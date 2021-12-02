@@ -1,0 +1,198 @@
+{
+  "Sitemaps": {
+    "message": "網頁地圖列表 ",
+    "description": "網頁地圖列表描述"
+  },
+  "Create_new_sitemap": {
+    "message": "創建新的網頁地圖",
+    "description": "創建新的網頁地圖1111"
+  },
+  "Create_Sitemap": {
+    "message": "從頭開始創建",
+    "description": "從頭開始創建描述"
+  },
+  "Import_Sitemap": {
+    "message": "導入新的網頁地圖",
+    "description": "導入新的網頁地圖描述"
+  },
+  "Sitemap_xa0": {
+    "message": "當前網頁地圖\\xa0",
+    "description": "當前網頁地圖\\xa0描述"
+  },
+  "Selectors": {
+    "message": "編輯網頁地圖選擇器 ",
+    "description": "編輯網頁地圖選擇器描述"
+  },
+  "Selector_graph": {
+    "message": "網頁地圖選擇器圖示",
+    "description": "網頁地圖選擇器圖示描述"
+  },
+  "Edit_metadata": {
+    "message": "編輯網頁地圖初始參數 ",
+    "description": "編輯網頁地圖初始參數描述"
+  },
+  "Scrape": {
+    "message": "開始抓取 ",
+    "description": "開始抓取描述"
+  },
+  "Browse": {
+    "message": "瀏覽已獲得的數據 ",
+    "description": "瀏覽已獲得的數據描述"
+  },
+  "Export_Sitemap": {
+    "message": "導出網頁地圖 ",
+    "description": "導出網頁地圖描述 "
+  },
+  "Export_data": {
+    "message": "導出數據 ",
+    "description": "導出數據描述 "
+  },
+  "Search_Sitemaps": {
+    "message": "搜索網頁地圖列表",
+    "description": "搜索網頁地圖列表描述"
+  },
+  "ID": {
+    "message": "唯一標識符",
+    "description": "唯一標識符描述"
+  },
+  "Domain": {
+    "message": "網頁",
+    "description": "網頁描述"
+  },
+  "Upload_to_Cloud": {
+    "message": "上傳到雲端",
+    "description": "上傳到雲端描述"
+  },
+  "Download_from_Cloud": {
+    "message": "從雲端下載",
+    "description": "從雲端下載描述"
+  },
+  "Start_URL": {
+    "message": "起始網頁列表",
+    "description": "起始網頁列表描述"
+  },
+  "Sitemap_name": {
+    "message": "網頁地圖標識符",
+    "description": "網頁地圖標識符描述"
+  },
+  "Create_Sitemap_Action": {
+    "message": "開始創建網頁地圖",
+    "description": "開始創建網頁地圖描述"
+  },
+  "URL": {
+    "message": "網址",
+    "description": "網址描述"
+  },
+  "Sitemap_JSON": {
+    "message": "網頁地圖內容",
+    "description": "網頁地圖內容描述"
+  },
+  "Import_Sitemap_Action": {
+    "message": "導入網頁地圖",
+    "description": "導入網頁地圖描述"
+  },
+  "Rename_Sitemap_optional": {
+    "message": "重命名網頁地圖標識(可選的)",
+    "description": "重命名網頁地圖標識(可選的)描述"
+  },
+  "Save_Sitemap": {
+    "message": "保存修改",
+    "description": "保存修改描述"
+  },
+  "Start_scraping": {
+    "message": "啟動抓取",
+    "description": "啟動抓取描述"
+  },
+  "Page_load_delay_ms": {
+    "message": "等待網頁加載延時(毫秒)",
+    "description": "等待網頁加載延時(毫秒)描述"
+  },
+  "Request_interval_ms": {
+    "message": "網頁請求間隔(毫秒)",
+    "description": "網頁請求間隔(毫秒)描述"
+  },
+  "Delete": {
+    "message": "刪除",
+    "description": "刪除描述"
+  },
+  "Delete_locally": {
+    "message": "本地刪除",
+    "description": "本地刪除描述"
+  },
+  "refresh": {
+    "message": "刷新",
+    "description": "刷新描述"
+  },
+  "NoDataScrapedYet": {
+    "message": "還沒有抓取到的數據喔!  ",
+    "description": "還沒有抓取到的數據喔!描述  "
+  },
+  "RefreshData": {
+    "message": "刷新數據",
+    "description": "刷新數據描述"
+  },
+  "Add_new_selector": {
+    "message": "添加新的選擇器",
+    "description": "添加新的選擇器描述"
+  },
+  "Selector": {
+    "message": "選擇器描述",
+    "description": "選擇器描述"
+  },
+  "type": {
+    "message": "類型",
+    "description": "類型描述"
+  },
+  "Multiple": {
+    "message": "選擇多個",
+    "description": "選擇多個描述"
+  },
+  "Parent_selectors": {
+    "message": "父選擇器",
+    "description": "父選擇器描述"
+  },
+  "Actions": {
+    "message": "動作",
+    "description": "動作描述"
+  },
+  "SelectorID":{
+    "message": "選擇器標識符",
+    "description": "選擇器標識符描述"
+  },
+  "DataPreview":{
+    "message": "數據預覽",
+    "description": "數據預覽描述"
+  },
+  "ElementPreview": {
+    "message": "元素預覽",
+    "description": "元素預覽描述"
+  },
+  "PerformAction": {
+    "message": "執行動作",
+    "description": "執行動作描述"
+  },
+  "Edit": {
+    "message": "編輯",
+    "description": "編輯描述"
+  },
+  "Save_selector": {
+    "message": "保存選擇器",
+    "description": "保存選擇器描述"
+  },
+  "Cancel": {
+    "message": "取消",
+    "description": "取消描述"
+  },
+  "Regex": {
+    "message": "正則表達式",
+    "description": "正則表達式描述"
+  },
+  "SelectorAction": {
+    "message": "操作選擇器",
+    "description": "操作選擇器描述"
+  },
+  "SitemapIDAlreadyExist": {
+    "message": "該標識符已存在",
+    "description": "該標識符已存在描述"
+  }
+}

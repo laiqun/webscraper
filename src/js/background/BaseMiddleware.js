@@ -1,0 +1,3 @@
+class BaseMiddleware{}
+
+export {BaseMiddleware}

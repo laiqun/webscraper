@@ -1,0 +1,202 @@
+{
+  "Sitemaps": {
+    "message": "Sitemaps ",
+    "description": "Sitemaps description"
+  },
+  "Create_new_sitemap": {
+    "message": "Create new sitemap ",
+    "description": "Create new sitemap description"
+  },
+  "Create_Sitemap": {
+    "message": "Create sitemap ",
+    "description": "Create sitemap description"
+  },
+  "Import_Sitemap": {
+    "message": "Import Sitemap ",
+    "description": "Import sitemap description"
+  },
+  "Sitemap_xa0": {
+    "message": "Sitemap: ",
+    "description": "sitemap description"
+  },
+  "Selectors": {
+    "message": "Selectors ",
+    "description": "Selectors description"
+  },
+  "Selector_graph": {
+    "message": "Selector graph ",
+    "description": "Selector graph description"
+  },
+  "Edit_metadata": {
+    "message": "Edit metadata ",
+    "description": "Edit metadata description"
+  },
+  "Scrape": {
+    "message": "Scrape ",
+    "description": "Scrape description"
+  },
+  "Browse": {
+    "message": "Browse ",
+    "description": "Browse description"
+  },
+  "Export_Sitemap": {
+    "message": "Export Sitemap ",
+    "description": "Export Sitemap description"
+  },
+  "Export_data": {
+    "message": "Export data ",
+    "description": "Export data description"
+  },
+  "Search_Sitemaps": {
+    "message": "Search Sitemaps",
+    "description": "Search Sitemaps description"
+  },
+  "ID": {
+    "message": "ID",
+    "description": "ID description"
+  },
+  "Domain": {
+    "message": "Domain",
+    "description": "Domain description"
+  },
+  "Upload_to_Cloud": {
+    "message": "Upload to Cloud",
+    "description": "Upload to Cloud description"
+  },
+  "Download_from_Cloud": {
+    "message": "Download from Cloud",
+    "description": "Download from Cloud description"
+  },
+  "Start_URL": {
+    "message": "Start URL",
+    "description": "Start URL description"
+  },
+  "Sitemap_name": {
+    "message": "Sitemap ID",
+    "description": "Sitemap ID description"
+  },
+  "Create_Sitemap_Action": {
+    "message": "Create Sitemap",
+    "description": "Create Sitemap description"
+  },
+  "URL": {
+    "message": "URL",
+    "description": "URL description"
+  },
+  "Sitemap_JSON": {
+    "message": "Sitemap content",
+    "description": "Sitemap content description"
+  },
+  "Import_Sitemap_Action": {
+    "message": "Import Sitemap",
+    "description": "Import Sitemap description"
+  },
+  "Rename_Sitemap_optional": {
+    "message": "Rename Sitemap (optional)",
+    "description": "Rename Sitemap (optional) description"
+  },
+  "Save_Sitemap": {
+    "message": "Save Change",
+    "description": "Save Change description"
+  },
+  "Start_scraping": {
+    "message": "Start scraping",
+    "description": "Start scraping description"
+  },
+  "Page_load_delay_ms": {
+    "message": "Page load delay (ms)",
+    "description": "Page load delay (ms) description"
+  },
+  "Request_interval_ms": {
+    "message": "Request interval (ms)",
+    "description": "Request interval (ms) description"
+  },
+  "Delete": {
+    "message": "Delete",
+    "description": "Delete description"
+  },
+  "Delete_locally": {
+    "message": "Delete locally",
+    "description": "Delete locally description"
+  },
+  "refresh": {
+    "message": "Refresh",
+    "description": "Refresh description"
+  },
+  "NoDataScrapedYet": {
+    "message": "No data scraped yet.  ",
+    "description": "No data scraped yet. description"
+  },
+  "RefreshData": {
+    "message": "Refresh Data",
+    "description": "Refresh Data description"
+  },
+  "Add_new_selector": {
+    "message": "Add new selector",
+    "description": "Add new selector description"
+  },
+  "Selector": {
+    "message": "Selector",
+    "description": "Selector description"
+  },
+  "type": {
+    "message": "type",
+    "description": "type description"
+  },
+  "Multiple": {
+    "message": "Multiple",
+    "description": "Multiple description"
+  },
+  "Parent_selectors": {
+    "message": "Parent selectors",
+    "description": "Parent selectors description"
+  },
+  "Actions": {
+    "message": "Actions",
+    "description": "Actions description"
+  },
+  "SelectorID": {
+    "message": "Selector ID",
+    "description": "Selector ID description"
+  },
+  "DataPreview": {
+    "message": "Data preview",
+    "description": "Data preview description"
+  },
+  "ElementPreview": {
+    "message": "Element preview",
+    "description": "Element preview description"
+  },
+  "PerformAction": {
+    "message": "Perform Action",
+    "description": "Perform Action description"
+  },
+  "Edit": {
+    "message": "Edit",
+    "description": "Edit description"
+  },
+  "Save_selector": {
+    "message": "Save selector",
+    "description": "Save selector description"
+  },
+  "Cancel": {
+    "message": "Cancel",
+    "description": "Cancel description"
+  },
+  "Regex": {
+    "message": "Cancel",
+    "description": "Cancel description"
+  },
+  "SelectorAction": {
+    "message": "Selector",
+    "description": "Selector description"
+  },
+  "SitemapIDAlreadyExist": {
+    "message": "Sitemap with this id already exists",
+    "description": "Sitemap with this id already exists description"
+  },
+  "GetCurURL": {
+    "message": "Get current URL",
+    "description": "Get current URL description"
+  }
+}

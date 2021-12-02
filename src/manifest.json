@@ -1,0 +1,40 @@
+{
+  "manifest_version": 2,
+  "version": "0.0.1",
+  "name": "Web Crawler - Free web Crawler",
+  "short_name": "Web Crawler",
+  "default_locale":"en",
+  "description": "Web data collection tool with an easy point-and-click interface for modern web",  
+  "minimum_chrome_version": "60",
+  
+  "permissions": ["<all_urls>", "tabs", "notifications", "storage", "unlimitedStorage","webRequest","webRequestBlocking"],
+  "optional_permissions": [ ],  
+  
+  "icons": {
+    "128": "icon-128.png"
+  },
+  
+  "options_page": "options.html",
+  "browser_action": {
+  	"default_title": "Web Crawler",
+    "default_popup": "popup.html",
+    "default_icon": "icon32.png"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "devtools_page": "devtools_init_page.html",  
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": [
+		"icon-128.png",
+		"frame.html"
+  ],  
+  "content_scripts": [
+    {
+	  "matches": ["*://*/*"],
+	  "js": [
+		  "content_script.bundle.js"
+	  ]
+    }
+  ]
+}

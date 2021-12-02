@@ -1,0 +1,202 @@
+{
+  "Sitemaps": {
+    "message": "网页地图列表 ",
+    "description": "网页地图列表描述"
+  },
+  "Create_new_sitemap": {
+    "message": "添加网页地图",
+    "description": "添加网页地图描述"
+  },
+  "Create_Sitemap": {
+    "message": "创建网页地图",
+    "description": "创建网页地图描述"
+  },
+  "Import_Sitemap": {
+    "message": "导入网页地图",
+    "description": "导入网页地图描述"
+  },
+  "Sitemap_xa0": {
+    "message": "当前网页地图: ",
+    "description": "当前网页地图\\xa0描述"
+  },
+  "Selectors": {
+    "message": "编辑网页地图选择器 ",
+    "description": "编辑网页地图选择器描述"
+  },
+  "Selector_graph": {
+    "message": "网页地图选择器图示",
+    "description": "网页地图选择器图示描述"
+  },
+  "Edit_metadata": {
+    "message": "编辑网页地图初始参数 ",
+    "description": "编辑网页地图初始参数描述"
+  },
+  "Scrape": {
+    "message": "开始抓取 ",
+    "description": "开始抓取描述"
+  },
+  "Browse": {
+    "message": "浏览已获得的数据 ",
+    "description": "浏览已获得的数据描述"
+  },
+  "Export_Sitemap": {
+    "message": "导出网页地图 ",
+    "description": "导出网页地图描述"
+  },
+  "Export_data": {
+    "message": "导出数据 ",
+    "description": "导出数据描述 "
+  },
+  "Search_Sitemaps": {
+    "message": "搜索网页地图列表",
+    "description": "搜索网页地图列表描述"
+  },
+  "ID": {
+    "message": "网页地图标识符",
+    "description": "网页地图标识符描述"
+  },
+  "Domain": {
+    "message": "网页",
+    "description": "网页描述"
+  },
+  "Upload_to_Cloud": {
+    "message": "上传到云端",
+    "description": "上传到云端描述"
+  },
+  "Download_from_Cloud": {
+    "message": "从云端下载",
+    "description": "从云端下载描述"
+  },
+  "Start_URL": {
+    "message": "起始网页列表",
+    "description": "起始网页列表描述"
+  },
+  "Sitemap_name": {
+    "message": "网页地图标识符",
+    "description": "网页地图标识符描述"
+  },
+  "Create_Sitemap_Action": {
+    "message": "创建网页地图",
+    "description": "开始创建网页地图描述"
+  },
+  "URL": {
+    "message": "网址",
+    "description": "网址描述"
+  },
+  "Sitemap_JSON": {
+    "message": "网页地图内容",
+    "description": "网页地图内容描述"
+  },
+  "Import_Sitemap_Action": {
+    "message": "导入网页地图",
+    "description": "导入网页地图描述"
+  },
+  "Rename_Sitemap_optional": {
+    "message": "重命名网页地图标识符(可选的)",
+    "description": "重命名网页地图标识符(可选的)描述"
+  },
+  "Save_Sitemap": {
+    "message": "保存修改",
+    "description": "保存修改描述"
+  },
+  "Start_scraping": {
+    "message": "启动抓取",
+    "description": "启动抓取描述"
+  },
+  "Page_load_delay_ms": {
+    "message": "等待网页加载延时(毫秒)",
+    "description": "等待页面加载延时(毫秒)描述"
+  },
+  "Request_interval_ms": {
+    "message": "网页请求间隔(毫秒)",
+    "description": "网页请求间隔(毫秒)描述"
+  },
+  "Delete":{
+    "message": "刪除",
+    "description": "刪除描述"
+  },
+  "Delete_locally": {
+    "message": "本地刪除",
+    "description": "本地刪除描述"
+  },
+  "refresh": {
+    "message": "刷新",
+    "description": "刷新描述"
+  },
+  "NoDataScrapedYet": {
+    "message": "还没有抓取到的数据喔!  ",
+    "description": "还没有抓取到的数据喔!描述  "
+  },
+  "RefreshData": {
+    "message": "刷新数据",
+    "description": "刷新数据描述"
+  },
+  "Add_new_selector": {
+    "message": "添加新的选择器",
+    "description": "添加新的选择器描述"
+  },
+  "Selector": {
+    "message": "选择器描述",
+    "description": "选择器描述"
+  },
+  "type": {
+    "message": "类型",
+    "description": "类型描述"
+  },
+  "Multiple": {
+    "message": "选择多个",
+    "description": "选择多个描述"
+  },
+  "Parent_selectors": {
+    "message": "父选择器",
+    "description": "父选择器描述"
+  },
+  "Actions": {
+    "message": "动作",
+    "description": "动作描述"
+  },
+  "SelectorID":{
+    "message": "选择器标识符",
+    "description": "选择器标识符描述"
+  },
+  "DataPreview":{
+    "message": "数据预览",
+    "description": "预览数据描述"
+  },
+  "ElementPreview": {
+    "message": "元素预览",
+    "description": "元素预览描述"
+  },
+  "PerformAction": {
+    "message": "执行动作",
+    "description": "执行动作描述"
+  },
+  "Edit": {
+    "message": "编辑",
+    "description": "编辑描述"
+  },
+  "Save_selector": {
+    "message": "保存选择器",
+    "description": "保存选择器描述"
+  },
+  "Cancel": {
+    "message": "取消",
+    "description": "取消描述"
+  },
+  "Regex": {
+    "message": "正则表达式",
+    "description": "正则表达式描述"
+  },
+  "SelectorAction": {
+    "message": "操作选择器",
+    "description": "操作选择器描述"
+  },
+  "SitemapIDAlreadyExist": {
+    "message": "该标识符已存在",
+    "description": "该标识符已存在描述"
+  },
+  "GetCurURL": {
+    "message": "获取当前页面网址",
+    "description": "获取当前页面网址描述"
+  }
+}

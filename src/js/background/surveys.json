@@ -1,0 +1,68 @@
+[
+  {
+    "id": "web-scraping-problems",
+    "minSitemaps": 0,
+    "minDataScraped": 0,
+    "question": "Experienced any problems with web scraping? Help us understand!",
+    "tasks": [
+      {
+        "type": "input",
+        "name": "main-web-scraping-problem",
+        "text": "What are the main problems you've experienced with web scraping?",
+        "placeholder": "Your problem",
+        "required": true
+      },
+      {
+        "type": "input",
+        "name": "main-web-scraping-problem-solution",
+        "text": "How did you try to solve them?",
+        "placeholder": "Your problem",
+        "required": true
+      },
+      {
+        "type": "multiple-choice",
+        "name": "main-web-scraping-problem-solved",
+        "text": "Did you succeed?",
+        "choices": [
+          "Yes",
+          "No"
+        ],
+        "required": true
+      },
+      {
+        "type": "input",
+        "name": "main-web-scraping-problem-implement",
+        "text": "What should we implement to fix this problem?",
+        "placeholder": "Suggested solution",
+        "required": true
+      },
+      {
+        "type": "text",
+        "name": "text-thanks",
+        "text": "Thank you for your answer, we appreciate it!",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "web-scraping-applications",
+    "minSitemaps": 0,
+    "minDataScraped": 0,
+    "question": "Can you tell us how web scraping is helping you?",
+    "tasks": [
+      {
+        "type": "input",
+        "name": "main-web-scraping-problem",
+        "text": "What problems are you solving with web scraping?",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "type": "text",
+        "name": "text-thanks",
+        "text": "Thank you for your answer, we appreciate it!",
+        "required": true
+      }
+    ]
+  }
+]

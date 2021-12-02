@@ -1,0 +1,19 @@
+{
+  "presets": [
+    ["@babel/preset-env" ]
+  ],
+  "plugins": [ ["@babel/plugin-proposal-decorators", { "legacy": true }],
+	["prismjs", {
+		"languages": [
+		  "applescript",
+		  "css",
+		  "javascript",
+		  "markup",
+		  "scss"
+		],
+		"plugins": ["line-numbers"],
+		"theme": "twilight",
+		"css": true
+	}]
+  ]
+}
