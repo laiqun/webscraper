@@ -39,11 +39,11 @@ let SitemapListView = class extends react.Component {
             }, react.createElement(reactRouterDom.Link, {
                 className: "create-sitemap btn btn-default",
                 to: "/create-sitemap"
-            }, "Create new Sitemap"),
+            }, chrome.i18n.getMessage("Create_Sitemap")),
             react.createElement(reactRouterDom.Link, {
                 className: "import-sitemap btn btn-default",
                 to: "/import-sitemap"
-            }, "Import new Sitemap"))
+            }, chrome.i18n.getMessage("Import_Sitemap")))
             ),
             react.createElement("table", {
                 className: "table table-bordered table-condensed table-hover"

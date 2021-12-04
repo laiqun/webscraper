@@ -38,7 +38,11 @@ let Navigation = class extends o.Component {
             }, o.createElement("li", null, o.createElement(s.Link, {
                 id: "sitemaps-nav-button",
                 to: "/"
-            }, chrome.i18n.getMessage("Sitemaps"))), o.createElement("li", null, o.createElement("a", {
+            }, chrome.i18n.getMessage("Sitemaps"))), o.createElement("li", {
+               style: {
+                    visibility: cur_sitemap ? "visible":"hidden"
+                }
+            }, o.createElement("a", {
                 id: "sitemap-nav-button",
                 className: "dropdown-toggle" + (cur_sitemap ? "" : " disabled"),
                 "data-toggle": "dropdown"
@@ -66,13 +70,13 @@ let Navigation = class extends o.Component {
                 to: "/sitemap/export?sitemapId=" + t
             }, chrome.i18n.getMessage("Export_Sitemap"))), o.createElement("li", null, o.createElement(s.Link, {
                 to: "/sitemap/export-data?sitemapId=" + t
-            }, chrome.i18n.getMessage("Export_data"))))), o.createElement("li", null, o.createElement("a", {
+            }, chrome.i18n.getMessage("Export_data"))))) /*o.createElement("li", null, o.createElement("a", {
                 id: "create-sitemap-nav-button",
                 className: "dropdown-toggle",
                 "data-toggle": "dropdown"
-            }, /*chrome.i18n.getMessage("Create_new_sitemap"), o.createElement("b", {
+            }, chrome.i18n.getMessage("Create_new_sitemap"), o.createElement("b", {
                 className: "caret"
-            })*/), /*o.createElement("ul", {
+            })), o.createElement("ul", {
                 className: "dropdown-menu"
             }, o.createElement("li", null, o.createElement(s.Link, {
                 className: "create-sitemap",
@@ -80,7 +84,7 @@ let Navigation = class extends o.Component {
             }, chrome.i18n.getMessage("Create_Sitemap"))), o.createElement("li", null, o.createElement(s.Link, {
                 className: "import-sitemap",
                 to: "/import-sitemap"
-            }, chrome.i18n.getMessage("Import_Sitemap"))))*/ ), this.props.appState.experimentalFeaturesEnabled ? o.createElement("li", null, o.createElement("a", null, "Experimental features enabled")) : ""), i));
+            }, chrome.i18n.getMessage("Import_Sitemap")))) )*/, this.props.appState.experimentalFeaturesEnabled ? o.createElement("li", null, o.createElement("a", null, "Experimental features enabled")) : ""), i));
     }
 
     openCloudAuthPage() {
