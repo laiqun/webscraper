@@ -11,34 +11,7 @@ var n = this && this.__decorate || function (e, t, i, n) {
 }, r = this && this.__metadata || function (e, t) {
     if ("object" == typeof Reflect && "function" == typeof Reflect.metadata) return Reflect.metadata(e, t);
 };
-/*, a = this && this.__awaiter || function(e, t, i, n) {
-    return new (i || (i = Promise))((function(r, a) {
-        function o(e) {
-            try {
-                l(n.next(e));
-            } catch (e) {
-                a(e);
-            }
-        }
-        function s(e) {
-            try {
-                l(n.throw(e));
-            } catch (e) {
-                a(e);
-            }
-        }
-        function l(e) {
-            var t;
-            e.done ? r(e.value) : (t = e.value, t instanceof i ? t : new i((function(e) {
-                e(t);
-            }))).then(o, s);
-        }
-        l((n = n.apply(e, t || [])).next());
-    }));
-};
-Object.defineProperty(t, "__esModule", {
-    value: !0
-}),*/
+
 
 let CreateSitemapView = class extends u.BaseComponent {
     constructor(e) {

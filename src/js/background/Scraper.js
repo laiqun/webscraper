@@ -93,3 +93,5 @@ class Scraper {
             });
     }
 }
+
+export {Scraper}

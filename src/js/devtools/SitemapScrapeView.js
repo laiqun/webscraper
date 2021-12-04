@@ -111,6 +111,7 @@ let SitemapScrapeView = class extends u.BaseComponent {
     }
 
     async scrape(e) {
+        console.log("sitemapScrapeView scrape");
         e.stopPropagation();
         e.preventDefault();
         if ( !this.isFormValid({

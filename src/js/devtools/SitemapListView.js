@@ -12,6 +12,7 @@ import * as react from "react"//o = i(0)
 import * as s from "react"//, s = i(0),
 import * as l from "./SitemapListItem.js"//  l = i(723),
 import * as c from "./Loader.js"//c = i(726);
+import * as reactRouterDom from "react-router-dom"//react-router //const   s = i(775);
 let SitemapListView = class extends react.Component {
     constructor(e) {
         super(e);
@@ -24,19 +25,32 @@ let SitemapListView = class extends react.Component {
         const e = this.props.appState;
         const t = this.getHeaders();
         return this.props.appState.loading ? react.createElement(c.Loader, null) : react.createElement("div", {
-            id: "sitemaps"
-        }, react.createElement("input", {
-            className: "form-control sitemap-search",
-            type: "text",
-            value: e.searchQuery,
-            placeholder: chrome.i18n.getMessage("Search_Sitemaps"),
-            onChange: this.changeSearchQuery.bind(this)
-        }), react.createElement("table", {
-            className: "table table-bordered table-condensed table-hover"
-        }, react.createElement("thead", null, react.createElement("tr", null, t)), react.createElement("tbody", null, e.filteredSitemaps.map((e, t) => react.createElement(l.SitemapListItem, {
-            key: t,
-            sitemap: e
-        })))));
+                id: "sitemaps"
+            }, react.createElement("div", {
+                className: "input-group"
+            }, react.createElement("input", {
+                className: "form-control sitemap-search",
+                type: "text",
+                value: e.searchQuery,
+                placeholder: chrome.i18n.getMessage("Search_Sitemaps"),
+                onChange: this.changeSearchQuery.bind(this)
+            }), react.createElement("span", {
+                className: "input-group-btn"
+            }, react.createElement(reactRouterDom.Link, {
+                className: "create-sitemap btn btn-default",
+                to: "/create-sitemap"
+            }, "Create new Sitemap"),
+            react.createElement(reactRouterDom.Link, {
+                className: "import-sitemap btn btn-default",
+                to: "/import-sitemap"
+            }, "Import new Sitemap"))
+            ),
+            react.createElement("table", {
+                className: "table table-bordered table-condensed table-hover"
+            }, react.createElement("thead", null, react.createElement("tr", null, t)), react.createElement("tbody", null, e.filteredSitemaps.map((e, t) => react.createElement(l.SitemapListItem, {
+                key: t,
+                sitemap: e
+            })))));
     }
 
     getHeaders() {
