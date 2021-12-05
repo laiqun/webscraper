@@ -1,11 +1,11 @@
 class StoreScrapeResultWriter{
-    constructor(e) {
-        this.db = e;
+    constructor(newPouchDB) {
+        this.db = newPouchDB;
     }
 
-    async writeDocs(e) {
-        if(0 !== e.length )
-            await this.db.bulkDocs(e);
+    async writeDocs(docs) {
+        if(0 !== docs.length )
+            await this.db.bulkDocs(docs);
     }
 }
 

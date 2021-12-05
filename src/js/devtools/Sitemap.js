@@ -6,19 +6,19 @@ import * as o from "./Obj.js"//o = i(57),
 import crypto from "crypto-browserify" //const     s = i(140);
 
 class Sitemap {
-    constructor(data) {
-        this.initData(data);
+    constructor(doc) {
+        this.initData(doc);
     }
 
-    initData(e) {
-        this._id = e._id;
-        this.startUrl = this.fixStartUrls(e.startUrl);
-        this.auth = e.auth;
-        const t = new r.SelectorList(e.selectors);
+    initData(doc) {
+        this._id = doc._id;
+        this.startUrl = this.fixStartUrls(doc.startUrl);
+        this.auth = doc.auth;
+        const t = new r.SelectorList(doc.selectors);
         this.selectors = t;
-        this.websiteStateSetup = e.websiteStateSetup;
-        if (e.hashHistory && e.hashHistory.length > 0)
-            this.hashHistory = e.hashHistory;
+        this.websiteStateSetup = doc.websiteStateSetup;
+        if (doc.hashHistory && doc.hashHistory.length > 0)
+            this.hashHistory = doc.hashHistory;
         else
             this.setHashHistory();
     }
@@ -59,7 +59,7 @@ class Sitemap {
     getStartUrls() {
         let e;
         e = Array.isArray(this.startUrl) ? this.startUrl : [this.startUrl];
-        const t = [];
+        const startUrls = [];
         e.forEach(e => {
             const i = (e, t) => {
                 for (; e.length < t;) e = "0" + e;
@@ -69,12 +69,12 @@ class Sitemap {
                 const e = n[2], r = n[3], a = parseInt(e, 10), o = parseInt(r, 10);
                 let s = 1;
                 void 0 !== n[5] && (s = parseInt(n[5], 10));
-                for (let l = a; l <= o; l += s) e.length === r.length ? t.push(n[1] + i(l.toString(), e.length) + n[6]) : t.push(n[1] + l + n[6]);
-                return t;
+                for (let l = a; l <= o; l += s) e.length === r.length ? startUrls.push(n[1] + i(l.toString(), e.length) + n[6]) : startUrls.push(n[1] + l + n[6]);
+                return startUrls;
             }
-            t.push(e);
+            startUrls.push(e);
         });
-        return t;
+        return startUrls;
     }
 
     updateSelector(originalSelector, t) {
@@ -142,9 +142,10 @@ class Sitemap {
 
     getDataColumns() {
         let e = ["web-scraper-order", "web-scraper-start-url"];
-        return this.selectors.forEach(t => {
+        this.selectors.forEach(t => {
             e = e.concat(t.getDataColumns());
-        }), e;
+        });
+        return  e;
     }
 
     getDataExportCsvBlob(e) {

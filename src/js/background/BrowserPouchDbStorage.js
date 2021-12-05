@@ -13,8 +13,8 @@ class BrowserPouchDbStorage {
 
     async updateJob(e) {
         await this.dataWriter.writeDocs(e.data);
-        for (const t of e.newJobs)
-            this.addJob(t);
+        for (const job of e.newJobs)
+            this.addJob(job);
     }
 
     getJob() {
@@ -28,14 +28,14 @@ class BrowserPouchDbStorage {
     }
 
     loadStartUrls(e) {
-        const t = e.getStartUrls();
-        for (const e of t)
-            if (this.canBeAdded(e)) {
-            this.urlsAddedToQueue[e] = true;
+        const startUrls = e.getStartUrls();
+        for (const startUrl of startUrls)
+            if (this.canBeAdded(startUrl)) {
+            this.urlsAddedToQueue[startUrl] = true;
             const job = new r.Job({
-                url: e,
+                url: startUrl,
                 baseData: {
-                    "web-scraper-start-url": e
+                    "web-scraper-start-url": startUrl
                 },
                 parentSelector: "_root"
             });

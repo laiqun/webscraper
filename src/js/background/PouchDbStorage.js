@@ -13,129 +13,132 @@ class PouchDbStorage {
     }
 
     async init() {
+        //这里是所有的sitemap的定义的地方
         this.sitemapDb = new PouchDB(await this.config.get("sitemapDb"), this.pouchDBConnectionConfig);
         this.dataDbName = await this.config.get("dataDb");
     }
 
-    sanitizeSitemapDataDbName(e) {
-        return "sitemap-data-" + e.replace(/[^a-z0-9_\$\(\)\+\-/]/gi, "_");
+    sanitizeSitemapDataDbName(e) {//sanitize  净化  为了支持中文，这里不做也应该没事的
+        return "sitemap-data-" + e;// e.replace(/[^a-z0-9_\$\(\)\+\-/]/gi, "_");//输入"你好" 输出"__"
     }
 
-    getSitemapDataDbLocation(e) {
-        const t = this.sanitizeSitemapDataDbName(e);
-        return this.dataDbName + t;
+    getSitemapDataDbLocation(originalDBName) {
+        const dbName = this.sanitizeSitemapDataDbName(originalDBName);
+        return this.dataDbName + dbName;
     }
 
-    getSitemapDataDb(e) {
-        const t = this.getSitemapDataDbLocation(e);
-        return new PouchDB(t, this.pouchDBConnectionConfig);
+    getSitemapDataDb(originalDBName) {
+        const databaseName = this.getSitemapDataDbLocation(originalDBName);
+        //这里是为一个sitemap创建database；   this.sitemapDb是放所有sitemap的地方，每个sitemap有一个sitemapDataDb
+        return new PouchDB(databaseName, this.pouchDBConnectionConfig);
     }
 
-    async initSitemapDataDb(e, t = !0) {
-        if (t) {
-            const t = this.getSitemapDataDb(e);
-            await t.destroy();
+    async initSitemapDataDb(databaseName, destroyOldDB = true) {
+        if (destroyOldDB) {
+            const dataDb = this.getSitemapDataDb(databaseName);
+            await dataDb.destroy();
         }
-        const i = this.getSitemapDataDb(e);
-        return new s.StoreScrapeResultWriter(i);
+        const sitemapDataDb = this.getSitemapDataDb(databaseName);
+        return new s.StoreScrapeResultWriter(sitemapDataDb);
     }
 
     async createSitemap(sitemap) {
-        const t = JSON.parse(JSON.stringify(sitemap));
+        const doc = JSON.parse(JSON.stringify(sitemap));
         sitemap._id || o.info("cannot save sitemap without an id", {
             sitemap: JSON.stringify(sitemap)
         });
-        const i = await this.sitemapDb.put(t);
-        sitemap._rev = i.rev;
+        const result = await this.sitemapDb.put(doc);
+        sitemap._rev = result.rev;
         return  sitemap;
     }
 
-    async deleteSitemap(sitemap) {
-        const t = await this.getSitemap(sitemap), i = {
-            _id: t._id,
-            _rev: t._rev
+    async deleteSitemap(sitemap_id) {
+        const doc = await this.getSitemap(sitemap_id);
+        const doc_ID = {
+            _id: doc._id,
+            _rev: doc._rev
         };
-        await this.sitemapDb.remove(i);
-        const n = this.getSitemapDataDb(t._id);
-        await n.destroy();
+        await this.sitemapDb.remove(doc_ID);//销毁sitemap这个doc，然后删除对应的Data db
+        const dataDb = this.getSitemapDataDb(doc._id);
+        await dataDb.destroy();
     }
 
-    async getSitemap(e) {
-        return await this.sitemapDb.get(e);
+    async getSitemap(doc_id) {
+        return await this.sitemapDb.get(doc_id);
     }
 
-    async updateSitemap(e) {
-        const t = await this.getSitemap(e._id);
-        e._rev = t._rev;
-        return  this.sitemapDb.put(e);
+    async updateSitemap(newDoc) {
+        const oldDoc = await this.getSitemap(newDoc._id);
+        newDoc._rev = oldDoc._rev;
+        return  this.sitemapDb.put(newDoc);
     }
 
     async getAllSitemaps() {
-        const e = await this.sitemapDb.allDocs({
-            include_docs: !0
+        const allDocs = await this.sitemapDb.allDocs({
+            include_docs: true
         });
         const sitemaps = [];
-        for (const rowsKey in e.rows) {
-            const n = e.rows[rowsKey].doc;
-            const r = new a.Sitemap(n);
-            sitemaps.push(r);
+        for (const rowsKey in allDocs.rows) {
+            const doc = allDocs.rows[rowsKey].doc;
+            const sitemap = new a.Sitemap(doc);
+            sitemaps.push(sitemap);
         }
         return sitemaps;
     }
 
     async getAllSitemapMetadata() {
-        const e = await this.sitemapDb.allDocs({
-            include_docs: !0
+        const allDocs = await this.sitemapDb.allDocs({
+            include_docs: true
         });
         const allSitemapMetadata = [];
-        for (const i in e.rows) {
-            const n = e.rows[i].doc;
-            const sitemap = new a.Sitemap(n);
-            const o = {
+        for (const rowsKey in allDocs.rows) {
+            const doc = allDocs.rows[rowsKey].doc;
+            const sitemap = new a.Sitemap(doc);
+            const sitemapMetaData = {
                 domain: sitemap.getFirstStartUrlDomain(),
                 hashHistory: sitemap.hashHistory,
                 name: sitemap._id,
-                localStorage: !0
+                localStorage: true
             };
-            allSitemapMetadata.push(o);
+            allSitemapMetadata.push(sitemapMetaData);
         }
         return allSitemapMetadata;
     }
 
-    async getSitemapData(e) {
-        const t = this.getSitemapDataDb(e);
-        const i = await t.allDocs({
-            include_docs: !0
+    async getSitemapData(dataDBName) {
+        const dataDb = this.getSitemapDataDb(dataDBName);
+        const allDocs = await dataDb.allDocs({
+            include_docs: true
         });
         const result = [];
-        for (const e in i.rows) {
-            const t = i.rows[e].doc;
-            result.push(t);
+        for (const rowsKey in allDocs.rows) {
+            const doc = allDocs.rows[rowsKey].doc;
+            result.push(doc);
         }
         return result;
     }
 
-    async getSitemapDataRange(e, t, i) {
-        const n = this.getSitemapDataDb(e);
-        let r;
-        r = t ? await n.allDocs({
-            include_docs: !0,
-            startkey: t,
+    async getSitemapDataRange(dataDBName, start, size) {
+        const dataDb = this.getSitemapDataDb(dataDBName);
+        let allDocs;
+        allDocs = start ? await dataDb.allDocs({
+            include_docs: true,
+            startkey: start,
             skip: 1,
-            limit: i
-        }) : await n.allDocs({
-            include_docs: !0,
-            limit: i
+            limit: size
+        }) : await dataDb.allDocs({
+            include_docs: true,
+            limit: size
         });
         const rows = [];
         let lastKey = "";
-        for (const e of r.rows)
+        for (const row of allDocs.rows)
         {
-            rows.push(e.doc);
-            lastKey = e.key;
+            rows.push(row.doc);
+            lastKey = row.key;
         }
         return {
-            totalRows: r.total_rows,
+            totalRows: allDocs.total_rows,
             rows: rows,
             lastKey: lastKey
         };
@@ -158,8 +161,8 @@ class PouchDbStorage {
         const sitemaps = await this.getAllSitemaps();
         for (const sitemap of sitemaps) {
             const id = sitemap._id;
-            const n = this.getSitemapDataDb(id);
-            number += (await n.info()).doc_count;
+            const dataDb = this.getSitemapDataDb(id);
+            number += (await dataDb.info()).doc_count;
         }
         return number;
     }
