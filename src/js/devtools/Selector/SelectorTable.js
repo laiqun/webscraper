@@ -1,11 +1,17 @@
-import * as s from "./Selector.js"//s = i(10),
+import * as o from "../../contentjs/cssSelector.js"//o = i(123),
+import * as s from "./Selector.js"//const  s = i(10);
 import * as l from "../emptyRecordValue.js"//, l = i(29)
-import {default as o} from "../../contentjs/cssSelector.js"//const o = i(123);
 class SelectorTable extends s.Selector {
     constructor(e) {
-        super(), this.type = "SelectorTable", this.delay = 0, this.multiple = !0, this.selector = "",
-            this.tableDataRowSelector = "", this.tableHeaderRowSelector = "", this.columns = [],
-            this.updateData(e);
+        super();
+        this.type = "SelectorTable";
+        this.delay = 0;
+        this.multiple = !0;
+        this.selector = "";
+        this.tableDataRowSelector = "";
+        this.tableHeaderRowSelector = "";
+        this.columns = [];
+        this.updateData(e);
     }
 
     canReturnMultipleRecords() {
@@ -25,8 +31,10 @@ class SelectorTable extends s.Selector {
     }
 
     async getTableHeaderColumns(e) {
-        const t = this.getTableHeaderRowSelector(), i = await e.getElements(t);
-        if (i.length < 1) return {};
+        const t = this.getTableHeaderRowSelector();
+        const i = await e.getElements(t);
+        if (i.length < 1)
+            return {};
         {
             const e = i[0], t = await e.getElements("td,th"), n = [];
             for (const e of t) {
@@ -44,8 +52,10 @@ class SelectorTable extends s.Selector {
     }
 
     async extractTableData(e) {
-        const t = await this.getTableHeaderColumns(e), i = this.getTableDataRowSelector(),
-            n = await e.getElements(i), r = [];
+        const t = await this.getTableHeaderColumns(e);
+        const i = this.getTableDataRowSelector();
+        const n = await e.getElements(i);
+        const r = [];
         for (const e of n) {
             const i = await this.extractRowData(e, t);
             r.push(i);
@@ -55,45 +65,41 @@ class SelectorTable extends s.Selector {
 
     async extractRowData(e, t) {
         const i = {};
-        for (const n of this.columns) if (!0 === n.extract)
-            if (void 0 === t[n.header])
-                i[n.name] = l.emptyRecordValue;
-            else {
-                const r = `td:nth-child(${t[n.header].index}),th:nth-child(${t[n.header].index})`,
-                    a = await e.getElements(r);
-                if (0 === a.length) i[n.name] = l.emptyRecordValue; else {
-                    const e = await a[0].getText();
-                    i[n.name] = e;
-                }
+        for (const n of this.columns) if (!0 === n.extract) if (void 0 === t[n.header]) i[n.name] = l.emptyRecordValue; else {
+            const r = `td:nth-child(${t[n.header].index}),th:nth-child(${t[n.header].index})`,
+                a = await e.getElements(r);
+            if (0 === a.length) i[n.name] = l.emptyRecordValue; else {
+                const e = await a[0].getText();
+                i[n.name] = e;
             }
+        }
         return i;
-
     }
 
     async _getData(e) {
-        const dataElement = await this.getDataElements(e);
-        let dataNumber = 0;
+        const t = await this.getDataElements(e);
+        let i = 0;
         let result =[];
-        for (const tElement of dataElement) {
-            const t = await this.extractTableData(tElement);
+        for (const e of t) {
+            const t = await this.extractTableData(e);
             for (const e of t)
             {
-                result.push(e);
-                dataNumber++;
+                result.push( e);
+                i++;
             }
             if (false === this.multiple)
-                break;
+                return await void 0;
         }
-        if(0 === dataNumber && false === this.multiple )
-            return this.getEmptyRecord();
+        if(0 === i && false === this.multiple )
+            return  this.getEmptyRecord();
+        return result;
     }
 
     getDataColumns() {
-        const result = [];
-        this.columns.forEach(t => {
-            true === t.extract && result.push(t.name);
-        });
-        return  result;
+        const e = [];
+        return this.columns.forEach(t => {
+            true === t.extract && e.push(t.name);
+        }), e;
     }
 
     getFeatures() {
@@ -113,7 +119,7 @@ class SelectorTable extends s.Selector {
             n = ["> thead > tr:has(td:not(:empty))", "> thead > tr:has(th:not(:empty))", "> tbody > tr:has(td:not(:empty))", "> tbody > tr:has(th:not(:empty))"].join(", "),
             r = i.find(n);
         if (r.length) {
-            return new o.cssSelector({
+            return new o.default({
                 parent: i[0],
                 query: e => t(i[0]).find(e)
             }).getCssSelector([r[0]]);
@@ -130,7 +136,7 @@ class SelectorTable extends s.Selector {
             n = i.find(t);
         }
         if (n && n.length) {
-            let e = new o.cssSelector({
+            let e = new o.default({
                 parent: i[0],
                 query: e => t(i[0]).find(e)
             }).getCssSelector(n.get());
@@ -149,16 +155,18 @@ class SelectorTable extends s.Selector {
     }
 
     getTableHeaderColumnsFromHTML(e, t, i) {
-        const n = i(t).find(e).find("td,th"), r = [];
-        return n.each((e, t) => {
+        const n = i(t).find(e).find("td,th");
+        const result = [];
+        n.each((e, t) => {
             i(t).find("br").length && i(t).find("br").html(" ");
             const n = i(t).text().trim(), a = n;
-            0 !== n.length && r.push({
+            0 !== n.length && result.push({
                 header: n,
                 name: a,
                 extract: !0
             });
-        }), r;
+        });
+        return  result;
     }
 }
 

@@ -38,7 +38,7 @@ import * as o from "react"//o = i(0),
 import * as a from "mobx-react"//a = i(21),
 import * as s from "./BaseComponent.js" //s = i(25),
 import * as l from "./SelectorBreadcrumbItem.js"//l = i(688),
-import * as c from "./SelectorRow.js"//const     c = i(689);
+import * as c from "./Selector/SelectorRow.js"//const     c = i(689);
 let EditSitemapSelectorsView = class extends s.BaseComponent {
     render() {
         const {selectorBreadcrumb: e} = this.props.appState, t = this.props.appState.visibleSelectors;

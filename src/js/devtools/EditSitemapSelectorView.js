@@ -1,4 +1,4 @@
-import * as c from "./SelectorTable.js"//c = i(219),
+import * as c from "./Selector/SelectorTable.js"//c = i(219),
 import * as A from "./Arr.js"//A = i(87),
 import * as _ from "./Selector/SelectorMicroData.js"//_ = i(217),
 import * as N from "./RequestPermissions.js" //N = i(220),
@@ -204,7 +204,7 @@ let EditSitemapSelectorView = class extends d.BaseComponent {
                 }
             },
             group: ".form-group:not(:has(.form-group))"
-        }, t = /^(?!web-scraper)[^_\.\$\s][^_\.\$\s][^\.\$\n]+$/;
+        }, t = /^(?!web-scraper)[^_\.\$\s][^\.\$\n]+$/;
         for (let i = 0; i <= 30; i++) e.fields[`columns[${i}][name]`] = {
             validators: {
                 notEmpty: {
@@ -572,6 +572,9 @@ let EditSitemapSelectorView = class extends d.BaseComponent {
         this.setState({
             selector: r
         });
+        console.log(c.SelectorTable);
+        console.log(r instanceof c.SelectorTable);
+        console.log(r );
         if (r instanceof c.SelectorTable) {
             const e = await this.getSelectorHTML();
             const t = r.getTableHeaderRowSelectorFromTableHTML(e, o);

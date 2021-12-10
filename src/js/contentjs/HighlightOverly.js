@@ -11,7 +11,7 @@ import * as Log from "./log.js"
 import * as ElementQuery2 from "./ElementQuery2.js"
 import * as serviceFactory from "./IM/serviceFactory.js"
 
-import  {applyController} from "./IM/applyController.js";
+import {applyController} from "./IM/applyController.js";
 import {Targets} from "./HighlightOverly/Targets.js"
 
 class HighlightOverlay {
@@ -163,15 +163,15 @@ class HighlightOverlay {
     }
 
     async onFocusChange(e, t) {
-            const n = "focus" === t.type;
-            await new Promise(e => {
-                setTimeout(e, 200);
-            });
-            let {window: r, frame: i} = this.state.focus;
-            r = "window" === e ? n : r;
-            i = "frame" === e ? n : i;
-            if (this.mode === ModeSetting.Modes.select)
-                this.toolbar.changeInFocus(r || i); //发送focus change事件给后台
+        const n = "focus" === t.type;
+        await new Promise(e => {
+            setTimeout(e, 200);
+        });
+        let {window: r, frame: i} = this.state.focus;
+        r = "window" === e ? n : r;
+        i = "frame" === e ? n : i;
+        if (this.mode === ModeSetting.Modes.select)
+            this.toolbar.changeInFocus(r || i); //发送focus change事件给后台
     }
 
     onKeyDown(e) {
@@ -251,24 +251,28 @@ class HighlightOverlay {
     }
 
     getElementFromPoint(pos_x, pos_y) {
+        console.log("getElementFromPoint");
         const topMostMatchedElement = document.elementsFromPoint(pos_x, pos_y);
         let matchedElement;
         const allowedElements = this.config.allowedElements || "*";
-        if(  "*" === allowedElements )
+        if ("*" === allowedElements)
             matchedElement = topMostMatchedElement[0];
         else
             matchedElement = topMostMatchedElement.find(e => e.matches(this.config.allowedElements));
         if (undefined === matchedElement)
             matchedElement = this.elementFromSubtree(topMostMatchedElement, allowedElements, pos_x, pos_y);
+        //"FONT" === matchedElement.tagName && (matchedElement = this.ignoreElementsFromTranslation(matchedElement.parentElement)),  new version
         return matchedElement;
     }
 
     elementFromSubtree(topMostMatchedElement, allowedElements, pos_x, pos_y) {
-        let subElements;
         for (const oneMatchedElement of topMostMatchedElement) {
-            subElements = oneMatchedElement.querySelector(allowedElements);
-            if (null !== subElements && Coordinates.Coordinates.pointWithinElement(subElements, pos_x, pos_y))
-                return subElements;
+            let childAllowedElements = oneMatchedElement.querySelectorAll(allowedElements);
+
+            for (const oneElement of Array.from(childAllowedElements)) {
+                if (Coordinates.Coordinates.pointWithinElement(oneElement, pos_x, pos_y) && this.config.parent.contains(oneMatchedElement))
+                    return oneElement;
+            }
         }
     }
 }
@@ -278,6 +282,6 @@ class HighlightOverlay {
 //当我们为类使用装饰器时，只会为类添加上 ”design:paramtypes” 的元数据信息，含义为其构造函数的传入参数的类型数组  https://zhuanlan.zhihu.com/p/166362122  类型检查
 //i("design:paramtypes", [Object, Object]) 约定HighlightOverlay的构造函数的两个参数都是Object类型
 
-let extFunc =  applyController(Targets.highlightOverlay );
+let extFunc = applyController(Targets.highlightOverlay);
 let outputClass = extFunc(HighlightOverlay);
-export { outputClass as HighlightOverlay }
+export {outputClass as HighlightOverlay}
