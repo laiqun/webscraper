@@ -26,12 +26,14 @@ class SelectorMicroData extends o.Selector {
             const t = new a.SchemaOrgExtractor, i = this.schemaOrgType, r = this.dataObjectSelectors,
                 datas = await t.extractData(e, r, i);
             !1 === this.multiple && 0 === datas.length && ( await this.getEmptyRecord());
+            let result=[];
             for (const data of datas)
             {
                 await data;
-                if ( !1 === this.multiple)
-                    return  void 0;
+                if ( false === this.multiple)
+                    break;
             }
+            return result;
     }
 
     getDataColumns() {

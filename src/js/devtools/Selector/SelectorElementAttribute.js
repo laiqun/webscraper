@@ -1,4 +1,4 @@
- import {Selector} from "./Selector.js";
+import {Selector} from "./Selector.js";
 
 class SelectorElementAttribute extends Selector {
     constructor(e) {
@@ -28,13 +28,15 @@ class SelectorElementAttribute extends Selector {
     }
 
     async _getData(e) {
-             const t = await this.getDataElements(e);
-            !1 === this.multiple && 0 === t.length && (await await this.getEmptyRecord());
-            for (const e of t) {
-                const t = await e.getAttr(this.extractAttribute);
-                await await { [this.id]: t};
-            }
-     }
+        const t = await this.getDataElements(e);
+        !1 === this.multiple && 0 === t.length && (await await this.getEmptyRecord());
+        let result =[];
+        for (const e of t) {
+            const t = await e.getAttr(this.extractAttribute);
+            result.push( {[this.id]: t});
+        }
+        return result;
+    }
 
     getDataColumns() {
         return [this.id];

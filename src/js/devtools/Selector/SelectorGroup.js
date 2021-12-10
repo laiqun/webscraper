@@ -23,17 +23,19 @@ class SelectorGroup extends a.Selector {
     }
 
     async _getData(e) {
-        const t = await this.getDataElements(e), i = [];
+        const t = await this.getDataElements(e);
+        const result = [];
         for (const e of t) {
             const t = {}, r = await e.getText();
             if (t[this.id] = r, this.extractAttribute) {
                 const i = await e.getAttr(this.extractAttribute);
                 t[`${this.id}-${this.extractAttribute}`] = i;
             }
-            i.push(t);
+            result.push(t);
         }
         const r = {};
-        r[this.id] = i, await await r;
+        r[this.id] = result;
+        return r;
     }
 
     getDataElements(e) {

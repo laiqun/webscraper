@@ -25,6 +25,7 @@ class SelectorHTML extends a.Selector {
     async _getData(e) {
         const t = await n(this.getDataElements(e));
         !1 === this.multiple && 0 === t.length && (await await this.getEmptyRecord());
+        let result = [];
         for (const e of t) {
             let t = await e.getHTML();
             const i = {};
@@ -32,8 +33,10 @@ class SelectorHTML extends a.Selector {
                 const e = t.match(new RegExp(this.regex));
                 t = null !== e ? e[0] : o.emptyRecordValue;
             }
-            i[this.id] = t, await await i;
+            i[this.id] = t;
+            result.push(i);
         }
+        return result;
     }
 
     getDataColumns() {

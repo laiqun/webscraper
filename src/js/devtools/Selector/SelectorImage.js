@@ -24,13 +24,15 @@ class SelectorImage extends a.Selector {
     async _getData(e) {
         const t = await this.getDataElements(e);
         !1 === this.multiple && 0 === t.length && (await await this.getEmptyRecord());
+        let result =[];
         for (const e of t) {
-            let t = await n(e.getAttr("src"));
-            t || (t = await n(e.getAttr("srcset"))),
-                await await {
+            let t = await e.getAttr("src");
+            t || (t = await e.getAttr("srcset")),
+                result.push( {
                     [this.id + "-src"]: t
-                };
+                });
         }
+        return result;
     }
 
     getDataColumns() {

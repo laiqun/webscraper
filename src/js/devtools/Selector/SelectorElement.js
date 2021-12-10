@@ -28,8 +28,10 @@ class SelectorElement extends a.Selector {
 
     async _getData(e) {
         const t = await this.getDataElements(e);
+        let result =[];
         for (const e of t)
-            await await e;
+            result.push(e);
+        return result;
     }
 
     getDataColumns() {

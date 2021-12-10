@@ -38,7 +38,14 @@ class SelectorScriptData extends a.Selector {
     async _getData(e) {
         let t = await n(e.getDataWithScript(this.script));
         t = this.parseData(t), !1 === this.multiple && 0 === t.length && (await await this.getEmptyRecord());
-        for (const e of t) if (await await e, !1 === this.multiple) return await void 0;
+        let result = [];
+        for (const e of t)
+        {
+            result.push(e);
+            if ( false === this.multiple)
+                break;
+        }
+        return result;
     }
 
     getDataColumns() {

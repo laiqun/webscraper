@@ -71,23 +71,29 @@ class SelectorTable extends s.Selector {
     }
 
     async _getData(e) {
-        const t = await this.getDataElements(e);
-        let i = 0;
-        for (const e of t) {
-            const t = await this.extractTableData(e);
+        const dataElement = await this.getDataElements(e);
+        let dataNumber = 0;
+        let result =[];
+        for (const tElement of dataElement) {
+            const t = await this.extractTableData(tElement);
             for (const e of t)
-                await await r(e), i++;
-            if (!1 === this.multiple)
-                return await void 0;
+            {
+                result.push(e);
+                dataNumber++;
+            }
+            if (false === this.multiple)
+                break;
         }
-        0 === i && !1 === this.multiple && (await await r(this.getEmptyRecord()));
+        if(0 === dataNumber && false === this.multiple )
+            return this.getEmptyRecord();
     }
 
     getDataColumns() {
-        const e = [];
-        return this.columns.forEach(t => {
-            !0 === t.extract && e.push(t.name);
-        }), e;
+        const result = [];
+        this.columns.forEach(t => {
+            true === t.extract && result.push(t.name);
+        });
+        return  result;
     }
 
     getFeatures() {

@@ -99,11 +99,15 @@ class SelectorSitemapXmlLink extends l.Selector {
     }
 
     async _getData(e) {
-        const t = await this.getSitemapXmlUrls(e), i = [];
+        const t = await this.getSitemapXmlUrls(e);
+        const i = [];
+        let result =[];
         for (const n of t) {
             const t = await this.extractUrlsFromSitemapXml(e, n, i);
-            for (const e of t) await await r(e);
+            for (const e of t)
+                result.push(e);
         }
+        return result;
     }
 
     getDataColumns() {

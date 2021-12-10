@@ -79,8 +79,8 @@ let EditSitemapSelectorView = class extends d.BaseComponent {
                             message: "Sitemap id required and cannot be empty"
                         },
                         stringLength: {
-                            min: 3,
-                            message: "The sitemap id should be atleast 3 characters long"
+                            min: 2,
+                            message: "The sitemap id should be atleast 2 characters long"
                         },
                         regexp: {
                             regexp: /^(?!web-scraper)[^_\.\$\#\s&][^\.\$\#\n&]+$/,

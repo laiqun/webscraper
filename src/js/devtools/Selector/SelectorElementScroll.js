@@ -36,7 +36,8 @@ class SelectorElementScroll extends o.Selector {
     }
 
     async _getData(e) {
-        await this.waitDelay(), await this.scrollToTop(e);
+        await this.waitDelay();
+        await this.scrollToTop(e);
         const t = parseInt("" + this.delay, 10) || 0;
         let i = await this.getDataElements(e), n = i.length;
         for (; ;) {

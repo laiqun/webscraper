@@ -27,7 +27,7 @@ class SelectorText extends a.Selector {
         const t = await this.getDataElements(e);
         if(false === this.multiple && 0 === t.length )
             return  this.getEmptyRecord();
-        var result =[];
+        let result =[];
         for (const e of t) {
             let t = await e.getText();
             if (void 0 !== this.regex && this.regex && this.regex.length) {

@@ -281,17 +281,17 @@ _defaults:
         return this.storage.updateSitemap(e);
     }
 
-    async getDataPreviewSelectorData(e, t) {
+    async getDataPreviewSelectorData(tabid, selectorContext) {
         console.log("getDataPreviewSelectorData");
-        const sitemap = new d.Sitemap(t.sitemap);
-        const devtoolsPage = await this.getDevtoolsWebPage(e);
+        const sitemap = new d.Sitemap(selectorContext.sitemap);
+        const devtoolsPage = await this.getDevtoolsWebPage(tabid);
         const devToolsElement = await devtoolsPage.getRootElement();
         const extractor2 = new o.DataExtractor2({
                 sitemap: sitemap,
                 parentSelectorId: undefined,
                 parentElement: devToolsElement
             });
-        const dataw = await extractor2.getSingleSelectorData(t.parentSelectorIds, t.selectorId);
+        const dataw = await extractor2.getSingleSelectorData(selectorContext.parentSelectorIds, selectorContext.selectorId);
         for (const data of dataw)
             delete data._deduplicateFirstPageData;
         await devtoolsPage.chromeClient.deInitMixins();
@@ -301,12 +301,12 @@ _defaults:
         return dataw;
     }
 
-    async getAllSelectorDataPreviewData(e, t) {
-        const sitemap = new d.Sitemap(t.sitemap);
-        const selectorPathElement = t.selectorPath[t.selectorPath.length - 1];
-        const devToolsPage = await this.getDevtoolsWebPage(e);
+    async getAllSelectorDataPreviewData(tabid, selectorContext) {
+        const sitemap = new d.Sitemap(selectorContext.sitemap);
+        const selectorPathElement = selectorContext.selectorPath[selectorContext.selectorPath.length - 1];
+        const devToolsPage = await this.getDevtoolsWebPage(tabid);
         const rootElement = await devToolsPage.getRootElement();
-        const parentElement = await rootElement.getParentElement(sitemap, t.selectorPath);
+        const parentElement = await rootElement.getParentElement(sitemap, selectorContext.selectorPath);
         const dataExtractor2 = new o.DataExtractor2({
                 sitemap: sitemap,
                 parentSelectorId: selectorPathElement,

@@ -55,13 +55,14 @@ let ImportSitemapView = class extends u.BaseComponent {
                 _id: {
                     validators: {
                         stringLength: {
-                            min: 3,
-                            message: "The sitemap id should be atleast 3 characters long"
+                            min: 2,
+                            message: "The sitemap id should be atleast 2 characters long"
                         },
+                        /*
                         regexp: {
                             regexp: /^[a-z][a-z0-9_\$\(\)\+\-/]+$/,
                             message: "Only lowercase characters (a-z), digits (0-9), or any of the characters _, $, (, ), +, -, and / are allowed. Must begin with a letter."
-                        },
+                        },*/
                         callback: {
                             message: chrome.i18n.getMessage("SitemapIDAlreadyExist"),
                             callback: (e, t) => !0

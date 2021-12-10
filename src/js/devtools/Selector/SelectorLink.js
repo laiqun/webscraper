@@ -53,6 +53,7 @@ class SelectorLink extends Selector {
         const t = await this.getDataElements(e);
         if(false === this.multiple && 0 === t.length)
              this.getEmptyRecord();
+        let result =[];
         for (const e of t) {
             const t = await e.getText();
             let i = await this.getLink(e);
@@ -63,8 +64,9 @@ class SelectorLink extends Selector {
                 _followSelectorId: this.id,
                 _follow: i
             };
-            await n;
+            result.push(n) ;
         }
+        return result;
     }
 
     getDataColumns() {
