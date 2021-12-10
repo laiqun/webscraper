@@ -37,7 +37,7 @@ class WaitForRootElementEventListener extends r.BaseWebNavigationEventListener {
     }
 
     get pageLoadError() {
-        return this.state.rootElementLookupTimedOut ? "WAIT_FOR_ROOT_ELEMENT_TIMEOUT" : this.state.tabStatusUnloaded ? "CHROME_TAB_CRASHED wait-for-root-element" : undefined;
+        return this.state.rootElementLookupTimedOut ? "WAIT_FOR_ROOT_ELEMENT_TIMEOUT" : this.state.tabStatusUnloaded ? "CHROME_TAB_CRASHED wait-for-root-element" : void 0;
     }
 
     initTimeouts() {

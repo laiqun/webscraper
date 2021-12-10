@@ -10,12 +10,12 @@ class SelectorGraphv2{
     }
 
     getSelectorChildren(e) {
-        return undefined === e.childSelectors && (e.childSelectors = this.sitemap.selectors.getDirectChildSelectors(e.id).fullClone()),
-            0 === e.childSelectors.length ? undefined : e.childSelectors;
+        return void 0 === e.childSelectors && (e.childSelectors = this.sitemap.selectors.getDirectChildSelectors(e.id).fullClone()),
+            0 === e.childSelectors.length ? void 0 : e.childSelectors;
     }
 
     getSelectorVisibleChildren(e) {
-        if (undefined === e.visibleChildren && (e.visibleChildren = false), false !== e.visibleChildren) return this.getSelectorChildren(e);
+        if (void 0 === e.visibleChildren && (e.visibleChildren = !1), !1 !== e.visibleChildren) return this.getSelectorChildren(e);
     }
 
     selectorHasChildren(e) {
@@ -42,7 +42,7 @@ class SelectorGraphv2{
         t.forEach(e => {
             e.y = 100 * e.depth;
         });
-        const i = this.svg.selectAll("g.node").data(t, t => (undefined === t.i && (t.i = t.id,
+        const i = this.svg.selectAll("g.node").data(t, t => (void 0 === t.i && (t.i = t.id,
                 t.i = `${e.i}/${t.i}`), t.i)),
             n = i.enter().append("svg:g").attr("class", "node").attr("transform", t => `translate(${e.y0},${e.x0})`).on("click", function (e) {
                 this.toggle(e), this.update(e);

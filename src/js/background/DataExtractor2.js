@@ -67,7 +67,7 @@ class DataExtractor2 {
                 if (i instanceof s.WebPageElement) {
                     if (directChildSelector.id === this.parentSelectorId) continue;
                     if (a && !(await a.isUniqueElement(i))) continue;
-                    const r = await this.getChildSelectorData(directChildSelector.id, i, false, u);
+                    const r = await this.getChildSelectorData(directChildSelector.id, i, !1, u);
                     directChildSelector.shouldDeduplicateChildSelectorData() && parentSelectorId !== directChildSelector.id && u.setFirstPageDeduplicationDataHash(r),
                         n.push(...r);
                 } else {
@@ -93,15 +93,15 @@ class DataExtractor2 {
 
     selectorWillReturnMultipleRecords(e) {
         if (e.willReturnMultipleRecords())
-            return true;
+            return !0;
         const t = this.sitemap.getDirectChildSelectors(e.id);
         for (const e of t) {
             if (e.willReturnMultipleRecords())
-                return true;
+                return !0;
             if (e.willReturnElements() && this.selectorWillReturnMultipleRecords(e))
-                return true;
+                return !0;
         }
-        return false;
+        return !1;
     }
 
     getSingleSelectorData(parentSelectorIds, selectorId) {

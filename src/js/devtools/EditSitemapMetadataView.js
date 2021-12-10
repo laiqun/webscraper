@@ -66,7 +66,7 @@ let EditSitemapMetadataView = class extends c.BaseComponent {
                         },*/
                         callback: {
                             message: chrome.i18n.getMessage("SitemapIDAlreadyExist"),
-                            callback: (e, t) => true
+                            callback: (e, t) => !0
                         }
                     }
                 },
@@ -77,7 +77,7 @@ let EditSitemapMetadataView = class extends c.BaseComponent {
                         },
                         uri: {
                             message: "The start URL is not a valid URL",
-                            allowLocal: true
+                            allowLocal: !0
                         }
                     }
                 }
@@ -145,7 +145,7 @@ let EditSitemapMetadataView = class extends c.BaseComponent {
     }
 
     async saveSitemap(e) {
-        if (e.preventDefault(), e.stopPropagation(), !this.isValidForm()) return false;
+        if (e.preventDefault(), e.stopPropagation(), !this.isValidForm()) return !1;
         if (this.state._id !== this.props.appState.sitemap._id) {
             if (await l.backgroundPageClient.sitemapExists(this.state._id)) {
                 return void this.getFormValidator().updateStatus("_id", "INVALID", "callback");

@@ -15,10 +15,10 @@ let WebSiteSetupView = class extends l.BaseComponent {
     constructor(e) {
         super(e);
         let websiteStateSetup = this.props.appState.sitemap.websiteStateSetup;
-        if(undefined === websiteStateSetup)
+        if(void 0 === websiteStateSetup)
         {
             websiteStateSetup = {
-            enabled: false,
+            enabled: !1,
             performWhenNotFoundSelector: "",
             actions: [{
                 type: "openUrl",
@@ -122,7 +122,7 @@ let WebSiteSetupView = class extends l.BaseComponent {
         {
             await c.DevToolsContentScriptClient.removeCurrentContentSelector();
             this.setState({
-                previewingElements: false
+                previewingElements: !1
             });
         }
         else

@@ -4,21 +4,21 @@ import * as n from "js-yaml" //const n = i(261);
 class DataObject {
     static serializeValue(e) {
         return "object" == typeof e ? null === e ? "null" : n.safeDump(e, {
-            skipInvalid: true
+            skipInvalid: !0
         }) : e;
     }
 
     static serializeArray(e) {
-        let t = true;
+        let t = !0;
         for (const i of e) if (Array.isArray(i) || "object" == typeof i) {
-            t = false;
+            t = !1;
             break;
         }
         if (t) {
             return e.map(e => e.replace(/,/g, ",")).join(", ");
         }
         return n.safeDump(e, {
-            skipInvalid: true
+            skipInvalid: !0
         });
     }
 
@@ -27,9 +27,9 @@ class DataObject {
         for (const n of e) {
             const e = {};
             for (const i of t) {
-                if (false === i.extract) continue;
+                if (!1 === i.extract) continue;
                 let t = n;
-                for (const e of i.selector) if (t = t[e], undefined === t) {
+                for (const e of i.selector) if (t = t[e], void 0 === t) {
                     t = r.emptyRecordValue;
                     break;
                 }
@@ -42,9 +42,9 @@ class DataObject {
     }
 
     static isDataEmpty(e) {
-        if (e.length > 1) return false;
-        for (const t in e[0]) if (e[0][t]) return false;
-        return true;
+        if (e.length > 1) return !1;
+        for (const t in e[0]) if (e[0][t]) return !1;
+        return !0;
     }
 }
 

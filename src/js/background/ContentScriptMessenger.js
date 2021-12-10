@@ -90,7 +90,7 @@ class ContentScriptMessenger extends a.ChromeClientBase {
         return this.sendMessage("getInterceptableJavaScriptClickUrl", [e]);
     }
 
-    scrollDownElement(e, t, i = false, r) {
+    scrollDownElement(e, t, i = !1, r) {
         return this.sendMessage("scrollDownElement", [e, t, i, r]);
     }
 
@@ -106,7 +106,7 @@ class ContentScriptMessenger extends a.ChromeClientBase {
         return this.sendMessage("waitForPageLoad");
     }
 
-    scrollDownBody(e, t, i = false) {
+    scrollDownBody(e, t, i = !1) {
         return this.sendMessage("scrollDownBody", [e, t, i]);
     }
 
@@ -140,7 +140,7 @@ class ContentScriptMessenger extends a.ChromeClientBase {
 
     async checkContentScriptReachable() {
         try {
-            await this.sendMessage("getRootElement", [], true);
+            await this.sendMessage("getRootElement", [], !0);
             return true;
         } catch (e) {
             if (e.toString().includes("Could not establish connection. Receiving end does not exist."))

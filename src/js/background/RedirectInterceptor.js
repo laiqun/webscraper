@@ -48,7 +48,7 @@ class RedirectInterceptor{
 
     initTimeout() {
         this.timeout = setTimeout(() => {
-            this.callbackResultUrl(undefined);
+            this.callbackResultUrl(void 0);
         }, this.duration);
     }
 

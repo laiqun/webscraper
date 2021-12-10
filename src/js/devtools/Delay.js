@@ -24,7 +24,7 @@ class Delay extends r.ConditionalElementBase {
     }
 
     get canRender() {
-        if (!super.canRender) return false;
+        if (!super.canRender) return !1;
         const {selector: e} = this.props;
         return !(e.isDeprecatedFeature("delay") && (!e.delay || 0 === e.delay));
     }

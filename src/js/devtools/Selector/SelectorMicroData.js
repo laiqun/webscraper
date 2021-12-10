@@ -2,30 +2,30 @@ import * as o from "./Selector.js"//, o = i(10);
 import * as a from "./SchemaOrgExtractor.js"//  const a = i(218)
 class SelectorMicroData extends o.Selector {
     constructor(e) {
-        super(), this.type = "SelectorMicroData", this.multiple = false, this.microDataSelectorType = "schema.org",
+        super(), this.type = "SelectorMicroData", this.multiple = !1, this.microDataSelectorType = "schema.org",
             this.dataObjectSelectors = [], this.updateData(e);
     }
 
     canReturnMultipleRecords() {
-        return true;
+        return !0;
     }
 
     canHaveChildSelectors() {
-        return false;
+        return !1;
     }
 
     canCreateNewJobs() {
-        return false;
+        return !1;
     }
 
     willReturnElements() {
-        return false;
+        return !1;
     }
 
     async _getData(e) {
             const t = new a.SchemaOrgExtractor, i = this.schemaOrgType, r = this.dataObjectSelectors,
                 datas = await t.extractData(e, r, i);
-            false === this.multiple && 0 === datas.length && ( await this.getEmptyRecord());
+            !1 === this.multiple && 0 === datas.length && ( await this.getEmptyRecord());
             let result=[];
             for (const data of datas)
             {

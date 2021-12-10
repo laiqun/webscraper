@@ -10,7 +10,7 @@ import {default as r} from "../contentjs/log.js";//r = i(5),
                 e.timeStarted = Date.now();
                 const result = await i();
                 e.timeFinished = (new Date).getTime();
-                e.executed = true;
+                e.executed = !0;
                 const a = {
                     execution: e.timeFinished - e.timeStarted,
                     getData: t.getDataExtractionDuration(),

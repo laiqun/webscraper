@@ -59,7 +59,7 @@ class Scraper {
     }
 
     async handleChromeCrashErrors(t) {
-        if (true === t.hasFailed() && t.error_message && o.includesAnyOf(t.error_message, this.chromeCrashErrors)) {
+        if (!0 === t.hasFailed() && t.error_message && o.includesAnyOf(t.error_message, this.chromeCrashErrors)) {
             try {
                 await this.browser.close();
             } catch (e) {

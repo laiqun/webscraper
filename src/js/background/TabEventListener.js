@@ -80,7 +80,7 @@ class TabEventListener extends r.BaseWebNavigationEventListener {
                 this.onWindowHistoryPushStateUrlChange(changeInfo);
             else if (changeInfo.status === o.ChromeTabStatus.loading)
                 this.onTabStatusLoading(changeInfo);
-            else if (undefined === changeInfo.status && tab.status === o.ChromeTabStatus.loading && undefined !== changeInfo.title)
+            else if (void 0 === changeInfo.status && tab.status === o.ChromeTabStatus.loading && void 0 !== changeInfo.title)
                 this.onLoadingTabTitleSet();
             else if (changeInfo.status === o.ChromeTabStatus.unloaded) {
                 n.notice("tab unloaded", {
@@ -111,7 +111,7 @@ class TabEventListener extends r.BaseWebNavigationEventListener {
             this.setState({
                 tabStatus: a.TabEventListenerTabStatus.loading
             }, {
-                tabOnCompleted: false
+                tabOnCompleted: !1
             });
         else
             n.info("Tab loading state is being set after it has already gone through loading state", {

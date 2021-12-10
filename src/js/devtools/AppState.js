@@ -1,5 +1,5 @@
 //670  module 522 appState
-//appState = t.AppState = undefined;  //main
+//appState = t.AppState = void 0;  //main
 //const /**/ /*, mobx-react-router */ /*, , , */
 //     y = i(524);
 import * as mobx_react_router from "mobx-react-router" //s = i(680)
@@ -47,7 +47,7 @@ class AppState {
         * */
         this.sitemaps = mobx.observable.array();
         this.selectorBreadcrumb = ["_root"];
-        this.sitemap = undefined;
+        this.sitemap = void 0;
         this.originalSitemap = undefined;
         this.selector = undefined;  //l = i(10),
         this.originalSelector = undefined;

@@ -5,30 +5,30 @@ class SelectorPopupLink extends s.Selector {
         super();
         this.type = "SelectorPopupLink";
         this.selector = "";
-        this.multiple = false;
+        this.multiple = !1;
         this.delay = 0;
         this.updateData(e);
     }
 
     canReturnMultipleRecords() {
-        return true;
+        return !0;
     }
 
     canHaveChildSelectors() {
-        return true;
+        return !0;
     }
 
     canCreateNewJobs() {
-        return true;
+        return !0;
     }
 
     willReturnElements() {
-        return false;
+        return !1;
     }
 
     async _getData(e) {
         const t = await this.getDataElements(e);
-        false === this.multiple && 0 === t.length && (await await this.getEmptyRecord());
+        !1 === this.multiple && 0 === t.length && (await await this.getEmptyRecord());
         let result = [];
         for (const e of t) {
             const t = await e.getText();
@@ -66,7 +66,7 @@ class SelectorPopupLink extends s.Selector {
     }
 
     isLinkSelector() {
-        return true;
+        return !0;
     }
 }
 

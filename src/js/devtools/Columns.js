@@ -40,7 +40,7 @@ class Columns extends r.ConditionalElementBase {
     get columns() {
         let e = [];
         const t = this.props.selector;
-        return undefined !== t.columns && (e = t.columns), e;
+        return void 0 !== t.columns && (e = t.columns), e;
     }
 }
 

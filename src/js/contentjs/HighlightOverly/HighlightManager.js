@@ -6,7 +6,7 @@ import * as s from "./HighlightManager/SVG.js"
 class HighlightManager {
     constructor(e, t) {
         this.highlightStyles = i.styles;
-        undefined !== t && (this.selectionParent = new r.Highlight(t, this.highlightStyles.parent));
+        void 0 !== t && (this.selectionParent = new r.Highlight(t, this.highlightStyles.parent));
 
         this.locked = [];
         this.containerElement = e;
@@ -17,7 +17,7 @@ class HighlightManager {
     toggle(e) {
         const {domChildAction: t} = o.getToggleMapping(e);
         this.container[t](this.mask.highlight);
-        undefined !== this.selectionParent && this.container[t](this.selectionParent.highlight);
+        void 0 !== this.selectionParent && this.container[t](this.selectionParent.highlight);
         for (const t of this.locked) this.toggleSelectedClass(t.element, e);
     }
 
@@ -28,25 +28,25 @@ class HighlightManager {
     }
 
     updateHovered(e) {
-        switch (true) {
-            case undefined !== this.hovered && undefined === e:
-                this.removeUnusedHighlights([this.hovered]), this.hovered = undefined;
+        switch (!0) {
+            case void 0 !== this.hovered && void 0 === e:
+                this.removeUnusedHighlights([this.hovered]), this.hovered = void 0;
                 break;
 
-            case undefined === this.hovered && undefined !== e:
+            case void 0 === this.hovered && void 0 !== e:
                 this.hovered = this.mountNewHighlight(e, this.highlightStyles.hovered);
                 break;
 
-            case undefined !== this.hovered && undefined !== e:
+            case void 0 !== this.hovered && void 0 !== e:
                 this.hovered.element = e;
         }
     }
 
     addLocked(e) {
         const {locked: t} = this;
-        if (undefined === e) return void this.removeUnusedHighlights(t);
+        if (void 0 === e) return void this.removeUnusedHighlights(t);
         let n;
-        switch (true) {
+        switch (!0) {
             case 0 === t.length:
                 n = this.addNewHighlights(e);
                 break;
@@ -66,14 +66,14 @@ class HighlightManager {
     }
 
     overwriteCommonHighlights(e, t) {
-        return e.map((e, n) => (this.toggleSelectedClass(e.element, false), e.element = t[n],
-            this.toggleSelectedClass(e.element, true), e));
+        return e.map((e, n) => (this.toggleSelectedClass(e.element, !1), e.element = t[n],
+            this.toggleSelectedClass(e.element, !0), e));
     }
 
     removeUnusedHighlights(e) {
         for (; e.length > 0;) {
             const t = e.pop();
-            this.toggleSelectedClass(t.element, false), this.container.removeChild(t.highlight);
+            this.toggleSelectedClass(t.element, !1), this.container.removeChild(t.highlight);
         }
     }
 
@@ -81,7 +81,7 @@ class HighlightManager {
         const t = [];
         for (const n of e) {
             const e = this.mountNewHighlight(n, this.highlightStyles.clicked);
-            this.toggleSelectedClass(e.element, true), t.push(e);
+            this.toggleSelectedClass(e.element, !0), t.push(e);
         }
         return t;
     }
@@ -93,7 +93,7 @@ class HighlightManager {
 
     dimensionChange(e) {
         e.forEach(e => {
-            undefined !== e && e.onDimensionChange();
+            void 0 !== e && e.onDimensionChange();
         });
     }
 

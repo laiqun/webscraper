@@ -5,11 +5,11 @@ class UniqueElementList {
 
     async push(e) {
         const t = await this.getElementUniqueId(e);
-        if (this.isAdded(t)) return false;
+        if (this.isAdded(t)) return !1;
         {
-            this.addedElements[t] = true;
+            this.addedElements[t] = !0;
             const i = await e.getClone();
-            return this.elements.push(i), true;
+            return this.elements.push(i), !0;
         }
     }
 

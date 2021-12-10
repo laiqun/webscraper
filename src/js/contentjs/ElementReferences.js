@@ -39,7 +39,7 @@ class ElementReferences {
 
     getElementByReference(refIndex) {
         const matchedElement = this.elementReferences[refIndex];
-        if (undefined === matchedElement)
+        if (void 0 === matchedElement)
             throw "ACCESSING_UNDEFINED_ELEMENT probably page was reloaded";
         if (false === matchedElement.isConnected &&
                 ("html" === matchedElement.tagName ||
@@ -73,7 +73,7 @@ class ElementReferences {
 
     getClone(refIndex) {
         const element = this.getElementByReference(refIndex);
-        const clonedElement = element.cloneNode(true);
+        const clonedElement = element.cloneNode(!0);
         let originalElementList, clonedElementList;
         //其中的select标签需要特殊处理
         if ("SELECT" === element.tagName) {

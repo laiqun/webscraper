@@ -5,29 +5,29 @@ class SelectorLink extends Selector {
         super();
         this.type = "SelectorLink";
         this.selector = "";
-        this.multiple = false;
+        this.multiple = !1;
         this.delay = 0;
         this.updateData(e);
     }
 
     canReturnMultipleRecords() {
-        return true;
+        return !0;
     }
 
     canHaveChildSelectors() {
-        return true;
+        return !0;
     }
 
     canCreateNewJobs() {
-        return true;
+        return !0;
     }
 
     willReturnElements() {
-        return false;
+        return !1;
     }
 
     getLinkType() {
-        return undefined === this.linkType ? "link" : this.linkType;
+        return void 0 === this.linkType ? "link" : this.linkType;
     }
 
     async getLink(e) {
@@ -86,7 +86,7 @@ class SelectorLink extends Selector {
     }
 
     isLinkSelector() {
-        return true;
+        return !0;
     }
 }
 

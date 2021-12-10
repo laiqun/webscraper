@@ -13,19 +13,19 @@ class ActionClick extends o.Selector {
     }
 
     canReturnMultipleRecords() {
-        return false;
+        return !1;
     }
 
     canHaveChildSelectors() {
-        return true;
+        return !0;
     }
 
     canCreateNewJobs() {
-        return false;
+        return !1;
     }
 
     willReturnElements() {
-        return true;
+        return !0;
     }
 
     getDataColumns() {
@@ -37,7 +37,7 @@ class ActionClick extends o.Selector {
         if(null !== t )
         {
             await t.click("real-like-events");
-            await e.webPage.waitForPageLoadComplete(true, this.delay);
+            await e.webPage.waitForPageLoadComplete(!0, this.delay);
         }
     }
 

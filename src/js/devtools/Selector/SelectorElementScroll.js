@@ -1,27 +1,27 @@
 import * as o from "./Selector.js"    //const o = i(10);
 class SelectorElementScroll extends o.Selector {
     constructor(e) {
-        super(), this.type = "SelectorElementScroll", this.selector = "", this.multiple = true,
+        super(), this.type = "SelectorElementScroll", this.selector = "", this.multiple = !0,
             this.delay = 2e3, this.scrollElementSelector = "", this.updateData(e);
     }
 
     canReturnMultipleRecords() {
-        return true;
+        return !0;
     }
 
     canHaveChildSelectors() {
-        return true;
+        return !0;
     }
 
     canCreateNewJobs() {
-        return false;
+        return !1;
     }
 
     willReturnElements() {
-        return true;
+        return !0;
     }
 
-    async scrollToBottom(e, t = false) {
+    async scrollToBottom(e, t = !1) {
         const i = e.element;
         if (this.scrollElementSelector) {
             const n = await e.getElement(this.scrollElementSelector);
@@ -41,12 +41,12 @@ class SelectorElementScroll extends o.Selector {
         const t = parseInt("" + this.delay, 10) || 0;
         let i = await this.getDataElements(e), n = i.length;
         for (; ;) {
-            if (await this.scrollToBottom(e), await e.webPage.waitForPageLoadComplete(false, t),
+            if (await this.scrollToBottom(e), await e.webPage.waitForPageLoadComplete(!1, t),
                 i = await this.getDataElements(e), i.length === n && (await this.scrollToTop(e),
-                await this.scrollToBottom(e, true), await e.webPage.waitForPageLoadComplete(false, t),
+                await this.scrollToBottom(e, !0), await e.webPage.waitForPageLoadComplete(!1, t),
                 i = await this.getDataElements(e), i.length === n)) {
                 for (const e of i) await await e;
-                return await undefined;
+                return await void 0;
             }
             n = i.length;
         }

@@ -13,7 +13,7 @@ class PageLoadMiddleware extends r.BaseMiddleware {
                 return  await i();
             } catch (t) {
                 if (a.startsWith(t, "PAGE_STATUS_CODE_ERROR")) {
-                    e.page_load_failed_with_status_code_error = true;
+                    e.page_load_failed_with_status_code_error = !0;
                     const n = await i();
                     if (e.retry || e.fingerprintCheckerDetected)
                         return n;

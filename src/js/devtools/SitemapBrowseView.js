@@ -44,8 +44,8 @@ let SitemapBrowseView = class extends c.BaseComponent {
     constructor(e) {
         super(e), this.state = {
             data: [],
-            loading: true,
-            survey: undefined
+            loading: !0,
+            survey: void 0
         };
     }
 

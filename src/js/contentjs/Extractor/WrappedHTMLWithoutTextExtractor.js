@@ -14,7 +14,7 @@ class WrappedHTMLWithoutTextExtractor extends ExtractorBase.ExtractorBase {
     }
 
     extract(e) {
-        const t = this.elementReferences.getElementByReference(e).cloneNode(true);
+        const t = this.elementReferences.getElementByReference(e).cloneNode(!0);
         this.removeTextNodes(t);
         let result = t.outerHTML;
         result = result || "";

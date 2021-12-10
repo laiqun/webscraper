@@ -3,24 +3,24 @@ import * as a from "./Selector.js"//a = i(10),
 import * as o from "../emptyRecordValue.js"//o = i(29);
 class SelectorText extends a.Selector {
     constructor(e) {
-        super(), this.type = "SelectorText", this.selector = "", this.multiple = false, this.delay = 0,
+        super(), this.type = "SelectorText", this.selector = "", this.multiple = !1, this.delay = 0,
             this.regex = "", this.updateData(e);
     }
 
     canReturnMultipleRecords() {
-        return true;
+        return !0;
     }
 
     canHaveChildSelectors() {
-        return false;
+        return !1;
     }
 
     canCreateNewJobs() {
-        return false;
+        return !1;
     }
 
     willReturnElements() {
-        return false;
+        return !1;
     }
 
     async _getData(e) {
@@ -30,7 +30,7 @@ class SelectorText extends a.Selector {
         let result =[];
         for (const e of t) {
             let t = await e.getText();
-            if (undefined !== this.regex && this.regex && this.regex.length) {
+            if (void 0 !== this.regex && this.regex && this.regex.length) {
                 const e = t.match(new RegExp(this.regex));
                 t = null !== e ? e[0] : o.emptyRecordValue;
             }

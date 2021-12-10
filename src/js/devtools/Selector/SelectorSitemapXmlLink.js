@@ -16,23 +16,23 @@ class SelectorSitemapXmlLink extends l.Selector {
     }
 
     canReturnMultipleRecords() {
-        return true;
+        return !0;
     }
 
     canHaveChildSelectors() {
-        return true;
+        return !0;
     }
 
     canCreateNewJobs() {
-        return true;
+        return !0;
     }
 
     willReturnElements() {
-        return false;
+        return !1;
     }
 
     willReturnMultipleRecords() {
-        return true;
+        return !0;
     }
 
     async getSitemapXmlUrls(e) {
@@ -119,7 +119,7 @@ class SelectorSitemapXmlLink extends l.Selector {
     }
 
     isLinkSelector() {
-        return true;
+        return !0;
     }
 }
 

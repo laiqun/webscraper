@@ -15,19 +15,19 @@ class SelectorPagination extends o.Selector {
     }
 
     get multiple() {
-        return true;
+        return !0;
     }
 
     canCreateNewJobs() {
-        return true;
+        return !0;
     }
 
     canHaveChildSelectors() {
-        return true;
+        return !0;
     }
 
     canReturnMultipleRecords() {
-        return true;
+        return !0;
     }
 
     getDataColumns() {
@@ -39,11 +39,11 @@ class SelectorPagination extends o.Selector {
     }
 
     willReturnElements() {
-        return false;
+        return !1;
     }
 
     shouldDeduplicateChildSelectorData() {
-        return true;
+        return !0;
     }
 
     async _getData(e, t) {

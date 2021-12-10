@@ -5,25 +5,25 @@ class SelectorElement extends a.Selector {
         super();
         this.type = "SelectorElement";
         this.selector = "";
-        this.multiple = true;
+        this.multiple = !0;
         this.delay = 0;
         this.updateData(e);
     }
 
     canReturnMultipleRecords() {
-        return true;
+        return !0;
     }
 
     canHaveChildSelectors() {
-        return true;
+        return !0;
     }
 
     canCreateNewJobs() {
-        return false;
+        return !1;
     }
 
     willReturnElements() {
-        return true;
+        return !0;
     }
 
     async _getData(e) {

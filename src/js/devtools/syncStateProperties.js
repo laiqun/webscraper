@@ -13,7 +13,7 @@ let syncStateProperties = {
             text: "Overwrite",
             title: "Latest sitemap version can't be determined. Overwrite this sitemap with the version from your Cloud account"
         },
-        deleteBtn: true
+        deleteBtn: !0
     },
     [n.SyncState.latestCloud]: {
         stateIcon: r.notSyncedIcon,
@@ -27,7 +27,7 @@ let syncStateProperties = {
             text: "Update",
             title: "Latest sitemap version is in your Cloud account. Update this sitemap to match the version in your Cloud account"
         },
-        deleteBtn: true
+        deleteBtn: !0
     },
     [n.SyncState.latestLocal]: {
         stateIcon: r.notSyncedIcon,
@@ -41,23 +41,23 @@ let syncStateProperties = {
             text: "Overwrite",
             title: "This is the latest sitemap version. Overwrite this sitemap with a version from your Cloud account"
         },
-        deleteBtn: true
+        deleteBtn: !0
     },
     [n.SyncState.synced]: {
         stateIcon: r.syncedIcon,
-        uploadBtn: undefined,
-        downloadBtn: undefined,
-        deleteBtn: true
+        uploadBtn: void 0,
+        downloadBtn: void 0,
+        deleteBtn: !0
     },
     [n.SyncState.cloud]: {
         stateIcon: r.syncCloudIcon,
-        uploadBtn: undefined,
+        uploadBtn: void 0,
         downloadBtn: {
             class: "btn-success",
             text: "Download",
             title: "This sitemap is only in your Cloud account. Download the sitemap from your Cloud account to edit"
         },
-        deleteBtn: false
+        deleteBtn: !1
     },
     [n.SyncState.local]: {
         stateIcon: r.syncLocalIcon,
@@ -66,8 +66,8 @@ let syncStateProperties = {
             text: "Upload",
             title: "This sitemap is only in your extension storage. Upload the sitemap to your Cloud account"
         },
-        downloadBtn: undefined,
-        deleteBtn: true
+        downloadBtn: void 0,
+        deleteBtn: !0
     }
 };
 

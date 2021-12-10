@@ -14,7 +14,7 @@ class TakesScreenShot extends a.ContentScriptMessenger {
                     });
                     return void resolve("");
                 }
-                if (undefined === res)
+                if (void 0 === res)
                     return void resolve("");
                 const n = res.substr("data:image/jpeg;base64,".length);
                 resolve(n);

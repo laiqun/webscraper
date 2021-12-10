@@ -17,7 +17,7 @@ class ParentSelectors extends r.ConditionalElementBase {
             value: t.parentSelectors,
             name: "parentSelectors",
             onChange: e,
-            multiple: true
+            multiple: !0
         }, i.map(e => n.createElement("option", {
             value: e,
             key: e

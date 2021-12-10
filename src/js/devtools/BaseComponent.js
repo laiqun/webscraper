@@ -51,8 +51,8 @@ class BaseComponent extends r.Component {
 
     isFormValid(e) {
         this.props.errorState.validateAllFields(e);
-        for (const e in this.props.errorState.validationErrors) if (undefined !== this.props.errorState.validationErrors[e]) return false;
-        return true;
+        for (const e in this.props.errorState.validationErrors) if (void 0 !== this.props.errorState.validationErrors[e]) return !1;
+        return !0;
     }
 
     revalidateField(e) {

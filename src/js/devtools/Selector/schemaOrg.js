@@ -24,16 +24,16 @@ let schemaOrg = new class {
         Array.isArray(e) || (e = [e]);
         for (const a of e) {
             const e = a["@type"];
-            if (undefined === e) continue;
+            if (void 0 === e) continue;
             const o = n.SchemaOrgSchema.types[e];
-            if (undefined !== o) for (const e in a) {
+            if (void 0 !== o) for (const e in a) {
                 if (e.startsWith("@")) continue;
                 if (!o.properties.includes(e)) continue;
                 const n = a[e];
                 if (Array.isArray(n) || "object" != typeof n || null == n) r.push({
                     key: t + e,
                     selector: i.concat([e]),
-                    extract: true
+                    extract: !0
                 }); else {
                     const a = t + e + "_", o = i.concat([e]), s = this.getSelectorsFromDataObject(n, a, o);
                     r = r.concat(s);
@@ -45,7 +45,7 @@ let schemaOrg = new class {
 
     getTypeFromDataObject(e) {
         const t = e["@type"];
-        if (undefined !== t) return undefined !== n.SchemaOrgSchema.types[t] ? t : undefined;
+        if (void 0 !== t) return void 0 !== n.SchemaOrgSchema.types[t] ? t : void 0;
     }
 
     initBasicTypes() {
@@ -74,11 +74,11 @@ let schemaOrg = new class {
         for (const i of a.ranges) if (!this.isIgnoredType(i)) if (this.isBasicDataType(i)) r.push({
             key: e,
             selector: t,
-            extract: true
-        }); else if (undefined === n.SchemaOrgSchema.types[i]) r.push({
+            extract: !0
+        }); else if (void 0 === n.SchemaOrgSchema.types[i]) r.push({
             key: e,
             selector: t,
-            extract: true
+            extract: !0
         }); else for (const a of n.SchemaOrgSchema.types[i].specific_properties) {
             const i = this.getPropertyDataSelectors(`${e}_${a}`, t.concat([a]), a);
             r = r.concat(i);

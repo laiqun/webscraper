@@ -95,7 +95,7 @@ class ChromeClient extends u.InterceptsRedirects {
         await this.waitForPageLoad();
     }
 
-    async openBlankPage(url, createNewTab = false) {
+    async openBlankPage(url, createNewTab = !1) {
         if (undefined !== this.externalPageLoadPromise)
             throw new Error("Starting open blank page load while external load hasn't completed");
         const windowExists = await this.windowExists();
@@ -103,7 +103,7 @@ class ChromeClient extends u.InterceptsRedirects {
             url = chrome.extension.getURL("empty-page.html");
         const oldTabId = this.tab.tabId;
         if(createNewTab )
-            this.tab.tabId = undefined;
+            this.tab.tabId = void 0;
         this.tabNetworkStatusListener.reset({
             isHashTagChange: false,
             pageLoadDelay: 50,

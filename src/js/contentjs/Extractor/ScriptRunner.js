@@ -28,8 +28,8 @@ class ScriptRunner extends ExtractorBase.ExtractorBase {
                     reject(e.toString());
                 }
             }, {
-                once: true,
-                capture: true
+                once: !0,
+                capture: !0
             });
             const i = document.createElement("script");
             i.id = e, i.type = "text/javascript", i.innerHTML = t, document.body.appendChild(i);
@@ -51,22 +51,22 @@ class ScriptRunner extends ExtractorBase.ExtractorBase {
                 }).constructor)("parentElement", e);
                 const s = o("" === t ? document : document.querySelectorAll(t)[0], e);
                 Array.isArray(s) ? i({
-                    success: true,
+                    success: !0,
                     response: s
                 }) : s.then(e => {
                     i({
-                        success: true,
+                        success: !0,
                         response: e
                     });
                 }).catch(e => {
                     i({
-                        success: false,
+                        success: !1,
                         error: e.toString()
                     });
                 });
             } catch (e) {
                 i({
-                    success: false,
+                    success: !1,
                     error: e.toString()
                 });
             }

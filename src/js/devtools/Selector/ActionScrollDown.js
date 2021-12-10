@@ -15,19 +15,19 @@ class ActionScrollDown extends o.Selector {
     }
 
     canReturnMultipleRecords() {
-        return false;
+        return !1;
     }
 
     canHaveChildSelectors() {
-        return true;
+        return !0;
     }
 
     canCreateNewJobs() {
-        return false;
+        return !1;
     }
 
     willReturnElements() {
-        return true;
+        return !0;
     }
 
     getDataColumns() {
@@ -35,7 +35,7 @@ class ActionScrollDown extends o.Selector {
     }
 
     async isNeededElementVisible(e) {
-        if (!this.selectorScrollDownIfElementNotVisible) return false;
+        if (!this.selectorScrollDownIfElementNotVisible) return !1;
         return !!(await e.getElements(this.selectorScrollDownIfElementNotVisible)).length;
     }
 
@@ -46,7 +46,7 @@ class ActionScrollDown extends o.Selector {
             const i = await e.getElement(this.selectorScrollElement);
             await e.scrollDownElement(e.element, this.selectorScrollToElement, t, i.element);
         } else await e.scrollDownBody(e.element, this.selectorScrollToElement, t);
-        await e.webPage.waitForPageLoadComplete(false, this.delay);
+        await e.webPage.waitForPageLoadComplete(!1, this.delay);
     }
 
     async _getData(e) {

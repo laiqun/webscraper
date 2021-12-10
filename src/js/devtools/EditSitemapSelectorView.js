@@ -100,7 +100,7 @@ let EditSitemapSelectorView = class extends d.BaseComponent {
                         callback: {
                             message: "JavaScript does not support regular expressions that can match 0 characters.",
                             callback(e, t) {
-                                if (!e) return true;
+                                if (!e) return !0;
                                 const i = "".match(new RegExp(e));
                                 return null === i || "" !== i[0];
                             }
@@ -149,13 +149,13 @@ let EditSitemapSelectorView = class extends d.BaseComponent {
                         callback: {
                             message: "JavaScript does not support regular expressions that can match 0 characters.",
                             callback(e, t) {
-                                if (!e) return true;
+                                if (!e) return !0;
                                 try {
                                     const t = "".match(new RegExp(e));
                                     return null === t || "" !== t[0];
                                 } catch (e) {
                                     return {
-                                        valid: false,
+                                        valid: !1,
                                         message: "Invalid regex"
                                     };
                                 }
@@ -168,13 +168,13 @@ let EditSitemapSelectorView = class extends d.BaseComponent {
                         callback: {
                             message: "JavaScript does not support regular expressions that can match 0 characters.",
                             callback(e, t) {
-                                if (!e) return true;
+                                if (!e) return !0;
                                 try {
                                     const t = "".match(new RegExp(e));
                                     return null === t || "" !== t[0];
                                 } catch (e) {
                                     return {
-                                        valid: false,
+                                        valid: !1,
                                         message: "Invalid regex"
                                     };
                                 }
@@ -548,7 +548,7 @@ let EditSitemapSelectorView = class extends d.BaseComponent {
     }
 
     saveSelector(e) {
-        if (e.preventDefault(), e.stopPropagation(), !this.isValidForm()) return false;
+        if (e.preventDefault(), e.stopPropagation(), !this.isValidForm()) return !1;
         this.props.appState.saveSelector(this.state.selector);
     }
 
@@ -724,7 +724,7 @@ let EditSitemapSelectorView = class extends d.BaseComponent {
 
     updateSchemaOrgType(e) {
         const t = this.state.schemaOrgExtractorFoundData, i = this.state.selector;
-        if (undefined === e) i.schemaOrgType = undefined, i.dataObjectSelectors = [], this.setState({
+        if (void 0 === e) i.schemaOrgType = void 0, i.dataObjectSelectors = [], this.setState({
             selector: i
         }); else {
             i.schemaOrgType = e;

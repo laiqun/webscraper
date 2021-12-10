@@ -6,7 +6,7 @@ class ClickOnceExtractorStrategy extends l.BaseClickPaginationStrategy {
     async extract(e) {
         const {selector: t} = e;
         if (e.parentElement.driver !== s.WebPageDriverType.chrometab)
-            return await undefined;
+            return await void 0;
         const i = e.parentElement, r = new a.UniqueElementList("uniqueText");
         for (; ;) {
             const e = await this.getClickButton(i, t, r);

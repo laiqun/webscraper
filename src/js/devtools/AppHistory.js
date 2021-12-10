@@ -37,6 +37,6 @@ createHashHistory: hashchange。
 
 createMemoryHistory: 因为是在内存中操作，跟浏览器没有关系，不涉及 UI 层面的事情，所以可以直接进行历史信息的回退。
  */
-let AppHistory = "undefined" != typeof document ? a.createHashHistory() : undefined;
+let AppHistory = "undefined" != typeof document ? a.createHashHistory() : void 0;
 console.log(AppHistory);
 export {AppHistory}

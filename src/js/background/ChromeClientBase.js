@@ -2,8 +2,8 @@ import {default as r} from "../contentjs/log.js";//r = i(5),
 class ChromeClientBase {
     constructor(e) {
         this.tab = {
-            tabId: undefined,
-            windowId: undefined
+            tabId: void 0,
+            windowId: void 0
         };
         if(undefined !== e.tabId )
             this.tab.tabId = e.tabId;

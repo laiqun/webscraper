@@ -15,7 +15,7 @@ class FailOnErrorPagesEventListener extends n.BaseWebNavigationEventListener {
     }
 
     get isPageLoadComplete() {
-        return !(!this.haveOtherListenersCompleted() || undefined !== this.pageLoadError);
+        return !(!this.haveOtherListenersCompleted() || void 0 !== this.pageLoadError);
     }
 
     get pageLoadError() {

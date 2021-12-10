@@ -84,7 +84,7 @@ class EndpointBase {
         if (action_e === Actions.Actions.error)
             throw new Error(`${payload_e.type} in endpoint ${this.name}: ${payload_e.message}`);
         if (action_e !== Actions.Actions.response) {
-            if (undefined === action_e)
+            if (void 0 === action_e)
                 throw new Error("Message without action received");
             if ("function" != typeof this.callbacks[action_e])
                 throw new Error("Incorrect action mapping for action: " + action_e);
