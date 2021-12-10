@@ -52,11 +52,11 @@ class WebPageChromeTab extends WebPageDriverBase {
         return this.chromeClient.getPageLoadState();
     }
 
-    waitForPageLoadComplete(e = !0, t) {
+    waitForPageLoadComplete(e = true, t) {
         return this.chromeClient.waitForPageLoadComplete(e, t);
     }
 
-    openBlankPage(e, t = !1) {
+    openBlankPage(e, t = false) {
         return this.chromeClient.openBlankPage(e, t);
     }
 

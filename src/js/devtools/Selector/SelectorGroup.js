@@ -7,19 +7,19 @@ class SelectorGroup extends a.Selector {
     }
 
     canReturnMultipleRecords() {
-        return !1;
+        return false;
     }
 
     canHaveChildSelectors() {
-        return !1;
+        return false;
     }
 
     canCreateNewJobs() {
-        return !1;
+        return false;
     }
 
     willReturnElements() {
-        return !1;
+        return false;
     }
 
     async _getData(e) {

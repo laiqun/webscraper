@@ -38,7 +38,7 @@ class SitemapSync {
         if ( e[0] === t[0])
             return r.SyncState.synced;
         const i = e.find(e => t.includes(e));
-        if (void 0 !== i) {
+        if (undefined !== i) {
             const n = e.findIndex(e => e === i);
             const a = t.findIndex(e => e === i);
             if(0 !== n && 0 !== a)

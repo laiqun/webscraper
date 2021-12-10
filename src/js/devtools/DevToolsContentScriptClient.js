@@ -1,5 +1,5 @@
 //221
-let DevToolsContentScriptClient = void 0;
+let DevToolsContentScriptClient = undefined;
 //const  a = i(17);//, o = i(196);
 
 import {default as r} from "../contentjs/log.js"//r = i(5),
@@ -23,7 +23,7 @@ DevToolsContentScriptClient = new class {
             //bind()方法会创建一个新的函数，称为绑定函数,fun方法在this环境下调用
             //
             // bind可传入多个参数，第一个参数作为this，第二个及以后的参数则作为函数的参数调用
-            get: (target, property) => void 0 !== target[property] ? target[property] : target.sendToContentScript.bind(target, property)
+            get: (target, property) => undefined !== target[property] ? target[property] : target.sendToContentScript.bind(target, property)
         });
     }
 
@@ -37,7 +37,7 @@ DevToolsContentScriptClient = new class {
         return new Promise((resolve, reject) => {
             const tabId = chrome.devtools.inspectedWindow.tabId;
             chrome.tabs.sendMessage(tabId, msg, res => {
-                if (void 0 === res) {
+                if (undefined === res) {
                     const e = a.getMessage(chrome.runtime.lastError);
                     r.error("DevTools Content Script client missing response", {
                         error: e

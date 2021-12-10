@@ -8,7 +8,7 @@ class JsonLdExtractor extends a.BaseExtractor {
     expandGraphs(e) {
         const t = [];
         for (const i of e) {
-            if (void 0 === i["@graph"] || !Array.isArray(i["@graph"])) {
+            if (undefined === i["@graph"] || !Array.isArray(i["@graph"])) {
                 t.push(i);
                 continue;
             }

@@ -10,7 +10,7 @@ class SchemaOrgExtractor extends o.BaseExtractor {
             r = await n.findRawData(e), o = [].concat(i, r), c = {}, u = [];
         for (const e of o) for (const t of e.data) {
             const e = a.schemaOrg.getTypeFromDataObject(t);
-            if (e) if (void 0 !== c[e]) c[e].data.push(t); else {
+            if (e) if (undefined !== c[e]) c[e].data.push(t); else {
                 const i = a.schemaOrg.getSelectorsFromDataObject(t);
                 c[e] = {
                     dataObjectSelectors: i,

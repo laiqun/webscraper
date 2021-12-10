@@ -19,9 +19,9 @@ class BaseExtractor {
         for (const t of e) {
             const e = this.getDataObjectSelectorsFromDataObject(t);
             for (const t of e) {
-                let e = !1;
+                let e = false;
                 for (const n of i) if (n.key === t.key) {
-                    e = !0;
+                    e = true;
                     break;
                 }
                 e || i.push(t);
@@ -37,7 +37,7 @@ class BaseExtractor {
             if (Array.isArray(a) || "object" != typeof a) n.push({
                 key: t + r,
                 selector: i.concat([r]),
-                extract: !0
+                extract: true
             }); else {
                 const e = t + r + "_", o = i.concat([r]), s = this.getDataObjectSelectorsFromDataObject(a, e, o);
                 n = n.concat(s);

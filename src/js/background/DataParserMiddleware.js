@@ -15,8 +15,8 @@ class DataParserMiddleware extends a.BaseMiddleware {
     }
 
     recordCanHaveChildJobs(e, t) {
-        if (void 0 === e._follow)
-            return !1;
+        if (undefined === e._follow)
+            return false;
         const i = e._followSelectorId;
         return 0 !== t.getDirectChildSelectors(i).length;
     }
@@ -24,7 +24,7 @@ class DataParserMiddleware extends a.BaseMiddleware {
     async handle(e, t, i) {
         const tx = await i();
         this.dataSize = 0;
-        this.jobDataSizeLimitReached = !1;
+        this.jobDataSizeLimitReached = false;
         const extractData1 = this.extractData(tx, e.baseData, e.url);
         e.data = extractData1;
         const newJobs = this.extractNewJobs(tx, e.baseData, e);
@@ -99,7 +99,7 @@ class DataParserMiddleware extends a.BaseMiddleware {
                 else
                     o.notice("invalid New Job URL protocol", {
                         url: l.url,
-                        hideInEsLogs: !0
+                        hideInEsLogs: true
                     });
             }
         }
@@ -118,7 +118,7 @@ class DataParserMiddleware extends a.BaseMiddleware {
                 url: t,
                 size: this.dataSize / 1024 / 1024
             });
-            this.jobDataSizeLimitReached = !0;
+            this.jobDataSizeLimitReached = true;
         }
     }
 }

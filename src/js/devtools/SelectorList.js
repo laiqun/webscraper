@@ -7,7 +7,7 @@ class SelectorList extends Array {
         Object.setPrototypeOf(this, Object.create(SelectorList.prototype));
         if ( Array.isArray(e))
             for (const t of e)
-                if (void 0 !== t)
+                if (undefined !== t)
                     if (Array.isArray(t))
                         for (const e of t)
                             this.push(e);
@@ -38,7 +38,7 @@ class SelectorList extends Array {
     }
 
     getAllSelectors(e) {
-        if (void 0 === e)
+        if (undefined === e)
             return this;
         const func = function (e, i) {
             this.forEach(n => {
@@ -173,7 +173,7 @@ class SelectorList extends Array {
             const arrar = [];
             const func = function (paramaters) {
                 if (arrar.includes(paramaters))
-                    result = !0;
+                    result = true;
                 else if (paramaters.willReturnElements()) {
                         arrar.push(paramaters);
                         this.getDirectChildSelectors(paramaters.id).forEach(func);

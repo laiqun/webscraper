@@ -5,31 +5,31 @@ class SelectorElementAttribute extends Selector {
         super(),
             this.type = "SelectorElementAttribute",
             this.selector = "",
-            this.multiple = !1,
+            this.multiple = false,
             this.delay = 0,
             this.extractAttribute = "",
             this.updateData(e);
     }
 
     canReturnMultipleRecords() {
-        return !0;
+        return true;
     }
 
     canHaveChildSelectors() {
-        return !1;
+        return false;
     }
 
     canCreateNewJobs() {
-        return !1;
+        return false;
     }
 
     willReturnElements() {
-        return !1;
+        return false;
     }
 
     async _getData(e) {
         const t = await this.getDataElements(e);
-        !1 === this.multiple && 0 === t.length && (await await this.getEmptyRecord());
+        false === this.multiple && 0 === t.length && (await await this.getEmptyRecord());
         let result =[];
         for (const e of t) {
             const t = await e.getAttr(this.extractAttribute);

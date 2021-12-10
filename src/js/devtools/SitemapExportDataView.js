@@ -14,7 +14,7 @@ let SitemapExportDataView = class extends c.BaseComponent {
     constructor(e) {
         super({});
         this.state = {
-            linkGenerated: !1
+            linkGenerated: false
         };
     }
 

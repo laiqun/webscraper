@@ -8,7 +8,7 @@ class BaseClickPaginationStrategy extends r.BasePaginationStrategy {
     }
 
     async waitForPageToLoadAfterClick(e) {
-        await e.webPage.waitForPageLoadComplete(!0, 2e3);
+        await e.webPage.waitForPageLoadComplete(true, 2e3);
     }
 }
 

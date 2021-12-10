@@ -68,7 +68,7 @@ class Sitemap {
             if (n) {
                 const e = n[2], r = n[3], a = parseInt(e, 10), o = parseInt(r, 10);
                 let s = 1;
-                void 0 !== n[5] && (s = parseInt(n[5], 10));
+                undefined !== n[5] && (s = parseInt(n[5], 10));
                 for (let l = a; l <= o; l += s) e.length === r.length ? startUrls.push(n[1] + i(l.toString(), e.length) + n[6]) : startUrls.push(n[1] + l + n[6]);
                 return startUrls;
             }
@@ -223,7 +223,7 @@ class Sitemap {
 
     deduplicateLastHashes() {
         return this.hashHistory[this.hashHistory.length - 1] !== this.hashHistory[this.hashHistory.length - 2] || (this.hashHistory.pop(),
-            !1);
+            false);
     }
 
     getFirstStartUrlDomain() {

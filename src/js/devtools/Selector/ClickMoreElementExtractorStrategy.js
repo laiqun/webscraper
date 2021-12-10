@@ -7,7 +7,7 @@ class ClickMoreElementExtractorStrategy extends l.BaseClickPaginationStrategy {
     async extract(e) {
         const {dataDeduplicator: t, selector: i} = e;
         if (e.parentElement.driver !== s.WebPageDriverType.chrometab)
-            return await void 0;
+            return await undefined;
         const r = e.parentElement, l = new a.UniqueElementList("uniqueText");
         for (; ;) {
             const e = await this.getClickButton(r, i, l);

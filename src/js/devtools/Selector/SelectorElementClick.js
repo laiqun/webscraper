@@ -5,29 +5,29 @@ class SelectorElementClick extends o.Selector {
     constructor(e) {
         super(), this.type = "SelectorElementClick", this.clickActionType = "auto", this.clickElementSelector = "",
             this.clickElementUniquenessType = "uniqueText", this.clickType = "clickOnce", this.delay = 2e3,
-            this.discardInitialElements = "discard-when-click-element-exists", this.multiple = !0,
-            this.selector = "", !0 === e.discardInitialElements || "discard" === e.discardInitialElements ? e.discardInitialElements = "discard" : !1 === e.discardInitialElements || "do-not-discard" === e.discardInitialElements ? e.discardInitialElements = "do-not-discard" : "discard-when-click-element-exists" === e.discardInitialElements ? e.discardInitialElements = "discard-when-click-element-exists" : e.discardInitialElements = "do-not-discard",
+            this.discardInitialElements = "discard-when-click-element-exists", this.multiple = true,
+            this.selector = "", true === e.discardInitialElements || "discard" === e.discardInitialElements ? e.discardInitialElements = "discard" : false === e.discardInitialElements || "do-not-discard" === e.discardInitialElements ? e.discardInitialElements = "do-not-discard" : "discard-when-click-element-exists" === e.discardInitialElements ? e.discardInitialElements = "discard-when-click-element-exists" : e.discardInitialElements = "do-not-discard",
             this.updateData(e);
     }
 
     canReturnMultipleRecords() {
-        return !0;
+        return true;
     }
 
     canHaveChildSelectors() {
-        return !0;
+        return true;
     }
 
     canCreateNewJobs() {
-        return !1;
+        return false;
     }
 
     willReturnElements() {
-        return !0;
+        return true;
     }
 
     getClickActionType() {
-        return void 0 === this.clickActionType ? "auto" : this.clickActionType;
+        return undefined === this.clickActionType ? "auto" : this.clickActionType;
     }
 
     async getClickElements(e) {
@@ -35,7 +35,7 @@ class SelectorElementClick extends o.Selector {
     }
 
     getClickElementUniquenessType() {
-        return void 0 === this.clickElementUniquenessType ? "uniqueText" : this.clickElementUniquenessType;
+        return undefined === this.clickElementUniquenessType ? "uniqueText" : this.clickElementUniquenessType;
     }
 
     async addInitialElements(e, t) {
@@ -55,8 +55,8 @@ class SelectorElementClick extends o.Selector {
         for (const e of i.getElements()) await await e;
         for (; ;) {
             const o = await this.getClickButton(e, n);
-            if (!1 === o) break;
-            "clickOnce" === this.clickType && (await n.push(o)), await o.click(a), await e.webPage.waitForPageLoadComplete(!1, t);
+            if (false === o) break;
+            "clickOnce" === this.clickType && (await n.push(o)), await o.click(a), await e.webPage.waitForPageLoadComplete(false, t);
             const s = await this.getDataElements(e), l = i.length;
             for (const e of s) {
                 (await i.push(e)) && (await await e);
@@ -83,7 +83,7 @@ class SelectorElementClick extends o.Selector {
         for (const e of i) {
             if (!(await t.isElementAdded(e))) return e;
         }
-        return !1;
+        return false;
     }
 }
 

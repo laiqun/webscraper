@@ -40,18 +40,18 @@ class DataDeduplicator {
     }
 
     getFirstPageDeduplicationHash() {
-        if(void 0 === this.firstPageDeduplicationHash )
+        if(undefined === this.firstPageDeduplicationHash )
             o.warning("missing first page deduplication hash");
         return this.firstPageDeduplicationHash;
     }
 
     deduplicateFirstPageData(e) {
         const t = this.makeFirstPageDeduplicationHash(e);
-        return this.firstPageDeduplicationHash !== t ? e : e.filter(e => void 0 !== e._deduplicateFirstPageData);
+        return this.firstPageDeduplicationHash !== t ? e : e.filter(e => undefined !== e._deduplicateFirstPageData);
     }
 
     makeFirstPageDeduplicationHash(e) {
-        e = (e = JSON.parse(JSON.stringify(e))).filter(e => void 0 === e._deduplicateFirstPageData);
+        e = (e = JSON.parse(JSON.stringify(e))).filter(e => undefined === e._deduplicateFirstPageData);
         return a.Obj.getHash(e);
     }
 }

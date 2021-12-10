@@ -4,7 +4,7 @@ class ScriptDataColumns extends r.ConditionalElementBase {
     _render() {
         const {onChange: e, onRemove: t, selector: i, onAdd: r} = this.props, a = i.scriptDataColumns, o = {
             name: "",
-            is_url: !1
+            is_url: false
         }, s = {
             width: "5%",
             "white-space": "nowrap",

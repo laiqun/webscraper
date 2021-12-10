@@ -41,7 +41,7 @@ let CreateSitemapView = class extends u.BaseComponent {
                         },*/
                         callback: {
                             message: chrome.i18n.getMessage("SitemapIDAlreadyExist"),
-                            callback: (e, t) => !0
+                            callback: (e, t) => true
                         }
                     }
                 },

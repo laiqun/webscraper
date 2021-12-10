@@ -6,7 +6,7 @@ class SelectorTable extends s.Selector {
         super();
         this.type = "SelectorTable";
         this.delay = 0;
-        this.multiple = !0;
+        this.multiple = true;
         this.selector = "";
         this.tableDataRowSelector = "";
         this.tableHeaderRowSelector = "";
@@ -15,19 +15,19 @@ class SelectorTable extends s.Selector {
     }
 
     canReturnMultipleRecords() {
-        return !0;
+        return true;
     }
 
     canHaveChildSelectors() {
-        return !1;
+        return false;
     }
 
     canCreateNewJobs() {
-        return !1;
+        return false;
     }
 
     willReturnElements() {
-        return !1;
+        return false;
     }
 
     async getTableHeaderColumns(e) {
@@ -65,7 +65,7 @@ class SelectorTable extends s.Selector {
 
     async extractRowData(e, t) {
         const i = {};
-        for (const n of this.columns) if (!0 === n.extract) if (void 0 === t[n.header]) i[n.name] = l.emptyRecordValue; else {
+        for (const n of this.columns) if (true === n.extract) if (undefined === t[n.header]) i[n.name] = l.emptyRecordValue; else {
             const r = `td:nth-child(${t[n.header].index}),th:nth-child(${t[n.header].index})`,
                 a = await e.getElements(r);
             if (0 === a.length) i[n.name] = l.emptyRecordValue; else {
@@ -87,7 +87,7 @@ class SelectorTable extends s.Selector {
                 i++;
             }
             if (false === this.multiple)
-                return await void 0;
+                return await undefined;
         }
         0 === i && false === this.multiple && (await await this.getEmptyRecord());
     }
@@ -144,11 +144,11 @@ class SelectorTable extends s.Selector {
     }
 
     getTableHeaderRowSelector() {
-        return void 0 === this.tableHeaderRowSelector ? "thead tr" : this.tableHeaderRowSelector;
+        return undefined === this.tableHeaderRowSelector ? "thead tr" : this.tableHeaderRowSelector;
     }
 
     getTableDataRowSelector() {
-        return void 0 === this.tableDataRowSelector ? "tbody tr" : this.tableDataRowSelector;
+        return undefined === this.tableDataRowSelector ? "tbody tr" : this.tableDataRowSelector;
     }
 
     getTableHeaderColumnsFromHTML(e, t, i) {
@@ -160,7 +160,7 @@ class SelectorTable extends s.Selector {
             0 !== n.length && result.push({
                 header: n,
                 name: a,
-                extract: !0
+                extract: true
             });
         });
         return  result;

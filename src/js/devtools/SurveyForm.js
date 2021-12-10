@@ -30,7 +30,7 @@ class SurveyForm extends react.Component {
         }, react.createElement("div", {
             className: "modal-body",
             style: new_height
-        }, tasks_value.map(e => void 0 !== e.showIfName && this.state.answers[e.showIfName] !== e.showIfChoice ? react.createElement(react.Fragment, null) : "text" === e.type ? react.createElement(s.TextTask, {
+        }, tasks_value.map(e => undefined !== e.showIfName && this.state.answers[e.showIfName] !== e.showIfChoice ? react.createElement(react.Fragment, null) : "text" === e.type ? react.createElement(s.TextTask, {
             task: e,
             key: e.name
         }) : "input" === e.type ? react.createElement(a.InputTask, {

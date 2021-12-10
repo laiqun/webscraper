@@ -3,25 +3,25 @@ import * as l from "../emptyRecordValue.js"//, l = i(29)
 import {default as o} from "../../contentjs/cssSelector.js"//const o = i(123);
 class SelectorTable extends s.Selector {
     constructor(e) {
-        super(), this.type = "SelectorTable", this.delay = 0, this.multiple = !0, this.selector = "",
+        super(), this.type = "SelectorTable", this.delay = 0, this.multiple = true, this.selector = "",
             this.tableDataRowSelector = "", this.tableHeaderRowSelector = "", this.columns = [],
             this.updateData(e);
     }
 
     canReturnMultipleRecords() {
-        return !0;
+        return true;
     }
 
     canHaveChildSelectors() {
-        return !1;
+        return false;
     }
 
     canCreateNewJobs() {
-        return !1;
+        return false;
     }
 
     willReturnElements() {
-        return !1;
+        return false;
     }
 
     async getTableHeaderColumns(e) {
@@ -55,8 +55,8 @@ class SelectorTable extends s.Selector {
 
     async extractRowData(e, t) {
         const i = {};
-        for (const n of this.columns) if (!0 === n.extract)
-            if (void 0 === t[n.header])
+        for (const n of this.columns) if (true === n.extract)
+            if (undefined === t[n.header])
                 i[n.name] = l.emptyRecordValue;
             else {
                 const r = `td:nth-child(${t[n.header].index}),th:nth-child(${t[n.header].index})`,
@@ -141,11 +141,11 @@ class SelectorTable extends s.Selector {
     }
 
     getTableHeaderRowSelector() {
-        return void 0 === this.tableHeaderRowSelector ? "thead tr" : this.tableHeaderRowSelector;
+        return undefined === this.tableHeaderRowSelector ? "thead tr" : this.tableHeaderRowSelector;
     }
 
     getTableDataRowSelector() {
-        return void 0 === this.tableDataRowSelector ? "tbody tr" : this.tableDataRowSelector;
+        return undefined === this.tableDataRowSelector ? "tbody tr" : this.tableDataRowSelector;
     }
 
     getTableHeaderColumnsFromHTML(e, t, i) {
@@ -156,7 +156,7 @@ class SelectorTable extends s.Selector {
             0 !== n.length && r.push({
                 header: n,
                 name: a,
-                extract: !0
+                extract: true
             });
         }), r;
     }

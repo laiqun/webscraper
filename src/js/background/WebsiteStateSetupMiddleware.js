@@ -48,7 +48,7 @@ class WebsiteStateSetupMiddleware extends o.BaseMiddleware {
 
     async handle(e, t, i) {
         const txx = this.sitemap;
-        if (void 0 !== txx.websiteStateSetup && txx.websiteStateSetup.enabled) {
+        if (undefined !== txx.websiteStateSetup && txx.websiteStateSetup.enabled) {
             const statusOK = await this.isStateAlreadyOk();
             const haveRetriedTimes = undefined !== e.stateSetupRetries && e.stateSetupRetries >= 1;
             if (!statusOK && !haveRetriedTimes)

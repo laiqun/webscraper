@@ -60,6 +60,6 @@ class ErrorState {
       *             Object.getOwnPropertyDescriptor(Example.prototype, "method")));
       *
 * */
-//n([a.observable, r("design:type", Object)], o.prototype, "validationErrors", void 0);
+//n([a.observable, r("design:type", Object)], o.prototype, "validationErrors", undefined);
 let errorState = new ErrorState;
 export {ErrorState, errorState}

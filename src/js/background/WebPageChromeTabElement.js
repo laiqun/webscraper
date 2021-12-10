@@ -54,11 +54,11 @@ class WebPageChromeTabElement extends r.WebPageElement {
         return await this.contentScriptClient.getCSSSelector(this.element);
     }
 
-    async scrollDownElement(e, t, i = !1, r) {
+    async scrollDownElement(e, t, i = false, r) {
         await this.contentScriptClient.scrollDownElement(e, t, i, r);
     }
 
-    async scrollDownBody(e, t, i = !1) {
+    async scrollDownBody(e, t, i = false) {
         await this.contentScriptClient.scrollDownBody(e, t, i);
     }
 

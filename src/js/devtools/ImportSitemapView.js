@@ -65,7 +65,7 @@ let ImportSitemapView = class extends u.BaseComponent {
                         },*/
                         callback: {
                             message: chrome.i18n.getMessage("SitemapIDAlreadyExist"),
-                            callback: (e, t) => !0
+                            callback: (e, t) => true
                         }
                     }
                 },
@@ -80,16 +80,16 @@ let ImportSitemapView = class extends u.BaseComponent {
                                 try {
                                     const t = JSON.parse(e);
                                     if (Array.isArray(t.startUrl) && t.startUrl.length > 1e4) return {
-                                        valid: !1,
+                                        valid: false,
                                         message: "Start url limit reached. Maximum start url count is 10000."
                                     };
                                 } catch (e) {
                                     return {
-                                        valid: !1,
+                                        valid: false,
                                         message: "invalid JSON"
                                     };
                                 }
-                                return !0;
+                                return true;
                             }
                         }
                     }

@@ -13,7 +13,7 @@ class SurveyButton extends n.Component {
         const paddingLeft = {
             paddingLeft: "10px"
         }, {survey: t} = this.props;
-        return void 0 === t || this.state.completed ? n.createElement(n.Fragment, null) : false === this.state.open ? n.createElement("span", {
+        return undefined === t || this.state.completed ? n.createElement(n.Fragment, null) : false === this.state.open ? n.createElement("span", {
             style: paddingLeft
         }, t.question, n.createElement("button", {
             className: "btn btn-warning btn-xs",

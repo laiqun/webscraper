@@ -5,7 +5,7 @@ class CSV {
 
     static encodeValue(e) {
         let result = "";
-        if(void 0 === e) {
+        if(undefined === e) {
             result = "";
         }
         else if("object" == typeof e) {

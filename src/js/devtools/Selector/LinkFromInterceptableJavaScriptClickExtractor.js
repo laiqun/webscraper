@@ -5,7 +5,7 @@ class LinkFromInterceptableJavaScriptClickExtractor {
         if (e.driver !== r.WebPageDriverType.chrometab)
             return;
         const t = await e.getInterceptableJavaScriptClickUrl();
-        return a.Url.isRecognizedProtocol(t) ? t : void 0;
+        return a.Url.isRecognizedProtocol(t) ? t : undefined;
     }
 }
 

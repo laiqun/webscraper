@@ -21,12 +21,12 @@ class MicroDataExtractor extends r.BaseExtractor {
         const n = await this.getDirectChildElements(e, "> [itemprop]:not([itemscope]), > * [itemprop]:not([itemscope])", "> [itemscope] [itemprop]:not([itemscope]), > * [itemscope] [itemprop]:not([itemscope])");
         for (const e of n) {
             const i = await e.getAttr("itemprop"), n = await this.getElementData(e, i);
-            void 0 === t[i] ? t[i] = n : (Array.isArray(t[i]) || (t[i] = [t[i]]), t[i].push(n));
+            undefined === t[i] ? t[i] = n : (Array.isArray(t[i]) || (t[i] = [t[i]]), t[i].push(n));
         }
         const r = await this.getDirectChildElements(e, "> [itemscope], > * [itemscope]", "> [itemscope] [itemscope], > * [itemscope] [itemscope]");
         for (const e of r) {
             const i = await this.extractItemScopeData(e), n = await e.getAttr("itemprop");
-            void 0 === t[n] ? t[n] = i : (Array.isArray(t[n]) || (t[n] = [t[n]]), t[n].push(i));
+            undefined === t[n] ? t[n] = i : (Array.isArray(t[n]) || (t[n] = [t[n]]), t[n].push(i));
         }
         return t;
     }
@@ -52,11 +52,11 @@ class MicroDataExtractor extends r.BaseExtractor {
     async getDirectChildElements(e, t, i) {
         const n = await e.getElements(t), r = await e.getElements(i), a = [];
         for (const e of n) {
-            let t = !1;
+            let t = false;
             for (const i of r)
                 if (e.element === i.element)
                 {
-                    t = !0;
+                    t = true;
                     break;
                 }
             t || a.push(e);
