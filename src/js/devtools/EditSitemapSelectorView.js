@@ -334,14 +334,14 @@ let EditSitemapSelectorView = class extends d.BaseComponent {
         }), l.createElement(T.ElementSelector, {
             feature: "tableHeaderRowSelector",
             selector: i,
-            label: "Header row selector",
+            label: chrome.i18n.getMessage("HeaderRowSelector"),
             onSelectClick: this.selectTableHeaderRowSelector.bind(this),
             onElementPreviewClick: this.previewTableRowSelector.bind(this),
             onChange: this.handleInputChange.bind(this)
         }), l.createElement(T.ElementSelector, {
             feature: "tableDataRowSelector",
             selector: i,
-            label: "Data rows selector",
+            label: chrome.i18n.getMessage("DataRowsSelector"),
             onSelectClick: this.selectTableDataRowSelector.bind(this),
             onElementPreviewClick: this.previewTableRowSelector.bind(this),
             onChange: this.handleInputChange.bind(this)

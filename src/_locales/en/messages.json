@@ -198,5 +198,40 @@
   "GetCurURL": {
     "message": "Get current URL",
     "description": "Get current URL description"
+  },
+  "HeaderRowSelector":
+  {
+    "message": "Header row selector",
+    "description": "Header row selector description"
+  },
+  "DataRowsSelector":
+  {
+    "message": "Data rows selector",
+    "description": "Data rows selector description"
+  },
+  "TableColumns":
+  {
+    "message": "Table columns",
+    "description": "Table columns description"
+  },
+  "Column":
+  {
+    "message": "Column",
+    "description": "Column description"
+  },
+  "ResultKey":
+  {
+    "message": "Result key",
+    "description": "Result key description"
+  },
+  "IncludeIntoResult":
+  {
+    "message": "Include into result",
+    "description": "Include into result description"
+  },
+  "Select":
+  {
+    "message": "Select",
+    "description": "Select description"
   }
 }

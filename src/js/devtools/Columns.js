@@ -9,11 +9,11 @@ class Columns extends r.ConditionalElementBase {
             className: "form-group"
         }, n.createElement("label", {
             className: "col-lg-1 control-label"
-        }, "Table columns"), n.createElement("div", {
+        }, chrome.i18n.getMessage("TableColumns")), n.createElement("div", {
             className: "col-lg-10"
         }, n.createElement("table", {
             className: "table table-bordered table-condensed"
-        }, n.createElement("thead", null, n.createElement("tr", null, n.createElement("th", null, "Column"), n.createElement("th", null, "Result key"), n.createElement("th", null, "Include into result"))), n.createElement("tbody", null, this.columns.map((t, i) => n.createElement("tr", {
+        }, n.createElement("thead", null, n.createElement("tr", null, n.createElement("th", null, chrome.i18n.getMessage("Column")), n.createElement("th", null, chrome.i18n.getMessage("ResultKey")), n.createElement("th", null, chrome.i18n.getMessage("IncludeIntoResult")))), n.createElement("tbody", null, this.columns.map((t, i) => n.createElement("tr", {
             key: "id" + i
         }, n.createElement("td", null, n.createElement("input", {
             className: "column-header",

@@ -20,16 +20,16 @@ class ElementSelector extends n.ConditionalElementBase {
             className: "btn btn-default select-" + e,
             type: "button",
             onClick: i
-        }, "Select"), r.createElement("button", {
+        }, chrome.i18n.getMessage("Select")), r.createElement("button", {
             className: "btn btn-default element-preview",
             type: "button",
             onClick: n
-        }, "Element preview"), a ? r.createElement("button", {
+        }, chrome.i18n.getMessage("ElementPreview")), a ? r.createElement("button", {
             id: "selector-data-preview",
             className: "btn btn-default",
             type: "button",
             onClick: a
-        }, "Data preview") : ""), r.createElement("input", {
+        }, chrome.i18n.getMessage("DataPreview")) : ""), r.createElement("input", {
             type: "text",
             className: "form-control selector-value",
             id: e,

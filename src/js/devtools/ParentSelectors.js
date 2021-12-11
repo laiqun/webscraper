@@ -10,7 +10,7 @@ class ParentSelectors extends r.ConditionalElementBase {
             title: "Parent Selectors"
         }, n.createElement("label", {
             className: "col-lg-1 control-label"
-        }, "Parent Selectors"), n.createElement("div", {
+        }, chrome.i18n.getMessage("Parent_selectors")), n.createElement("div", {
             className: "col-lg-10"
         }, n.createElement("select", {
             className: "form-control",

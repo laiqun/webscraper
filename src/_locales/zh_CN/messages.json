@@ -148,8 +148,8 @@
     "description": "选择多个描述"
   },
   "Parent_selectors": {
-    "message": "父选择器",
-    "description": "父选择器描述"
+    "message": "父选择器们",
+    "description": "父选择器们描述"
   },
   "Actions": {
     "message": "动作",
@@ -198,5 +198,40 @@
   "GetCurURL": {
     "message": "获取当前页面网址",
     "description": "获取当前页面网址描述"
+  },
+  "HeaderRowSelector":
+  {
+    "message": "表头选择器",
+    "description": "表头选择器描述"
+  },
+  "DataRowsSelector":
+  {
+    "message": "数据行选择器",
+    "description": "数据行选择器描述"
+  },
+  "TableColumns":
+  {
+    "message": "表格列",
+    "description": "表格列描述"
+  },
+  "Column":
+  {
+    "message": "原列名",
+    "description": "原列名描述"
+  },
+  "ResultKey":
+  {
+    "message": "新列名",
+    "description": "新列名描述"
+  },
+  "IncludeIntoResult":
+  {
+    "message": "是否包含在结果中",
+    "description": "是否包含在结果中描述"
+  },
+  "Select":
+  {
+    "message": "选择",
+    "description": "选择描述"
   }
 }
