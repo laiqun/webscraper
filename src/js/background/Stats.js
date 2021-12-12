@@ -194,7 +194,7 @@ class Stats {
     startExtensionIsBeingUsedCheckInterval(e) {
         if (!this.isEnabled)
             return;
-        this.usageStartTimes[e].checkInterval = window.setInterval(async function () {
+        this.usageStartTimes[e].checkInterval = window.setInterval(async ()=> {
             const t = Math.round(Date.now() / 1000);
             if (this.usageStartTimes[e].lastUpdated + 65 < t) {
                 const i = Math.round((t - this.usageStartTimes[e].timeStarted) / 60);
@@ -202,7 +202,7 @@ class Stats {
                 clearInterval(this.usageStartTimes[e].checkInterval);
                 delete this.usageStartTimes[e];
             }
-        }.bind(this), 1000 * this.extensionIsBeingUsedCheckIntervalTime);
+        }, 1000 * this.extensionIsBeingUsedCheckIntervalTime);
     }
 
     updateDailyStats() {

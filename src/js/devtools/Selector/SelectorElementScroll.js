@@ -1,54 +1,74 @@
 import * as o from "./Selector.js"    //const o = i(10);
 class SelectorElementScroll extends o.Selector {
     constructor(e) {
-        super(), this.type = "SelectorElementScroll", this.selector = "", this.multiple = !0,
-            this.delay = 2e3, this.scrollElementSelector = "", this.updateData(e);
+        super();
+        this.type = "SelectorElementScroll";
+        this.selector = "";
+        this.multiple = true;
+        this.delay = 2e3;
+        this.scrollElementSelector = "";
+        this.updateData(e);
     }
 
     canReturnMultipleRecords() {
-        return !0;
+        return true;
     }
 
     canHaveChildSelectors() {
-        return !0;
+        return true;
     }
 
     canCreateNewJobs() {
-        return !1;
+        return false;
     }
 
     willReturnElements() {
-        return !0;
+        return true;
     }
 
-    async scrollToBottom(e, t = !1) {
+    async scrollToBottom(e, t = false) {
         const i = e.element;
         if (this.scrollElementSelector) {
             const n = await e.getElement(this.scrollElementSelector);
-            if (!n) return;
+            if (!n)
+                return;
             await e.scrollDownElement(i, this.selector, t, n.element);
-        } else await e.scrollDownBody(i, this.selector, t);
+        } else
+            await e.scrollDownBody(i, this.selector, t);
     }
 
     async scrollToTop(e) {
         e.element;
-        this.scrollElementSelector, await e.srcollBodyToTop();
+        this.scrollElementSelector;
+        await e.srcollBodyToTop();
     }
 
     async _getData(e) {
+        console.log("SelectorElementScroll");
         await this.waitDelay();
+        let result = [];
         await this.scrollToTop(e);
-        const t = parseInt("" + this.delay, 10) || 0;
-        let i = await this.getDataElements(e), n = i.length;
+        const delayTime = parseInt("" + this.delay, 10) || 0;
+        let dataElements = await this.getDataElements(e);
+        let dataElementsLength = dataElements.length;
         for (; ;) {
-            if (await this.scrollToBottom(e), await e.webPage.waitForPageLoadComplete(!1, t),
-                i = await this.getDataElements(e), i.length === n && (await this.scrollToTop(e),
-                await this.scrollToBottom(e, !0), await e.webPage.waitForPageLoadComplete(!1, t),
-                i = await this.getDataElements(e), i.length === n)) {
-                for (const e of i) await await e;
-                return await void 0;
+            await this.scrollToBottom(e);
+            console.log("SelectorElementScroll wait page start");
+            await e.webPage.waitForPageLoadComplete(false, delayTime);
+            console.log("SelectorElementScroll wait page end");
+            dataElements = await this.getDataElements(e);
+            if (dataElements.length === dataElementsLength) {
+                await this.scrollToTop(e);
+                await this.scrollToBottom(e, true);
+                await e.webPage.waitForPageLoadComplete(false, delayTime);
+                dataElements = await this.getDataElements(e);
+                if (dataElements.length === dataElementsLength) {
+                    for (const dataElement of dataElements)
+                        result.push(dataElement);
+                    return result;
+                }
             }
-            n = i.length;
+            dataElementsLength = dataElements.length;
         }
     }
 

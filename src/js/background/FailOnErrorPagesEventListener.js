@@ -15,19 +15,17 @@ class FailOnErrorPagesEventListener extends n.BaseWebNavigationEventListener {
     }
 
     get isPageLoadComplete() {
-        return !(!this.haveOtherListenersCompleted() || void 0 !== this.pageLoadError);
+        return this.haveOtherListenersCompleted() && undefined === this.pageLoadError;
     }
 
     get pageLoadError() {
         if (this.haveOtherListenersCompleted())
-            if(!(this.sharedState.failOnErrorPages || "net::ERR_HTTP_RESPONSE_CODE_FAILURE" === this.webNavigationEventListener.state.wnError))
-                return false;
-            if(this.webRequestEventListener.state.headersStatusCode >= 400)
-                return "PAGE_STATUS_CODE_ERROR " + this.webRequestEventListener.state.headersStatusCode;
-            else if(r.ContentTypeParser.isContentTypeUnknown(this.webRequestEventListener.state.headersContentType) )
-                return "PAGE_UNKNOWN_CONTENT_TYPE_ERROR";
-            else
-                return undefined;
+            if("net::ERR_HTTP_RESPONSE_CODE_FAILURE" === this.webNavigationEventListener.state.wnError)
+            return  "PAGE_STATUS_CODE_ERROR " + this.webRequestEventListener.state.headersStatusCode;
+        else if(r.ContentTypeParser.isContentTypeUnknown(this.webRequestEventListener.state.headersContentType) )
+            return "PAGE_UNKNOWN_CONTENT_TYPE_ERROR";
+        else
+            return undefined;
     }
 
     setAlreadyLoaded() {

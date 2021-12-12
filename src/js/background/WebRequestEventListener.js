@@ -241,7 +241,7 @@ class WebRequestEventListener extends n.BaseWebNavigationEventListener {
             r.notice("missed wrOnHeadersReceived event but received wrOnResponseStarted. This is due to a proxy auth + miss headers bug in chrome", {
                 url: e.url,
                 event: "wrOnResponseStarted",
-                hideInEsLogs: ture
+                hideInEsLogs: true
             });
             const resHeader = this.extractContentTypeFromResponseHeaders(e.responseHeaders), i = {
                 wrOnHeadersReceived: true,

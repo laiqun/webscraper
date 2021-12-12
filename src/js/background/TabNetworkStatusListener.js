@@ -173,6 +173,7 @@ class TabNetworkStatusListener {
     }
 
     onStateChanged() {
+        console.log("TabNetworkStatusListener onStateChanged");
         if(this.logEventListenerChanges)
             r.info("page load status", {
                 pageLoadDelayCompleted: this.eventListeners.pageLoadDelayEventListener.isPageLoadComplete,
