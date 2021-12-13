@@ -29,9 +29,6 @@ class Selector {
     }
 
     hasParentSelector(e) {
-        console.log("xxxx");
-        console.log(this.parentSelectors);
-        console.log(this.parentSelectors.includes);
         return this.parentSelectors.includes(e);
     }
 

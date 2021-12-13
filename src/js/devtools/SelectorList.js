@@ -21,8 +21,6 @@ class SelectorList extends Array {
             if (this.hasSelector(selector.id) == false)
                 if( selector instanceof n.Selector == false)// if it is selector init data, then create new selector
                     selector = r.selectorFactory(selector);
-                console.log(JSON.stringify(selector));
-                console.log("xxxxxx");
                 Array.prototype.push.call(this, selector);
         }
         return this.length;

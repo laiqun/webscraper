@@ -397,7 +397,7 @@ _defaults:
         }
         chrome.notifications.create("scraping-finished", {
             type: "basic",
-            iconUrl: "images/icon128.png",
+            iconUrl: "img/icon128.png",
             title: "Scraping finished!",
             message: "Finished scraping " + sitemap._id
         });

@@ -38,7 +38,7 @@ class ChromeTabs {
 
     static async waitForUrl(tabid, target_url, timeout, throwErrorWhenMissMatch) {
         let result;
-        for (let count = 0; count <= timeout && (result = await s.get(tabid), target_url !== result.url); count += 50)
+        for (let count = 0; count <= timeout && (result = await ChromeTabs.get(tabid), target_url !== result.url); count += 50)
         {
             r.debug("waiting for tab to get url", {
                 url: target_url,
