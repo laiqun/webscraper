@@ -8,12 +8,16 @@ class ClickMoreElementExtractorStrategy extends l.BaseClickPaginationStrategy {
         const {dataDeduplicator: t, selector: i} = e;
         if (e.parentElement.driver !== s.WebPageDriverType.chrometab)
             return await void 0;
-        const r = e.parentElement, l = new a.UniqueElementList("uniqueText");
+        const r = e.parentElement;
+        const l = new a.UniqueElementList("uniqueText");
         for (; ;) {
             const e = await this.getClickButton(r, i, l);
-            if (!e) break;
-            await e.click(o.ClickActionTypes.realLikeEvents), await this.waitForPageToLoadAfterClick(r),
-                await await r, t.lastBatchIsDuplicate() && (await l.push(e));
+            if (!e)
+                return l;
+            await e.click(o.ClickActionTypes.realLikeEvents);
+            await this.waitForPageToLoadAfterClick(r);
+            await await r;
+            t.lastBatchIsDuplicate() && (await l.push(e));
         }
     }
 }

@@ -1,6 +1,8 @@
 class UniqueElementList {
     constructor(e) {
-        this.elementUniquenessType = e, this.addedElements = {}, this.elements = [];
+        this.elementUniquenessType = e;
+        this.addedElements = {};
+        this.elements = [];
     }
 
     async push(e) {
@@ -9,13 +11,20 @@ class UniqueElementList {
         {
             this.addedElements[t] = !0;
             const i = await e.getClone();
-            return this.elements.push(i), !0;
+            this.elements.push(i);
+            return true;
         }
     }
 
     async getElementUniqueId(e) {
         let t;
-        if ("uniqueText" === this.elementUniquenessType) t = await e.getText(); else if ("uniqueHTMLText" === this.elementUniquenessType) t = await e.getWrappedHTML(); else if ("uniqueHTML" === this.elementUniquenessType) t = await e.getWrappedHTMLWithoutText(); else {
+        if ("uniqueText" === this.elementUniquenessType)
+            t = await e.getText();
+        else if ("uniqueHTMLText" === this.elementUniquenessType)
+            t = await e.getWrappedHTML();
+        else if ("uniqueHTML" === this.elementUniquenessType)
+            t = await e.getWrappedHTMLWithoutText();
+        else {
             if ("uniqueCSSSelector" !== this.elementUniquenessType) {
                 throw "Invalid elementUniquenessType " + this.elementUniquenessType;
             }

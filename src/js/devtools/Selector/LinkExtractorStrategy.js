@@ -7,7 +7,7 @@ class LinkExtractorStrategy extends a.BasePaginationStrategy {
 
     async extract(e) {
         const {id: id, dataElements: elements} = e;
-        var result = [];
+        let result = [];
         for (const element of elements) {
             const extracted = await this.extractor.execute(element);
             if (extracted) {

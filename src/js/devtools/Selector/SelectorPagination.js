@@ -8,10 +8,14 @@ import * as p from "./ClickMoreElementExtractorStrategy.js"//p = i(411),
 import * as h from "./ClickOnceExtractorStrategy.js"//h = i(412),
 import * as f from "./LinkFromClickRedirectStrategy.js"//f = i(413),
 import * as m from "./LinkFromInterceptableJavaScriptClickExtractor.js"//const      m = i(414);
-
+        console.log("SelectorPagination module");
 class SelectorPagination extends o.Selector {
     constructor(e) {
-        super(), this.paginationType = "auto", delete e.multiple, this.updateData(e), this.parentSelectors.includes(this.id) || this.parentSelectors.push(this.id);
+        super();
+        this.paginationType = "auto";
+        delete e.multiple;
+        this.updateData(e);
+        this.parentSelectors.includes(this.id) || this.parentSelectors.push(this.id);
     }
 
     get multiple() {
@@ -47,9 +51,10 @@ class SelectorPagination extends o.Selector {
     }
 
     async _getData(e, t) {
+        console.log("pagination _getData");
         var i, a;
         const o = await this.getDataElements(e);
-        const s = this.strategies();
+        const strategies1 = this.strategies();
         const l = {
             id: this.id,
             selector: this.selector,
@@ -57,15 +62,17 @@ class SelectorPagination extends o.Selector {
             dataDeduplicator: t,
             dataElements: o
         };
-        //await await l.parentElement;
-        for (const e of s) {
+        let result =[];
+        //result.push(l.parentElement);
+        for (const strategies1Element of strategies1) {
             let t = false;
             try {
                 i = undefined;
-                let  u = await e.extract(l);
+                let  u = await strategies1Element.extract(l);
                 for(let c of u)
                 {
-                    t = true;
+                //    t = true;
+                    result.push(c);
                 }
             } catch (e) {
                 i = {
@@ -79,9 +86,13 @@ class SelectorPagination extends o.Selector {
                     if (i) await i.error;
                 }*/
             }
-            if (t)
-                return undefined;
+            if (result.length>0)
+                break;
         }
+        if(result.length)
+            return result;
+        else
+            return undefined;
     }
 
     strategies() {

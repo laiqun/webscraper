@@ -55,21 +55,23 @@ class DataExtractor2 {
     }
 
     async getSelectorData(parentSelectorId, directChildSelector, parentElement, a) {
-        var o, l;
+        let o, l;
         const n = [];
         let u;
         directChildSelector.shouldDeduplicateChildSelectorData() && (u = new c.DataDeduplicator(this.deduplicateFirstPageData));
         try {
-            var childSelectorData = await directChildSelector.getData(parentElement, u);
+            let childSelectorData = await directChildSelector.getData(parentElement, u);
             for (let childSelectorDatum of childSelectorData) {
                 const i = childSelectorDatum;
                 directChildSelector.shouldDeduplicateChildSelectorData() && u.startNewDataBatch();
                 if (i instanceof s.WebPageElement) {
-                    if (directChildSelector.id === this.parentSelectorId) continue;
-                    if (a && !(await a.isUniqueElement(i))) continue;
+                    if (directChildSelector.id === this.parentSelectorId)
+                        continue;
+                    if (a && !(await a.isUniqueElement(i)))
+                        continue;
                     const r = await this.getChildSelectorData(directChildSelector.id, i, !1, u);
-                    directChildSelector.shouldDeduplicateChildSelectorData() && parentSelectorId !== directChildSelector.id && u.setFirstPageDeduplicationDataHash(r),
-                        n.push(...r);
+                    directChildSelector.shouldDeduplicateChildSelectorData() && parentSelectorId !== directChildSelector.id && u.setFirstPageDeduplicationDataHash(r);
+                    n.push(...r);
                 } else {
                     if (a && !a.isUniqueRecord(i))
                         continue;

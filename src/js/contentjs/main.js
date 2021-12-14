@@ -15,7 +15,7 @@ import * as DownloadUrlAction from "../contentjs/Action/DownloadUrlAction.js";
 import * as ClickActionTypes from "../contentjs/Action/ClickActionTypes.js"
 import * as scrool from "../contentjs/Action/scrool.js"
 import * as jquery from "./jquery.js";
-
+import * as _ from "../contentjs/Extractor/allAttributeExtractor.js"
 /*
 * 这个文件有3个功能
 * 1. 可视化选择元素
@@ -31,6 +31,7 @@ class main {
 
         this.textExtractor = new TextExtractor.TextExtractor(this.elementReferences);
         this.attributeExtractor = new AttributeExtractor.AttributeExtractor(this.elementReferences);
+        this.allAttributeExtractor = new _.AllAttributeExtractor(this.elementReferences);
         this.htmlExtractor = new InnerHTMLExtractor.InnerHTMLExtractor(this.elementReferences);
         this.wrappedHtmlExtractor = new WrappedHTMLExtractor.WrappedHTMLExtractor(this.elementReferences);
         this.wrappedHtmlWithoutTextExtractor = new WrappedHTMLWithoutTextExtractor.WrappedHTMLWithoutTextExtractor(this.elementReferences);
@@ -69,7 +70,10 @@ class main {
     async getAttr(e, t) {
         return this.attributeExtractor.extract(e, t, this.highlightDataElements);
     }
-
+    async getAllAttributes(e)
+    {
+        return this.allAttributeExtractor.extract(e);
+    }
     async getHTML(e) {
         return this.htmlExtractor.extract(e);
     }
