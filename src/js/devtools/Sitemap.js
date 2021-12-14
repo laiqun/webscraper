@@ -14,8 +14,8 @@ class Sitemap {
         this._id = doc._id;
         this.startUrl = this.fixStartUrls(doc.startUrl);
         this.auth = doc.auth;
-        const t = new r.SelectorList(doc.selectors);
-        this.selectors = t;
+        const selectorList = new r.SelectorList(doc.selectors);
+        this.selectors = selectorList;
         this.websiteStateSetup = doc.websiteStateSetup;
         if (doc.hashHistory && doc.hashHistory.length > 0)
             this.hashHistory = doc.hashHistory;

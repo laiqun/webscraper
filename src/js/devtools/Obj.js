@@ -76,11 +76,11 @@ class Obj {
     }
 
     static getHash(e) {
-        const t = JSON.stringify(e);
-        return createHash("sha256").update(t).digest("hex");
+        const jsonStr = JSON.stringify(e);
+        return createHash("sha256").update(jsonStr).digest("hex");
     }
     static convertToBasicObject(e) {
-        if (void 0 !== e) return JSON.parse(JSON.stringify(e));
+        if (undefined !== e) return JSON.parse(JSON.stringify(e));
     }
 }
 

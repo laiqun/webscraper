@@ -1,33 +1,48 @@
 //
 import * as o from "./Selector.js"//o = i(10),
 import * as s from "./UniqueElementList.js"//const  s = i(85);
+console.log("element click");
 class SelectorElementClick extends o.Selector {
     constructor(e) {
-        super(), this.type = "SelectorElementClick", this.clickActionType = "auto", this.clickElementSelector = "",
-            this.clickElementUniquenessType = "uniqueText", this.clickType = "clickOnce", this.delay = 2e3,
-            this.discardInitialElements = "discard-when-click-element-exists", this.multiple = !0,
-            this.selector = "", !0 === e.discardInitialElements || "discard" === e.discardInitialElements ? e.discardInitialElements = "discard" : !1 === e.discardInitialElements || "do-not-discard" === e.discardInitialElements ? e.discardInitialElements = "do-not-discard" : "discard-when-click-element-exists" === e.discardInitialElements ? e.discardInitialElements = "discard-when-click-element-exists" : e.discardInitialElements = "do-not-discard",
-            this.updateData(e);
+        super();
+        this.type = "SelectorElementClick";
+        this.clickActionType = "auto";
+        this.clickElementSelector = "";
+        this.clickElementUniquenessType = "uniqueText";
+        this.clickType = "clickOnce";
+        this.delay = 2e3;
+        this.discardInitialElements = "discard-when-click-element-exists";
+        this.multiple = true;
+        this.selector = "";
+        if(true === e.discardInitialElements || "discard" === e.discardInitialElements )
+            e.discardInitialElements = "discard" ;
+        else if(false === e.discardInitialElements || "do-not-discard" === e.discardInitialElements )
+            e.discardInitialElements = "do-not-discard";
+        else if("discard-when-click-element-exists" === e.discardInitialElements)
+            e.discardInitialElements = "discard-when-click-element-exists";
+        else
+            e.discardInitialElements = "do-not-discard";
+        this.updateData(e);
     }
 
     canReturnMultipleRecords() {
-        return !0;
+        return true;
     }
 
     canHaveChildSelectors() {
-        return !0;
+        return true;
     }
 
     canCreateNewJobs() {
-        return !1;
+        return false;
     }
 
     willReturnElements() {
-        return !0;
+        return true;
     }
 
     getClickActionType() {
-        return void 0 === this.clickActionType ? "auto" : this.clickActionType;
+        return undefined === this.clickActionType ? "auto" : this.clickActionType;
     }
 
     async getClickElements(e) {
@@ -35,35 +50,50 @@ class SelectorElementClick extends o.Selector {
     }
 
     getClickElementUniquenessType() {
-        return void 0 === this.clickElementUniquenessType ? "uniqueText" : this.clickElementUniquenessType;
+        return undefined === this.clickElementUniquenessType ? "uniqueText" : this.clickElementUniquenessType;
     }
 
     async addInitialElements(e, t) {
-        if ("discard" === this.discardInitialElements) return;
+        if ("discard" === this.discardInitialElements)
+            return;
         if ("discard-when-click-element-exists" === this.discardInitialElements) {
-            if ((await this.getClickElements(e)).length > 0) return;
+            if ((await this.getClickElements(e)).length > 0)
+                return;
         }
         const i = await this.getDataElements(e);
-        for (const e of i) await t.push(e);
+        for (const e of i)
+            await t.push(e);
     }
 
     async _getData(e) {
         await this.waitDelay();
-        const t = parseInt("" + this.delay, 10) || 0, i = new s.UniqueElementList("uniqueHTMLText"),
-            n = new s.UniqueElementList(this.getClickElementUniquenessType()), a = this.getClickActionType();
-        await this.addInitialElements(e, i);
-        for (const e of i.getElements()) await await e;
+        const delayTime = parseInt("" + this.delay, 10) || 0;
+        const uniqueElementList = new s.UniqueElementList("uniqueHTMLText");
+        const  uniqueElementList1 = new s.UniqueElementList(this.getClickElementUniquenessType());
+        const  a = this.getClickActionType();
+        await this.addInitialElements(e, uniqueElementList);
+        let result = [];
+        for (const initialPageData of uniqueElementList.getElements())
+            result.push(initialPageData);
         for (; ;) {
-            const o = await this.getClickButton(e, n);
-            if (!1 === o) break;
-            "clickOnce" === this.clickType && (await n.push(o)), await o.click(a), await e.webPage.waitForPageLoadComplete(!1, t);
-            const s = await this.getDataElements(e), l = i.length;
-            for (const e of s) {
-                (await i.push(e)) && (await await e);
+            const clickButton = await this.getClickButton(e, uniqueElementList1);
+            if (false === clickButton)
+                break;
+            if("clickOnce" === this.clickType)
+                await uniqueElementList1.push(clickButton);
+            await clickButton.click(a);
+            await e.webPage.waitForPageLoadComplete(false, delayTime);
+            const dataElements = await this.getDataElements(e);
+            const l = uniqueElementList.length;
+            for (const dataElement of dataElements) {
+                if(await uniqueElementList.push(dataElement))//if new data
+                    result.push(dataElement);
             }
-            const c = i.length - l;
-            ("clickOnce" === this.clickType || "clickMore" === this.clickType && 0 === c) && (await n.push(o));
+            const onlyOne = uniqueElementList.length - l;
+            if("clickOnce" === this.clickType || "clickMore" === this.clickType && 0 === onlyOne)
+                await uniqueElementList1.push(clickButton);
         }
+        return result;
     }
 
     getDataColumns() {
@@ -81,9 +111,10 @@ class SelectorElementClick extends o.Selector {
     async getClickButton(e, t) {
         const i = await this.getClickElements(e);
         for (const e of i) {
-            if (!(await t.isElementAdded(e))) return e;
+            if (!(await t.isElementAdded(e)))
+                return e;
         }
-        return !1;
+        return false;
     }
 }
 

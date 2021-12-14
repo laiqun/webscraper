@@ -1,30 +1,32 @@
-//const r = i(85), a = i(57), o = i(5);
 import * as a from "../devtools/Obj.js"//, a = i(57)
 import {default as o} from "../contentjs/log.js";//c = i(5),
-import * as r from "./UniqueElementList.js"
+import * as r from "../devtools/selector/UniqueElementList.js"
 
 class DataDeduplicator {
-    constructor(e) {
+    constructor(setFirstPageHash) {
         this._lastBatchIsDuplicate = false;
         this.recordHashes = new Set;
         this.uniqueElementList = new r.UniqueElementList("uniqueHTMLText");
-        e && (this.firstPageDeduplicationHash = e);
+        if(setFirstPageHash)
+            this.firstPageDeduplicationHash = setFirstPageHash;
     }
 
     async isUniqueElement(e) {
-        const t = await this.uniqueElementList.push(e);
-        t && (this._lastBatchIsDuplicate = false);
-        return t;
+        const isNewElement = await this.uniqueElementList.push(e);
+        if(isNewElement)//如果是新的
+            this._lastBatchIsDuplicate = false;
+        return isNewElement;
     }
 
     isUniqueRecord(e) {
         const t = a.Obj.getHash(e);
-        if (!this.recordHashes.has(t)) {
+        if (!this.recordHashes.has(t)) {//如果没有，表明是新的
             this.recordHashes.add(t);
             this._lastBatchIsDuplicate = false;
             return true;
         }
-        return false;
+        else
+            return false;
     }
 
     startNewDataBatch() {
@@ -40,18 +42,19 @@ class DataDeduplicator {
     }
 
     getFirstPageDeduplicationHash() {
-        if(void 0 === this.firstPageDeduplicationHash )
+        if(undefined === this.firstPageDeduplicationHash )
             o.warning("missing first page deduplication hash");
         return this.firstPageDeduplicationHash;
     }
 
     deduplicateFirstPageData(e) {
-        const t = this.makeFirstPageDeduplicationHash(e);
-        return this.firstPageDeduplicationHash !== t ? e : e.filter(e => void 0 !== e._deduplicateFirstPageData);
+        const newHash = this.makeFirstPageDeduplicationHash(e);
+        return this.firstPageDeduplicationHash !== newHash ? e : e.filter(item => undefined !== item._deduplicateFirstPageData);
     }
 
     makeFirstPageDeduplicationHash(e) {
-        e = (e = JSON.parse(JSON.stringify(e))).filter(e => void 0 === e._deduplicateFirstPageData);
+        //拿到所有去重第一页数据属性为undefined的子元素
+        e = (e = JSON.parse(JSON.stringify(e))).filter(item => undefined === item._deduplicateFirstPageData);
         return a.Obj.getHash(e);
     }
 }

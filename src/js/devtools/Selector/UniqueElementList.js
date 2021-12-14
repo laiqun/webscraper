@@ -7,7 +7,9 @@ class UniqueElementList {
 
     async push(e) {
         const t = await this.getElementUniqueId(e);
-        if (this.isAdded(t)) return !1;
+        if (this.isAdded(t))
+            return false;
+        else
         {
             this.addedElements[t] = !0;
             const i = await e.getClone();

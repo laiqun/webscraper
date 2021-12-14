@@ -21,11 +21,12 @@ class DataExtractor2 {
 
     async getData() {
         const parentSelector = this.sitemap.getSelectorById(this.parentSelectorId);
-        let t;
+        let deDuplicator;
         if (parentSelector && parentSelector.shouldDeduplicateChildSelectorData())
-            t = new c.DataDeduplicator(this.deduplicateFirstPageData);
-        let i = await this.getChildSelectorData(this.parentSelectorId, this.parentElement, true, t);
-        t && (i = t.deduplicateFirstPageData(i));
+            deDuplicator = new c.DataDeduplicator(this.deduplicateFirstPageData);
+        let i = await this.getChildSelectorData(this.parentSelectorId, this.parentElement, true, deDuplicator);
+        if(deDuplicator)
+            i = deDuplicator.deduplicateFirstPageData(i);
         return i;
     }
 

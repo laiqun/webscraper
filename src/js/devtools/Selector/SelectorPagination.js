@@ -15,23 +15,24 @@ class SelectorPagination extends o.Selector {
         this.paginationType = "auto";
         delete e.multiple;
         this.updateData(e);
-        this.parentSelectors.includes(this.id) || this.parentSelectors.push(this.id);
+        if(!this.parentSelectors.includes(this.id) )
+            this.parentSelectors.push(this.id);
     }
 
     get multiple() {
-        return !0;
+        return true;
     }
 
     canCreateNewJobs() {
-        return !0;
+        return true;
     }
 
     canHaveChildSelectors() {
-        return !0;
+        return true;
     }
 
     canReturnMultipleRecords() {
-        return !0;
+        return true;
     }
 
     getDataColumns() {
@@ -43,31 +44,31 @@ class SelectorPagination extends o.Selector {
     }
 
     willReturnElements() {
-        return !1;
+        return false;
     }
 
     shouldDeduplicateChildSelectorData() {
-        return !0;
+        return true;
     }
 
-    async _getData(e, t) {
+    async _getData(parentElement, dataDeDuplicator) {
         console.log("pagination _getData");
-        var i, a;
-        const o = await this.getDataElements(e);
-        const strategies1 = this.strategies();
+        let error_temp, a;
+        const dataElements = await this.getDataElements(parentElement);
+        const strategy = this.strategies();
         const l = {
             id: this.id,
             selector: this.selector,
-            parentElement: e,
-            dataDeduplicator: t,
-            dataElements: o
+            parentElement: parentElement,
+            dataDeduplicator: dataDeDuplicator,//Deduplication删除重复
+            dataElements: dataElements
         };
         let result =[];
         //result.push(l.parentElement);
-        for (const strategies1Element of strategies1) {
+        for (const strategies1Element of strategy) {
             let t = false;
             try {
-                i = undefined;
+                error_temp = undefined;
                 let  u = await strategies1Element.extract(l);
                 for(let c of u)
                 {
@@ -75,7 +76,7 @@ class SelectorPagination extends o.Selector {
                     result.push(c);
                 }
             } catch (e) {
-                i = {
+                error_temp = {
                     error: e
                 };
             } finally {
@@ -86,7 +87,9 @@ class SelectorPagination extends o.Selector {
                     if (i) await i.error;
                 }*/
             }
-            if (result.length>0)
+            if (error_temp)
+                return error_temp.error;
+            if (result.length > 0)
                 break;
         }
         if(result.length)
@@ -98,7 +101,10 @@ class SelectorPagination extends o.Selector {
     strategies() {
         switch (this.paginationType) {
             case "auto":
-                return [new d.LinkExtractorStrategy(new s.LinkFromHrefExtractor), new d.LinkExtractorStrategy(new u.LinkFromInlineScriptExtractor), new d.LinkExtractorStrategy(new c.LinkFromAttributesExtractor), new p.ClickMoreElementExtractorStrategy];
+                return [new d.LinkExtractorStrategy(new s.LinkFromHrefExtractor),
+                    new d.LinkExtractorStrategy(new u.LinkFromInlineScriptExtractor),
+                    new d.LinkExtractorStrategy(new c.LinkFromAttributesExtractor),
+                    new p.ClickMoreElementExtractorStrategy];
 
             case "linkFromHref":
                 return [new d.LinkExtractorStrategy(new s.LinkFromHrefExtractor)];
