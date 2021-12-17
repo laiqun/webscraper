@@ -18,7 +18,10 @@ class Selector {
         let t = ["id", "type", "parentSelectors"];
         t = t.concat(this.getFeatures());
         for (const i in e)
-            t.includes(i) ? this[i] = e[i] : u.Log.notice("configuring incorrect key for selector", {
+            if(t.includes(i))
+                this[i] = e[i];
+            else
+                u.default.notice("configuring incorrect key for selector", {
                 key: i,
                 selector: JSON.stringify(this)
             });

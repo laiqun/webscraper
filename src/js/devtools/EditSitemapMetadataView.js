@@ -70,7 +70,7 @@ let EditSitemapMetadataView = class extends c.BaseComponent {
                         }
                     }
                 },
-                "startUrl[]": {
+                "startUrl[]": { //通过name属性来辨别  验证规则，和待验证 的元素
                     validators: {
                         notEmpty: {
                             message: "The start URL is required and cannot be empty"

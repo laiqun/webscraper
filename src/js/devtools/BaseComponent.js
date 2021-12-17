@@ -22,9 +22,11 @@ class BaseComponent extends r.Component {
 
     getFormElement() {
         const e = n("form", this.el).get();
-        if (e.length > 0) return e[0];
+        if (e.length > 0)
+            return e[0];
         const t = n(this.el).closest("form").get();
-        if (t.length > 0) return t[0];
+        if (t.length > 0)
+            return t[0];
         throw "cannot find form element";
     }
 
@@ -38,7 +40,9 @@ class BaseComponent extends r.Component {
     }
 
     initFormValidator() {
-        const e = this.getFormValidatorOptions(), t = this.getFormElement();
+        const e = this.getFormValidatorOptions();
+        console.log("initFormValidator");
+        const t = this.getFormElement();
         n(t).bootstrapValidator(e);
     }
 
@@ -56,7 +60,7 @@ class BaseComponent extends r.Component {
     }
 
     revalidateField(e) {
-        this.getFormValidator().revalidateField(n(e).closest(".input-group").find("input"));
+        this.getFormValidator().revalidateField(n(e).closest(".input-group").find("input")[0]["name"]);
     }
 
     cancelEvent(e) {
