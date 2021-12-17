@@ -5,17 +5,17 @@ class SelectorElement extends a.Selector {
         super();
         this.type = "SelectorElement";
         this.selector = "";
-        this.multiple = !0;
+        this.multiple = true;
         this.delay = 0;
         this.updateData(e);
     }
 
     canReturnMultipleRecords() {
-        return !0;
+        return true;
     }
 
     canHaveChildSelectors() {
-        return !0;
+        return true;
     }
 
     canCreateNewJobs() {
@@ -23,7 +23,7 @@ class SelectorElement extends a.Selector {
     }
 
     willReturnElements() {
-        return !0;
+        return true;
     }
 
     async _getData(e) {

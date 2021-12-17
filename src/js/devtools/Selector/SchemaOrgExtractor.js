@@ -8,17 +8,21 @@ class SchemaOrgExtractor extends o.BaseExtractor {
     async findRawData(e) {
         const t = new s.JsonLdExtractor, i = await t.findRawData(e), n = new l.MicroDataExtractor,
             r = await n.findRawData(e), o = [].concat(i, r), c = {}, u = [];
-        for (const e of o) for (const t of e.data) {
-            const e = a.schemaOrg.getTypeFromDataObject(t);
-            if (e) if (void 0 !== c[e]) c[e].data.push(t); else {
-                const i = a.schemaOrg.getSelectorsFromDataObject(t);
-                c[e] = {
-                    dataObjectSelectors: i,
-                    schemaOrgType: e,
-                    data: [t]
-                }, u.push(c[e]);
+        for (const e of o)
+            for (const t of e.data) {
+                const e = a.schemaOrg.getTypeFromDataObject(t);
+                if (e)
+                    if (void 0 !== c[e])
+                        c[e].data.push(t);
+                    else {
+                        const i = a.schemaOrg.getSelectorsFromDataObject(t);
+                        c[e] = {
+                            dataObjectSelectors: i,
+                            schemaOrgType: e,
+                            data: [t]
+                        }, u.push(c[e]);
+                    }
             }
-        }
         return u;
     }
 

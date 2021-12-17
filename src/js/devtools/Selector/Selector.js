@@ -118,8 +118,9 @@ class Selector {
     }
 
     async waitDelay() {
-        const e = this.delay || 0;
-        0 !== e && (await Async.sleep(e));
+        const dalay = this.delay || 0;
+        if(0 !== dalay )
+            await Async.sleep(dalay);
     }
 
     getExperimentalFeatures() {

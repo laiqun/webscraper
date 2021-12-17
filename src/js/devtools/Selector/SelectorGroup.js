@@ -2,40 +2,46 @@ import * as a from "./Selector.js"//const a = i(10);
 
 class SelectorGroup extends a.Selector {
     constructor(e) {
-        super(), this.type = "SelectorGroup", this.selector = "", this.delay = 0, this.extractAttribute = "",
-            this.updateData(e);
+        super();
+        this.type = "SelectorGroup";
+        this.selector = "";
+        this.delay = 0;
+        this.extractAttribute = "";
+        this.updateData(e);
     }
 
     canReturnMultipleRecords() {
-        return !1;
+        return false;
     }
 
     canHaveChildSelectors() {
-        return !1;
+        return false;
     }
 
     canCreateNewJobs() {
-        return !1;
+        return false;
     }
 
     willReturnElements() {
-        return !1;
+        return false;
     }
 
     async _getData(e) {
-        const t = await this.getDataElements(e);
+        const elements = await this.getDataElements(e);
         const result = [];
-        for (const e of t) {
-            const t = {}, r = await e.getText();
-            if (t[this.id] = r, this.extractAttribute) {
-                const i = await e.getAttr(this.extractAttribute);
-                t[`${this.id}-${this.extractAttribute}`] = i;
+        for (const element of elements) {
+            const oneItem = {};
+            const text = await element.getText();
+            oneItem[this.id] = text;
+            if (this.extractAttribute) {
+                const attr = await element.getAttr(this.extractAttribute);
+                oneItem[`${this.id}-${this.extractAttribute}`] = attr;
             }
-            result.push(t);
+            result.push(oneItem);
         }
-        const r = {};
-        r[this.id] = result;
-        return r;
+        const groupedResult = {};
+        groupedResult[this.id] = result;
+        return groupedResult;
     }
 
     getDataElements(e) {

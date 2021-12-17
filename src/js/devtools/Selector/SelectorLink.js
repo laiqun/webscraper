@@ -5,40 +5,40 @@ class SelectorLink extends Selector {
         super();
         this.type = "SelectorLink";
         this.selector = "";
-        this.multiple = !1;
+        this.multiple = false;
         this.delay = 0;
         this.updateData(e);
     }
 
     canReturnMultipleRecords() {
-        return !0;
+        return true;
     }
 
     canHaveChildSelectors() {
-        return !0;
+        return true;
     }
 
     canCreateNewJobs() {
-        return !0;
+        return true;
     }
 
     willReturnElements() {
-        return !1;
+        return false;
     }
 
     getLinkType() {
-        return void 0 === this.linkType ? "link" : this.linkType;
+        return undefined === this.linkType ? "link" : this.linkType;
     }
 
     async getLink(e) {
-        const t = this.getLinkType();
-        if ("link" === t) {
+        const linkType = this.getLinkType();
+        if ("link" === linkType) {
             return await this.getLinkFromHrefAttribute(e);
         }
-        if ("text" === t) {
+        if ("text" === linkType) {
             return await this.getLinkFromText(e);
         }
-        throw "unknown link type." + t;
+        throw "unknown link type." + linkType;
     }
 
     async getLinkFromHrefAttribute(e) {
@@ -50,21 +50,21 @@ class SelectorLink extends Selector {
     }
 
     async _getData(e) {
-        const t = await this.getDataElements(e);
-        if(false === this.multiple && 0 === t.length)
+        const dataElements = await this.getDataElements(e);
+        if(false === this.multiple && 0 === dataElements.length)
              this.getEmptyRecord();
         let result =[];
-        for (const e of t) {
-            const t = await e.getText();
-            let i = await this.getLink(e);
-            i = Url.escapeWhiteSpace(i);
-            const n = {
-                [this.id]: t,
-                [this.id + "-href"]: i,
+        for (const dataElement of dataElements) {
+            const text = await dataElement.getText();
+            let link = await this.getLink(dataElement);
+            link = Url.escapeWhiteSpace(link);
+            const oneItem = {
+                [this.id]: text,
+                [this.id + "-href"]: link,
                 _followSelectorId: this.id,
-                _follow: i
+                _follow: link
             };
-            result.push(n) ;
+            result.push(oneItem) ;
         }
         return result;
     }
@@ -86,7 +86,7 @@ class SelectorLink extends Selector {
     }
 
     isLinkSelector() {
-        return !0;
+        return true;
     }
 }
 

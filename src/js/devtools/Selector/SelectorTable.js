@@ -31,23 +31,27 @@ class SelectorTable extends s.Selector {
     }
 
     async getTableHeaderColumns(e) {
-        const t = this.getTableHeaderRowSelector();
-        const i = await e.getElements(t);
-        if (i.length < 1)
+        const tableHeaderRowSelector = this.getTableHeaderRowSelector();
+        const elements = await e.getElements(tableHeaderRowSelector);
+        if (elements.length < 1)
             return {};
         {
-            const e = i[0], t = await e.getElements("td,th"), n = [];
-            for (const e of t) {
-                const t = await e.getText();
-                n.push(t.replace("\n", " "));
+            const element = elements[0];
+            const th = await element.getElements("td,th");
+            const result = [];
+            for (const column of th) {
+                const text = await column.getText();
+                result.push(text.replace("\n", " "));
             }
-            let r = 1;
-            const a = {};
-            return n.forEach(e => {
-                a[e] = {
-                    index: r
-                }, r++;
-            }), a;
+            let columnIndex = 1;
+            const columnsMap = {};
+            result.forEach(column => {
+                columnsMap[column] = {
+                    index: columnIndex
+                };
+                columnIndex++;
+            });
+            return columnsMap;
         }
     }
 
@@ -64,42 +68,48 @@ class SelectorTable extends s.Selector {
     }
 
     async extractRowData(e, t) {
-        const i = {};
-        for (const n of this.columns) if (!0 === n.extract) if (void 0 === t[n.header]) i[n.name] = l.emptyRecordValue; else {
-            const r = `td:nth-child(${t[n.header].index}),th:nth-child(${t[n.header].index})`,
-                a = await e.getElements(r);
-            if (0 === a.length) i[n.name] = l.emptyRecordValue; else {
-                const e = await a[0].getText();
-                i[n.name] = e;
-            }
-        }
-        return i;
+        const result = {};
+        for (const n of this.columns)
+            if (!0 === n.extract)
+                if (undefined === t[n.header])
+                    result[n.name] = l.emptyRecordValue;
+                else {
+                    const r = `td:nth-child(${t[n.header].index}),th:nth-child(${t[n.header].index})`;
+                    const elements = await e.getElements(r);
+                    if (0 === elements.length)
+                        result[n.name] = l.emptyRecordValue;
+                    else {
+                        const text = await elements[0].getText();
+                        result[n.name] = text;
+                    }
+                }
+        return result;
     }
 
     async _getData(e) {
-        const t = await this.getDataElements(e);
-        let i = 0;
-        let result =[];
-        for (const e of t) {
-            const t = await this.extractTableData(e);
-            for (const e of t)
-            {
-                result.push( e);
-                i++;
+        const dataElements = await this.getDataElements(e);
+        let totalNum = 0;
+        let result = [];
+        for (const dataElement of dataElements) {
+            const tableData = await this.extractTableData(dataElement);
+            for (const oneData of tableData) {
+                result.push(oneData);
+                totalNum++;
             }
             if (false === this.multiple)
-                return await void 0;
+                return undefined;
         }
-        if(0 === i && false === this.multiple )
-            return  this.getEmptyRecord();
+        if (0 === totalNum && false === this.multiple)
+            return this.getEmptyRecord();
         return result;
     }
 
     getDataColumns() {
-        const e = [];
-        return this.columns.forEach(t => {
-            true === t.extract && e.push(t.name);
-        }), e;
+        const result = [];
+        this.columns.forEach(t => {
+            true === t.extract && result.push(t.name);
+        });
+        return result;
     }
 
     getFeatures() {
@@ -166,7 +176,7 @@ class SelectorTable extends s.Selector {
                 extract: !0
             });
         });
-        return  result;
+        return result;
     }
 }
 

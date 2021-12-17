@@ -30,11 +30,22 @@ class WebPageBase {
     }
 
     getSelectorParts(e) {
-        const t = e.split(/((?<!\\),|".*?"|'.*?'|\([^"']*?\))/), i = [];
-        let n = "";
-        return t.forEach(e => {
-            "," === e ? (n.trim().length && i.push(n.trim()), n = "") : n += e;
-        }), n.trim().length && i.push(n.trim()), i;
+        const t = e.split(/((?<!\\),|".*?"|'.*?'|\([^"']*?\))/);
+        const result = [];
+        let tempItem = "";
+        t.forEach(e => {
+            if("," === e )
+            {
+                if(tempItem.trim().length )
+                    result.push(tempItem.trim());
+                tempItem = "";
+            }
+            else
+                tempItem += e;
+        });
+        if(tempItem.trim().length )
+            result.push(tempItem.trim());
+        return  result;
     }
 }
 

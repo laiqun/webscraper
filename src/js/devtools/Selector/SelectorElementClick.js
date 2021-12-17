@@ -53,16 +53,16 @@ class SelectorElementClick extends o.Selector {
         return undefined === this.clickElementUniquenessType ? "uniqueText" : this.clickElementUniquenessType;
     }
 
-    async addInitialElements(e, t) {
+    async addInitialElements(e, uniqueElementList) {
         if ("discard" === this.discardInitialElements)
             return;
         if ("discard-when-click-element-exists" === this.discardInitialElements) {
             if ((await this.getClickElements(e)).length > 0)
                 return;
         }
-        const i = await this.getDataElements(e);
-        for (const e of i)
-            await t.push(e);
+        const dataElements = await this.getDataElements(e);
+        for (const dataElement of dataElements)
+            await uniqueElementList.push(dataElement);
     }
 
     async _getData(e) {
@@ -101,7 +101,9 @@ class SelectorElementClick extends o.Selector {
     }
 
     getFeatures() {
-        return ["selector", "multiple", "delay", "clickElementSelector", "clickType", "discardInitialElements", "clickElementUniquenessType", "clickActionType"];
+        return ["selector", "multiple", "delay", "clickElementSelector",
+            "clickType", "discardInitialElements",
+            "clickElementUniquenessType", "clickActionType"];
     }
 
     getExperimentalFeatures() {
@@ -109,10 +111,10 @@ class SelectorElementClick extends o.Selector {
     }
 
     async getClickButton(e, t) {
-        const i = await this.getClickElements(e);
-        for (const e of i) {
-            if (!(await t.isElementAdded(e)))
-                return e;
+        const clickElements = await this.getClickElements(e);
+        for (const clickElement of clickElements) {
+            if (!(await t.isElementAdded(clickElement)))
+                return clickElement;
         }
         return false;
     }

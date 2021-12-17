@@ -2,14 +2,18 @@ import * as a from "./Selector.js"//    const a = i(10)
 import * as o from "../emptyRecordValue.js"//, o = i(29);
 class SelectorScriptData extends a.Selector {
     constructor(e) {
-        super(), this.type = "SelectorScriptData", this.script = "", this.scriptDataColumns = [{
+        super();
+        this.type = "SelectorScriptData";
+        this.script = "";
+        this.scriptDataColumns = [{
             name: "",
-            is_url: !1
-        }], this.updateData(e);
+            is_url: false
+        }];
+        this.updateData(e);
     }
 
     canReturnMultipleRecords() {
-        return !0;
+        return true;
     }
 
     canHaveChildSelectors() {
@@ -17,12 +21,14 @@ class SelectorScriptData extends a.Selector {
     }
 
     canCreateNewJobs() {
-        for (const e of this.scriptDataColumns) if (e.is_url) return !0;
-        return !1;
+        for (const e of this.scriptDataColumns) 
+            if (e.is_url) 
+                return true;
+        return false;
     }
 
     willReturnElements() {
-        return !1;
+        return false;
     }
 
     parseData(e) {
@@ -36,12 +42,14 @@ class SelectorScriptData extends a.Selector {
     }
 
     async _getData(e) {
-        let t = await n(e.getDataWithScript(this.script));
-        t = this.parseData(t), !1 === this.multiple && 0 === t.length && (await await this.getEmptyRecord());
+        let dataWithScript = await e.getDataWithScript(this.script);
+        dataWithScript = this.parseData(dataWithScript);
+        if(false === this.multiple && 0 === dataWithScript.length )
+            return this.getEmptyRecord();
         let result = [];
-        for (const e of t)
+        for (const oneData of dataWithScript)
         {
-            result.push(e);
+            result.push(oneData);
             if ( false === this.multiple)
                 break;
         }
@@ -57,7 +65,9 @@ class SelectorScriptData extends a.Selector {
     }
 
     getUrlColumn() {
-        for (const e of this.scriptDataColumns) if (e.is_url) return e.name;
+        for (const e of this.scriptDataColumns)
+            if (e.is_url)
+                return e.name;
     }
 }
 

@@ -3,8 +3,12 @@ import {default as s} from "../../contentjs/log.js"//, s = i(5)
 import * as o from "../Str.js"//const o = i(75);
 class SelectorSitemapXmlLink extends l.Selector {
     constructor(e) {
-        super(), this.type = "SelectorSitemapXmlLink", this.sitemapXmlMinimumPriority = .1,
-            this.sitemapXmlUrlRegex = "", this.sitemapXmlUrls = [""], this.updateData(e);
+        super();
+        this.type = "SelectorSitemapXmlLink";
+        this.sitemapXmlMinimumPriority = .1;
+        this.sitemapXmlUrlRegex = "";
+        this.sitemapXmlUrls = [""];
+        this.updateData(e);
     }
 
     get urlRegexp() {
@@ -16,23 +20,23 @@ class SelectorSitemapXmlLink extends l.Selector {
     }
 
     canReturnMultipleRecords() {
-        return !0;
+        return true;
     }
 
     canHaveChildSelectors() {
-        return !0;
+        return true;
     }
 
     canCreateNewJobs() {
-        return !0;
+        return true;
     }
 
     willReturnElements() {
-        return !1;
+        return false;
     }
 
     willReturnMultipleRecords() {
-        return !0;
+        return true;
     }
 
     async getSitemapXmlUrls(e) {
@@ -76,7 +80,8 @@ class SelectorSitemapXmlLink extends l.Selector {
     }
 
     async extractUrlsFromSitemapXml(e, t, i) {
-        if (i.includes(t)) return [];
+        if (i.includes(t))
+            return [];
         i.push(t), s.info("Downloading stemap.xml", {
             url: t
         });
@@ -119,7 +124,7 @@ class SelectorSitemapXmlLink extends l.Selector {
     }
 
     isLinkSelector() {
-        return !0;
+        return true;
     }
 }
 

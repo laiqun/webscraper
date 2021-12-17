@@ -53,9 +53,7 @@ class SelectorElementScroll extends o.Selector {
         let dataElementsLength = dataElements.length;
         for (; ;) {
             await this.scrollToBottom(e);
-            console.log("SelectorElementScroll wait page start");
             await e.webPage.waitForPageLoadComplete(false, delayTime);
-            console.log("SelectorElementScroll wait page end");
             dataElements = await this.getDataElements(e);
             if (dataElements.length === dataElementsLength) {
                 await this.scrollToTop(e);
