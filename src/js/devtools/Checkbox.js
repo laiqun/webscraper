@@ -3,7 +3,9 @@ import * as n from "./ConditionalElementBase.js"
 import * as r from "react"
 class Checkbox extends n.ConditionalElementBase {
     _render() {
-        const e = this.props.feature, t = this.props.selector[e], {label: i, onChange: n} = this.props;
+        const feature = this.props.feature;
+        const checked = this.props.selector[feature];
+        const {label: label, onChange: onChange} = this.props;
         return r.createElement("div", {
             className: "form-group"
         }, r.createElement("div", {
@@ -12,11 +14,11 @@ class Checkbox extends n.ConditionalElementBase {
             className: "checkbox"
         }, r.createElement("label", null, r.createElement("input", {
             type: "checkbox",
-            id: e,
-            name: e,
-            checked: t,
-            onChange: n
-        }), i))));
+            id: feature,
+            name: feature,
+            checked: checked,
+            onChange: onChange
+        }), label))));
     }
 }
 

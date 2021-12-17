@@ -30,11 +30,11 @@ class SelectorMicroData extends o.Selector {
         const t = new a.SchemaOrgExtractor;
         const i = this.schemaOrgType;
         const r = this.dataObjectSelectors;
-        const datas = await t.extractData(e, r, i);
-        if (false === this.multiple && 0 === datas.length)
+        const dataw = await t.extractData(e, r, i);
+        if (false === this.multiple && 0 === dataw.length)
             return this.getEmptyRecord();
         let result = [];
-        for (const data of datas) {
+        for (const data of dataw) {
             result.push(data);
             if (false === this.multiple)
                 break;

@@ -4,7 +4,7 @@ let DevToolsContentScriptClient = void 0;
 
 import {default as r} from "../contentjs/log.js"//r = i(5),
 import * as s from "url-parse"//, s = i(48)
-import * as o from "./ChromeTabs.js" //o = i(196);
+import * as o from "../background/ChromeTabs.js" //o = i(196);
 import {default as a} from "../contentjs/Msg.js"  //a = i(17)
 DevToolsContentScriptClient = new class {
     constructor() {
