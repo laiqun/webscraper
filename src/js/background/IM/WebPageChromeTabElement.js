@@ -1,5 +1,5 @@
 import * as a from "../../devtools/Selector/WebPageDriverType.js"//, a = i(34)
-import * as r from "../WebPageElement.js"//r = i(93),
+import * as r from "./WebPageElement.js"//r = i(93),
 class WebPageChromeTabElement extends r.WebPageElement {
     constructor(e, t) {
         super(e);

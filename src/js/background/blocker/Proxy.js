@@ -1,5 +1,5 @@
-import * as a from "./WindowManager.js"//const  a = i(612);
-import {default as r} from "../contentjs/log.js";//r = i(5),
+import * as a from "../chromeOpt/WindowManager.js"//const  a = i(612);
+import {default as r} from "../../contentjs/log.js";//r = i(5),
 class Proxy extends a.WindowManager {
     constructor() {
         super(...arguments);

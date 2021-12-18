@@ -1,5 +1,5 @@
 import * as n from "./BaseWebNavigationEventListener.js"
-import * as r from "../ContentTypeParser.js"//    const  r = i(416);
+import * as r from "./ContentTypeParser.js"//    const  r = i(416);
 class FailOnErrorPagesEventListener extends n.BaseWebNavigationEventListener {
     constructor(e) {
         super(e);

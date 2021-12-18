@@ -1,5 +1,5 @@
 import * as r from "url-parse"//const r = i(48),
-import * as a from "../JobRuntimeMetadata.js"//a = i(556);
+import * as a from "./JobRuntimeMetadata.js"//a = i(556);
 class MiddlewareHandler {
     constructor(e) {
         this.currentDomain = "";

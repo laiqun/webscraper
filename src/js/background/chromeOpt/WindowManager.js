@@ -1,7 +1,7 @@
-import {default as r} from "../contentjs/log.js";//r = i(5),
-import {default as o} from "../contentjs/Msg.js"//o = i(17),
-import * as s from "../devtools/Async.js"//s = i(22),
-import * as a from "./TakesScreenShot.js"//const  a = i(613);
+import {default as r} from "../../contentjs/log.js";//r = i(5),
+import {default as o} from "../../contentjs/Msg.js"//o = i(17),
+import * as s from "../../devtools/Async.js"//s = i(22),
+import * as a from "../IM/TakesScreenShot.js"//const  a = i(613);
 class WindowManager extends a.TakesScreenShot {
     constructor(e) {
         super(e);
