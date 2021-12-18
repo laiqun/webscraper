@@ -1,7 +1,7 @@
-import * as o from "./BaseMiddleware.js"//r = i(33)
-import {default as a} from "../../log/log.js";//a = i(5),
-import * as r from "../../common/Async.js"//const r = i(22);
-class WebsiteStateSetupMiddleware extends o.BaseMiddleware {
+import {BaseMiddleware} from "./BaseMiddleware.js"//r = i(33)
+import {default as log} from "../../log/log.js";//a = i(5),
+import {Async} from "../../common/Async.js"//const r = i(22);
+class WebsiteStateSetupMiddleware extends BaseMiddleware {
     constructor(webPage, sitemap) {
         super();
         this.webPage = webPage;
@@ -15,7 +15,7 @@ class WebsiteStateSetupMiddleware extends o.BaseMiddleware {
     }
 
     async setupState() {
-        a.Log.info("Setting up website state");
+        log.info("Setting up website state");
         const sitemap = this.sitemap;
         const webPage = this.webPage;
         const websiteStateSetup = sitemap.websiteStateSetup;
@@ -23,7 +23,7 @@ class WebsiteStateSetupMiddleware extends o.BaseMiddleware {
             if ("openUrl" === e.type)
             {
                 await webPage.openPage(e.url);
-                await r.Async.sleep(2000);
+                await Async.sleep(2000);
             }
             else if ("input" === e.type) {
                 const selector = e.selector;
@@ -42,7 +42,7 @@ class WebsiteStateSetupMiddleware extends o.BaseMiddleware {
             } else
             {
                 if("sleep" === e.type )
-                    await r.Async.sleep(e.duration);
+                    await Async.sleep(e.duration);
             }
     }
 

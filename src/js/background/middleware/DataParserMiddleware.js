@@ -1,10 +1,10 @@
 let order = 0;
 import {Job} from "../Job.js"//const r = i(500);
 import {BaseMiddleware} from "./BaseMiddleware.js"//a = i(33),
-import {default as o} from "../../log/log.js";//o = i(5),
+import {default as log} from "../../log/log.js";//o = i(5),
 import * as s from "../../devtools/Selector/Url.js"//s = i(19),
 import * as l from "../../common/Obj.js"//, l = i(57)
-import * as c from "../DataSizeLimitError.js"//,  c = i(499)
+import {DataSizeLimitError} from "../DataSizeLimitError.js"//,  c = i(499)
 class DataParserMiddleware extends BaseMiddleware {
     constructor(e) {
         super();
@@ -31,12 +31,12 @@ class DataParserMiddleware extends BaseMiddleware {
         job.newJobs = newJobs;
         if (0 === job.newJobs.length && 0 === job.data.length) {
             job.markAsEmpty();
-            o.notice("Empty page", {
+            log.notice("Empty page", {
                 url: job.url
             });
         }
         if (this.jobDataSizeLimitReached)
-            o.notice("Job data size limit exceeded", {
+            log.notice("Job data size limit exceeded", {
                 error: "DATA_SIZE_LIMIT_EXCEEDED",
                 url: job.url,
                 size: this.dataSize / 1024 / 1024
@@ -97,7 +97,7 @@ class DataParserMiddleware extends BaseMiddleware {
                     result.push(job);
                 }
                 else
-                    o.notice("invalid New Job URL protocol", {
+                    log.notice("invalid New Job URL protocol", {
                         url: job.url,
                         hideInEsLogs: !0
                     });
@@ -109,11 +109,11 @@ class DataParserMiddleware extends BaseMiddleware {
     checkDataSize(e, t) {
         const i = l.Obj.getSize(e);
         if (i > this.recordSizeLimit)
-            throw new c.DataSizeLimitError("Record data size limit reached", i / 1024 / 1024);
+            throw new DataSizeLimitError("Record data size limit reached", i / 1024 / 1024);
         this.dataSize += i;
         if(this.dataSize > this.jobDataSizeLimit && !this.jobDataSizeLimitReached )
         {
-            o.notice("Job data size limit reached", {
+            log.notice("Job data size limit reached", {
                 error: "DATA_SIZE_LIMIT_REACHED",
                 url: t,
                 size: this.dataSize / 1024 / 1024
