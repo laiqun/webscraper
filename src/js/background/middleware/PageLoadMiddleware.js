@@ -1,5 +1,5 @@
 import * as r from "./BaseMiddleware.js"//r = i(33)
-import {default as a} from "../../contentjs/Msg.js"//a = i(17),
+import {default as a} from "../../common/Msg.js"//a = i(17),
 class PageLoadMiddleware extends r.BaseMiddleware {
     constructor(e) {
         super();

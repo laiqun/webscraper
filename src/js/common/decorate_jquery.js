@@ -1,4 +1,4 @@
-import * as jquery from "./jquery.js"
+import * as jquery from "./lib/jquery.js"
 window.$ = jquery;
 window.jQuery = jquery;
 //https://blog.csdn.net/qq_44884577/article/details/89085803

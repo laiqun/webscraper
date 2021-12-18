@@ -2,8 +2,8 @@ import {Targets} from "./contentjs/HighlightOverly/Targets";
 import css from "../css/frame.css"
 
 const a = document;
-import {applyController} from "./contentjs/IM/applyController";
-import {serviceFactory} from "./contentjs/IM/ServiceFactory"
+import {applyController} from "./common/RPC/applyController";
+import {serviceFactory} from "./common/RPC/serviceFactory"
 import {keyEventHandler} from "./contentjs/HighlightOverly/keyEventHandler"
 
 class frame_x {

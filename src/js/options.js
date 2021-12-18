@@ -1,5 +1,5 @@
 import {Targets} from "./contentjs/HighlightOverly/Targets";
-import {serviceFactory} from "./contentjs/IM/serviceFactory";
+import {serviceFactory} from "./common/RPC/serviceFactory";
 
 class optionsClass {
     constructor() {

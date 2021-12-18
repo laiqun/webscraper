@@ -1,5 +1,5 @@
 import * as r from "./BaseWebNavigationEventListener.js"//r = i(67),
-import {default as u} from "../../contentjs/Msg.js"//u = i(17),
+import {default as u} from "../../common/Msg.js"//u = i(17),
 import {default as o} from "../../log/log.js";//o = i(5),
 import * as a from "../../common/Async.js"//a = i(22),
 import * as s from "../../devtools/Selector/Url.js"//s = i(19),

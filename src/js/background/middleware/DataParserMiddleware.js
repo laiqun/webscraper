@@ -83,22 +83,22 @@ class DataParserMiddleware extends a.BaseMiddleware {
                     continue;
                 if (!s.Url.isValidUrlOrUrlPart(e))
                     continue;
-                const l = new r.Job({
+                const job = new r.Job({
                     url: e,
                     parentSelector: t,
                     parentJob: i,
                     baseData: c,
                     deduplicateFirstPageData: n
                 });
-                const protocol = new URL(l.url).protocol;
+                const protocol = new URL(job.url).protocol;
                 if("http:" === protocol || "https:" === protocol )
                 {
                     this.checkDataSize(c, i.url);
-                    result.push(l);
+                    result.push(job);
                 }
                 else
                     o.notice("invalid New Job URL protocol", {
-                        url: l.url,
+                        url: job.url,
                         hideInEsLogs: !0
                     });
             }

@@ -1,4 +1,4 @@
-import * as r from "../../contentjs/IM/InternalRuntime.js"//, r = i(84)
+import * as r from "../../common/RPC/InternalRuntime.js"//, r = i(84)
 import * as n from "./Dispatcher.js"//const n = i(624);
 class MessageManager {
     constructor() {

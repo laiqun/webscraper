@@ -1,6 +1,6 @@
 import * as SelectionError from "./SelectionError.js"
 import * as ElementQuery2 from "./ElementQuery2.js"
-import  {applyController} from "./IM/applyController.js";
+import  {applyController} from "../common/RPC/applyController.js";
 import {Targets} from "./HighlightOverly/Targets.js";
 
 

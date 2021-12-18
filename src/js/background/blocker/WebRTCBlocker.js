@@ -1,4 +1,4 @@
-import {default as a} from "../../contentjs/Msg.js"//a = i(17),
+import {default as a} from "../../common/Msg.js"//a = i(17),
 import {default as r} from "../../log/log.js";//r = i(5),
 class WebRTCBlocker {
     constructor(e) {

@@ -1,4 +1,4 @@
-import {default as o} from "../../contentjs/Msg.js"//o = i(17),
+import {default as o} from "../../common/Msg.js"//o = i(17),
 import {default as a} from "../../log/log.js";//a = i(5),
 import * as r from "./Proxy.js"//const r = i(611);
 class ImageBlocker extends r.Proxy {
