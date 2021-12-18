@@ -21,24 +21,24 @@ class DataParserMiddleware extends a.BaseMiddleware {
         return 0 !== t.getDirectChildSelectors(i).length;
     }
 
-    async handle(e, t, i) {
-        const tx = await i();
+    async handle(job, jobRuntimeInfo, callback) {
+        const tx = await callback();
         this.dataSize = 0;
         this.jobDataSizeLimitReached = !1;
-        const extractData1 = this.extractData(tx, e.baseData, e.url);
-        e.data = extractData1;
-        const newJobs = this.extractNewJobs(tx, e.baseData, e);
-        e.newJobs = newJobs;
-        if (0 === e.newJobs.length && 0 === e.data.length) {
-            e.markAsEmpty();
+        const extractData1 = this.extractData(tx, job.baseData, job.url);
+        job.data = extractData1;
+        const newJobs = this.extractNewJobs(tx, job.baseData, job);
+        job.newJobs = newJobs;
+        if (0 === job.newJobs.length && 0 === job.data.length) {
+            job.markAsEmpty();
             o.notice("Empty page", {
-                url: e.url
+                url: job.url
             });
         }
         if (this.jobDataSizeLimitReached)
             o.notice("Job data size limit exceeded", {
                 error: "DATA_SIZE_LIMIT_EXCEEDED",
-                url: e.url,
+                url: job.url,
                 size: this.dataSize / 1024 / 1024
             });
         return tx;

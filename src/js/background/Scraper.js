@@ -21,13 +21,14 @@ class Scraper {
         this.stats = e.stats;
     }
 
-    async run(e) {
+    async run(chromeTabMiddleware) {
         for (; ;) {
-            const t = await this.storage.getJob();
-            if (!t) return this.finishScraping();
+            const jobs = await this.storage.getJob();
+            if (!jobs)
+                return this.finishScraping();
             const i = Date.now();
             try {
-                await this.executeJob(e, t);
+                await this.executeJob(chromeTabMiddleware, jobs);
             } catch (e) {
                 this.logUnexpectedMiddlewareExecutionErrors(e);
                 return  void (await this.finishScraping());
@@ -36,15 +37,15 @@ class Scraper {
         }
     }
 
-    async executeJob(e, t) {
+    async executeJob(chromeTabMiddleware, jobs) {
         a.info("Job execution started", {
-            url: t.url,
-            parentSelector: t.parentSelector
+            url: jobs.url,
+            parentSelector: jobs.parentSelector
         });
-        await e.handle(t);
-        if(t.hasFailed() )
-            await this.syncStorageBecauseOfFailedJob(t);
-        await this.handleChromeCrashErrors(t);
+        await chromeTabMiddleware.handle(jobs);
+        if(jobs.hasFailed() )
+            await this.syncStorageBecauseOfFailedJob(jobs);
+        await this.handleChromeCrashErrors(jobs);
     }
 
     async syncStorageBecauseOfFailedJob(e) {

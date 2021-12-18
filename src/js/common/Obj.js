@@ -80,7 +80,8 @@ class Obj {
         return createHash("sha256").update(jsonStr).digest("hex");
     }
     static convertToBasicObject(e) {
-        if (undefined !== e) return JSON.parse(JSON.stringify(e));
+        if (undefined !== e)
+            return JSON.parse(JSON.stringify(e));
     }
 }
 

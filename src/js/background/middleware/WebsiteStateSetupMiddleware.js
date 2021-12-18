@@ -2,10 +2,10 @@ import * as o from "./BaseMiddleware.js"//r = i(33)
 import {default as a} from "../../log/log.js";//a = i(5),
 import * as r from "../../common/Async.js"//const r = i(22);
 class WebsiteStateSetupMiddleware extends o.BaseMiddleware {
-    constructor(e, t) {
+    constructor(webPage, sitemap) {
         super();
-        this.webPage = e;
-        this.sitemap = t;
+        this.webPage = webPage;
+        this.sitemap = sitemap;
     }
 
     async isStateAlreadyOk() {
@@ -46,28 +46,28 @@ class WebsiteStateSetupMiddleware extends o.BaseMiddleware {
             }
     }
 
-    async handle(e, t, i) {
+    async handle(job, jobRuntimeInfo, callback) {
         const txx = this.sitemap;
         if (void 0 !== txx.websiteStateSetup && txx.websiteStateSetup.enabled) {
             const statusOK = await this.isStateAlreadyOk();
-            const haveRetriedTimes = undefined !== e.stateSetupRetries && e.stateSetupRetries >= 1;
+            const haveRetriedTimes = undefined !== job.stateSetupRetries && job.stateSetupRetries >= 1;
             if (!statusOK && !haveRetriedTimes)
             {
                 await this.setupState();
                 await this.webPage.waitForPageLoadComplete();
-                e.retry = true;
-                if(undefined === e.stateSetupRetries )
-                    e.stateSetupRetries = 0;
-                e.stateSetupRetries++;
+                job.retry = true;
+                if(undefined === job.stateSetupRetries )
+                    job.stateSetupRetries = 0;
+                job.stateSetupRetries++;
                 return [];
             }
             if (!statusOK && haveRetriedTimes)
             {
-                delete e.retry;
+                delete job.retry;
                 throw  "STATE_SETUP_CHECK_FAILED_AFTER_STATE_SETUP";
             }
         }
-        return await i();
+        return await callback();
     }
 }
 

@@ -1,30 +1,30 @@
 import * as a from "./BaseMiddleware.js"//a = i(33),
 import {default as r} from "../../log/log.js";//r = i(5),
     class JobExecutionProfileMiddleware extends a.BaseMiddleware {
-        constructor(e, t) {
+        constructor(webPage, sitemap) {
             super();
-            this.webPage = e;
-            this.sitemap = t;
+            this.webPage = webPage;
+            this.sitemap = sitemap;
         }
-        async handle(e, t, i) {
-                e.timeStarted = Date.now();
-                const result = await i();
-                e.timeFinished = (new Date).getTime();
-                e.executed = !0;
+        async handle(job, jobRuntimeInfo, callback) {
+                job.timeStarted = Date.now();
+                const result = await callback();
+                job.timeFinished = (new Date).getTime();
+                job.executed = !0;
                 const a = {
-                    execution: e.timeFinished - e.timeStarted,
-                    getData: t.getDataExtractionDuration(),
-                    url: e.url,
-                    parentSelector: e.parentSelector,
+                    execution: job.timeFinished - job.timeStarted,
+                    getData: jobRuntimeInfo.getDataExtractionDuration(),
+                    url: job.url,
+                    parentSelector: job.parentSelector,
                     sitemapName: this.sitemap._id,
                     driver: this.webPage.getDriverType(),
                     logType: "JOB_STAT"
                 };
-                if(e.hasFailed() )
+                if(job.hasFailed() )
                     r.notice("Job failed", Object.assign(Object.assign({}, a), {
-                        error: e.error_message
+                        error: job.error_message
                     }));
-                else if(e.isEmpty() && !e.isKnownEmpty() )
+                else if(job.isEmpty() && !job.isKnownEmpty() )
                     r.notice("Job is empty", a);
                 else
                     r.info("Job OK", a);

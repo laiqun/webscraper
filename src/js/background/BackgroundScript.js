@@ -375,21 +375,21 @@ _defaults:
         const a = new y.WebPageChromeTab({
             chromeClient: chromeClient
         });
-        const o = new u.Scraper({
+        const scraper = new u.Scraper({
             storage: dbStorage,
             sitemap: sitemap,
             browser: a,
             requestInterval: e.requestInterval,
             stats: this.stats
         });
-        const s = new l.ChromeTabMiddlewareHandler({
+        const chromeTabMiddleware = new l.ChromeTabMiddlewareHandler({
             storage: dbStorage,
             sitemap: sitemap,
             webPage: a,
             stats: this.stats
         });
         try {
-            await o.run(s);
+            await scraper.run(chromeTabMiddleware);
         } catch (e) {
             c.error("Scraper error occurred", {
                 error: C.getMessage(e)

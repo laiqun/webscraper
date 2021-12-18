@@ -7,14 +7,14 @@ class RefreshTabMiddleware extends r.BaseMiddleware {
         this.webPage = e;
     }
 
-    async handle(e, t, i, r) {
+    async handle(job, jobRuntimeInfo, callback, r) {
             if(this.openBlankPageInNextJob)
             {
                 await this.webPage.openBlankPage(undefined, true);
                 this.openBlankPageInNextJob = false;
             }
             try {
-                return await i();
+                return await callback();
             } catch (e) {
                 if(a.startsWithAnyOf(e, ["CHROME_TAB_CRASHED",
                     "FAILED_TO_CONNECT_TO_CHROME_TAB",

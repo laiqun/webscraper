@@ -1,13 +1,13 @@
 import * as r from "./BaseMiddleware.js"//r = i(33)
 class StatsMiddleware extends r.BaseMiddleware {
-    constructor(e) {
+    constructor(stats) {
         super();
-        this.stats = e;
+        this.stats = stats;
     }
 
-    async handle(e, t, i) {
+    async handle(job, jobRuntimeInfo, callback) {
             this.stats && this.stats.incrementDailyStat("pagesScraped", 1);
-            return await i();
+            return await callback();
     }
 }
 

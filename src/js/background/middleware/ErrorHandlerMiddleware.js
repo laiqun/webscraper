@@ -2,7 +2,7 @@ import * as a from "./BaseMiddleware.js"//a = i(33),
 import {default as o} from "../../common/Msg.js"//o = i(17),
 import {default as r} from "../../log/log.js";//r = i(5),
 class ErrorHandlerMiddleware extends a.BaseMiddleware {
-    constructor(webpage, sitemap) {
+    constructor(webPage, sitemap) {
         super();
         this.reduceSeverityForStartsWith = ["PAGE_REQUEST_ERROR",
             "PAGE_STATUS_CODE_ERROR",
@@ -27,13 +27,13 @@ class ErrorHandlerMiddleware extends a.BaseMiddleware {
                 "connecting to content script timed out",
                 "Cannot navigate to invalid URL",
                 "Chrome tab update error Invalid url"];
-            this.webPage = webpage;
+            this.webPage = webPage;
             this.sitemap = sitemap;
     }
 
-    async handle(e, t, i) {
+    async handle(job, jobRuntimeInfo, callback) {
             try {
-                return await i();
+                return await callback();
             } catch (t) {
                 if (o.startsWith(t, "CHROME_WINDOW_CLOSED"))
                     throw "CHROME_WINDOW_CLOSED";
@@ -41,8 +41,8 @@ class ErrorHandlerMiddleware extends a.BaseMiddleware {
                 const webPage = this.webPage;
                 const message = o.getMessage(t);
                 const s = {
-                    url: e.url,
-                    parentSelector: e.parentSelector,
+                    url: job.url,
+                    parentSelector: job.parentSelector,
                     sitemapName: sitemap._id,
                     driver: webPage.getDriverType(),
                     error: message,
@@ -52,7 +52,7 @@ class ErrorHandlerMiddleware extends a.BaseMiddleware {
                     if(!o.includesAnyOf(t, this.reduceSeverityForIncludes) )
                     {
                         r.error("Job execution failed with unknown error", s);
-                        e.markAsFailed(message);
+                        job.markAsFailed(message);
                     }
             }
     }

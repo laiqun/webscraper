@@ -46,27 +46,27 @@ class AuthMiddleware extends a.BaseMiddleware {
         await clickButtonElement.webPage.waitForPageLoadComplete(false, 2000);
     }
 
-    async handle(loggingTryInfoMap, t, callback) {
+    async handle(job, jobRuntimeInfo, callback) {
         const sitemap = this.sitemap;
         if (undefined !== sitemap.auth && sitemap.auth.checkLoggedInSelector) {
             const _isLoggedIn = await this.isLoggedIn();
-            const haveTriedTimes = undefined !== loggingTryInfoMap.loginRetries && loggingTryInfoMap.loginRetries >= 1;
+            const haveTriedTimes = undefined !== job.loginRetries && job.loginRetries >= 1;
             if (!_isLoggedIn && !haveTriedTimes)//如果loginRetries为undefined，则haveTryTimes是false
             {
                 await this.login();
-                loggingTryInfoMap.retry = true;
-                if(undefined === loggingTryInfoMap.loginRetries)
-                    loggingTryInfoMap.loginRetries = 0;
-                loggingTryInfoMap.loginRetries++;
+                job.retry = true;
+                if(undefined === job.loginRetries)
+                    job.loginRetries = 0;
+                job.loginRetries++;
                 return  [];
             }
             if (!_isLoggedIn && haveTriedTimes)//已经试过登录了，但是没登录上
             {
-                delete loggingTryInfoMap.retry;
+                delete job.retry;
                 throw  "Login check failed after logging in";
             }
             if(_isLoggedIn)
-                delete loggingTryInfoMap.page_load_failed_with_status_code_error;
+                delete job.page_load_failed_with_status_code_error;
         }
         return await callback();
     }

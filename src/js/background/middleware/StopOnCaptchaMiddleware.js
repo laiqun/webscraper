@@ -2,9 +2,9 @@ import * as o from "./BaseMiddleware.js"//o = i(33)
 import {default as a} from "../../log/log.js";//a = i(5),
 import * as r from "../../common/Async.js"//const r = i(22);
 class StopOnCaptchaMiddleware extends o.BaseMiddleware {
-    constructor(e) {
+    constructor(webPage) {
         super();
-        this.webPage = e;
+        this.webPage = webPage;
         this.captchaDetectionSelectors = ["iframe[src*='https://www.google.com/recaptcha/api2/']"];
     }
 
@@ -21,7 +21,7 @@ class StopOnCaptchaMiddleware extends o.BaseMiddleware {
         return false;
     }
 
-    async handle(e, t, i) {
+    async handle(job, jobRuntimeInfo, callback) {
         let exx = await this.pageHasCaptcha();
         if (exx) {
             a.info("Page has captcha. Waiting for user to resolve it");
@@ -30,7 +30,7 @@ class StopOnCaptchaMiddleware extends o.BaseMiddleware {
                 exx = await this.pageHasCaptcha();
             } while (exx);
         }
-        return await i();
+        return await callback();
     }
 }
 

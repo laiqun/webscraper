@@ -1,13 +1,13 @@
 import * as r from "./BaseMiddleware.js"//    const r = i(33);
 class DataStorageMiddleware extends r.BaseMiddleware {
-    constructor(e) {
+    constructor(storage) {
         super();
-        this.storage = e;
+        this.storage = storage;
     }
 
-    async handle(e, t, i) {
-            const tx = await i();
-            await this.storage.updateJob(e);
+    async handle(job, jobRuntimeInfo, callback) {
+            const tx = await callback();
+            await this.storage.updateJob(job);
             return  tx;
     }
 }
