@@ -1,7 +1,7 @@
 import * as o from "../../devtools/Selector/WebPageDriverType.js"//, o = i(34)
-import * as r from "../../devtools/Selector/WebPageDriverBase.js"//r = i(619),
+import {WebPageDriverBase} from "../../devtools/Selector/WebPageDriverBase.js"//r = i(619),
 import * as a from "../IM/WebPageChromeTabElement.js"//const  a = i(620);
-class WebPageChromeTab extends r.WebPageDriverBase {
+class WebPageChromeTab extends WebPageDriverBase {
     constructor(e) {
         super();
         this.chromeClient = e.chromeClient;

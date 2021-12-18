@@ -7,6 +7,7 @@ import * as l from "./ChromeTabs.js"//l = i(196),
 import * as o from "../pageLoadDetect/TabNetworkStatusListener.js"//o = i(511),
 import * as s from "../blocker/WebRTCBlocker.js"//s = i(607),
 import * as u from "../blocker/InterceptsRedirects.js"//const   u = i(608);
+//ChromeClient不直接使用，而是作为 WebPageChromeTab的参数，由它来调用
 class ChromeClient extends u.InterceptsRedirects {
     constructor(clientSetting) {
         super(clientSetting);

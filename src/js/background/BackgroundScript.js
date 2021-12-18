@@ -372,20 +372,20 @@ _defaults:
                 reloadPageBeforeHashTagChange: false
             });
         await chromeClient.init();
-        const a = new y.WebPageChromeTab({
+        const webPageChromeTab = new y.WebPageChromeTab({
             chromeClient: chromeClient
         });
         const scraper = new u.Scraper({
             storage: dbStorage,
             sitemap: sitemap,
-            browser: a,
+            browser: webPageChromeTab,
             requestInterval: e.requestInterval,
             stats: this.stats
         });
         const chromeTabMiddleware = new l.ChromeTabMiddlewareHandler({
             storage: dbStorage,
             sitemap: sitemap,
-            webPage: a,
+            webPage: webPageChromeTab,
             stats: this.stats
         });
         try {

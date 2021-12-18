@@ -17,7 +17,7 @@ class BrowserPouchDbStorage {
             this.addJob(job);
     }
 
-    getJob() {
+    async getJob() {
         if (this.jobQueue.length > 0) {
             return this.jobQueue.pop();
         }

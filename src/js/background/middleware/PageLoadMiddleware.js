@@ -11,16 +11,15 @@ class PageLoadMiddleware extends BaseMiddleware {
             try {
                 await this.webPage.openPage(url);
                 return  await callback();
-            } catch (t) {
-                if (Msg.startsWith(t, "PAGE_STATUS_CODE_ERROR")) {
+            } catch (ex) {
+                if (Msg.startsWith(ex, "PAGE_STATUS_CODE_ERROR")) {
                     job.page_load_failed_with_status_code_error = !0;
-                    const n = await callback();
+                    const nextCallbackResult = await callback();
                     if (job.retry || job.fingerprintCheckerDetected)
-                        return n;
+                        return nextCallbackResult;
                     delete job.page_load_failed_with_status_code_error;
-                    throw  t;
                 }
-                throw t;
+                throw ex;
             }
     }
 }
