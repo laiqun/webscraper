@@ -15,8 +15,8 @@ class JobRuntimeMetadata {
         this.proxyHasChanged = false;
     }
 
-    setDataExtractionDuration(e) {
-        this.dataExtractionDuration = e;
+    setDataExtractionDuration(duration) {
+        this.dataExtractionDuration = duration;
     }
 
     getDataExtractionDuration() {
