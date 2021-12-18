@@ -58,7 +58,8 @@ class SelectorGraphv2 {
 		const i = this.svg.selectAll("g.node").data(t, t => (void 0 === t.i && (t.i = t.id,
 			t.i = `${e.i}/${t.i}`), t.i));
 		const n = i.enter().append("svg:g").attr("class", "node").attr("transform", t => `translate(${e.y0},${e.x0})`).on("click", function (e) {
-			this.toggle(e), this.update(e);
+			this.toggle(e);
+			this.update(e);
 		}.bind(this));
 		n.append("svg:circle").attr("r", 1e-6).style("fill", this.getNodeColor.bind(this));
 		n.append("svg:text").attr("x", function (e) {
@@ -67,7 +68,8 @@ class SelectorGraphv2 {
 			return this.selectorHasChildren(e) ? "end" : "start";
 		}.bind(this)).text(e => e.id).style("fill-opacity", 1e-6);
 		const r = i.transition().duration(500).attr("transform", e => `translate(${e.y},${e.x})`);
-		r.select("circle").attr("r", 6).style("fill", this.getNodeColor.bind(this)), r.select("text").style("fill-opacity", 1);
+		r.select("circle").attr("r", 6).style("fill", this.getNodeColor.bind(this));
+		r.select("text").style("fill-opacity", 1);
 		const a = i.exit().transition().duration(500).attr("transform", t => `translate(${e.y},${e.x})`).remove();
 		a.select("circle").attr("r", 1e-6), a.select("text").style("fill-opacity", 1e-6);
 		const o = this.svg.selectAll("path.link").data(this.tree.links(t), e => e.target.i);
@@ -83,15 +85,16 @@ class SelectorGraphv2 {
 		}.bind(this)).transition().duration(500).attr("d", this.diagonal);
 		o.transition().duration(500).attr("d", this.diagonal);
 		o.exit().transition().duration(500).attr("d", function (t) {
-				const i = {
-					x: e.x,
-					y: e.y
-				};
-				return this.diagonal({
-					source: i,
-					target: i
-				});
-			}.bind(this)).remove(), t.forEach(e => {
+			const i = {
+				x: e.x,
+				y: e.y
+			};
+			return this.diagonal({
+				source: i,
+				target: i
+			});
+		}.bind(this)).remove();
+		t.forEach(e => {
 			e.x0 = e.x, e.y0 = e.y;
 		});
 	}
