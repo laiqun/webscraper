@@ -5,7 +5,7 @@ class SelectorElementScroll extends o.Selector {
         this.type = "SelectorElementScroll";
         this.selector = "";
         this.multiple = true;
-        this.delay = 2e3;
+        this.delay = 2000;
         this.scrollElementSelector = "";
         this.updateData(e);
     }

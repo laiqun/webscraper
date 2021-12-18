@@ -35,12 +35,14 @@ class ActionScrollDown extends o.Selector {
 	}
 
 	async isNeededElementVisible(e) {
-		if (!this.selectorScrollDownIfElementNotVisible) return !1;
+		if (!this.selectorScrollDownIfElementNotVisible)
+			return !1;
 		return !!(await e.getElements(this.selectorScrollDownIfElementNotVisible)).length;
 	}
 
 	async scrollDown(e) {
-		if (await this.isNeededElementVisible(e)) return;
+		if (await this.isNeededElementVisible(e))
+			return;
 		const t = !this.selectorScrollToElement;
 		if (this.selectorScrollElement) {
 			const i = await e.getElement(this.selectorScrollElement);

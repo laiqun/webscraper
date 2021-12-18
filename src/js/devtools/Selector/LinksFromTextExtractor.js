@@ -6,18 +6,20 @@ class LinksFromTextExtractor {
     }
 
     extract(e) {
-        if (!e) return [];
+        if (!e)
+            return [];
         const t = e.match(this.pattern);
-        if (!t) return [];
-        const i = [];
+        if (!t)
+            return [];
+        const result = [];
         for (const e of t) {
             const t = n(e);
             if (t && t.protocol && t.hostname) {
                 const t = r.Url.escapeWhiteSpace(e);
-                i.push(t);
+                result.push(t);
             }
         }
-        return i;
+        return result;
     }
 }
 

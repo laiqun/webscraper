@@ -6,36 +6,42 @@ import * as l from "./MicroDataExtractor.js"//const    l = i(393);
 //https://stackoverflow.com/questions/58510177/uncaught-syntaxerror-unexpected-token-reactjs-mainchunk-js
 class SchemaOrgExtractor extends o.BaseExtractor {
     async findRawData(e) {
-        const t = new s.JsonLdExtractor, i = await t.findRawData(e), n = new l.MicroDataExtractor,
-            r = await n.findRawData(e), o = [].concat(i, r), c = {}, u = [];
-        for (const e of o)
-            for (const t of e.data) {
-                const e = a.schemaOrg.getTypeFromDataObject(t);
-                if (e)
-                    if (void 0 !== c[e])
-                        c[e].data.push(t);
+        const jsonLdExtractor = new s.JsonLdExtractor;
+        const raw_data = await jsonLdExtractor.findRawData(e);
+        const microDataExtractor = new l.MicroDataExtractor;
+        const raw_data2 = await microDataExtractor.findRawData(e);
+        const raw_data_sum = [].concat(raw_data, raw_data2);
+        const mapdata = {};
+        const result = [];
+        for (const e of raw_data_sum)
+            for (const oneData of e.data) {
+                const schemaOrgType = a.schemaOrg.getTypeFromDataObject(oneData);
+                if (schemaOrgType)
+                    if (undefined !== mapdata[schemaOrgType])
+                        mapdata[schemaOrgType].data.push(oneData);
                     else {
-                        const i = a.schemaOrg.getSelectorsFromDataObject(t);
-                        c[e] = {
-                            dataObjectSelectors: i,
-                            schemaOrgType: e,
-                            data: [t]
-                        }, u.push(c[e]);
+                        const dataObjectSelectors = a.schemaOrg.getSelectorsFromDataObject(oneData);
+                        mapdata[schemaOrgType] = {
+                            dataObjectSelectors: dataObjectSelectors,
+                            schemaOrgType: schemaOrgType,
+                            data: [oneData]
+                        };
+                        result.push(mapdata[schemaOrgType]);
                     }
             }
-        return u;
+        return result;
     }
 
     async extractData(e, t, i) {
-        const n = await this.findRawData(e);
-        let a = [];
-        for (const e of n) {
+        const rcdata = await this.findRawData(e);
+        let result = [];
+        for (const e of rcdata) {
             if (e.schemaOrgType !== i)
                 continue;
             const n = r.DataObject.extractData(e.data, t);
-            a = a.concat(n);
+            result = result.concat(n);
         }
-        return a;
+        return result;
     }
 }
 

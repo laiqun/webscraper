@@ -1,8 +1,10 @@
 import * as n from "./SchemaOrgSchema.js"//const n = i(284);
 let schemaOrg = new class {
     constructor() {
-        this.basicTypes = [], this.ignoredTypes = ["Thing"], this.ignoredProperties = [],
-            this.initBasicTypes();
+        this.basicTypes = [];
+        this.ignoredTypes = ["Thing"];
+        this.ignoredProperties = [];
+        this.initBasicTypes();
     }
 
     getTypes() {
@@ -35,7 +37,8 @@ let schemaOrg = new class {
                     selector: i.concat([e]),
                     extract: !0
                 }); else {
-                    const a = t + e + "_", o = i.concat([e]), s = this.getSelectorsFromDataObject(n, a, o);
+                    const a = t + e + "_", o = i.concat([e]);
+                    const s = this.getSelectorsFromDataObject(n, a, o);
                     r = r.concat(s);
                 }
             }

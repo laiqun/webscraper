@@ -32,20 +32,23 @@ class BaseExtractor {
 	}
 
 	getDataObjectSelectorsFromDataObject(e, t = "", i = []) {
-		let n = [];
+		let result = [];
 		for (const r in e) {
 			const a = e[r];
-			if (Array.isArray(a) || "object" != typeof a) n.push({
-				key: t + r,
-				selector: i.concat([r]),
-				extract: !0
-			}); else {
-				const e = t + r + "_", o = i.concat([r]);
+			if (Array.isArray(a) || "object" != typeof a)
+				result.push({
+					key: t + r,
+					selector: i.concat([r]),
+					extract: !0
+				});
+			else {
+				const e = t + r + "_";
+				const o = i.concat([r]);
 				const s = this.getDataObjectSelectorsFromDataObject(a, e, o);
-				n = n.concat(s);
+				result = result.concat(s);
 			}
 		}
-		return n;
+		return result;
 	}
 }
 

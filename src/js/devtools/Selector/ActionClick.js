@@ -13,19 +13,19 @@ class ActionClick extends o.Selector {
     }
 
     canReturnMultipleRecords() {
-        return !1;
+        return false;
     }
 
     canHaveChildSelectors() {
-        return !0;
+        return true;
     }
 
     canCreateNewJobs() {
-        return !1;
+        return false;
     }
 
     willReturnElements() {
-        return !0;
+        return true;
     }
 
     getDataColumns() {
@@ -33,11 +33,11 @@ class ActionClick extends o.Selector {
     }
 
     async click(e) {
-        const t = await e.getElement(this.clickElementSelector);
-        if(null !== t )
+        const element = await e.getElement(this.clickElementSelector);
+        if(null !== element )
         {
-            await t.click("real-like-events");
-            await e.webPage.waitForPageLoadComplete(!0, this.delay);
+            await element.click("real-like-events");
+            await e.webPage.waitForPageLoadComplete(true, this.delay);
         }
     }
 

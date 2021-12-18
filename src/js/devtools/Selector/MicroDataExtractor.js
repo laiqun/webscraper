@@ -6,7 +6,8 @@ class MicroDataExtractor extends r.BaseExtractor {
     async findRawData(e) {
         const t = [], i = await e.getElements("[itemscope][itemtype]:not([itemprop])");
         for (const e of i) {
-            const i = await this.extractItemScopeData(e), n = this.getDataObjectSelectorsFromDataObjects([i]);
+            const i = await this.extractItemScopeData(e);
+            const n = this.getDataObjectSelectorsFromDataObjects([i]);
             t.push({
                 dataObjectSelectors: n,
                 data: [i]
@@ -16,17 +17,34 @@ class MicroDataExtractor extends r.BaseExtractor {
     }
 
     async extractItemScopeData(e) {
-        const t = {}, i = (await e.getAttr("itemtype")).replace("http://schema.org/", "");
+        const t = {};
+        const i = (await e.getAttr("itemtype")).replace("http://schema.org/", "");
         t["@type"] = i;
         const n = await this.getDirectChildElements(e, "> [itemprop]:not([itemscope]), > * [itemprop]:not([itemscope])", "> [itemscope] [itemprop]:not([itemscope]), > * [itemscope] [itemprop]:not([itemscope])");
         for (const e of n) {
-            const i = await e.getAttr("itemprop"), n = await this.getElementData(e, i);
-            void 0 === t[i] ? t[i] = n : (Array.isArray(t[i]) || (t[i] = [t[i]]), t[i].push(n));
+            const i = await e.getAttr("itemprop");
+            const n = await this.getElementData(e, i);
+            if(void 0 === t[i] )
+                t[i] = n;
+            else
+            {
+                if(!Array.isArray(t[i]))
+                    t[i] = [t[i]];
+                t[i].push(n);
+            }
         }
         const r = await this.getDirectChildElements(e, "> [itemscope], > * [itemscope]", "> [itemscope] [itemscope], > * [itemscope] [itemscope]");
         for (const e of r) {
-            const i = await this.extractItemScopeData(e), n = await e.getAttr("itemprop");
-            void 0 === t[n] ? t[n] = i : (Array.isArray(t[n]) || (t[n] = [t[n]]), t[n].push(i));
+            const i = await this.extractItemScopeData(e);
+            const n = await e.getAttr("itemprop");
+            if(void 0 === t[n] )
+                t[n] = i ;
+            else
+            {
+                if(!Array.isArray(t[n]) )
+                    t[n] = [t[n]];
+                t[n].push(i);
+            }
         }
         return t;
     }
@@ -50,7 +68,9 @@ class MicroDataExtractor extends r.BaseExtractor {
     }
 
     async getDirectChildElements(e, t, i) {
-        const n = await e.getElements(t), r = await e.getElements(i), a = [];
+        const n = await e.getElements(t);
+        const r = await e.getElements(i);
+        const result = [];
         for (const e of n) {
             let t = !1;
             for (const i of r)
@@ -59,9 +79,9 @@ class MicroDataExtractor extends r.BaseExtractor {
                     t = !0;
                     break;
                 }
-            t || a.push(e);
+            t || result.push(e);
         }
-        return a;
+        return result;
     }
 }
 

@@ -7,11 +7,16 @@ class LinkFromInlineScriptExtractor {
     async execute(e) {
         const t = await e.getNativeAttr("href"), i = await e.getNativeAttr("onclick");
         for (const e of [t, i]) {
-            if (!e) continue;
-            const t = [new r.LocationAssignmentOperatorMatcher, new s.LocationHrefAssignmentMatcher, new a.LocationAssignmentMatcher, new o.LocationReplacementMatcher];
+            if (!e)
+                continue;
+            const t = [new r.LocationAssignmentOperatorMatcher,
+                new s.LocationHrefAssignmentMatcher,
+                new a.LocationAssignmentMatcher,
+                new o.LocationReplacementMatcher];
             for (const i of t) {
                 const t = i.match(e);
-                if (t) return t;
+                if (t)
+                    return t;
             }
         }
     }
