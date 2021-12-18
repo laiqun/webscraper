@@ -1,5 +1,5 @@
 import * as a from "../../devtools/Selector/Url.js"//a = i(19),
-import {default as n} from "../../contentjs/log.js";//n = i(5),
+import {default as n} from "../../log/log.js";//n = i(5),
 import * as r from "./BaseWebNavigationEventListener.js"//const r = i(67);
 class WebNavigationEventListener extends r.BaseWebNavigationEventListener {
     constructor(e) {

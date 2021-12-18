@@ -1,5 +1,5 @@
-import * as a from "../devtools/Obj.js"//, a = i(57)
-import {default as o} from "../contentjs/log.js";//c = i(5),
+import * as a from "../common/Obj.js"//, a = i(57)
+import {default as o} from "../log/log.js";//c = i(5),
 import * as r from "../devtools/selector/UniqueElementList.js"
 
 class DataDeduplicator {

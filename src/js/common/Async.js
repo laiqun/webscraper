@@ -1,4 +1,4 @@
-import {default as logFunc} from "../contentjs/log.js";
+import {default as logFunc} from "../log/log.js";
 import {TimeoutError} from "./TimeoutError.js";
 
 class Async {

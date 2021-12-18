@@ -1,6 +1,6 @@
-import * as r from "../devtools/Str.js"//r = i(75),
+import * as r from "../common/Str.js"//r = i(75),
 import * as a from "../devtools/Selector/Url.js"//a = i(19),
-import {default as o} from "../contentjs/log.js";//o = i(5),
+import {default as o} from "../log/log.js";//o = i(5),
 class RobotsTxt {
     async getRobotsTextContent(e) {
         const page_url = await e.getPageUrl();

@@ -1,5 +1,5 @@
 import * as r from "./idb-keyval-iife.min.js"//const r = i(593);
-import {default as a} from "../../contentjs/log.js";//a = i(5),
+import {default as a} from "../../log/log.js";//a = i(5),
 
 class IndexedDBKeyValueStorage {
     async get(e, t) {

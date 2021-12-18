@@ -1,6 +1,6 @@
 import * as o from "./BaseMiddleware.js"//o = i(33)
-import {default as a} from "../../contentjs/log.js";//a = i(5),
-import * as r from "../../devtools/Async.js"//const r = i(22);
+import {default as a} from "../../log/log.js";//a = i(5),
+import * as r from "../../common/Async.js"//const r = i(22);
 class StopOnCaptchaMiddleware extends o.BaseMiddleware {
     constructor(e) {
         super();

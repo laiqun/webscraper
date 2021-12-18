@@ -1,5 +1,5 @@
 import * as n from "./BaseWebNavigationEventListener.js"//const n = i(67);
-import {default as r} from "../../contentjs/log.js";//r = i(5),
+import {default as r} from "../../log/log.js";//r = i(5),
 class GlobalTimeoutEventListener extends n.BaseWebNavigationEventListener {
     constructor() {
         super(...arguments);

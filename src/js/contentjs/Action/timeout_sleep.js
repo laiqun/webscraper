@@ -1,5 +1,5 @@
 //const i = n(3);
-import * as i from "../log.js"
+import * as i from "../../log/log.js"
 
 class TimeoutError extends Error {
 }

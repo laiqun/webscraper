@@ -1,5 +1,5 @@
-import {default as s} from "../../contentjs/log.js";//s = i(5),
-import * as a from "../../devtools/Async.js"//a = i(22),
+import {default as s} from "../../log/log.js";//s = i(5),
+import * as a from "../../common/Async.js"//a = i(22),
 import * as o from "../database/keyValueStorage.js"// o = i(591)
 import * as r from "axios/index"//const r = i(502) ;
 

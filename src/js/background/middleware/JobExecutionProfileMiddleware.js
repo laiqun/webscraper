@@ -1,5 +1,5 @@
 import * as a from "./BaseMiddleware.js"//a = i(33),
-import {default as r} from "../../contentjs/log.js";//r = i(5),
+import {default as r} from "../../log/log.js";//r = i(5),
     class JobExecutionProfileMiddleware extends a.BaseMiddleware {
         constructor(e, t) {
             super();

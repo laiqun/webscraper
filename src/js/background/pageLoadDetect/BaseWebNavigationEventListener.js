@@ -1,5 +1,5 @@
-import {default as n} from "../../contentjs/log.js";//n = i(5),
-import * as r from "../../devtools/Obj.js"// r = i(57);
+import {default as n} from "../../log/log.js";//n = i(5),
+import * as r from "../../common/Obj.js"// r = i(57);
 class BaseWebNavigationEventListener {
     constructor(e) {
         this.sharedState = e.sharedState;

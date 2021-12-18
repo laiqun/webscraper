@@ -1,6 +1,6 @@
-import {default as r} from "../../contentjs/log.js";//r = i(5),
+import {default as r} from "../../log/log.js";//r = i(5),
 import {default as o} from "../../contentjs/Msg.js"//o = i(17),
-import * as a from "../../devtools/Async.js"//a = i(22),
+import * as a from "../../common/Async.js"//a = i(22),
 class ChromeTabs {
     static get(tabId) {
         return new Promise((resolve, reject) => {

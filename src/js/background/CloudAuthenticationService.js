@@ -1,4 +1,4 @@
-import {default as r} from "../contentjs/log.js";//r = i(5),
+import {default as r} from "../log/log.js";//r = i(5),
 class CloudAuthenticationService {
     constructor() {
         this.handleExternalMessage = this.handleExternalMessage.bind(this);

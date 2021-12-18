@@ -1,7 +1,7 @@
 import * as r from "./BaseWebNavigationEventListener.js"//r = i(67),
 import {default as u} from "../../contentjs/Msg.js"//u = i(17),
-import {default as o} from "../../contentjs/log.js";//o = i(5),
-import * as a from "../../devtools/Async.js"//a = i(22),
+import {default as o} from "../../log/log.js";//o = i(5),
+import * as a from "../../common/Async.js"//a = i(22),
 import * as s from "../../devtools/Selector/Url.js"//s = i(19),
 import * as c from "../chromeOpt/ChromeTabs.js"//c = i(196),
 import * as l from "./ChromeTabStatus.js"//const     l = i(512);

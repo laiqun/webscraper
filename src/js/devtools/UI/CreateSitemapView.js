@@ -1,4 +1,4 @@
-import * as o from "../../contentjs/jquery.js" //o = i(65),
+import * as o from "../../common/jquery.js" //o = i(65),
 import * as s from "mobx-react/dist/index"//s = i(21),
 import * as l from "react"//l = i(0),
 import * as u from "./BaseComponent.js"//u = i(25),

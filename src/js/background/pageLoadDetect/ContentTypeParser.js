@@ -1,4 +1,4 @@
-import {default as n} from "../../contentjs/log.js";//n = i(5),
+import {default as n} from "../../log/log.js";//n = i(5),
 class ContentTypeParser {
     static isContentTypeUnknown(e) {
         if (!!e) {

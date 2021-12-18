@@ -4,7 +4,7 @@
 import * as a from "./Config.js"//a = i(542),
 import * as u from "./Scraper.js"//u = i(561),
 import * as y from "./chromeOpt/WebPageChromeTab.js"//    y = i(618),
-import {default as c} from "../contentjs/log.js";//c = i(5),
+import {default as c} from "../log/log.js";//c = i(5),
 import * as d from "../devtools/Sitemap.js"//d = i(119),
 import {default as C} from "../contentjs/Msg.js"//, C = i(17)
 import * as s from "../devtools/Selector/SchemaOrgExtractor.js"//s = i(218),

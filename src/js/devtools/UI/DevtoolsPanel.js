@@ -1,6 +1,6 @@
 //看起来像是引用了一堆UI库
 //function(e, t, i)  e 是exports t是export  i是导入其他模块
-import * as b from "../../contentjs/decorate_jquery.js"
+import * as b from "../../common/decorate_jquery.js"
 import * as d from "./EditSitemapSelectorView.js"//const d = i(690);
 import * as CreateSitemapView from "./CreateSitemapView.js"//s = i(679)
 import * as l from "./EditSitemapMetadataView.js"//l = i(683)

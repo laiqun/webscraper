@@ -1,6 +1,6 @@
-import {Async} from "../Async.js"
+import {Async} from "../../common/Async.js"
 import * as c from "./WebPageElement.js"
-import * as u from "../../contentjs/log.js"
+import * as u from "../../log/log.js"
 import {WebPageDriverType} from "./WebPageDriverType.js"
 
 let emptyRecordValue = null;

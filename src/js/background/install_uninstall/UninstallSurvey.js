@@ -1,4 +1,4 @@
-import {default as n} from "../../contentjs/log.js";//c = i(5),//const n = i(5);
+import {default as n} from "../../log/log.js";//c = i(5),//const n = i(5);
 class UninstallSurvey {
     constructor(e) {
         this.userSitemapCount = e.userSitemapCount;

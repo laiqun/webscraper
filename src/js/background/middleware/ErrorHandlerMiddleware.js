@@ -1,6 +1,6 @@
 import * as a from "./BaseMiddleware.js"//a = i(33),
 import {default as o} from "../../contentjs/Msg.js"//o = i(17),
-import {default as r} from "../../contentjs/log.js";//r = i(5),
+import {default as r} from "../../log/log.js";//r = i(5),
 class ErrorHandlerMiddleware extends a.BaseMiddleware {
     constructor(webpage, sitemap) {
         super();

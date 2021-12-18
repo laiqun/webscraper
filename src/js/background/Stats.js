@@ -1,5 +1,5 @@
-import {default as a} from "../contentjs/log.js";//a = i(5),
-import * as r from "../contentjs/jquery.js"//r = i(65),
+import {default as a} from "../log/log.js";//a = i(5),
+import * as r from "../common/jquery.js"//r = i(65),
 import * as o from "../devtools/Sitemap.js"//o = i(119),
 let Interval_Handle;
 

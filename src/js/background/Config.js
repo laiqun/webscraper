@@ -1,4 +1,4 @@
-import {default as o} from "../contentjs/log.js";//o = i(5),
+import {default as o} from "../log/log.js";//o = i(5),
 //import * as c from "../contentjs/IM/applyController.js"//c = i(122),
 import * as l from "../contentjs/HighlightOverly/Targets.js"//,  l = i(73);
 import * as s from "./database/storageTypes.js"

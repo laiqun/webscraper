@@ -1,5 +1,5 @@
-import {default as r} from "../../contentjs/log.js";//r = i(5),
-import * as o from "../../devtools/Async.js"//o = i(22),
+import {default as r} from "../../log/log.js";//r = i(5),
+import * as o from "../../common/Async.js"//o = i(22),
 import * as a from "./ContentScriptMessenger.js"//const  a = i(614);
 class TakesScreenShot extends a.ContentScriptMessenger {
     getScreenShotBase64() {

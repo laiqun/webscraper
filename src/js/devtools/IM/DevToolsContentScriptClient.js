@@ -2,7 +2,7 @@
 let DevToolsContentScriptClient = void 0;
 //const  a = i(17);//, o = i(196);
 
-import {default as r} from "../../contentjs/log.js"//r = i(5),
+import {default as r} from "../../log/log.js"//r = i(5),
 import * as s from "url-parse"//, s = i(48)
 import * as o from "../../background/chromeOpt/ChromeTabs.js" //o = i(196);
 import {default as a} from "../../contentjs/Msg.js"  //a = i(17)

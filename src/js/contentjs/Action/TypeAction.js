@@ -1,6 +1,6 @@
 //const r = n(35), i = n(3);
 import * as r from "../Extractor/ExtractorBase.js"
-import * as i from "../log.js"
+import * as i from "../../log/log.js"
 
 class TypeAction extends r.ExtractorBase { //输入的以上
     extract(refIndex, value) {

@@ -1,9 +1,9 @@
 let u = 0;
 import * as r from "../Job.js"//const r = i(500);
 import * as a from "./BaseMiddleware.js"//a = i(33),
-import {default as o} from "../../contentjs/log.js";//o = i(5),
+import {default as o} from "../../log/log.js";//o = i(5),
 import * as s from "../../devtools/Selector/Url.js"//s = i(19),
-import * as l from "../../devtools/Obj.js"//, l = i(57)
+import * as l from "../../common/Obj.js"//, l = i(57)
 import * as c from "../DataSizeLimitError.js"//,  c = i(499)
 class DataParserMiddleware extends a.BaseMiddleware {
     constructor(e) {

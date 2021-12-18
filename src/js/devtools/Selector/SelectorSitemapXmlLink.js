@@ -1,6 +1,6 @@
 import * as l from "./Selector.js"//, l = i(10)
-import {default as s} from "../../contentjs/log.js"//, s = i(5)
-import * as o from "../Str.js"//const o = i(75);
+import {default as s} from "../../log/log.js"//, s = i(5)
+import * as o from "../../common/Str.js"//const o = i(75);
 class SelectorSitemapXmlLink extends l.Selector {
     constructor(e) {
         super();

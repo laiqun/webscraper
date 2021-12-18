@@ -1,4 +1,4 @@
-import * as r from "../../log.js"
+import * as r from "../../../log/log.js"
 
 class i {
     static isContentTypeUnknown(e) {

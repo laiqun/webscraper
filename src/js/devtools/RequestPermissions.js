@@ -1,4 +1,4 @@
-import {default as r} from "../contentjs/log.js"//const r = i(5);
+import {default as r} from "../log/log.js"//const r = i(5);
 
 class RequestPermissions {
     static requestAdditionalPermissions() {

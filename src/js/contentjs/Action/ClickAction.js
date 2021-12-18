@@ -1,4 +1,4 @@
-import * as o from "../log.js"
+import * as o from "../../log/log.js"
 import * as i from "../Extractor/ExtractorBase.js"
 import * as a from "./ClickActionTypes.js"
 import * as s from "./timeout_sleep.js"

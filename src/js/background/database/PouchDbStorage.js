@@ -1,5 +1,5 @@
 import * as pouchDB from "pouchdb-browser"//r = i(565),
-import {default as o} from "../../contentjs/log.js";//o = i(5),
+import {default as o} from "../../log/log.js";//o = i(5),
 import * as a from "../../devtools/Sitemap.js"//a = i(119),
 import * as s from "./StoreScrapeResultWriter.js"//const   s = i(572);
 let PouchDB;

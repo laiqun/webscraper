@@ -1,5 +1,5 @@
 //75
-import * as n from "buffer"
+import * as n from "buffer/index"
 
 class Str {
     static slugify(e) {

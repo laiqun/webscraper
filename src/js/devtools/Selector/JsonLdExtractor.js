@@ -1,5 +1,5 @@
 import * as a from "./BaseExtractor.js"//, a = i(97)
-import * as r from "../Obj.js"//const r = i(57);
+import * as r from "../../common/Obj.js"//const r = i(57);
 class JsonLdExtractor extends a.BaseExtractor {
 	async extractData(e, t) {
 		return Promise.reject(new Error("extractData not implemented"));

@@ -8,7 +8,7 @@ var n = this && this.__decorate || function (e, t, i, n) {
 import * as r from "mobx-react/dist/index"//const r = i(21),
 import {BaseComponent} from "./BaseComponent.js"//a = i(25),
 import * as o from "react"//o = i(0)
-import * as s from "../Obj.js"//, s = i(57);
+import * as s from "../../common/Obj.js"//, s = i(57);
 let ValidationError = class extends BaseComponent {
     render() {
         const {validationErrors: e} = this.props.errorState;

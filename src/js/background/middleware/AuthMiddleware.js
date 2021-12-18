@@ -1,4 +1,4 @@
-import * as r from "../../devtools/Async.js"//r = i(22),
+import * as r from "../../common/Async.js"//r = i(22),
 import * as a from "./BaseMiddleware.js"//const a = i(33);
 class AuthMiddleware extends a.BaseMiddleware {
     constructor(webPage, sitemap) {

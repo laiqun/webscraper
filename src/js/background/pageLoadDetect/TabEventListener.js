@@ -1,4 +1,4 @@
-import {default as n} from "../../contentjs/log.js";//n = i(5),
+import {default as n} from "../../log/log.js";//n = i(5),
 import * as r from "./BaseWebNavigationEventListener.js"//const r = i(67);
 import * as a from "./TabEventListenerTabStatus.js"//a = i(599),
 import * as o from "./ChromeTabStatus.js"//const   o = i(512);

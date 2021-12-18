@@ -1,5 +1,5 @@
-import {default as a} from "../../contentjs/log.js";//a = i(5),
-import * as r from "../../devtools/Async.js"//r = i(22),
+import {default as a} from "../../log/log.js";//a = i(5),
+import * as r from "../../common/Async.js"//r = i(22),
 import * as c from "../../devtools/Selector/Url.js"//c = i(19),
 import * as h from "../UnrecoverablError.js"//, h = i(501)
 import * as d from "../blocker/Blocker.js"//, d = i(616)

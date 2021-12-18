@@ -1,6 +1,6 @@
-import {default as r} from "../../contentjs/log.js"
+import {default as r} from "../../log/log.js"
 import * as a from "../state/AppState.js"
-import * as Obj from "../Obj.js"
+import * as Obj from "../../common/Obj.js"
 import {default as msgProcess} from "../../contentjs/Msg.js"
 
 let backgroundPageClient = new class {

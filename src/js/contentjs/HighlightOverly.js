@@ -7,7 +7,7 @@ import * as UIFrame from "./HighlightOverly/UIFrame.js"
 import * as GetToggleMapping from "./HighlightOverly/getToggleMapping.js"
 import * as Coordinates from "./HighlightOverly/Coordinates.js"
 import * as HighlightManager from "./HighlightOverly/HighlightManager.js"
-import * as Log from "./log.js"
+import * as Log from "../log/log.js"
 import * as ElementQuery2 from "./ElementQuery2.js"
 import * as serviceFactory from "./IM/serviceFactory.js"
 

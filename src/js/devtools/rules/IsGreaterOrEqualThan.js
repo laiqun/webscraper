@@ -1,4 +1,4 @@
-import * as r from "../Str.js"//, r = i(75);
+import * as r from "../../common/Str.js"//, r = i(75);
 import {BaseValidator} from "./BaseValidator.js"//const n = i(421)
 
 class IsGreaterOrEqualThan extends BaseValidator {
