@@ -21,13 +21,15 @@ class Arr {
     }
 
     static randomElements(e, t) {
-        if (e.length <= t) return e;
-        const i = new Set, n = [];
+        if (e.length <= t)
+            return e;
+        const newSet = new Set;
+        const result = [];
         do {
             const t = Math.floor(Math.random() * e.length);
-            i.has(t) || (n.push(e[t]), i.add(t));
-        } while (n.length !== t);
-        return n;
+            newSet.has(t) || (result.push(e[t]), newSet.add(t));
+        } while (result.length !== t);
+        return result;
     }
 
     static exclude(e, t) {

@@ -6,31 +6,7 @@ var n = this && this.__decorate || function (e, t, i, n) {
 }, r = this && this.__metadata || function (e, t) {
     if ("object" == typeof Reflect && "function" == typeof Reflect.metadata) return Reflect.metadata(e, t);
 };
-/*a = this && this.__awaiter || function(e, t, i, n) {
-    return new (i || (i = Promise))((function(r, a) {
-        function o(e) {
-            try {
-                l(n.next(e));
-            } catch (e) {
-                a(e);
-            }
-        }
-        function s(e) {
-            try {
-                l(n.throw(e));
-            } catch (e) {
-                a(e);
-            }
-        }
-        function l(e) {
-            var t;
-            e.done ? r(e.value) : (t = e.value, t instanceof i ? t : new i((function(e) {
-                e(t);
-            }))).then(o, s);
-        }
-        l((n = n.apply(e, t || [])).next());
-    }));
-};*/
+
 
 import * as o from "mobx-react"//o = i(21),
 import * as s from "react"//s = i(0),
@@ -123,16 +99,16 @@ let SitemapScrapeView = class extends u.BaseComponent {
         this.setState({
             scrapingInProgress: true
         });
-        const t = this.props.appState.sitemap;
-        const i = {
-            sitemap: t,
+        const sitemap = this.props.appState.sitemap;
+        const scrapeInput = {
+            sitemap: sitemap,
             requestInterval: parseInt(this.state.requestInterval, 10),
             pageLoadDelay: parseInt(this.state.pageLoadDelay, 10)
         };
         await c.backgroundPageClient.incrementDailyStat("scrapingJobsRun", 1);
-        c.backgroundPageClient.scrape(i);
+        c.backgroundPageClient.scrape(scrapeInput);
         await l.Async.sleep(1000);
-        this.props.appState.goToSitemapBrowseData(t._id);
+        this.props.appState.goToSitemapBrowseData(sitemap._id);
     }
 };
 SitemapScrapeView = n([o.inject("appState", "errorState"), o.observer, r("design:paramtypes", [Object])], SitemapScrapeView);

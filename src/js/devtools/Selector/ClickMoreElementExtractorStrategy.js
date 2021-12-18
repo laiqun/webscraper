@@ -18,6 +18,7 @@ class ClickMoreElementExtractorStrategy extends l.BaseClickPaginationStrategy {
             await await r;
             deDuplicator.lastBatchIsDuplicate() && (await l.push(e));
         }
+        return l;
     }
 }
 

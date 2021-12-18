@@ -40,7 +40,14 @@ class SelectorList extends Array {
             return this;
         const func = function (e, i) {
             this.forEach(n => {
-                n.hasParentSelector(e) && (i.includes(n) || (i.push(n), func(n.id, i)));
+                if(n.hasParentSelector(e) )
+                {
+                    if(!i.includes(n) )
+                    {
+                        i.push(n);
+                        func(n.id, i);
+                    }
+                }
             });
         }.bind(this);
         const result = [];

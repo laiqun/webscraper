@@ -5,34 +5,7 @@ var n = this && this.__decorate || function (e, t, i, n) {
     return a > 3 && o && Object.defineProperty(t, i, o), o;
 }, r = this && this.__metadata || function (e, t) {
     if ("object" == typeof Reflect && "function" == typeof Reflect.metadata) return Reflect.metadata(e, t);
-}/*, a = this && this.__awaiter || function (e, t, i, n) {
-    return new (i || (i = Promise))((function (r, a) {
-        function o(e) {
-            try {
-                l(n.next(e));
-            } catch (e) {
-                a(e);
-            }
-        }
-
-        function s(e) {
-            try {
-                l(n.throw(e));
-            } catch (e) {
-                a(e);
-            }
-        }
-
-        function l(e) {
-            var t;
-            e.done ? r(e.value) : (t = e.value, t instanceof i ? t : new i((function (e) {
-                e(t);
-            }))).then(o, s);
-        }
-
-        l((n = n.apply(e, t || [])).next());
-    }));
-};*/
+}
 
 
 import * as o from "mobx-react"//const o = i(21),
@@ -42,7 +15,8 @@ import * as c from "./BaseComponent.js"// c = i(25),
 import * as u from "./SurveyButton.js"// u = i(715);
 let SitemapBrowseView = class extends c.BaseComponent {
     constructor(e) {
-        super(e), this.state = {
+        super(e);
+        this.state = {
             data: [],
             loading: !0,
             survey: void 0

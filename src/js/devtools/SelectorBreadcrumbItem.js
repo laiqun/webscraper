@@ -16,7 +16,8 @@ let SelectorBreadcrumbItem = class extends o.BaseComponent {
     }
 
     showChildSelectors() {
-        const e = this.props.index, t = this.props.appState.selectorBreadcrumb.length - e - 1;
+        const e = this.props.index;
+        const t = this.props.appState.selectorBreadcrumb.length - e - 1;
         this.props.appState.selectorBreadcrumb.splice(e + 1, t);
     }
 };

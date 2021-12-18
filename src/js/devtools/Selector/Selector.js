@@ -14,15 +14,15 @@ class Selector {
         return this.canReturnMultipleRecords() && this.multiple;
     }
 
-    updateData(e) {
-        let t = ["id", "type", "parentSelectors"];
-        t = t.concat(this.getFeatures());
-        for (const i in e)
-            if(t.includes(i))
-                this[i] = e[i];
+    updateData(selectorFeatures) {
+        let features = ["id", "type", "parentSelectors"];
+        features = features.concat(this.getFeatures());
+        for (const selectorFeaturesKey in selectorFeatures)
+            if(features.includes(selectorFeaturesKey))
+                this[selectorFeaturesKey] = selectorFeatures[selectorFeaturesKey];
             else
                 u.default.notice("configuring incorrect key for selector", {
-                key: i,
+                key: selectorFeaturesKey,
                 selector: JSON.stringify(this)
             });
     }

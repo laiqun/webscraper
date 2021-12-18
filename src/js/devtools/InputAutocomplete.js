@@ -4,14 +4,16 @@ import * as r from "./ConditionalElementBase.js"
 
 class InputAutocomplete extends r.ConditionalElementBase {
     constructor(e) {
-        super(e), this.state = {
+        super(e);
+        this.state = {
             suggestions: [],
             attributes: []
         };
     }
 
     _render() {
-        const {label: e, feature: t, placeholder: i} = this.props, n = this.props.selector[t];
+        const {label: e, feature: t, placeholder: i} = this.props;
+        const n = this.props.selector[t];
         return a.createElement("div", {
             className: "form-group"
         }, a.createElement("label", {
@@ -32,13 +34,13 @@ class InputAutocomplete extends r.ConditionalElementBase {
     }
 
     updateSuggestions(e) {
-        let t = this.state.attributes;
+        let attributes = this.state.attributes;
         if (e.length > 0) {
-            const i = new RegExp("^" + e, "i");
-            t = this.state.attributes.sort().filter(e => i.test(e));
+            const regx = new RegExp("^" + e, "i");
+            attributes = this.state.attributes.sort().filter(e => regx.test(e));
         }
         this.setState({
-            suggestions: t
+            suggestions: attributes
         });
     }
 

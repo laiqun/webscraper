@@ -4,7 +4,10 @@ class Loader extends r.BaseComponent {
     render() {
         return n.createElement("div", {
             className: "lds-ellipsis"
-        }, n.createElement("div", null), n.createElement("div", null), n.createElement("div", null), n.createElement("div", null));
+        }, n.createElement("div", null),
+            n.createElement("div", null),
+            n.createElement("div", null),
+            n.createElement("div", null));
     }
 }
 

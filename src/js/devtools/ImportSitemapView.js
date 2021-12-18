@@ -1,45 +1,20 @@
 "use strict";
-var n = this && this.__decorate || function (e, t, i, n) {
-    var r, a = arguments.length, o = a < 3 ? t : null === n ? n = Object.getOwnPropertyDescriptor(t, i) : n;
-    if ("object" == typeof Reflect && "function" == typeof Reflect.decorate) o = Reflect.decorate(e, t, i, n); else for (var s = e.length - 1; s >= 0; s--) (r = e[s]) && (o = (a < 3 ? r(o) : a > 3 ? r(t, i, o) : r(t, i)) || o);
-    return a > 3 && o && Object.defineProperty(t, i, o), o;
-}, r = this && this.__metadata || function (e, t) {
-    if ("object" == typeof Reflect && "function" == typeof Reflect.metadata) return Reflect.metadata(e, t);
-}/*, a = this && this.__awaiter || function (e, t, i, n) {
-    return new (i || (i = Promise))((function (r, a) {
-        function o(e) {
-            try {
-                l(n.next(e));
-            } catch (e) {
-                a(e);
-            }
-        }
-
-        function s(e) {
-            try {
-                l(n.throw(e));
-            } catch (e) {
-                a(e);
-            }
-        }
-
-        function l(e) {
-            var t;
-            e.done ? r(e.value) : (t = e.value, t instanceof i ? t : new i((function (e) {
-                e(t);
-            }))).then(o, s);
-        }
-
-        l((n = n.apply(e, t || [])).next());
-    }));
-};*/
-
-
-import * as o from "mobx-react"//o = i(21),
-import * as s from "react"//s = i(0),
-import * as u from "./BaseComponent.js"//, u = i(25)
-import * as c from "./backgroundPageClient.js"//, c = i(68)
-import * as l from "./Sitemap.js"//const  l = i(119);
+var n = this && this.__decorate || function(e, t, i, n) {
+        var r, a = arguments.length,
+            o = a < 3 ? t : null === n ? n = Object.getOwnPropertyDescriptor(t, i) : n;
+        if ("object" == typeof Reflect && "function" == typeof Reflect.decorate) o = Reflect.decorate(e, t, i, n);
+        else
+            for (var s = e.length - 1; s >= 0; s--)(r = e[s]) && (o = (a < 3 ? r(o) : a > 3 ? r(t, i, o) : r(t, i)) || o);
+        return a > 3 && o && Object.defineProperty(t, i, o), o;
+    },
+    r = this && this.__metadata || function(e, t) {
+        if ("object" == typeof Reflect && "function" == typeof Reflect.metadata) return Reflect.metadata(e, t);
+    };
+import * as o from "mobx-react" //o = i(21),
+import * as s from "react" //s = i(0),
+import * as u from "./BaseComponent.js" //, u = i(25)
+import * as c from "./backgroundPageClient.js" //, c = i(68)
+import * as l from "./Sitemap.js" //const  l = i(119);
 let ImportSitemapView = class extends u.BaseComponent {
     constructor(e) {
         super(e);
@@ -103,7 +78,7 @@ let ImportSitemapView = class extends u.BaseComponent {
     }
 
     render() {
-        const {sitemapJSON: e, _id: t} = this.state;
+        const { sitemapJSON: e, _id: t } = this.state;
         return s.createElement("div", {
             ref: e => this.el = e
         }, s.createElement("form", {
@@ -152,20 +127,23 @@ let ImportSitemapView = class extends u.BaseComponent {
     }
 
     async importSitemap(e) {
-        if (e.stopPropagation(), e.preventDefault(), !this.isValidForm())
+        e.stopPropagation();
+        e.preventDefault();
+        if ( !this.isValidForm())
             return false;
-        const t = this.state.sitemapJSON;
-        const i = this.state._id;
-        const n = new l.Sitemap(JSON.parse(t));
-        i.length && (n._id = i);
-        if (await c.backgroundPageClient.sitemapExists(n._id)) {
+        const sitemapJSON = this.state.sitemapJSON;
+        const _id = this.state._id;
+        const sitemap = new l.Sitemap(JSON.parse(sitemapJSON));
+        if (_id.length)
+            sitemap._id = _id;
+        if (await c.backgroundPageClient.sitemapExists(sitemap._id)) {
             this.getFormValidator().updateStatus("_id", "INVALID", "callback");
         } else {
             await c.backgroundPageClient.incrementDailyStat("sitemapsImported", 1);
-            this.props.appState.createSitemap(n);
+            this.props.appState.createSitemap(sitemap);
         }
     }
 };
 ImportSitemapView = n([o.inject("appState"), o.observer, r("design:paramtypes", [Object])], ImportSitemapView);
 
-export {ImportSitemapView}
+export { ImportSitemapView }

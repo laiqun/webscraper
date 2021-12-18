@@ -4,35 +4,6 @@ var n = this && this.__decorate || function (e, t, i, n) {
     if ("object" == typeof Reflect && "function" == typeof Reflect.decorate) o = Reflect.decorate(e, t, i, n); else for (var s = e.length - 1; s >= 0; s--) (r = e[s]) && (o = (a < 3 ? r(o) : a > 3 ? r(t, i, o) : r(t, i)) || o);
     return a > 3 && o && Object.defineProperty(t, i, o), o;
 };
-/*, r = this && this.__awaiter || function (e, t, i, n) {
-    return new (i || (i = Promise))((function (r, a) {
-        function o(e) {
-            try {
-                l(n.next(e));
-            } catch (e) {
-                a(e);
-            }
-        }
-
-        function s(e) {
-            try {
-                l(n.throw(e));
-            } catch (e) {
-                a(e);
-            }
-        }
-
-        function l(e) {
-            var t;
-            e.done ? r(e.value) : (t = e.value, t instanceof i ? t : new i((function (e) {
-                e(t);
-            }))).then(o, s);
-        }
-
-        l((n = n.apply(e, t || [])).next());
-    }));
-};*/
-
 
 import * as o from "react"//o = i(0),
 import * as a from "mobx-react"//a = i(21),

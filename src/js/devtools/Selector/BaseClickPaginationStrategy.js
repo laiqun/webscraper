@@ -3,7 +3,8 @@ class BaseClickPaginationStrategy extends r.BasePaginationStrategy {
     async getClickButton(e, t, i) {
         const n = await e.getElements(t);
         for (const e of n) {
-            if (!(await i.isElementAdded(e))) return e;
+            if (!(await i.isElementAdded(e)))
+                return e;
         }
     }
 

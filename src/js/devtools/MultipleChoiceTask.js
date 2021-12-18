@@ -19,9 +19,9 @@ class MultipleChoiceTask extends react.Component {
     }
 
     updateAnswer(e) {
-        const {value: t} = e.currentTarget;
-        const {name: i} = this.props.task;
-        this.props.updateAnswer(i, t);
+        const {value: value} = e.currentTarget;
+        const {name: name} = this.props.task;
+        this.props.updateAnswer(name, value);
     }
 }
 

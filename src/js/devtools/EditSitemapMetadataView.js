@@ -1,45 +1,24 @@
 "use strict";
-var n = this && this.__decorate || function (e, t, i, n) {
-    var r, a = arguments.length, o = a < 3 ? t : null === n ? n = Object.getOwnPropertyDescriptor(t, i) : n;
-    if ("object" == typeof Reflect && "function" == typeof Reflect.decorate) o = Reflect.decorate(e, t, i, n); else for (var s = e.length - 1; s >= 0; s--) (r = e[s]) && (o = (a < 3 ? r(o) : a > 3 ? r(t, i, o) : r(t, i)) || o);
-    return a > 3 && o && Object.defineProperty(t, i, o), o;
-}, r = this && this.__metadata || function (e, t) {
-    if ("object" == typeof Reflect && "function" == typeof Reflect.metadata) return Reflect.metadata(e, t);
-}/*, a = this && this.__awaiter || function(e, t, i, n) {
-        return new (i || (i = Promise))((function(r, a) {
-            function o(e) {
-                try {
-                    l(n.next(e));
-                } catch (e) {
-                    a(e);
-                }
-            }
-            function s(e) {
-                try {
-                    l(n.throw(e));
-                } catch (e) {
-                    a(e);
-                }
-            }
-            function l(e) {
-                var t;
-                e.done ? r(e.value) : (t = e.value, t instanceof i ? t : new i((function(e) {
-                    e(t);
-                }))).then(o, s);
-            }
-            l((n = n.apply(e, t || [])).next());
-        }));
+var n = this && this.__decorate || function(e, t, i, n) {
+        var r, a = arguments.length,
+            o = a < 3 ? t : null === n ? n = Object.getOwnPropertyDescriptor(t, i) : n;
+        if ("object" == typeof Reflect && "function" == typeof Reflect.decorate) o = Reflect.decorate(e, t, i, n);
+        else
+            for (var s = e.length - 1; s >= 0; s--)(r = e[s]) && (o = (a < 3 ? r(o) : a > 3 ? r(t, i, o) : r(t, i)) || o);
+        return a > 3 && o && Object.defineProperty(t, i, o), o;
+    },
+    r = this && this.__metadata || function(e, t) {
+        if ("object" == typeof Reflect && "function" == typeof Reflect.metadata) return Reflect.metadata(e, t);
     };
-    */
 import * as mobx_react from "mobx-react" //const o = i(21),
-import * as react from "react"//s = i(0),
-import * as l from "./backgroundPageClient.js"//l = i(68),
-import * as c from "./BaseComponent.js"//c = i(25),
-import * as u from "./StartUrl.js"// u = i(525);
+import * as react from "react" //s = i(0),
+import * as l from "./backgroundPageClient.js" //l = i(68),
+import * as c from "./BaseComponent.js" //c = i(25),
+import * as u from "./StartUrl.js" // u = i(525);
 let EditSitemapMetadataView = class extends c.BaseComponent {
     constructor(e) {
         super(e);
-        const {startUrl: t} = e.appState.sitemap;
+        const { startUrl: t } = e.appState.sitemap;
         let i = [];
         i = Array.isArray(t) ? t.length > 0 ? t : [""] : [t], this.state = {
             _id: e.appState.sitemap._id,
@@ -145,7 +124,10 @@ let EditSitemapMetadataView = class extends c.BaseComponent {
     }
 
     async saveSitemap(e) {
-        if (e.preventDefault(), e.stopPropagation(), !this.isValidForm()) return !1;
+        e.preventDefault();
+        e.stopPropagation();
+        if (!this.isValidForm())
+            return !1;
         if (this.state._id !== this.props.appState.sitemap._id) {
             if (await l.backgroundPageClient.sitemapExists(this.state._id)) {
                 return void this.getFormValidator().updateStatus("_id", "INVALID", "callback");
@@ -156,4 +138,4 @@ let EditSitemapMetadataView = class extends c.BaseComponent {
 };
 EditSitemapMetadataView = n([mobx_react.inject("appState"), mobx_react.observer, r("design:paramtypes", [Object])], EditSitemapMetadataView);
 
-export {EditSitemapMetadataView}
+export { EditSitemapMetadataView }
