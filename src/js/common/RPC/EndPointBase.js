@@ -1,4 +1,4 @@
-import * as Actions from "./Actions.js"
+import * as Actions from "../Actions.js"
 import * as inBackgroundContext from "./inBackgroundContext.js"
 import * as InternalRuntime from "./InternalRuntime.js"
 /*

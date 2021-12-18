@@ -14,7 +14,7 @@ import * as WaitForPageLoadAction from "../contentjs/Action/WaitForPageLoadActio
 import * as DownloadUrlAction from "../contentjs/Action/DownloadUrlAction.js";
 import * as ClickActionTypes from "../contentjs/Action/ClickActionTypes.js"
 import * as scrool from "../contentjs/Action/scrool.js"
-import * as jquery from "../common/jquery.js";
+import * as jquery from "../common/lib/jquery.js";
 import * as _ from "../contentjs/Extractor/allAttributeExtractor.js"
 /*
 * 这个文件有3个功能

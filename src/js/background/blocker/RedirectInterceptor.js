@@ -1,6 +1,6 @@
 import * as a from "../chromeOpt/ChromeTabs.js"//a = i(196),
 import * as o from "../pageLoadDetect/TabNetworkStatusListener.js"//o = i(511),
-import * as s from "../../devtools/Async.js"//s = i(22),
+import * as s from "../../common/Async.js"//s = i(22),
 import * as r from "../../contentjs/Action/ClickActionTypes.js"//r = i(83),
 class RedirectInterceptor{
     constructor(e) {

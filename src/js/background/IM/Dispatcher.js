@@ -1,5 +1,5 @@
 import * as o from "../../contentjs/HighlightOverly/Targets.js"//,  o = i(73);
-import * as r from "../../contentjs/IM/Actions.js"//r = i(27),
+import * as r from "../../common/Actions.js"//r = i(27),
 import * as a from "../Errors.js"//const a = i(625);
 class Dispatcher {
     constructor(tab_id, backgroundPorts) {

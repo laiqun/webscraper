@@ -1,5 +1,5 @@
-import * as i from "./Msg.js"
-import * as jqueryModule from "./jquery.js"
+import * as i from "../common/Msg.js"
+import * as jqueryModule from "../common/lib/jquery.js"
 
 let instance = null;
 

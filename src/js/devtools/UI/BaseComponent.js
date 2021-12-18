@@ -1,5 +1,5 @@
 import * as r from "react"//r = i(0),
-import * as n from "../../common/jquery.js"//n = i(65),
+import * as n from "../../common/lib/jquery.js"//n = i(65),
 class BaseComponent extends r.Component {
 	handleInputChange(e) {
 		const target = e.target;

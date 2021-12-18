@@ -1,6 +1,6 @@
 import * as buffer from "buffer"
 import * as ExtractorBase from "./ExtractorBase.js"
-import * as Msg from "../Msg.js"
+import * as Msg from "../../common/Msg.js"
 
 class ScriptRunner extends ExtractorBase.ExtractorBase {
     async extract(t, n) {

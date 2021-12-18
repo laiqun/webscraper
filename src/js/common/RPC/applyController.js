@@ -1,5 +1,5 @@
 import * as InComing from "./Incoming.js"
-import * as Actions from "./Actions.js"
+import * as Actions from "../Actions.js"
 //其实要实现的是RPC远程函数调用
 let applyController = function (name) {
     return baseClass => class extends baseClass {

@@ -1,6 +1,6 @@
 //const i = n(39), o = n(13), s = n(15);
-import * as Actions from "./Actions.js"
-import * as Msg from "../../contentjs/Msg.js"
+import * as Actions from "../Actions.js"
+import * as Msg from "../Msg.js"
 import * as EndPointBase from "./EndPointBase.js"
 
 /*

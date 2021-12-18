@@ -4,14 +4,14 @@
 //     y = i(524);
 import * as mobx_react_router from "mobx-react-router/types" //s = i(680)
 import * as errorState from "./errorState.js" // y = i(524);
-import * as Sitemap from "../Sitemap.js" //c = i(119)
+import * as Sitemap from "../../common/Sitemap.js" //c = i(119)
 import * as backgroundPageClient from "../IM/backgroundPageClient.js" //u = i(68)
 import * as mobx from 'mobx/dist/mobx' //o = i(13),
 import * as selectorFactory from "../SelectorOpt/selectorFactory.js" //d = i(94)
 import * as RequestPermissions from "../RequestPermissions.js" //p = i(220),
 import * as SitemapSync from "./SitemapSync.js" //h = i(681),
 import * as DevToolsContentScriptClient from "../IM/DevToolsContentScriptClient.js" // f = i(221),
-import {default as Msg} from "../../contentjs/Msg.js" //m = i(17),
+import {default as Msg} from "../../common/Msg.js" //m = i(17),
 import * as AppHistory from "./AppHistory.js" //g = i(682),
 // o是mobx
 //s是 mobx-react-router

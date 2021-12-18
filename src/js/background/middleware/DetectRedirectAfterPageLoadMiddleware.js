@@ -1,4 +1,4 @@
-import {default as a} from "../../contentjs/Msg.js"//a = i(17),
+import {default as a} from "../../common/Msg.js"//a = i(17),
 import {default as o} from "../../log/log.js";//o = i(5),
 import * as r from "./BaseMiddleware.js"//const r = i(33);
 class DetectRedirectAfterPageLoadMiddleware extends r.BaseMiddleware {

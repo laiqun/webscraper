@@ -9,9 +9,9 @@ import * as Coordinates from "./HighlightOverly/Coordinates.js"
 import * as HighlightManager from "./HighlightOverly/HighlightManager.js"
 import * as Log from "../log/log.js"
 import * as ElementQuery2 from "./ElementQuery2.js"
-import * as serviceFactory from "./IM/serviceFactory.js"
+import * as serviceFactory from "../common/RPC/serviceFactory.js"
 
-import {applyController} from "./IM/applyController.js";
+import {applyController} from "../common/RPC/applyController.js";
 import {Targets} from "./HighlightOverly/Targets.js"
 
 class HighlightOverlay {

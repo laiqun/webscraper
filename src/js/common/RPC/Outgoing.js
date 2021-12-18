@@ -1,5 +1,5 @@
-import * as EndpointBase from "./EndpointBase.js"
-import * as Actions from "./Actions.js"
+import * as EndpointBase from "./EndPointBase.js"
+import * as Actions from "../Actions.js"
 /*
 *     OutGoing,InComing  <- Actions
 *                        <- EndpointBase <- inBackGroundContext

@@ -1,6 +1,6 @@
 import {default as a} from "../log/log.js";//a = i(5),
-import * as r from "../common/jquery.js"//r = i(65),
-import * as o from "../devtools/Sitemap.js"//o = i(119),
+import * as r from "../common/lib/jquery.js"//r = i(65),
+import * as o from "../common/Sitemap.js"//o = i(119),
 let Interval_Handle;
 
 class Stats {

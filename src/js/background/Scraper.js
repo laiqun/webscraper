@@ -1,7 +1,7 @@
 import * as browser from "process/browser"
 import {default as a} from "../log/log.js";//a = i(5),
 import * as r from "../common/Async.js"//r = i(22),
-import {default as o} from "../contentjs/Msg.js"//o = i(17),
+import {default as o} from "../common/Msg.js"//o = i(17),
 import * as s from "./UnrecoverablError.js"//const   s = i(501);
 
 class Scraper {
