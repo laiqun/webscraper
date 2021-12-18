@@ -1,6 +1,6 @@
 import * as o from "../../contentjs/cssSelector.js"//o = i(123),
 import * as s from "./Selector.js"//const  s = i(10);
-import * as l from "../emptyRecordValue.js"//, l = i(29)
+import * as l from "./emptyRecordValue.js"//, l = i(29)
 class SelectorTable extends s.Selector {
     constructor(e) {
         super();

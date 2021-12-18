@@ -1,6 +1,6 @@
 import * as u from "../devtools/Obj.js"//, u = i(57)
 import * as l from "./DataSizeLimitError.js"//, l = i(499)
-import * as a from "../devtools/SelectorList.js"//a = i(215),
+import * as a from "../devtools/SelectorOpt/SelectorList.js"//a = i(215),
 import * as o from "../devtools/Sitemap.js"//o = i(119),
 import * as s from "./WebPageElement.js"// s = i(93),
 import * as c from "./DataDeduplicator.js"//const   c = i(543);

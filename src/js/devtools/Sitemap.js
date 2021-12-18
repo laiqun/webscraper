@@ -1,7 +1,7 @@
 import * as n from "./CSV.js" //n = i(415),
-import * as a from "./selectorFactory.js" //a = i(94),
+import * as a from "./SelectorOpt/selectorFactory.js" //a = i(94),
 import * as l from "./Selector/Url.js" //  , l = i(19)
-import * as r from "./SelectorList.js" //r = i(215),
+import * as r from "./SelectorOpt/SelectorList.js" //r = i(215),
 import * as o from "./Obj.js"//o = i(57),
 import crypto from "crypto-browserify" //const     s = i(140);
 

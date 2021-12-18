@@ -1,6 +1,6 @@
 // const a = i(10), o = i(29);
 import * as a from "./Selector.js"//a = i(10),
-import * as o from "../emptyRecordValue.js"//o = i(29);
+import * as o from "./emptyRecordValue.js"//o = i(29);
 class SelectorText extends a.Selector {
     constructor(e) {
         super();

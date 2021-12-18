@@ -49,7 +49,8 @@ class Arr {
     }
 
     static delete(e, t) {
-        return e.splice(e.indexOf(t), 1), e;
+        e.splice(e.indexOf(t), 1);
+        return  e;
     }
 }
 

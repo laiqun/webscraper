@@ -3,23 +3,23 @@
 
 import * as a from "./Config.js"//a = i(542),
 import * as u from "./Scraper.js"//u = i(561),
-import * as y from "./WebPageChromeTab.js"//    y = i(618),
+import * as y from "./chromeOpt/WebPageChromeTab.js"//    y = i(618),
 import {default as c} from "../contentjs/log.js";//c = i(5),
 import * as d from "../devtools/Sitemap.js"//d = i(119),
 import {default as C} from "../contentjs/Msg.js"//, C = i(17)
 import * as s from "../devtools/Selector/SchemaOrgExtractor.js"//s = i(218),
-import * as f from "./PouchDbStorage.js"//    f = i(564),
-import * as S from "./FirstTimeInstall.js"//    S = i(626),
-import * as b from "./UninstallSurvey.js"// b = i(621),
+import * as f from "./database/PouchDbStorage.js"//    f = i(564),
+import * as S from "./install_uninstall/FirstTimeInstall.js"//    S = i(626),
+import * as b from "./install_uninstall/UninstallSurvey.js"// b = i(621),
 import * as v from "./RobotsTxt.js"//    v = i(622),
 import * as A from "./CloudAuthenticationService.js"//A = i(628),
 import * as h from "./Stats.js"//    h = i(562),
-import * as p from "./BrowserPouchDbStorage.js"//    p = i(563),
+import * as p from "./database/BrowserPouchDbStorage.js"//    p = i(563),
 import * as o from "./DataExtractor2.js"//    o = i(498),
-import * as l from "./ChromeTabMiddlewareHandler.js"//    l = i(544),
-import * as m from "./SurveyClient.js"//    m = i(573),
-import * as g from "./ChromeClient.js"//g = i(595),
-import * as w from "./MessageManager.js"//    w = i(623),
+import * as l from "./middleware/ChromeTabMiddlewareHandler.js"//    l = i(544),
+import * as m from "./install_uninstall/SurveyClient.js"//    m = i(573),
+import * as g from "./chromeOpt/ChromeClient.js"//g = i(595),
+import * as w from "./IM/MessageManager.js"//    w = i(623),
 import * as M from "./CloudApiClient.js"//  M = i(629);
 class BackgroundScript {
     constructor() {

@@ -1,4 +1,4 @@
-import * as r from "../emptyRecordValue.js"//, r = i(29)
+import * as r from "./emptyRecordValue.js"//, r = i(29)
 import * as n from "js-yaml" //const n = i(261);
 class DataObject {
 	static serializeValue(e) {

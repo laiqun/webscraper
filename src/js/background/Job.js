@@ -1,7 +1,7 @@
 class Job {
     constructor(e) {
         if(undefined !== e.parentJob )
-            this.url = this.combineUrls(e.parentJob.url, e.url)
+            this.url = this.combineUrls(e.parentJob.url, e.url);
         else
         {
             this.url = e.url;
@@ -39,7 +39,7 @@ class Job {
     }
 
     getTimeAvailableAt() {
-        return this.timeAvailableAt ? 1e3 * this.timeAvailableAt : Date.now();
+        return this.timeAvailableAt ? 1000 * this.timeAvailableAt : Date.now();
     }
 
     hasFailed() {

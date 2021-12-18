@@ -1,5 +1,5 @@
 import * as a from "./Selector.js"//    const a = i(10)
-import * as o from "../emptyRecordValue.js"//, o = i(29);
+import * as o from "./emptyRecordValue.js"//, o = i(29);
 class SelectorScriptData extends a.Selector {
     constructor(e) {
         super();

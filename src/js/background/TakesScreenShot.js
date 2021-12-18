@@ -1,6 +1,6 @@
 import {default as r} from "../contentjs/log.js";//r = i(5),
 import * as o from "../devtools/Async.js"//o = i(22),
-import * as a from "./ContentScriptMessenger.js"//const  a = i(614);
+import * as a from "./IM/ContentScriptMessenger.js"//const  a = i(614);
 class TakesScreenShot extends a.ContentScriptMessenger {
     getScreenShotBase64() {
         const promise_item = new Promise((resolve, reject) => {

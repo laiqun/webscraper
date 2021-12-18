@@ -28,7 +28,7 @@ class Async {
         try {
             return await Promise.race(promise_array).then(args => (clearTimeout(timeout_handle), args));
         } catch (except) {
-            clearTimeout(timeout_handle)
+            clearTimeout(timeout_handle);
             throw  except;
         }
     }
