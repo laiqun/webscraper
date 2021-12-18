@@ -1,5 +1,5 @@
-import * as r from "./BaseMiddleware.js"//    const r = i(33);
-class DataStorageMiddleware extends r.BaseMiddleware {
+import {BaseMiddleware} from "./BaseMiddleware.js"//    const r = i(33);
+class DataStorageMiddleware extends BaseMiddleware {
     constructor(storage) {
         super();
         this.storage = storage;

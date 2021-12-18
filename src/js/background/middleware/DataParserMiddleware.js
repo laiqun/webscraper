@@ -1,11 +1,11 @@
-let u = 0;
-import * as r from "../Job.js"//const r = i(500);
-import * as a from "./BaseMiddleware.js"//a = i(33),
+let order = 0;
+import {Job} from "../Job.js"//const r = i(500);
+import {BaseMiddleware} from "./BaseMiddleware.js"//a = i(33),
 import {default as o} from "../../log/log.js";//o = i(5),
 import * as s from "../../devtools/Selector/Url.js"//s = i(19),
 import * as l from "../../common/Obj.js"//, l = i(57)
 import * as c from "../DataSizeLimitError.js"//,  c = i(499)
-class DataParserMiddleware extends a.BaseMiddleware {
+class DataParserMiddleware extends BaseMiddleware {
     constructor(e) {
         super();
         this.jobDataSizeLimit = 26214400;
@@ -44,34 +44,34 @@ class DataParserMiddleware extends a.BaseMiddleware {
         return tx;
     }
 
-    extractData(e, t, i) {
+    extractData(nextCallbackData, jobBaseData, jobURL) {
         const now_time = Math.round(Date.now() / 1000);
         const sitemap = this.sitemap;
         const result = [];
-        for (const o of e) {
-            for (const e in t)
-                if(undefined === o[e] )
-                    o[e] = t[e];
-            if(!this.recordCanHaveChildJobs(o, sitemap) )
+        for (const nextCallbackItem of nextCallbackData) {
+            for (const e in jobBaseData)
+                if(undefined === nextCallbackItem[e] )
+                    nextCallbackItem[e] = jobBaseData[e];
+            if(!this.recordCanHaveChildJobs(nextCallbackItem, sitemap) )
             {
-                delete o._follow;
-                delete o._followSelectorId;
-                delete o._deduplicateFirstPageData;
-                o["web-scraper-order"] = `${now_time}-${++u}`;
-                this.checkDataSize(o, i);
-                result.push(o);
+                delete nextCallbackItem._follow;
+                delete nextCallbackItem._followSelectorId;
+                delete nextCallbackItem._deduplicateFirstPageData;
+                nextCallbackItem["web-scraper-order"] = `${now_time}-${++order}`;
+                this.checkDataSize(nextCallbackItem, jobURL);
+                result.push(nextCallbackItem);
             }
         }
         return result;
     }
 
-    extractNewJobs(e, t, i) {
+    extractNewJobs(nextCallbackData, jobBaseData, job) {
         const n = this.sitemap;
         const result = [];
-        for (const c of e) {
-            for (const e in t)
+        for (const c of nextCallbackData) {
+            for (const e in jobBaseData)
                 if(undefined === c[e])
-                    c[e] = t[e];
+                    c[e] = jobBaseData[e];
             if (this.recordCanHaveChildJobs(c, n)) {
                 const e = c._follow;
                 const t = c._followSelectorId;
@@ -83,17 +83,17 @@ class DataParserMiddleware extends a.BaseMiddleware {
                     continue;
                 if (!s.Url.isValidUrlOrUrlPart(e))
                     continue;
-                const job = new r.Job({
+                const job = new Job({
                     url: e,
                     parentSelector: t,
-                    parentJob: i,
+                    parentJob: job,
                     baseData: c,
                     deduplicateFirstPageData: n
                 });
                 const protocol = new URL(job.url).protocol;
                 if("http:" === protocol || "https:" === protocol )
                 {
-                    this.checkDataSize(c, i.url);
+                    this.checkDataSize(c, job.url);
                     result.push(job);
                 }
                 else

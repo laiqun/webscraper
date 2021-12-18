@@ -1,6 +1,6 @@
-import * as r from "../../common/Async.js"//r = i(22),
-import * as a from "./BaseMiddleware.js"//const a = i(33);
-class AuthMiddleware extends a.BaseMiddleware {
+import {Async} from "../../common/Async.js"//r = i(22),
+import {BaseMiddleware} from "./BaseMiddleware.js"//const a = i(33);
+class AuthMiddleware extends BaseMiddleware {
     constructor(webPage, sitemap) {
         super();
         this.webPage = webPage;
@@ -18,7 +18,7 @@ class AuthMiddleware extends a.BaseMiddleware {
         const webPage = this.webPage;
         const auth = sitemap.auth;
         await webPage.openPage(auth.url);
-        await r.Async.sleep(5000);
+        await Async.sleep(5000);
         if (await this.isLoggedIn())
             return;
         for (const inputElement of auth.input) {

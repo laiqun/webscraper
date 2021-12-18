@@ -12,7 +12,8 @@ class DetectRedirectAfterPageLoadMiddleware extends r.BaseMiddleware {
             try {
                 return await callback();
             } catch (t) {
-                if (a.startsWith(t, "ACCESSING_UNDEFINED_ELEMENT") || a.startsWith(t, "FAILED_TO_CONNECT_TO_CHROME_TAB")) {
+                if (a.startsWith(t, "ACCESSING_UNDEFINED_ELEMENT") ||
+                    a.startsWith(t, "FAILED_TO_CONNECT_TO_CHROME_TAB")) {
                     let t = await this.webPage.getPageLoadState();
                     if (t.redirectedAfterPageLoadComplete) {
                         await this.webPage.waitForPageLoadComplete();

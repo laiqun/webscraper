@@ -1,6 +1,6 @@
-import * as r from "./BaseMiddleware.js"//r = i(33)
-import {default as a} from "../../common/Msg.js"//a = i(17),
-class PageLoadMiddleware extends r.BaseMiddleware {
+import {BaseMiddleware} from "./BaseMiddleware.js"//r = i(33)
+import {default as Msg} from "../../common/Msg.js"//a = i(17),
+class PageLoadMiddleware extends BaseMiddleware {
     constructor(webPage) {
         super();
         this.webPage = webPage;
@@ -12,7 +12,7 @@ class PageLoadMiddleware extends r.BaseMiddleware {
                 await this.webPage.openPage(url);
                 return  await callback();
             } catch (t) {
-                if (a.startsWith(t, "PAGE_STATUS_CODE_ERROR")) {
+                if (Msg.startsWith(t, "PAGE_STATUS_CODE_ERROR")) {
                     job.page_load_failed_with_status_code_error = !0;
                     const n = await callback();
                     if (job.retry || job.fingerprintCheckerDetected)

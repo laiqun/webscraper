@@ -1,7 +1,7 @@
-import * as o from "./BaseMiddleware.js"//o = i(33)
-import {default as a} from "../../log/log.js";//a = i(5),
-import * as r from "../../common/Async.js"//const r = i(22);
-class StopOnCaptchaMiddleware extends o.BaseMiddleware {
+import {BaseMiddleware} from "./BaseMiddleware.js"//o = i(33)
+import {default as log} from "../../log/log.js";//a = i(5),
+import {Async} from "../../common/Async.js"//const r = i(22);
+class StopOnCaptchaMiddleware extends BaseMiddleware {
     constructor(webPage) {
         super();
         this.webPage = webPage;
@@ -24,9 +24,9 @@ class StopOnCaptchaMiddleware extends o.BaseMiddleware {
     async handle(job, jobRuntimeInfo, callback) {
         let exx = await this.pageHasCaptcha();
         if (exx) {
-            a.info("Page has captcha. Waiting for user to resolve it");
+            log.info("Page has captcha. Waiting for user to resolve it");
             do {
-                await r.Async.sleep(1000);
+                await Async.sleep(1000);
                 exx = await this.pageHasCaptcha();
             } while (exx);
         }

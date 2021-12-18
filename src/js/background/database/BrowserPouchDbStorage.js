@@ -11,9 +11,9 @@ class BrowserPouchDbStorage {
         return undefined === this.urlsAddedToQueue[e] && null === e.match(/\.(doc|docx|pdf|ppt|pptx|odt)$/i);
     }
 
-    async updateJob(e) {
-        await this.dataWriter.writeDocs(e.data);
-        for (const job of e.newJobs)
+    async updateJob(job) {
+        await this.dataWriter.writeDocs(job.data);
+        for (const job of job.newJobs)
             this.addJob(job);
     }
 

@@ -1,6 +1,6 @@
-import * as a from "./BaseMiddleware.js"//a = i(33),
-import {default as r} from "../../log/log.js";//r = i(5),
-    class JobExecutionProfileMiddleware extends a.BaseMiddleware {
+import {BaseMiddleware} from "./BaseMiddleware.js"//a = i(33),
+import {default as log} from "../../log/log.js";//r = i(5),
+    class JobExecutionProfileMiddleware extends BaseMiddleware {
         constructor(webPage, sitemap) {
             super();
             this.webPage = webPage;
@@ -10,8 +10,8 @@ import {default as r} from "../../log/log.js";//r = i(5),
                 job.timeStarted = Date.now();
                 const result = await callback();
                 job.timeFinished = (new Date).getTime();
-                job.executed = !0;
-                const a = {
+                job.executed = true;
+                const jobInfo = {
                     execution: job.timeFinished - job.timeStarted,
                     getData: jobRuntimeInfo.getDataExtractionDuration(),
                     url: job.url,
@@ -21,13 +21,13 @@ import {default as r} from "../../log/log.js";//r = i(5),
                     logType: "JOB_STAT"
                 };
                 if(job.hasFailed() )
-                    r.notice("Job failed", Object.assign(Object.assign({}, a), {
+                    log.notice("Job failed", Object.assign(Object.assign({}, jobInfo), {
                         error: job.error_message
                     }));
                 else if(job.isEmpty() && !job.isKnownEmpty() )
-                    r.notice("Job is empty", a);
+                    log.notice("Job is empty", jobInfo);
                 else
-                    r.info("Job OK", a);
+                    log.info("Job OK", jobInfo);
                 return result;
         }
     }

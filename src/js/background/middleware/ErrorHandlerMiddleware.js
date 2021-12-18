@@ -1,7 +1,7 @@
-import * as a from "./BaseMiddleware.js"//a = i(33),
-import {default as o} from "../../common/Msg.js"//o = i(17),
-import {default as r} from "../../log/log.js";//r = i(5),
-class ErrorHandlerMiddleware extends a.BaseMiddleware {
+import {BaseMiddleware} from "./BaseMiddleware.js"//a = i(33),
+import {default as Msg} from "../../common/Msg.js"//o = i(17),
+import {default as log} from "../../log/log.js";//r = i(5),
+class ErrorHandlerMiddleware extends BaseMiddleware {
     constructor(webPage, sitemap) {
         super();
         this.reduceSeverityForStartsWith = ["PAGE_REQUEST_ERROR",
@@ -19,7 +19,7 @@ class ErrorHandlerMiddleware extends a.BaseMiddleware {
             "CDP_FETCH_CLIENT_ERROR", "CHROME_TAB_CRASHED",
             "FAILED_TO_CONNECT_TO_CHROME_TAB",
             "STATE_SETUP_ERROR",
-            "WAIT_FOR_ROOT_ELEMENT_TIMEOUT"],
+            "WAIT_FOR_ROOT_ELEMENT_TIMEOUT"];
             this.reduceSeverityForIncludes = ["PAGE_LOAD_TIMEOUT",
                 "tabStatusLoadedPromise",
                 "tabNetworkStatusLoadedPromise",
@@ -35,12 +35,12 @@ class ErrorHandlerMiddleware extends a.BaseMiddleware {
             try {
                 return await callback();
             } catch (t) {
-                if (o.startsWith(t, "CHROME_WINDOW_CLOSED"))
+                if (Msg.startsWith(t, "CHROME_WINDOW_CLOSED"))
                     throw "CHROME_WINDOW_CLOSED";
                 const sitemap = this.sitemap;
                 const webPage = this.webPage;
-                const message = o.getMessage(t);
-                const s = {
+                const message = Msg.getMessage(t);
+                const jobInfo = {
                     url: job.url,
                     parentSelector: job.parentSelector,
                     sitemapName: sitemap._id,
@@ -48,12 +48,12 @@ class ErrorHandlerMiddleware extends a.BaseMiddleware {
                     error: message,
                     stack: t.stack
                 };
-                if(!o.startsWithAnyOf(t, this.reduceSeverityForStartsWith) )
-                    if(!o.includesAnyOf(t, this.reduceSeverityForIncludes) )
+                if(!Msg.startsWithAnyOf(t, this.reduceSeverityForStartsWith) )
+                    if(!Msg.includesAnyOf(t, this.reduceSeverityForIncludes) )
                     {
-                        r.error("Job execution failed with unknown error", s);
-                        job.markAsFailed(message);
+                        log.error("Job execution failed with unknown error", jobInfo);
                     }
+                job.markAsFailed(message);
             }
     }
 }

@@ -31,14 +31,12 @@ class logHandler {
         this.proxyServiceType = e;
     }
     log(level, rawmsg, outputMsg, timestamp) {
-        let url ;
         timestamp || (timestamp = Math.round(Date.now() / 1000));
-        url = outputMsg.url;
-        outputMsg.url = (url!=null)&&(url!==undefined)? url: this.url;
-        if (undefined !== outputMsg.url) {
-            const e = URLParse(outputMsg.url);
-            outputMsg.domainName = e.hostname;
-        }
+        if(outputMsg.url == null || outputMsg.url==undefined)
+            outputMsg.url = this.url;
+
+        const parsedURL = URLParse(outputMsg.url);
+        outputMsg.domainName = parsedURL.hostname;
         outputMsg.timestamp = timestamp;
         outputMsg.level_name = level;
         outputMsg.message = rawmsg;

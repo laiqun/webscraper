@@ -1,5 +1,5 @@
-import * as r from "./BaseMiddleware.js"//r = i(33)
-class RetryMiddleware extends r.BaseMiddleware {
+import {BaseMiddleware} from "./BaseMiddleware.js"//r = i(33)
+class RetryMiddleware extends BaseMiddleware {
     async handle(job, jobRuntimeInfo, callback) {
             let tx = await callback();
             if(job.retry)

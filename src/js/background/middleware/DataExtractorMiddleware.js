@@ -1,6 +1,6 @@
-import * as a from "./BaseMiddleware.js"//, a = i(33)
-import * as r from "../DataExtractor2.js"//const r = i(498);
-class DataExtractorMiddleware extends a.BaseMiddleware {
+import {BaseMiddleware}from "./BaseMiddleware.js"//, a = i(33)
+import {DataExtractor2} from "../DataExtractor2.js"//const r = i(498);
+class DataExtractorMiddleware extends BaseMiddleware {
     constructor(webPage, sitemap) {
         super();
         this.webPage = webPage;
@@ -15,7 +15,7 @@ class DataExtractorMiddleware extends a.BaseMiddleware {
         const parentSelector = job.parentSelector;
         const webPage = this.webPage;
         const rootElement = await webPage.getRootElement();
-        const c = new r.DataExtractor2({
+        const c = new DataExtractor2({
             sitemap: sitemap,
             parentSelectorId: parentSelector,
             parentElement: rootElement,

@@ -1,5 +1,5 @@
-import * as r from "./BaseMiddleware.js"//r = i(33)
-class StatsMiddleware extends r.BaseMiddleware {
+import {BaseMiddleware} from "./BaseMiddleware.js"//r = i(33)
+class StatsMiddleware extends BaseMiddleware {
     constructor(stats) {
         super();
         this.stats = stats;
