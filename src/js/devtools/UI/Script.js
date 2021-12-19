@@ -1,7 +1,7 @@
 import * as react from "react"//, r = i(0),
 import * as o from "./ConditionalElementBase.js"//, o = i(26);
 import * as n from "prismjs"//n = i(697),//https://ian.pvdindustrial.com/blog/prismjs-npm-webpack-wordpress-theme-20180920/
-import * as a from "react-simple-code-editor/index"//const  a = i(698)
+import * as a from "react-simple-code-editor"//const  a = i(698)
 class Script extends o.ConditionalElementBase {
     _render() {
         const {onChange: e, selector: t} = this.props, i = t.script || "";

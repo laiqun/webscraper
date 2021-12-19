@@ -4,7 +4,7 @@ var n = this && this.__decorate || function (e, t, i, n) {
     return a > 3 && o && Object.defineProperty(t, i, o), o;
 };
 
-import * as r from "mobx-react/dist/index"//const r = i(21),
+import * as r from "mobx-react"//const r = i(21),
 import * as a from "react"//a = i(0),
 import * as o from "./BaseComponent.js"//o = i(25);
 let SelectorBreadcrumbItem = class extends o.BaseComponent {

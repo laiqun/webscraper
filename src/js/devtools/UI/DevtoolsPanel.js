@@ -18,10 +18,10 @@ import * as g from "./SitemapListView.js"//     g = i(722),
 import * as y from "./SitemapScrapeView.js"//     y = i(727)
 import "../../../css/devtools.css"
 import "bootstrap"// i(734);
-import "./bootstrapValidator.min.js"//i(747);
+import "./lib/bootstrapValidator.min.js"//i(747);
 import * as v from "./WebSiteSetupView.js"//const v = i(748);
 import * as w from "./BackgroundScriptErrorMessageAlert.js"//, w = i(749)
-import * as S from "./UI/CloudAuthModal.js"//, S = i(750)
+import * as S from "./CloudAuthModal.js"//, S = i(750)
 class DevtoolsPanel extends react.Component {
     /*
     * <div>

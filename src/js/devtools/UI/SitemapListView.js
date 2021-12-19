@@ -7,7 +7,7 @@ var n = this && this.__decorate || function (e, t, i, n) {
 };
 
 
-import * as a from "mobx-react/dist/index"//const a = i(21),
+import * as a from "mobx-react"//const a = i(21),
 import * as react from "react"//o = i(0)
 import * as s from "react"//, s = i(0),
 import * as l from "./SitemapListItem.js"//  l = i(723),

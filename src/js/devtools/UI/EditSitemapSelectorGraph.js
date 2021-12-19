@@ -1,4 +1,4 @@
-import * as r from "mobx-react/dist/index"//r = i(21),
+import * as r from "mobx-react"//r = i(21),
 import * as a from "react"//a = i(0),
 import * as s from "./BaseComponent.js"//, s = i(25)
 import * as o from "../SelectorOpt/SelectorGraphv2.js" //    const  o = i(685);

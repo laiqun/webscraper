@@ -2,11 +2,11 @@
 //appState = t.AppState = void 0;  //main
 //const /**/ /*, mobx-react-router */ /*, , , */
 //     y = i(524);
-import * as mobx_react_router from "mobx-react-router/types" //s = i(680)
+import * as mobx_react_router from "mobx-react-router" //s = i(680)
 import * as errorState from "./errorState.js" // y = i(524);
 import * as Sitemap from "../../common/Sitemap.js" //c = i(119)
 import * as backgroundPageClient from "../IM/backgroundPageClient.js" //u = i(68)
-import * as mobx from 'mobx/dist/mobx' //o = i(13),
+import * as mobx from 'mobx' //o = i(13),
 import * as selectorFactory from "../SelectorOpt/selectorFactory.js" //d = i(94)
 import * as RequestPermissions from "../RequestPermissions.js" //p = i(220),
 import * as SitemapSync from "./SitemapSync.js" //h = i(681),

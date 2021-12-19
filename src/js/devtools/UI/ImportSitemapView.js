@@ -10,7 +10,7 @@ var n = this && this.__decorate || function(e, t, i, n) {
     r = this && this.__metadata || function(e, t) {
         if ("object" == typeof Reflect && "function" == typeof Reflect.metadata) return Reflect.metadata(e, t);
     };
-import * as o from "mobx-react/dist/index" //o = i(21),
+import * as o from "mobx-react" //o = i(21),
 import * as s from "react" //s = i(0),
 import * as u from "./BaseComponent.js" //, u = i(25)
 import * as c from "../IM/backgroundPageClient.js" //, c = i(68)

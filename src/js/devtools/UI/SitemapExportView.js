@@ -5,7 +5,7 @@ var n = this && this.__decorate || function (e, t, i, n) {
 };
 
 
-import * as r from "mobx-react/dist/index"//r = i(21),
+import * as r from "mobx-react"//r = i(21),
 import * as react from "react"//const  a = i(0),
 import {BaseComponent} from "./BaseComponent.js"//o = i(25);
 let SitemapExportView = class extends BaseComponent {

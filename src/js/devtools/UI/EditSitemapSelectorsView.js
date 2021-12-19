@@ -6,7 +6,7 @@ var n = this && this.__decorate || function (e, t, i, n) {
 };
 
 import * as o from "react"//o = i(0),
-import * as a from "mobx-react/dist/index"//a = i(21),
+import * as a from "mobx-react"//a = i(21),
 import * as s from "./BaseComponent.js" //s = i(25),
 import * as l from "./SelectorBreadcrumbItem.js"//l = i(688),
 import * as c from "./SelectorRow.js"//const     c = i(689);

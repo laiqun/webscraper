@@ -1,5 +1,5 @@
 import * as o from "../../common/lib/jquery.js" //o = i(65),
-import * as s from "mobx-react/dist/index"//s = i(21),
+import * as s from "mobx-react"//s = i(21),
 import * as l from "react"//l = i(0),
 import * as u from "./BaseComponent.js"//u = i(25),
 import * as c from "../IM/backgroundPageClient.js"//const c = i(68),

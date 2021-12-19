@@ -1,4 +1,4 @@
-import * as a from "mobx-react/dist/index"//const a = i(21),
+import * as a from "mobx-react"//const a = i(21),
 import * as o from "react" //o = i(0),
 import * as s from "./BaseComponent.js"//s = i(25),
 import * as l from "../RequestPermissions.js"//l = i(220),

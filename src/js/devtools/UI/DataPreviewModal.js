@@ -1,4 +1,4 @@
-import * as a from "mobx-react/dist/index"//a = i(21),
+import * as a from "mobx-react"//a = i(21),
 import * as r from "../../common/lib/jquery.js"//r = i(65),
 import * as o from "react"//o = i(0),
 import * as s from "../Arr.js"//const   s = i(87);

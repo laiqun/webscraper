@@ -1,4 +1,4 @@
-import * as a from "mobx-react/dist/index"//const a = i(21),
+import * as a from "mobx-react"//const a = i(21),
 import * as react from "react"// o = i(0),
 import * as s from "../state/syncStateProperties.js"//const s = i(724);
 var n = this && this.__decorate || function (e, t, i, n) {
@@ -9,11 +9,12 @@ var n = this && this.__decorate || function (e, t, i, n) {
 
 let SitemapListItem = class extends react.Component {
 	render() {
+		console.log("sitemaplist ");
 		const {sitemap: e} = this.props;
 		if (this.props.appState.sitemapSyncEnabled)
 			return this.getSitemapRowWithSyncEnabled(e);
 		else
-			this.getSitemapRow(e);
+			return this.getSitemapRow(e);
 	}
 
 	editSitemap(e) {

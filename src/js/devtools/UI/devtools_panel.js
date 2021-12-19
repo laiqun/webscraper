@@ -25,8 +25,8 @@ Redux是Facebook提出一个数据状态管理的库，也可以说框架。它�
 //30分钟极速通关react mobx react-router及打通springboot 十分钟mobx入门 //https://mobx.js.org/getting-started.html  https://zh.mobx.js.org/getting-started.html
 //https://blog.csdn.net/ixygj197875/article/details/79249752  es6 core-decorators.js
 //http://react-guide.github.io/react-router-cn/index.html
-import * as mobx from 'mobx/dist/mobx'  //mobx 是i(13)   //i(13) 也是mobx相关
-import * as mobx_react from 'mobx-react/dist/index'//r = i(21),
+import * as mobx from 'mobx'  //mobx 是i(13)   //i(13) 也是mobx相关
+import * as mobx_react from 'mobx-react'//r = i(21),
 import * as react_dom from "react-dom"//o = i(11)
 import * as bgClient from "../IM/backgroundPageClient.js"
 import * as appState from "../state/AppState.js" //u = i(522)

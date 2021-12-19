@@ -1,4 +1,4 @@
-import * as s from "mobx-react/dist/index"//s = i(21),  s = i(21),
+import * as s from "mobx-react"//s = i(21),  s = i(21),
 import * as l from "../../common/lib/jquery.js"//l = i(65),
 import * as a from "react" //a = i(0),
 import * as o from "./BaseComponent.js"//const  o = i(25);

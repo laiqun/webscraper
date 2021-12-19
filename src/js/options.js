@@ -31,7 +31,6 @@ class optionsClass {
     render() {
         let app = document.getElementById("app");
         app.innerHTML = "";
-
         let control_parent = document.createElement("div");
         let header = document.createElement("h1");
         header.innerText = "Web crawler setting";

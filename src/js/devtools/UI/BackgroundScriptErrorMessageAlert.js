@@ -1,6 +1,6 @@
 import * as r from "react"//r = i(0),
 import * as a from "./BaseComponent.js"//a = i(25)
-import * as o from "mobx-react/dist/index"//const , o = i(21),
+import * as o from "mobx-react"//const , o = i(21),
 import * as s from "../../common/Obj.js"//s = i(57);
 var n = this && this.__decorate || function (e, t, i, n) {
     var r, a = arguments.length, o = a < 3 ? t : null === n ? n = Object.getOwnPropertyDescriptor(t, i) : n;

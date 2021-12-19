@@ -8,7 +8,7 @@ var n = this && this.__decorate || function (e, t, i, n) {
 }
 
 
-import * as o from "mobx-react/dist/index"//const o = i(21),
+import * as o from "mobx-react"//const o = i(21),
 import * as s from "react"// s = i(0),
 import * as l from "../IM/backgroundPageClient.js"// l = i(68),
 import * as c from "./BaseComponent.js"// c = i(25),

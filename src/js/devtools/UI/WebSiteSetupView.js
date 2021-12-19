@@ -7,7 +7,7 @@ var r = this && this.__metadata || function (e, t) {
     if ("object" == typeof Reflect && "function" == typeof Reflect.metadata) return Reflect.metadata(e, t);
 };  //限制输入参数类型的
 
-import * as o from "mobx-react/dist/index"//const o = i(21)
+import * as o from "mobx-react"//const o = i(21)
 import * as s from "react"//s = i(0),
 import * as l from "./BaseComponent.js"//l = i(25)
 import * as c from "../IM/DevToolsContentScriptClient.js"//, c = i(221);

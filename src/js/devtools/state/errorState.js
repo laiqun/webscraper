@@ -1,4 +1,4 @@
-import * as mobx from 'mobx/dist/mobx'
+import * as mobx from 'mobx'
 
 class ErrorState {
     constructor() {

@@ -1,5 +1,5 @@
 import * as o from "react"//o = i(0),//o = i(0),
-import * as a from "mobx-react/dist/index"//a = i(21),
+import * as a from "mobx-react"//a = i(21),
 
 import * as s from "react-router-dom"//react-router //const   s = i(775);
 var n = this && this.__decorate || function (e, t, i, n) {

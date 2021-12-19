@@ -27,7 +27,7 @@ var options = {
 	content_script:path.join(__dirname, "src", "js", "content_script.js"),
 	frame:path.join(__dirname, "src", "js", "frame.js"),
 	devtools_init:path.join(__dirname, "src", "js", "devtools_init.js"),
-	devtools_panel:path.join(__dirname, "src", "js","devtools", "devtools_panel.js"),	
+	devtools_panel:path.join(__dirname, "src", "js","devtools","UI","devtools_panel.js"),	
   },
   chromeExtensionBoilerplate: {
     notHotReload: ["content_script"]
