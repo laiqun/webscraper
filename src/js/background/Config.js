@@ -44,18 +44,19 @@ let Config = class {
         return Promise.resolve(this.fields[e]);
     }
 
-    async set(e, t) {
+    async set(key, value) {
         if(undefined === this.fields )
             await this.loadConfiguration();
         return  new Promise(resolve => {
             chrome.storage.sync.set({
-                [e]: t
+                [key]: value
             }, () => {
                 const lastError = chrome.runtime.lastError;
-                lastError && o.error("Couldn't set config value", {
-                    error: lastError.toString()
-                });
-                this.fields[e] = t;
+                if(lastError)
+                    o.error("Couldn't set config value", {
+                        error: lastError.toString()
+                    });
+                this.fields[key] = value;
                 this.onUpdate();
                 resolve();
             });
