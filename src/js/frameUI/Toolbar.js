@@ -1,62 +1,64 @@
-import * as i from "react"
+import * as React from "react"
 import {applyController} from "../common/RPC/applyController.js";
-import * as o  from "../contentjs/HighlightOverly/Targets.js"
-import * as u from "../common/RPC/serviceFactory.js"
-import * as c  from "../contentjs/HighlightOverly/keyEventHandler"
-import {Targets} from "../contentjs/HighlightOverly/Targets";
-class Toolbar extends i.Component {
-	constructor(e, t) {
-		super(e, t);
+import {Targets} from "../contentjs/HighlightOverly/Targets.js"
+import {serviceFactory}from "../common/RPC/serviceFactory.js"
+import {keyEventHandler} from "../contentjs/HighlightOverly/keyEventHandler"
+
+class Toolbar extends React.Component {
+	constructor(props, context) {
+		super(props, context);
 		this.keysDisabledMessage = "Click here to enable hotkeys";
-		this.highlightOverlayService = u.serviceFactory(o.Targets.highlightOverlay);
-		this.selectionService = u.serviceFactory(o.Targets.selection);
+		this.highlightOverlayService = serviceFactory(Targets.highlightOverlay);
+		this.selectionService = serviceFactory(Targets.selection);
 		this.onSelectParent = this.onSelectParent.bind(this);
 		this.onSelectChild = this.onSelectChild.bind(this);
 		this.onSelectElement = this.onSelectElement.bind(this);
 		this.handleFocusChange = this.handleFocusChange.bind(this);
 		this.onFocus = this.onFocus.bind(this);
 		this.onBlur = this.onBlur.bind(this);
-		this.keyDownHandler = c.keyEventHandler({
+		this.keyDownHandler = keyEventHandler({
 			KeyP: this.onSelectParent,
 			KeyC: this.onSelectChild,
 			KeyS: this.onSelectElement
 		});
 		this.state = {
 			selector: "",
-			joinSelectAllowed: !1,
-			keyBoardEventsEnabled: !0,
-			parentHasFocus: !1,
-			uiHasFocus: !1
+			joinSelectAllowed: false,
+			keyBoardEventsEnabled: true,
+			parentHasFocus: false,
+			uiHasFocus: false
 		};
 		this.onSubmit = this.onSubmit.bind(this);
 	}
 
 	componentDidMount() {
-		this.toggleBaseEvents(!0);
+		this.toggleBaseEvents(true);
 		this.setState({
 			notification: this.keysDisabledMessage
 		});
 	}
 
 	componentWillUnmount() {
-		this.toggleBaseEvents(!1);
+		this.toggleBaseEvents(false);
 	}
 
 	render() {
-		const {notification: e} = this.state;
-		const t = undefined !== e;
-		return i.createElement("div", {
+		const {notification: note} = this.state;
+		const notificationNotUDF = undefined !== note;
+		return React.createElement("div", {
 			className: "toolbar-container panel panel-default"
-		}, i.createElement("div", {
-			className: "panel-body"
-		}, t && this.notification, !t && this.selectorInput, !t && this.controls,
-			i.createElement("div", {
-			className: "col-xs-4 container submit-container"
-		}, i.createElement("button", {
-			id: "submit-selector",
-			className: "btn btn-success",
-			onClick: this.onSubmit
-		}, "Done selecting"))));
+		}, React.createElement("div", {
+				className: "panel-body"
+			}, notificationNotUDF && this.notification,
+			!notificationNotUDF && this.selectorInput,
+			!notificationNotUDF && this.controls,
+			React.createElement("div", {
+				className: "col-xs-4 container submit-container"
+			}, React.createElement("button", {
+				id: "submit-selector",
+				className: "btn btn-success",
+				onClick: this.onSubmit
+			}, "Done selecting"))));
 	}
 
 	setSelector(e) {
@@ -64,7 +66,7 @@ class Toolbar extends i.Component {
 			selector: e,
 			notification: void 0
 		});
-		return  Promise.resolve();
+		return Promise.resolve();
 	}
 
 	setNotification(e) {
@@ -76,34 +78,34 @@ class Toolbar extends i.Component {
 
 	changeInFocus(e) {
 		this.handleFocusChange(e, this.state.uiHasFocus);
-		return  Promise.resolve();
+		return Promise.resolve();
 	}
 
 	get notification() {
-		return i.createElement("div", {
+		return React.createElement("div", {
 			className: "col-xs-8 container alert-container",
 			onClick: () => this.setState({
 				notification: void 0
 			})
-		}, i.createElement("div", {
+		}, React.createElement("div", {
 			className: "alert alert-info"
-		}, i.createElement("span", null, this.state.notification)));
+		}, React.createElement("span", null, this.state.notification)));
 	}
 
 	get selectorInput() {
-		return i.createElement("div", {
+		return React.createElement("div", {
 			className: "col-xs-5 container selector-container"
-		}, i.createElement("input", {
+		}, React.createElement("input", {
 			id: "active-selection",
 			className: "form-control",
-			disabled: !0,
+			disabled: true,
 			type: "text",
 			value: this.state.selector
 		}));
 	}
 
 	get controls() {
-		return i.createElement("div", {
+		return React.createElement("div", {
 			id: "dom-controls",
 			tabIndex: 0,
 			className: "col-xs-3 container"
@@ -111,16 +113,19 @@ class Toolbar extends i.Component {
 	}
 
 	get keyboardControls() {
-		return i.createElement("div", null,
+		return React.createElement("div", null,
 			this.renderDOMControl("parent", "P",
-				"Press P to select parent element", this.onSelectParent), this.renderDOMControl("child", "C", "Press C to select child element", this.onSelectChild), this.renderDOMControl("element", "S", "Press S to select hovered element", () => {
-		}, !0));
+				"Press P to select parent element", this.onSelectParent),
+			this.renderDOMControl("child", "C", "Press C to select child element",
+				this.onSelectChild), this.renderDOMControl("element", "S",
+				"Press S to select hovered element", () => {
+				}, true));
 	}
 
 	renderDOMControl(id, content, title, onClick, disabled) {
-		return i.createElement("div", {
+		return React.createElement("div", {
 			className: "col-xs-4 container dom-control-container"
-		}, i.createElement("button", {
+		}, React.createElement("button", {
 			id: "select-" + id,
 			className: "btn btn-primary",
 			title: title,
@@ -129,11 +134,11 @@ class Toolbar extends i.Component {
 		}, content));
 	}
 
-	toggleBaseEvents(e) {
-		const t = e ? "addEventListener" : "removeEventListener";
-		window[t]("focus", this.onFocus);
-		window[t]("blur", this.onBlur);
-		document[t]("keydown", this.keyDownHandler);
+	toggleBaseEvents(enable) {
+		const funcName = enable ? "addEventListener" : "removeEventListener";
+		window[funcName]("focus", this.onFocus);
+		window[funcName]("blur", this.onBlur);
+		document[funcName]("keydown", this.keyDownHandler);
 	}
 
 	onSelectParent() {
@@ -153,21 +158,21 @@ class Toolbar extends i.Component {
 	onSubmit(e) {
 		e.preventDefault();
 		e.stopPropagation();
-		return  this.selectionService.lockActive();
+		return this.selectionService.lockActive();
 	}
 
 	onFocus() {
-		return this.handleFocusChange(this.state.parentHasFocus, !0);
+		return this.handleFocusChange(this.state.parentHasFocus, true);
 	}
 
 	onBlur() {
-		return this.handleFocusChange(this.state.parentHasFocus, !1);
+		return this.handleFocusChange(this.state.parentHasFocus, false);
 	}
 
 	handleFocusChange(parentHasFocus, uiHasFocus) {
 		const keyBoardEventsEnabled = parentHasFocus || uiHasFocus;
-		const {notification: r} = this.state;
-		const notification  = keyBoardEventsEnabled && r === this.keysDisabledMessage ? void 0 : r;
+		const {notification: note} = this.state;
+		const notification = keyBoardEventsEnabled && note === this.keysDisabledMessage ? undefined : note;
 		this.setState({
 			keyBoardEventsEnabled: keyBoardEventsEnabled,
 			parentHasFocus: parentHasFocus,
@@ -176,8 +181,9 @@ class Toolbar extends i.Component {
 		});
 	}
 }
+
 //Toolbar = r([applyController(o.Targets.uiOverlay), l("design:paramtypes", [Object, Object])], s);
 
-let extFunc =  applyController(Targets.uiOverlay );
+let extFunc = applyController(Targets.uiOverlay);
 let ToolbarExt = extFunc(Toolbar);
 export {ToolbarExt as Toolbar}
