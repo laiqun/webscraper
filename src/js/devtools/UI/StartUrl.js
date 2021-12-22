@@ -51,13 +51,16 @@ class StartUrl extends BaseComponent {
             className: "btn btn-default",
             type: "button",
             onClick: e.onAdd
-        }, "+")))));
+        }, "+"),react.createElement("button", {
+                className: "btn btn-default",
+                type: "button",
+                onClick: e.openURL
+            }, "Goto")))));
     }
 
     getInput() {
         return this.el.querySelectorAll("input")[0];
     }
-
 
 }
 

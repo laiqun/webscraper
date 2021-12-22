@@ -3,10 +3,12 @@ var n = this && this.__decorate || function (e, t, i, n) {
     var r, a = arguments.length, o = a < 3 ? t : null === n ? n = Object.getOwnPropertyDescriptor(t, i) : n;
     if ("object" == typeof Reflect && "function" == typeof Reflect.decorate) o = Reflect.decorate(e, t, i, n); else for (var s = e.length - 1; s >= 0; s--) (r = e[s]) && (o = (a < 3 ? r(o) : a > 3 ? r(t, i, o) : r(t, i)) || o);
     return a > 3 && o && Object.defineProperty(t, i, o), o;
-}, r = this && this.__metadata || function (e, t) {
+};
+/*
+var r = this && this.__metadata || function (e, t) {
     if ("object" == typeof Reflect && "function" == typeof Reflect.metadata) return Reflect.metadata(e, t);
-}
-
+};
+*/
 
 import * as o from "mobx-react"//const o = i(21),
 import * as s from "react"// s = i(0),
@@ -31,10 +33,10 @@ let SitemapBrowseView = class extends c.BaseComponent {
         this.setState({
             loading: true
         });
-        const e = this.props.appState.sitemap._id;
-        const t = await l.backgroundPageClient.getSitemapData(e);
+        const sitemap_id = this.props.appState.sitemap._id;
+        const sitemap_data = await l.backgroundPageClient.getSitemapData(sitemap_id);
         this.setState({
-            data: t,
+            data: sitemap_data,
             loading: false
         });
         await this.loadSurvey();
@@ -51,17 +53,20 @@ let SitemapBrowseView = class extends c.BaseComponent {
         if (this.state.loading) return s.createElement("div", {
             className: "panel-body"
         }, "Loading");
-        const e = this.state.data;
-        if (0 === e.length) return s.createElement("div", {
-            id: "sitemap-data"
-        }, s.createElement("div", {
-            className: "panel-body"
-        }, chrome.i18n.getMessage("NoDataScrapedYet"), s.createElement("button", {
-            type: "button",
-            className: "btn btn-primary btn-xs",
-            onClick: this.loadData.bind(this)
-        }, chrome.i18n.getMessage("refresh"))), this.renderCloudAd());
-        const t = this.props.appState.sitemap.getDataColumns();
+        const sitemap_data = this.state.data;
+        if (0 === sitemap_data.length)
+            return s.createElement("div", {
+                id: "sitemap-data"
+            }, s.createElement("div", {
+                className: "panel-body"
+            }, chrome.i18n.getMessage("NoDataScrapedYet"),
+                s.createElement("button", {
+                type: "button",
+                className: "btn btn-primary btn-xs",
+                onClick: this.loadData.bind(this)
+            }, chrome.i18n.getMessage("refresh"))), this.renderCloudAd());
+
+        const columns = this.props.appState.sitemap.getDataColumns();
         return s.createElement("div", {
             id: "sitemap-data"
         }, s.createElement("div", {
@@ -70,17 +75,20 @@ let SitemapBrowseView = class extends c.BaseComponent {
             type: "button",
             className: "btn btn-primary btn-xs",
             onClick: this.loadData.bind(this)
-        }, chrome.i18n.getMessage("RefreshData")), s.createElement(u.SurveyButton, {
+        }, chrome.i18n.getMessage("RefreshData")),
+            s.createElement(u.SurveyButton, {
             survey: this.state.survey
         })), s.createElement("table", {
             className: "table table-bordered table-condensed table-hover"
-        }, s.createElement("thead", null, s.createElement("tr", null, t.map(e => s.createElement("th", {
-            key: e
-        }, e)))), s.createElement("tbody", null, e.map((e, i) => s.createElement("tr", {
-            key: i
-        }, t.map(t => s.createElement("td", {
-            key: t
-        }, "object" == typeof e[t] ? JSON.stringify(e[t]) : e[t])))))), this.renderCloudAd());
+        }, s.createElement("thead", null,
+            s.createElement("tr", null, columns.map(currentValue => s.createElement("th", {
+            key: currentValue
+        }, currentValue)))),
+            s.createElement("tbody", null, sitemap_data.map((currentValue, index) => s.createElement("tr", {
+                key: index
+            }, columns.map(column_key => s.createElement("td", {
+                key: column_key
+            }, "object" == typeof currentValue[column_key] ? JSON.stringify(currentValue[column_key]) : currentValue[column_key])))))), this.renderCloudAd());
     }
 
     renderCloudAd() {
@@ -103,5 +111,5 @@ let SitemapBrowseView = class extends c.BaseComponent {
         }), " Built-in proxy for site access issues"))));
     }
 };
-SitemapBrowseView = n([o.inject("appState"), o.observer, r("design:paramtypes", [Object])], SitemapBrowseView);
+SitemapBrowseView = n([o.inject("appState"), o.observer,/* r("design:paramtypes", [Object])*/], SitemapBrowseView);
 export {SitemapBrowseView}

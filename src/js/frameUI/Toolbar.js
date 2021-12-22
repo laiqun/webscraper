@@ -1,13 +1,13 @@
 import * as React from "react"
 import {applyController} from "../common/RPC/applyController.js";
 import {Targets} from "../contentjs/HighlightOverly/Targets.js"
-import {serviceFactory}from "../common/RPC/serviceFactory.js"
-import {keyEventHandler} from "../contentjs/HighlightOverly/keyEventHandler"
+import {serviceFactory} from "../common/RPC/serviceFactory.js"
+//import {keyEventHandler} from "../contentjs/HighlightOverly/keyEventHandler"
 
 class Toolbar extends React.Component {
 	constructor(props, context) {
 		super(props, context);
-		this.keysDisabledMessage = "Click here to enable hotkeys";
+		this.keysDisabledMessage = "";//"Click here to enable hotkeys";
 		this.highlightOverlayService = serviceFactory(Targets.highlightOverlay);
 		this.selectionService = serviceFactory(Targets.selection);
 		this.onSelectParent = this.onSelectParent.bind(this);
@@ -16,11 +16,12 @@ class Toolbar extends React.Component {
 		this.handleFocusChange = this.handleFocusChange.bind(this);
 		this.onFocus = this.onFocus.bind(this);
 		this.onBlur = this.onBlur.bind(this);
+		/*
 		this.keyDownHandler = keyEventHandler({
 			KeyP: this.onSelectParent,
 			KeyC: this.onSelectChild,
 			KeyS: this.onSelectElement
-		});
+		});*/
 		this.state = {
 			selector: "",
 			joinSelectAllowed: false,
@@ -53,7 +54,7 @@ class Toolbar extends React.Component {
 			!notificationNotUDF && this.selectorInput,
 			!notificationNotUDF && this.controls,
 			React.createElement("div", {
-				className: "col-xs-4 container submit-container"
+				className: "col-xs-3 container submit-container"
 			}, React.createElement("button", {
 				id: "submit-selector",
 				className: "btn btn-success",
@@ -83,7 +84,7 @@ class Toolbar extends React.Component {
 
 	get notification() {
 		return React.createElement("div", {
-			className: "col-xs-8 container alert-container",
+			className: "col-xs-9 container alert-container",
 			onClick: () => this.setState({
 				notification: void 0
 			})
@@ -94,7 +95,7 @@ class Toolbar extends React.Component {
 
 	get selectorInput() {
 		return React.createElement("div", {
-			className: "col-xs-5 container selector-container"
+			className: "col-xs-7 container selector-container"
 		}, React.createElement("input", {
 			id: "active-selection",
 			className: "form-control",
@@ -108,7 +109,7 @@ class Toolbar extends React.Component {
 		return React.createElement("div", {
 			id: "dom-controls",
 			tabIndex: 0,
-			className: "col-xs-3 container"
+			className: "col-xs-2 container"
 		}, this.keyboardControls);
 	}
 
@@ -117,14 +118,14 @@ class Toolbar extends React.Component {
 			this.renderDOMControl("parent", "P",
 				"Press P to select parent element", this.onSelectParent),
 			this.renderDOMControl("child", "C", "Press C to select child element",
-				this.onSelectChild), this.renderDOMControl("element", "S",
+				this.onSelectChild), /* this.renderDOMControl("element", "S",
 				"Press S to select hovered element", () => {
-				}, true));
+				}, true)*/);
 	}
 
 	renderDOMControl(id, content, title, onClick, disabled) {
 		return React.createElement("div", {
-			className: "col-xs-4 container dom-control-container"
+			className: "col-xs-6 container dom-control-container"
 		}, React.createElement("button", {
 			id: "select-" + id,
 			className: "btn btn-primary",
@@ -138,7 +139,7 @@ class Toolbar extends React.Component {
 		const funcName = enable ? "addEventListener" : "removeEventListener";
 		window[funcName]("focus", this.onFocus);
 		window[funcName]("blur", this.onBlur);
-		document[funcName]("keydown", this.keyDownHandler);
+		//document[funcName]("keydown", this.keyDownHandler);
 	}
 
 	onSelectParent() {

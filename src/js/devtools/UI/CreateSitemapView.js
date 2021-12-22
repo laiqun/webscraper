@@ -105,7 +105,8 @@ let CreateSitemapView = class extends u.BaseComponent {
             onRemove: this.removeUrl.bind(this, index),
             onAdd: this.addUrl.bind(this),
             onChange: this.handleInputChange.bind(this),
-            getCurURL:this.getCurURL.bind(this,index)
+            getCurURL:this.getCurURL.bind(this,index),
+            openURL:this.openURL.bind(this,index)
         })), l.createElement("div", {
             className: "form-group"
         }, l.createElement("div", {
@@ -118,15 +119,17 @@ let CreateSitemapView = class extends u.BaseComponent {
         }, chrome.i18n.getMessage("Create_Sitemap_Action"))))));
     }
     getCurURL(index){
-        console.log(index);
         const tabId = chrome.devtools.inspectedWindow.tabId;
         chrome.tabs.get(tabId, (tab) => {
-            console.log(tab);
             this.state.startUrl[index] = tab.url;
             this.setState({
                 startUrl:this.state.startUrl
             });
         });
+    }
+    openURL(index){
+        const tabId = chrome.devtools.inspectedWindow.tabId;
+        chrome.tabs.update(tabId,{url:this.state.startUrl[index]},()=>{});
     }
     removeUrl(index) {
         const t = this.state.startUrl;

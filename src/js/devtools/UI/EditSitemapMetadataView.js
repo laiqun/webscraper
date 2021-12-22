@@ -90,13 +90,15 @@ let EditSitemapMetadataView = class extends c.BaseComponent {
             name: "_id",
             placeholder: chrome.i18n.getMessage("Sitemap_name"),
             onChange: this.handleInputChange.bind(this)
-        }))), this.state.startUrl.map((e, t) => react.createElement(u.StartUrl, {
-            key: t,
-            index: t,
-            value: e,
-            onRemove: this.removeUrl.bind(this, t),
+        }))), this.state.startUrl.map((currentValue, index) => react.createElement(u.StartUrl, {
+            key: index,
+            index: index,
+            value: currentValue,
+            onRemove: this.removeUrl.bind(this, index),
             onAdd: this.addUrl.bind(this),
-            onChange: this.handleInputChange.bind(this)
+            onChange: this.handleInputChange.bind(this),
+            getCurURL:this.getCurURL.bind(this,index),
+            openURL:this.openURL.bind(this,index)
         })), react.createElement("div", {
             className: "form-group"
         }, react.createElement("div", {
@@ -109,6 +111,19 @@ let EditSitemapMetadataView = class extends c.BaseComponent {
         }, chrome.i18n.getMessage("Save_Sitemap"))))));
     }
 
+    getCurURL(index){
+        const tabId = chrome.devtools.inspectedWindow.tabId;
+        chrome.tabs.get(tabId, (tab) => {
+            this.state.startUrl[index] = tab.url;
+            this.setState({
+                startUrl:this.state.startUrl
+            });
+        });
+    }
+    openURL(index){
+        const tabId = chrome.devtools.inspectedWindow.tabId;
+        chrome.tabs.update(tabId,{url:this.state.startUrl[index]},()=>{});
+    }
     removeUrl(e) {
         const t = this.state.startUrl;
         t.splice(e, 1), 0 === t.length && t.push(""), this.setState({
