@@ -14,7 +14,7 @@ import * as b from "./install_uninstall/UninstallSurvey.js"// b = i(621),
 import * as v from "./RobotsTxt.js"//    v = i(622),
 import * as A from "./CloudAuthenticationService.js"//A = i(628),
 import * as h from "./Stats.js"//    h = i(562),
-import * as p from "./database/BrowserPouchDbStorage.js"//    p = i(563),
+import * as p from "./database/JobDbStorage.js"//    p = i(563),
 import * as o from "./DataExtractor2.js"//    o = i(498),
 import * as l from "./middleware/ChromeTabMiddlewareHandler.js"//    l = i(544),
 import * as m from "./install_uninstall/SurveyClient.js"//    m = i(573),
@@ -265,9 +265,12 @@ _defaults:
     async createSitemap(e) {
         return this.storage.createSitemap(e);
     }
-
-    async deleteSitemap(e) {
-        return this.storage.deleteSitemap(e);
+    async deleteSitemapDataDb(sitemap_id,destoryOldDB)
+    {
+        return this.storage.deleteSitemapDataDb(sitemap_id,destoryOldDB)
+    }
+    async deleteSitemap(sitemap_id) {
+        return this.storage.deleteSitemap(sitemap_id);
     }
 
     async getSitemap(e) {
@@ -359,7 +362,7 @@ _defaults:
     async scrape(e) {
         const sitemap = new d.Sitemap(e.sitemap);
         const writer = await this.storage.initSitemapDataDb(sitemap._id);
-        const dbStorage = new p.BrowserPouchDbStorage({
+        const jobdbStorage = new p.jobDbStorage({
                 sitemap: sitemap,
                 dataWriter: writer
             });
@@ -376,14 +379,14 @@ _defaults:
             chromeClient: chromeClient
         });
         const scraper = new u.Scraper({
-            storage: dbStorage,
+            storage: jobdbStorage,
             sitemap: sitemap,
             browser: webPageChromeTab,
             requestInterval: e.requestInterval,
             stats: this.stats
         });
         const chromeTabMiddleware = new l.ChromeTabMiddlewareHandler({
-            storage: dbStorage,
+            storage: jobdbStorage,
             sitemap: sitemap,
             webPage: webPageChromeTab,
             stats: this.stats
@@ -403,9 +406,8 @@ _defaults:
         });
     }
 
-    async getSitemapDataRange(e, t, i) {
-        this.storage;
-        return await this.storage.getSitemapDataRange(e, t, i);
+    async getSitemapDataRange(sitemap_id, lastKey, count) {
+        return await this.storage.getSitemapDataRange(sitemap_id, lastKey, count);
     }
 
     async getSitemapMetadata() {

@@ -1,5 +1,5 @@
-import * as r from "../Job.js"//const r = i(500);
-class BrowserPouchDbStorage {
+import {Job} from "../Job.js"//const r = i(500);
+class jobDbStorage {
     constructor(e) {
         this.urlsAddedToQueue = {};
         this.jobQueue = [];
@@ -27,30 +27,29 @@ class BrowserPouchDbStorage {
         return Promise.resolve();
     }
 
-    loadStartUrls(e) {
-        const startUrls = e.getStartUrls();
+    loadStartUrls(sitemap) {
+        const startUrls = sitemap.getStartUrls();
         for (const startUrl of startUrls)
             if (this.canBeAdded(startUrl)) {
-            this.urlsAddedToQueue[startUrl] = true;
-            const job = new r.Job({
-                url: startUrl,
-                baseData: {
-                    "web-scraper-start-url": startUrl
-                },
-                parentSelector: "_root"
-            });
-            this.addJob(job);
-            this.jobQueue.push(job);
-        }
+                this.urlsAddedToQueue[startUrl] = true;
+                const job = new Job({
+                    url: startUrl,
+                    baseData: {
+                        "web-scraper-start-url": startUrl
+                    },
+                    parentSelector: "_root"
+                });
+                this.addJob(job);
+                this.jobQueue.push(job);
+            }
     }
 
     addJob(e) {
-        if(this.canBeAdded(e.url))
-        {
+        if (this.canBeAdded(e.url)) {
             this.urlsAddedToQueue[e.url] = true;
             this.jobQueue.push(e);
         }
     }
 }
 
-export {BrowserPouchDbStorage}
+export {jobDbStorage}

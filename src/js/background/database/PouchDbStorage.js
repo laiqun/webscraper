@@ -33,7 +33,7 @@ class PouchDbStorage {
         return new PouchDB(databaseName, this.pouchDBConnectionConfig);
     }
 
-    async initSitemapDataDb(databaseName, destroyOldDB = true) {
+    async initSitemapDataDb(databaseName, destroyOldDB = true) {//如果设置为false，会出现多次抓取的时候，有重复，应该有一种去重的检测;destroyOldDB可以用来断点续传
         if (destroyOldDB) {
             const dataDb = this.getSitemapDataDb(databaseName);
             await dataDb.destroy();
@@ -41,7 +41,15 @@ class PouchDbStorage {
         const sitemapDataDb = this.getSitemapDataDb(databaseName);
         return new s.StoreScrapeResultWriter(sitemapDataDb);
     }
-
+    async deleteSitemapDataDb(sitemap_id,destroyOldDB)
+    {
+        if (destroyOldDB) {
+            const dataDb = this.getSitemapDataDb(sitemap_id);
+            await dataDb.destroy();
+        }
+        const sitemapDataDb = this.getSitemapDataDb(sitemap_id);
+        return null;
+    }
     async createSitemap(sitemap) {
         const doc = JSON.parse(JSON.stringify(sitemap));
         sitemap._id || o.info("cannot save sitemap without an id", {

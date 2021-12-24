@@ -3,13 +3,13 @@ class MemoryKeyValueStorage {
         this.data = {};
     }
 
-    get(e, defaultValue) {
-        const value = this.data[e];
+    get(key, defaultValue) {
+        const value = this.data[key];
         return value || defaultValue;
     }
 
-    set(e, t) {
-        this.data[e] = t;
+    set(key, value) {
+        this.data[key] = value;
         return  Promise.resolve();
     }
 

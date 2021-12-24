@@ -42,6 +42,15 @@ let SitemapBrowseView = class extends c.BaseComponent {
         await this.loadSurvey();
     }
 
+    async deleteData() {
+        this.setState({loading: true});
+        const sitemap_id = this.props.appState.sitemap._id;
+        await l.backgroundPageClient.deleteSitemapData(sitemap_id);
+        this.setState({
+            data: [],
+            loading:false});
+    }
+
     async loadSurvey() {
         const e = await l.backgroundPageClient.getSurvey();
         this.setState({
@@ -76,6 +85,12 @@ let SitemapBrowseView = class extends c.BaseComponent {
             className: "btn btn-primary btn-xs",
             onClick: this.loadData.bind(this)
         }, chrome.i18n.getMessage("RefreshData")),
+        s.createElement("button", {
+            type: "button",
+            className: "btn btn-primary btn-xs",
+            style:{"marginLeft":"10px"},
+            onClick: this.deleteData.bind(this)
+        }, "Delete Data"),
             s.createElement(u.SurveyButton, {
             survey: this.state.survey
         })), s.createElement("table", {

@@ -1,25 +1,25 @@
 import * as r from "./idb-keyval-iife.min.js"//const r = i(593);
-import {default as a} from "../../log/log.js";//a = i(5),
+import {default as log} from "../../log/log.js";//a = i(5),
 
 class IndexedDBKeyValueStorage {
-    async get(e, t) {
+    async get(key, defaultValue) {
         try {
 
-            const i = await r.idbKeyval.get(e);
-            return i || t;
+            const value = await r.idbKeyval.get(key);
+            return value || defaultValue;
         } catch (e) {
-            a.error("an error occurred while fetching data from indexed db", {
+            log.error("an error occurred while fetching data from indexed db", {
                 error: e.toString()
             });
-            return  t;
+            return  defaultValue;
         }
     }
 
-    set(e, t) {
+    set(key, value) {
         try {
-            return r.idbKeyval.set(e, t);
+            return r.idbKeyval.set(key, value);
         } catch (e) {
-            a.error("an error occurred while storing data", {
+            log.error("an error occurred while storing data", {
                 error: e.toString()
             });
         }

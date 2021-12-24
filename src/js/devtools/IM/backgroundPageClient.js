@@ -45,18 +45,22 @@ let backgroundPageClient = new class {
 
     }
 
-    async getSitemapData(e) {
-        let t = "";
-        const i = [];
-        let n;
+    async getSitemapData(sitemap_id) {
+        let lastKey = "";
+        const result = [];
+        let totalRows;
         do {
-            const r = await this.callBackgroundPage("getSitemapDataRange", e, t, 50);
-            for (const e of r.rows)
-                i.push(e);
-            t = r.lastKey;
-            n = r.totalRows;
-        } while (i.length < n);
-        return i;
+            const queryRows = await this.callBackgroundPage("getSitemapDataRange", sitemap_id, lastKey, 50);
+            for (const row of queryRows.rows)
+                result.push(row);
+            lastKey = queryRows.lastKey;
+            totalRows = queryRows.totalRows;
+        } while (result.length < totalRows);
+        return result;
+    }
+
+    async deleteSitemapData(sitemap_id){
+        await this.callBackgroundPage("deleteSitemapDataDb",sitemap_id,true);
     }
 
     async getSitemapXmlLinksFromRobotsTxt() {
