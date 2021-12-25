@@ -5,18 +5,18 @@ var n = this && this.__decorate || function (e, t, i, n) {
 };
 
 
-import * as r from "mobx-react"//const r = i(21),
+import * as mobxReact from "mobx-react"//const mobxReact = i(21),
 import {BaseComponent} from "./BaseComponent.js"//a = i(25),
-import * as o from "react"//o = i(0)
-import * as s from "../../common/Obj.js"//, s = i(57);
+import * as react from "react"//react = i(0)
+import {Obj} from "../../common/Obj.js"//, s = i(57);
 let ValidationError = class extends BaseComponent {
     render() {
         const {validationErrors: e} = this.props.errorState;
-        return !s.Obj.empty(e) && e[this.props.field] ? o.createElement("small", {
+        return !Obj.empty(e) && e[this.props.field] ? react.createElement("small", {
                                                         className: "help-block error-" + this.props.field
-                                                        }, e[this.props.field]) : o.createElement(o.Fragment, null);
+                                                        }, e[this.props.field]) : react.createElement(react.Fragment, null);
     }
 };
-ValidationError = n([r.inject("errorState"), r.observer], ValidationError);
+ValidationError = n([mobxReact.inject("errorState"), mobxReact.observer], ValidationError);
 
 export {ValidationError}

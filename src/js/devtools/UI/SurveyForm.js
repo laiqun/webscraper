@@ -1,7 +1,7 @@
 import * as react from "react"//const n = i(0),
 import * as r from "../IM/backgroundPageClient.js"//r = i(68),
- import * as a from "./InputTask.js"// a = i(717),
- import * as o from "./MultipleChoiceTask.js"// o = i(718),
+import * as a from "./InputTask.js"// a = i(717),
+import * as o from "./MultipleChoiceTask.js"// o = i(718),
 import * as s from "./TextTask.js"// s = i(719);
 class SurveyForm extends react.Component {
     constructor(e) {

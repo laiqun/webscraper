@@ -1,12 +1,12 @@
-import * as a from "../common/Obj.js"//, a = i(57)
-import {default as o} from "../log/log.js";//c = i(5),
-import * as r from "../devtools/selector/UniqueElementList.js"
+import {Obj}from "../common/Obj.js"//, a = i(57)
+import {default as log} from "../log/log.js";//c = i(5),
+import {UniqueElementList} from "../devtools/selector/UniqueElementList.js"
 
 class DataDeduplicator {
     constructor(setFirstPageHash) {
         this._lastBatchIsDuplicate = false;
         this.recordHashes = new Set;
-        this.uniqueElementList = new r.UniqueElementList("uniqueHTMLText");
+        this.uniqueElementList = new UniqueElementList("uniqueHTMLText");
         if(setFirstPageHash)
             this.firstPageDeduplicationHash = setFirstPageHash;
     }
@@ -19,7 +19,7 @@ class DataDeduplicator {
     }
 
     isUniqueRecord(e) {
-        const t = a.Obj.getHash(e);
+        const t = Obj.getHash(e);
         if (!this.recordHashes.has(t)) {//如果没有，表明是新的
             this.recordHashes.add(t);
             this._lastBatchIsDuplicate = false;
@@ -43,7 +43,7 @@ class DataDeduplicator {
 
     getFirstPageDeduplicationHash() {
         if(undefined === this.firstPageDeduplicationHash )
-            o.warning("missing first page deduplication hash");
+            log.warning("missing first page deduplication hash");
         return this.firstPageDeduplicationHash;
     }
 
@@ -55,7 +55,7 @@ class DataDeduplicator {
     makeFirstPageDeduplicationHash(e) {
         //拿到所有去重第一页数据属性为undefined的子元素
         e = (e = JSON.parse(JSON.stringify(e))).filter(item => undefined === item._deduplicateFirstPageData);
-        return a.Obj.getHash(e);
+        return Obj.getHash(e);
     }
 }
 

@@ -1,13 +1,12 @@
 import {default as o} from "../log/log.js";//o = i(5),
-//import * as c from "../contentjs/IM/applyController.js"//c = i(122),
-import * as l from "../contentjs/HighlightOverly/Targets.js"//,  l = i(73);
-import * as s from "./database/storageTypes.js"
+import {Targets} from "../contentjs/HighlightOverly/Targets.js"//,  l = i(73);
+import {storageTypes} from "./database/storageTypes.js"
 import {applyController} from "../common/RPC/applyController";
 //const s = i(246)
 let Config = class {
     constructor() {
         this._defaults = {
-            storageType: s.storageTypes.local,
+            storageType: storageTypes.local,
             sitemapDb: "scraper-sitemaps",
             dataDb: "",
             enableDailyStats: true
@@ -92,7 +91,7 @@ let Config = class {
     }
 };
 
-let extFunc = applyController(l.Targets.config);//popup我记得可以直接调用background的函数的
+let extFunc = applyController(Targets.config);//popup我记得可以直接调用background的函数的
 let outputClass = extFunc(Config);
 //Config = n([c.applyController(l.Targets.config), r("design:paramtypes", [])], Config);
 

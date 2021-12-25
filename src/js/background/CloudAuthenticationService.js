@@ -1,4 +1,4 @@
-import {default as r} from "../log/log.js";//r = i(5),
+import {default as log} from "../log/log.js";//r = i(5),
 class CloudAuthenticationService {
     constructor() {
         this.handleExternalMessage = this.handleExternalMessage.bind(this);
@@ -41,7 +41,7 @@ class CloudAuthenticationService {
                     throw new Error("Unknown auth message type");
             }
         } catch (exception) {
-            r.error(exception.message);
+            log.error(exception.message);
             return  void callback({
                 success: false,
                 error: exception.message

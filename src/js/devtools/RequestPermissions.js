@@ -1,4 +1,4 @@
-import {default as r} from "../log/log.js"//const r = i(5);
+import {default as log} from "../log/log.js"//const r = i(5);
 
 class RequestPermissions {
     static requestAdditionalPermissions() {
@@ -10,7 +10,7 @@ class RequestPermissions {
                     permissions: ["webRequest"]
                 }, parameter => {
                     if (parameter) {
-                        r.info("user already has given permission");
+                        log.info("user already has given permission");
                         resolve(true)
                     } else
                         resolve(false);

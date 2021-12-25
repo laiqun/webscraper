@@ -7,11 +7,11 @@ var r = this && this.__metadata || function (e, t) {
     if ("object" == typeof Reflect && "function" == typeof Reflect.metadata) return Reflect.metadata(e, t);
 };  //限制输入参数类型的
 
-import * as o from "mobx-react"//const o = i(21)
-import * as s from "react"//s = i(0),
-import * as l from "./BaseComponent.js"//l = i(25)
-import * as c from "../IM/DevToolsContentScriptClient.js"//, c = i(221);
-let WebSiteSetupView = class extends l.BaseComponent {
+import * as mobxReact from "mobx-react"//const mobxReact = i(21)
+import * as react from "react"//react = i(0),
+import {BaseComponent} from "./BaseComponent.js"//l = i(25)
+import {DevToolsContentScriptClient} from "../IM/DevToolsContentScriptClient.js"//, c = i(221);
+let WebSiteSetupView = class extends BaseComponent {
     constructor(e) {
         super(e);
         let websiteStateSetup = this.props.appState.sitemap.websiteStateSetup;
@@ -53,49 +53,49 @@ let WebSiteSetupView = class extends l.BaseComponent {
 
     render() {
         const {enabled: e, performWhenNotFoundSelector: t, actions: i} = this.state;
-        return s.createElement("div", {
+        return react.createElement("div", {
             ref: e => this.el = e
-        }, s.createElement("form", {
+        }, react.createElement("form", {
             className: "form-horizontal",
             role: "form",
             onSubmit: this.cancelEvent.bind(this)
-        }, s.createElement("div", {
+        }, react.createElement("div", {
             className: "form-group"
-        }, s.createElement("label", {
+        }, react.createElement("label", {
             className: "col-lg-1 control-label"
-        }, "Selector"), s.createElement("div", {
+        }, "Selector"), react.createElement("div", {
             className: "col-lg-10"
-        }, s.createElement("div", {
+        }, react.createElement("div", {
             className: "input-group"
-        }, s.createElement("span", {
+        }, react.createElement("span", {
             className: "input-group-btn"
-        }, s.createElement("button", {
+        }, react.createElement("button", {
             className: "btn btn-default",
             type: "button",
             onClick: this.selectSelector.bind(this)
-        }, "Select"), s.createElement("button", {
+        }, "Select"), react.createElement("button", {
             className: "btn btn-default" + (this.state.previewingElements ? " preview" : ""),
             type: "button",
             "data-toggle": "button",
             onClick: this.elementPreview.bind(this)
-        }, "Element preview")), s.createElement("input", {
+        }, "Element preview")), react.createElement("input", {
             type: "text",
             className: "form-control selector-value",
             id: "performWhenNotFoundSelector",
             name: "performWhenNotFoundSelector",
             value: t,
             onChange: this.handleInputChange.bind(this)
-        })))), s.createElement("div", {
+        })))), react.createElement("div", {
             className: "form-group"
-        }, s.createElement("label", {
+        }, react.createElement("label", {
             className: "col-lg-1 control-label"
-        }, "Actions"), s.createElement("div", {
+        }, "Actions"), react.createElement("div", {
             className: "col-lg-10"
-        })), s.createElement("div", {
+        })), react.createElement("div", {
             className: "form-group"
-        }, s.createElement("div", {
+        }, react.createElement("div", {
             className: "col-lg-10 col-lg-offset-1"
-        }, s.createElement("button", {
+        }, react.createElement("button", {
             type: "button",
             className: "btn btn-primary"
         }, "Add Action")))));
@@ -105,7 +105,7 @@ let WebSiteSetupView = class extends l.BaseComponent {
         e.preventDefault();
         e.stopPropagation();
         const target = e.currentTarget;
-        const selector = (await c.DevToolsContentScriptClient.selectSelector({
+        const selector = (await DevToolsContentScriptClient.selectSelector({
                     parentCSSSelector: "",
                     allowedElements: "*"
                 })).CSSSelector;
@@ -120,14 +120,14 @@ let WebSiteSetupView = class extends l.BaseComponent {
         e.stopPropagation();
         if (this.state.previewingElements )
         {
-            await c.DevToolsContentScriptClient.removeCurrentContentSelector();
+            await DevToolsContentScriptClient.removeCurrentContentSelector();
             this.setState({
                 previewingElements: !1
             });
         }
         else
         {
-            await c.DevToolsContentScriptClient.elementPreview({
+            await DevToolsContentScriptClient.elementPreview({
                 parentCSSSelector: "",
                 elementCSSSelector: this.state.performWhenNotFoundSelector
             });
@@ -137,7 +137,7 @@ let WebSiteSetupView = class extends l.BaseComponent {
         }
     }
 };
-WebSiteSetupView = n([o.inject("appState"), o.observer, r("design:paramtypes", [Object])], WebSiteSetupView);
+WebSiteSetupView = n([mobxReact.inject("appState"), mobxReact.observer, r("design:paramtypes", [Object])], WebSiteSetupView);
 
 
 export {WebSiteSetupView}

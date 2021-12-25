@@ -7,8 +7,8 @@ class jobDbStorage {
         this.loadStartUrls(e.sitemap);
     }
 
-    canBeAdded(e) {
-        return undefined === this.urlsAddedToQueue[e] && null === e.match(/\.(doc|docx|pdf|ppt|pptx|odt)$/i);
+    canBeAdded(url) {
+        return undefined === this.urlsAddedToQueue[url] && null === url.match(/\.(doc|docx|pdf|ppt|pptx|odt)$/i);
     }
 
     async updateJob(job) {
@@ -44,10 +44,10 @@ class jobDbStorage {
             }
     }
 
-    addJob(e) {
-        if (this.canBeAdded(e.url)) {
-            this.urlsAddedToQueue[e.url] = true;
-            this.jobQueue.push(e);
+    addJob(job) {
+        if (this.canBeAdded(job.url)) {
+            this.urlsAddedToQueue[job.url] = true;
+            this.jobQueue.push(job);
         }
     }
 }

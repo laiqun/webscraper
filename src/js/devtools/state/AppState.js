@@ -190,6 +190,7 @@ class AppState {
 
     async locationChanged() {
         console.log("location changed");
+
         function decodeURI(key, search_str) {//demo : key = "sitemapId", search_str = "?sitemapId=aaaaaaaaaaaa
             key = key.replace(/[\[\]]/g, "\\$&");//"sitemapId"
             const captured_str = new RegExp(`[?&]${key}(=([^&#]*)|&|#|$)`).exec(search_str);//["?sitemapId=aaaaaaaaaaaa", "=aaaaaaaaaaaa", "aaaaaaaaaaaa"]
@@ -232,7 +233,7 @@ class AppState {
             this.originalSitemap = this.sitemap;
         }
         this.updateSearchQuery("");
-        if ("/" === this.routingStore.location.pathname ||undefined === this.routingStore.location.pathname)
+        if ("/" === this.routingStore.location.pathname || undefined === this.routingStore.location.pathname)
             await this.loadSitemaps();
     }
 
@@ -376,6 +377,14 @@ class AppState {
 
     hideAuthModal() {
         this.authModalVisible = false;
+    }
+
+    startLoader() {
+        this.loading = true;
+    }
+
+    stopLoader() {
+        this.loading = false;
     }
 }
 

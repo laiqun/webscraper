@@ -4,7 +4,7 @@ import * as l from "../devtools/Selector/Url.js" //  , l = i(19)
 import * as r from "../devtools/SelectorOpt/SelectorList.js" //r = i(215),
 import * as o from "./Obj.js"//o = i(57),
 import crypto from "crypto-browserify" //const     s = i(140);
-
+import * as u from "./Xlsx.js"
 class Sitemap {
     constructor(doc) {
         this.initData(doc);
@@ -151,6 +151,11 @@ class Sitemap {
     getDataExportCsvBlob(e) {
         const t = this.getDataColumns();
         return n.CSV.getCsvBlob(e, t);
+    }
+
+    async getDataExportXlsxBlob(e) {
+        const t = this.getDataColumns();
+        return await u.Xlsx.getXlsxBlob(e, t);
     }
 
     getSelectorById(e) {
