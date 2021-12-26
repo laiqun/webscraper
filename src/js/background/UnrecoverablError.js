@@ -1,6 +1,6 @@
 class UnrecoverablError extends Error {
     constructor(e) {
-        super(e = `${n.prefix} ${e}`);
+        super(e = `${UnrecoverablError.prefix} ${e}`);
     }
 }
 

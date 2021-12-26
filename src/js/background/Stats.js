@@ -1,4 +1,4 @@
-import {default as a} from "../log/log.js";//a = i(5),
+import {default as log} from "../log/log.js";//a = i(5),
 import * as r from "../common/lib/jquery.js"//r = i(65),
 import * as o from "../common/Sitemap.js"//o = i(119),
 let Interval_Handle;
@@ -99,7 +99,7 @@ class Stats {
             return new Promise((resolve, reject) => {
                 const indexDB = this.indexedDb.transaction("Stats", "readwrite").objectStore("Stats").delete(e);
                 indexDB.onerror = e => {
-                    a.error("Database error: ", {
+                    log.error("Database error: ", {
                         error: e.toString()
                     });
                     resolve();
@@ -439,7 +439,7 @@ class Stats {
                         if (undefined=== arg) {
                             const have_error = chrome.runtime.lastError;
                             if(have_error)
-                                a.notice(have_error.toString());
+                                log.notice(have_error.toString());
                         }
                         let {statId: stat_id} = await this.indexedDbGet("statId");
                         if(!stat_id)
@@ -449,7 +449,7 @@ class Stats {
                         }, () => {
                             const have_error = chrome.runtime.lastError;
                             if(have_error)
-                                a.notice(have_error.toString());
+                                log.notice(have_error.toString());
                         });
                         resolve(stat_id);
                     }

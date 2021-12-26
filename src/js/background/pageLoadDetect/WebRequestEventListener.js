@@ -1,4 +1,5 @@
 import * as n from "./BaseWebNavigationEventListener.js"//const n = i(67);
+import {default as r} from "../../log/log.js";//n = i(5),
 class WebRequestEventListener extends n.BaseWebNavigationEventListener {
     constructor(e) {
         super(e);

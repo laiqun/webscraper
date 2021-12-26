@@ -15,13 +15,9 @@ import * as u from "./Loader.js"
 let SitemapExportDataView = class extends c.BaseComponent {
     constructor(e) {
         super(e);
-        /*
-        this.state = {
-            linkGenerated: !1
-        };*/
         e.appState.stopLoader();
     }
-    
+
     async downloadFile(filetype) {
         console.log("downloadFile");
         const {sitemap: sitemap} = this.props.appState;

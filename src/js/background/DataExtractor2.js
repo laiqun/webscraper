@@ -3,7 +3,7 @@ import * as l from "./DataSizeLimitError.js"//, l = i(499)
 import * as a from "../devtools/SelectorOpt/SelectorList.js"//a = i(215),
 import * as o from "../common/Sitemap.js"//o = i(119),
 import * as s from "./IM/WebPageElement.js"// s = i(93),
-import * as c from "./DataDeduplicator.js"//const   c = i(543);
+import {DataDeduplicator} from "./DataDeduplicator.js"//const   c = i(543);
 class DataExtractor2 {
     constructor(e) {
         this.rawDataSize = 0;
@@ -23,11 +23,11 @@ class DataExtractor2 {
         const parentSelector = this.sitemap.getSelectorById(this.parentSelectorId);
         let deDuplicator;
         if (parentSelector && parentSelector.shouldDeduplicateChildSelectorData())
-            deDuplicator = new c.DataDeduplicator(this.deduplicateFirstPageData);
-        let i = await this.getChildSelectorData(this.parentSelectorId, this.parentElement, true, deDuplicator);
+            deDuplicator = new DataDeduplicator(this.deduplicateFirstPageData);
+        let childSeletorData = await this.getChildSelectorData(this.parentSelectorId, this.parentElement, true, deDuplicator);
         if(deDuplicator)
-            i = deDuplicator.deduplicateFirstPageData(i);
-        return i;
+            childSeletorData = deDuplicator.deduplicateFirstPageData(childSeletorData);
+        return childSeletorData;
     }
 
     async getChildSelectorData(parentSelectorId, parentElement, keepParentCircle = false, r) {
@@ -55,29 +55,32 @@ class DataExtractor2 {
         }
     }
 
-    async getSelectorData(parentSelectorId, directChildSelector, parentElement, a) {
+    async getSelectorData(parentSelectorId, directChildSelector, parentElement, dataDedeuplicator) {
         let o, l;
-        const n = [];
-        let u;
-        directChildSelector.shouldDeduplicateChildSelectorData() && (u = new c.DataDeduplicator(this.deduplicateFirstPageData));
+        const result = [];
+        let newDataDeduplicator;
+        if(directChildSelector.shouldDeduplicateChildSelectorData() )
+            newDataDeduplicator = new DataDeduplicator(this.deduplicateFirstPageData);
         try {
-            let childSelectorData = await directChildSelector.getData(parentElement, u);
-            for (let childSelectorDatum of childSelectorData) {
-                const i = childSelectorDatum;
-                directChildSelector.shouldDeduplicateChildSelectorData() && u.startNewDataBatch();
-                if (i instanceof s.WebPageElement) {
+            let childSelectorData = await directChildSelector.getData(parentElement, newDataDeduplicator);
+            for (let childSelectorDataItem of childSelectorData) {
+                const childSelectorDataItemCloned = childSelectorDataItem;
+                if(directChildSelector.shouldDeduplicateChildSelectorData() )
+                    newDataDeduplicator.startNewDataBatch();
+                if (childSelectorDataItemCloned instanceof s.WebPageElement) {
                     if (directChildSelector.id === this.parentSelectorId)
                         continue;
-                    if (a && !(await a.isUniqueElement(i)))
+                    if (dataDedeuplicator && !(await dataDedeuplicator.isUniqueElement(childSelectorDataItemCloned)))
                         continue;
-                    const r = await this.getChildSelectorData(directChildSelector.id, i, false, u);
-                    directChildSelector.shouldDeduplicateChildSelectorData() && parentSelectorId !== directChildSelector.id && u.setFirstPageDeduplicationDataHash(r);
-                    n.push(...r);
+                    const childSeletorData = await this.getChildSelectorData(directChildSelector.id, childSelectorDataItemCloned, false, newDataDeduplicator);
+                    if(directChildSelector.shouldDeduplicateChildSelectorData() && parentSelectorId !== directChildSelector.id )
+                        newDataDeduplicator.setFirstPageDeduplicationDataHash(childSeletorData);
+                    result.push(...childSeletorData);
                 } else {
-                    if (a && !a.isUniqueRecord(i))
+                    if (dataDedeuplicator && !dataDedeuplicator.isUniqueRecord(childSelectorDataItemCloned))
                         continue;
-                    this.checkRawDataSize(i);
-                    n.push(i);
+                    this.checkRawDataSize(childSelectorDataItemCloned);
+                    result.push(childSelectorDataItemCloned);
                 }
             }
         } catch (e) {
@@ -86,12 +89,12 @@ class DataExtractor2 {
             };
         }
         if (directChildSelector.shouldDeduplicateChildSelectorData())
-            for (const e of n)
+            for (const e of result)
                 if (e._followSelectorId === directChildSelector.id) {
-                    const t = u.getFirstPageDeduplicationHash();
+                    const t = newDataDeduplicator.getFirstPageDeduplicationHash();
                     e._deduplicateFirstPageData = t;
                 }
-        return n;
+        return result;
     }
 
     selectorWillReturnMultipleRecords(e) {

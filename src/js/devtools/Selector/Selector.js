@@ -102,11 +102,11 @@ class Selector {
     }
 
     isLinkSelector() {
-        return !1;
+        return false;
     }
 
     shouldDeduplicateChildSelectorData() {
-        return !1;
+        return false;
     }
 
     getDeprecatedFeatures() {
