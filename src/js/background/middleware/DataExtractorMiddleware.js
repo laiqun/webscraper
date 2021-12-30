@@ -15,13 +15,13 @@ class DataExtractorMiddleware extends BaseMiddleware {
         const parentSelector = job.parentSelector;
         const webPage = this.webPage;
         const rootElement = await webPage.getRootElement();
-        const c = new DataExtractor2({
+        const dataExtractor2 = new DataExtractor2({
             sitemap: sitemap,
             parentSelectorId: parentSelector,
             parentElement: rootElement,
             deduplicateFirstPageData: job.getDeduplicateFirstPageData()
         });
-        const  result = await c.getData();
+        const  result = await dataExtractor2.getData();
         jobRuntimeInfo.setDataExtractionDuration(Date.now() - now);
         return result;
     }

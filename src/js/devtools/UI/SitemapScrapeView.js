@@ -1,4 +1,6 @@
 "use strict";
+import * as react from "react";
+
 var n = this && this.__decorate || function (e, t, i, n) {
     var r, a = arguments.length, o = a < 3 ? t : null === n ? n = Object.getOwnPropertyDescriptor(t, i) : n;
     if ("object" == typeof Reflect && "function" == typeof Reflect.decorate) o = Reflect.decorate(e, t, i, n); else for (var s = e.length - 1; s >= 0; s--) (r = e[s]) && (o = (a < 3 ? r(o) : a > 3 ? r(t, i, o) : r(t, i)) || o);
@@ -10,21 +12,23 @@ var n = this && this.__decorate || function (e, t, i, n) {
 
 import * as o from "mobx-react"//o = i(21),
 import * as s from "react"//s = i(0),
-import * as u from "./BaseComponent.js"//u = i(25),
+import {BaseComponent} from "./BaseComponent.js"//u = i(25),
 import * as c from "../IM/backgroundPageClient.js"//c = i(68),
 import * as d from "../RequestPermissions.js"//d = i(220),
 import * as l from "../../common/Async.js"//l = i(22),
 import * as p from "./ValidationError.js"//p = i(728),
-import * as h from "../rules/SitemapScrapeViewRules.js"//const     h = i(729);
-let SitemapScrapeView = class extends u.BaseComponent {
+import {SitemapScrapeViewRules} from "../rules/SitemapScrapeViewRules.js"//const     h = i(729);
+
+let SitemapScrapeView = class extends BaseComponent {
     constructor(e) {
         super(e);
         this.state = {
             requestInterval: "2000",
             pageLoadDelay: "2000",
-            scrapingInProgress: false
+            scrapingInProgress: false,
+            destroyOldDB:true
         };
-        this.props.errorState.setRules(new h.SitemapScrapeViewRules);
+        this.props.errorState.setRules(new SitemapScrapeViewRules);
     }
 
     render() {
@@ -70,7 +74,20 @@ let SitemapScrapeView = class extends u.BaseComponent {
             disabled: this.state.scrapingInProgress
         }), s.createElement(p.ValidationError, {
             field: "pageLoadDelay"
-        }))), s.createElement("div", {
+        }))),
+            react.createElement("div", {
+            className: "form-group"
+        }, react.createElement("div", {
+            className: "col-lg-offset-1 col-lg-10"
+        }, react.createElement("div", {
+            className: "checkbox"
+        }, react.createElement("label", null, react.createElement("input", {
+            type: "checkbox",
+            id: "destroyOldDB",
+            name: "destroyOldDB",
+            checked: this.state.destroyOldDB,
+            onChange: this.handleInputChange.bind(this)
+        }), "Destroy old database")))), s.createElement("div", {
             className: "alert alert-success col-lg-10 col-lg-offset-1 scraping-in-progress" + e,
             role: "alert"
         }, "Scraping in progress. Close the popup to stop scraping.", s.createElement("br", null), "When scraping is finished you can browse the data or export it as CSV.", s.createElement("br", null), "You can also browse data while the scraper is running."), s.createElement("div", {
@@ -100,13 +117,14 @@ let SitemapScrapeView = class extends u.BaseComponent {
             scrapingInProgress: true
         });
         const sitemap = this.props.appState.sitemap;
-        const scrapeInput = {
+        const scrapeSetting = {
             sitemap: sitemap,
             requestInterval: parseInt(this.state.requestInterval, 10),
-            pageLoadDelay: parseInt(this.state.pageLoadDelay, 10)
+            pageLoadDelay: parseInt(this.state.pageLoadDelay, 10),
+            destroyOldDB:this.state.destroyOldDB
         };
         await c.backgroundPageClient.incrementDailyStat("scrapingJobsRun", 1);
-        c.backgroundPageClient.scrape(scrapeInput);
+        c.backgroundPageClient.scrape(scrapeSetting);
         await l.Async.sleep(1000);
         this.props.appState.goToSitemapBrowseData(sitemap._id);
     }

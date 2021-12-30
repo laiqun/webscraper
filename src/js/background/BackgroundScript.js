@@ -15,7 +15,7 @@ import * as v from "./RobotsTxt.js"//    v = i(622),
 import * as A from "./CloudAuthenticationService.js"//A = i(628),
 import * as h from "./Stats.js"//    h = i(562),
 import * as p from "./database/JobDbStorage.js"//    p = i(563),
-import * as o from "./DataExtractor2.js"//    o = i(498),
+import {DataExtractor2} from "./DataExtractor2.js"//    o = i(498),
 import * as l from "./middleware/ChromeTabMiddlewareHandler.js"//    l = i(544),
 import * as m from "./install_uninstall/SurveyClient.js"//    m = i(573),
 import * as g from "./chromeOpt/ChromeClient.js"//g = i(595),
@@ -289,7 +289,7 @@ _defaults:
         const sitemap = new d.Sitemap(selectorContext.sitemap);
         const devtoolsPage = await this.getDevtoolsWebPage(tabid);
         const devToolsElement = await devtoolsPage.getRootElement();
-        const extractor2 = new o.DataExtractor2({
+        const extractor2 = new DataExtractor2({
                 sitemap: sitemap,
                 parentSelectorId: undefined,
                 parentElement: devToolsElement
@@ -310,7 +310,7 @@ _defaults:
         const devToolsPage = await this.getDevtoolsWebPage(tabid);
         const rootElement = await devToolsPage.getRootElement();
         const parentElement = await rootElement.getParentElement(sitemap, selectorContext.selectorPath);
-        const dataExtractor2 = new o.DataExtractor2({
+        const dataExtractor2 = new DataExtractor2({
                 sitemap: sitemap,
                 parentSelectorId: selectorPathElement,
                 parentElement: parentElement
@@ -359,15 +359,15 @@ _defaults:
         return await n.getSitemapXmlLinksFromRobotsTxt(root);
     }
 
-    async scrape(e) {
-        const sitemap = new d.Sitemap(e.sitemap);
-        const writer = await this.storage.initSitemapDataDb(sitemap._id);
+    async scrape(scrapeSetting) {
+        const sitemap = new d.Sitemap(scrapeSetting.sitemap);
+        const writer = await this.storage.initSitemapDataDb(sitemap._id,scrapeSetting.destroyOldDB);
         const jobdbStorage = new p.jobDbStorage({
                 sitemap: sitemap,
                 dataWriter: writer
             });
         const chromeClient = new g.ChromeClient({
-                pageLoadDelay: e.pageLoadDelay,
+                pageLoadDelay: scrapeSetting.pageLoadDelay,
                 failOnErrorPages: true,
                 blockImages: false,
                 blockImagesWhitelistDomains: [],
@@ -382,7 +382,7 @@ _defaults:
             storage: jobdbStorage,
             sitemap: sitemap,
             browser: webPageChromeTab,
-            requestInterval: e.requestInterval,
+            requestInterval: scrapeSetting.requestInterval,
             stats: this.stats
         });
         const chromeTabMiddleware = new l.ChromeTabMiddlewareHandler({

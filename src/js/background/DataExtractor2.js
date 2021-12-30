@@ -15,7 +15,7 @@ class DataExtractor2 {
         }
         this.parentSelectorId = e.parentSelectorId;
         this.parentElement = e.parentElement;
-        this.deduplicateFirstPageData = e.deduplicateFirstPageData;
+        this.deduplicateFirstPageData = e.deduplicateFirstPageData;//真正抓取才有这个参数
 
     }
 
@@ -30,13 +30,18 @@ class DataExtractor2 {
         return childSeletorData;
     }
 
-    async getChildSelectorData(parentSelectorId, parentElement, keepParentCircle = false, r) {
+    async getChildSelectorData(parentSelectorId, parentElement, keepParentCircle = false, deDuplicator) {
+        //Step1:  获取所有的子选择器
         const directChildSelectors = this.sitemap.getDirectChildSelectors(parentSelectorId);
         let notMultipleData = {}, notMultipleFlag = false, multipleData = [];
+        //Step2: 对于每个子选择器
+        //如果子选择器的id和父选择器相同，表明是个递归， 如果保持父元素的循环为假，则跳过这个子选择器，否则处理这个选择器
+        //Step2.1:  获取子选择器的数据
+        //Step2.2：
         for (const directChildSelector of directChildSelectors) {
             if (directChildSelector.id === parentSelectorId && !keepParentCircle)
                 continue;
-            const dataResults = await this.getSelectorData(parentSelectorId, directChildSelector, parentElement, r);
+            const dataResults = await this.getSelectorData(parentSelectorId, directChildSelector, parentElement, deDuplicator);
             if (this.selectorWillReturnMultipleRecords(directChildSelector)) {
                 multipleData = multipleData.concat(dataResults);
             } else {
@@ -91,8 +96,8 @@ class DataExtractor2 {
         if (directChildSelector.shouldDeduplicateChildSelectorData())
             for (const e of result)
                 if (e._followSelectorId === directChildSelector.id) {
-                    const t = newDataDeduplicator.getFirstPageDeduplicationHash();
-                    e._deduplicateFirstPageData = t;
+                    const hash = newDataDeduplicator.getFirstPageDeduplicationHash();
+                    e._deduplicateFirstPageData = hash;
                 }
         return result;
     }

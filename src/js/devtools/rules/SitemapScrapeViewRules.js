@@ -12,7 +12,8 @@ class SitemapScrapeViewRules extends BaseRules {
                 new IsGreaterOrEqualThan(2000)],
             pageLoadDelay: [new IsNotEmpty,
                 new IsNumeric,
-                new IsGreaterOrEqualThan(500)]
+                new IsGreaterOrEqualThan(500)],
+            destroyOldDB: [new IsNotEmpty]
         };
     }
 }
