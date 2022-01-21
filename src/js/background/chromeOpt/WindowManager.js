@@ -21,8 +21,10 @@ class WindowManager extends a.TakesScreenShot {
 
     async createWindow(url) {
         if (this.tab.windowId)
-            throw r.error("trying to create window when it already exists"),
-                "CHROME_WINDOW_CLOSED";
+        {
+            r.error("trying to create window when it already exists");
+            throw "CHROME_WINDOW_CLOSED";
+        }
         await new Promise((resolve, reject) => {
             const windowSetting = this.defaultChromeWindowConfiguration;
             if(url )
@@ -64,9 +66,10 @@ class WindowManager extends a.TakesScreenShot {
     }
 
     async closeWindow() {
-        if (undefined === this.tab.windowId)
-            throw r.error("trying to destroy window when it doesn't exist"),
-                "CHROME_WINDOW_CLOSED";
+        if (undefined === this.tab.windowId) {
+            r.error("trying to destroy window when it doesn't exist");
+            throw  "CHROME_WINDOW_CLOSED";
+        }
         if (!(await this.windowExists()))
         {
             this.tab.windowId = undefined;

@@ -12,9 +12,9 @@ let backgroundPageClient = new class {
         return new Proxy(this, {
             get: function (target, property)
             {
-                console.log(JSON.stringify(target));
-                console.log(JSON.stringify(property));
-                console.log(arguments);
+                //console.log(JSON.stringify(target));
+                //console.log(JSON.stringify(property));
+                //console.log(arguments);
                 if(undefined!== target[property])
                 {
                     return target[property];

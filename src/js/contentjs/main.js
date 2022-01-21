@@ -225,7 +225,7 @@ class main {
     }
 // 这里也是RPC，HighLightOverly 和 Selection用的是长连接
     initMessageListener() {
-        console.log("content initMessageListener");
+        //console.log("content initMessageListener");
         //request, sender, sendResponse
         //request demo
         //{method: "selectSelector", params: Array(1)}

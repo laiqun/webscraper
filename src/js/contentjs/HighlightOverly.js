@@ -219,7 +219,7 @@ class HighlightOverlay {
     handleSelectionError(SelectionError) {
         if (SelectionError instanceof SelectionError)
             return this.toolbar.setNotification(SelectionError.message);////发送focus change事件给后台
-        Log.default.error(SelectionError.message);
+        Log.default.error(SelectionError.message,{stack:SelectionError.stack});
     }
 
     updateLocked(selector) {
@@ -251,7 +251,7 @@ class HighlightOverlay {
     }
 
     getElementFromPoint(pos_x, pos_y) {
-        console.log("getElementFromPoint");
+        //console.log("getElementFromPoint");
         const topMostMatchedElement = document.elementsFromPoint(pos_x, pos_y);
         let matchedElement;
         const allowedElements = this.config.allowedElements || "*";

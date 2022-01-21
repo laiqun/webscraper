@@ -70,7 +70,8 @@ class SurveyClient {
                     return survey;
         } catch (exception) {
             s.error("An error occurred while fetching surveys", {
-                error: exception.toString()
+                error: exception.toString(),
+                stack:exception.stack
             });
         }
     }
@@ -98,7 +99,8 @@ class SurveyClient {
                 break;
             } catch (exception) {
                 s.error("an error occurred while submitting survey", {
-                    error: exception.toString()
+                    error: exception.toString(),
+                    stack:exception.stack
                 });
                 t++;
                 await a.Async.sleep(10000);

@@ -9,7 +9,8 @@ class IndexedDBKeyValueStorage {
             return value || defaultValue;
         } catch (e) {
             log.error("an error occurred while fetching data from indexed db", {
-                error: e.toString()
+                error: e.toString(),
+                stack:e.stack
             });
             return  defaultValue;
         }
@@ -20,7 +21,8 @@ class IndexedDBKeyValueStorage {
             return r.idbKeyval.set(key, value);
         } catch (e) {
             log.error("an error occurred while storing data", {
-                error: e.toString()
+                error: e.toString(),
+                stack:e.stack
             });
         }
     }

@@ -17,7 +17,7 @@ class WebPageChromeTabElement extends r.WebPageElement {
     }
 
     async getText() {
-        console.log("web pageChromeTabElement xx");
+        //console.log("web pageChromeTabElement xx");
         return await this.contentScriptClient.getText(this.element);
     }
 

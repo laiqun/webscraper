@@ -11,7 +11,8 @@ class WebRTCBlocker {
                 await this.blockWebRtcIpLeak();
             } catch (e) {
                 r.error("Couldn't init WebRTCBlocker", {
-                    error: a.getMessage(e)
+                    error: a.getMessage(e),
+                    stack:e.stack
             });
         }
     }

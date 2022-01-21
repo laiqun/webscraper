@@ -5,6 +5,7 @@ import * as hrtTime from "browser-process-hrtime"   //https://github.com/kumavis
 import * as loggingLevels from "./loggingLevels.js"
 //import * as proto from "./logHandle/n48" //开源库 npm install url-parse
 import * as URLParse from "url-parse"
+import * as isJSON from "is-json"
 
 class logHandler {
     constructor(msgSetting) {
@@ -30,6 +31,35 @@ class logHandler {
     setProxyServiceType(e) {
         this.proxyServiceType = e;
     }
+    formatDate(timestamp)
+    {
+        if(timestamp.toString().length<13)
+        {
+            timestamp = timestamp * 1000;
+        }
+        let localDateTime = new Date(timestamp);
+        let year = localDateTime.getFullYear();
+        let month = localDateTime.getMonth() + 1;
+        let date = localDateTime.getDate();
+        let hour = localDateTime.getHours();
+        let minute = localDateTime.getMinutes();
+        let second = localDateTime.getSeconds();
+        return year+"-"+month+"-"+date+" " + hour+":"+minute+":"+second;
+    }
+    prettyLog(outputMsg)
+    {
+        for(let key in outputMsg)
+        {
+            if(key === 'timestamp')
+            {
+                outputMsg[key] = this.formatDate(outputMsg[key]);
+                continue;
+            }
+            if(isJSON(outputMsg[key]))
+                outputMsg[key] = JSON.parse(outputMsg[key]);
+
+        }
+    }
     log(level, rawmsg, outputMsg, timestamp) {
         timestamp || (timestamp = Math.round(Date.now() / 1000));
         if(outputMsg.url == null || outputMsg.url==undefined)
@@ -45,14 +75,20 @@ class logHandler {
         outputMsg.userId = this.userId;
         outputMsg.proxyServiceType = this.proxyServiceType;
         if ("ERROR" === level || "WARNING" === level)
-            console.error(JSON.stringify(outputMsg,null,4));
+        {
+            this.prettyLog(outputMsg);
+            console.error(JSON.stringify(outputMsg,null,2));
+        }
         else
-            console.log(JSON.stringify(outputMsg,null,4));
+        {
+            this.prettyLog(outputMsg);
+            console.log(JSON.stringify(outputMsg,null,2));
+        }
     }
 
     error(rawMsg, context = {}) {
         if (this.canLog(loggingLevels.loggingLevels.Error)) {
-            if (context.stack == null)
+            if (context.stack == null || context.stack==undefined)
                 context.stack = (new Error).stack; //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
             this.log("ERROR", rawMsg, context);
         }
@@ -103,34 +139,50 @@ class logHandler {
         return this.loggingLevel >= canlogLevel;
     }
 
-    setLoggingLevel() {
-        switch (processBrowser.env.LOGGING_LEVEL) {
-            case "error":
-                this.loggingLevel = loggingLevels.loggingLevels.Error;
-                break;
+    async setLoggingLevel() {
+        if(processBrowser.browser)
+        {
+            await new Promise((resolve,reject) => {
+                chrome.storage.sync.get(["loggingLevels"], args => {
+                    if (undefined === args) {
+                        this.loggingLevel = this.defaultLoggingLevel;
+                    }
+                    else
+                        this.loggingLevel = parseInt(args["loggingLevels"]);
+                    resolve();
+                });
+            });
+        }
+        else  //in Node.js
+        {
+            switch (processBrowser.env.LOGGING_LEVEL) {
+                case "error":
+                    this.loggingLevel = loggingLevels.loggingLevels.Error;
+                    break;
 
-            case "warning":
-                this.loggingLevel = loggingLevels.loggingLevels.Warning;
-                break;
+                case "warning":
+                    this.loggingLevel = loggingLevels.loggingLevels.Warning;
+                    break;
 
-            case "notice":
-                this.loggingLevel = loggingLevels.loggingLevels.Notice;
-                break;
+                case "notice":
+                    this.loggingLevel = loggingLevels.loggingLevels.Notice;
+                    break;
 
-            case "info":
-                this.loggingLevel = loggingLevels.loggingLevels.Info;
-                break;
+                case "info":
+                    this.loggingLevel = loggingLevels.loggingLevels.Info;
+                    break;
 
-            case "debug":
-                this.loggingLevel = loggingLevels.loggingLevels.Debug;
-                break;
+                case "debug":
+                    this.loggingLevel = loggingLevels.loggingLevels.Debug;
+                    break;
 
-            case "profile":
-                this.loggingLevel = loggingLevels.loggingLevels.Profile;
-                break;
+                case "profile":
+                    this.loggingLevel = loggingLevels.loggingLevels.Profile;
+                    break;
 
-            default:
-                this.loggingLevel = this.defaultLoggingLevel;
+                default:
+                    this.loggingLevel = this.defaultLoggingLevel;
+            }
         }
     }
 }

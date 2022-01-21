@@ -146,7 +146,8 @@ class ContentScriptMessenger extends a.ChromeClientBase {
             if (e.toString().includes("Could not establish connection. Receiving end does not exist."))
                 return false;
             r.error("unexpected error message when connecting to content script", {
-                error: e.toString()
+                error: e.toString(),
+                stack:e.stack
             });
             throw  e;
         }

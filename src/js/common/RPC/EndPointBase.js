@@ -13,10 +13,10 @@ class EndpointBase {
         this.receive = this.receive.bind(this);
         this.callbacks = callbacks;
         this.name = name;//outGoing 是时间戳， inComing是target的名字
-        console.log("###########");
+        /*console.log("###########");
         console.trace();
         console.log(name);
-        console.log("###########");
+        console.log("###########");*/
         this.pendingMessages = {};
         this.port = this.initPort();
         this.port.onMessage.addListener(this.receive);
@@ -24,9 +24,11 @@ class EndpointBase {
     }
     //apply Controler 中的receive使用,它扩展了EndpointBase中的receive 方法
     postResponse(target, payload) {
+        /*
         console.log("postRes");
         console.log(target);
         console.trace();//Incoming->receive->handleCallback->postResponse
+        */
         this.port.postMessage({
             action: Actions.Actions.response,
             target: target,//sender

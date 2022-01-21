@@ -13,8 +13,8 @@ class jobDbStorage {
 
     async updateJob(job) {
         await this.dataWriter.writeDocs(job.data);
-        for (const job of job.newJobs)
-            this.addJob(job);
+        for (const oneNewJob of job.newJobs)
+            this.addJob(oneNewJob);
     }
 
     async getJob() {

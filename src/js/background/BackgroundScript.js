@@ -26,11 +26,11 @@ class BackgroundScript {
         this.experimentalFeaturesEnabled = false;
         this.messageManager = new w.MessageManager;
         this.firstTimeInstall = new S.FirstTimeInstall("https://www.webscraper.io/web-scraper-first-time-install");
-        console.log("background script constructor");
+        //console.log("background script constructor");
     }
 
     async init() {
-        console.log("background script init");
+        //console.log("background script init");
         this.messageManager.init();//注册了3个事件监听 runtime.onConnect tabsRemove InternalRuntime.onConnect
         /* 创建config实例的时候，会调用applyControler，创建InComing，name参数为"config"
         //InCombing调用基类初始化函数，EndPointBase，其初始化函数会调用initPort
@@ -65,7 +65,8 @@ class BackgroundScript {
             }).init();
         } catch (exception) {
             c.error("stat/survey client init error", {
-                error: exception.toString()
+                error: exception.toString(),
+                stack:exception.stack
             });
         }
     }
@@ -285,7 +286,7 @@ _defaults:
     }
 
     async getDataPreviewSelectorData(tabid, selectorContext) {
-        console.log("getDataPreviewSelectorData");
+        //console.log("getDataPreviewSelectorData");
         const sitemap = new d.Sitemap(selectorContext.sitemap);
         const devtoolsPage = await this.getDevtoolsWebPage(tabid);
         const devToolsElement = await devtoolsPage.getRootElement();
@@ -395,7 +396,8 @@ _defaults:
             await scraper.run(chromeTabMiddleware);
         } catch (e) {
             c.error("Scraper error occurred", {
-                error: C.getMessage(e)
+                error: C.getMessage(e),
+                stack:e.stack
             });
         }
         chrome.notifications.create("scraping-finished", {

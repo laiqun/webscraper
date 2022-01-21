@@ -19,7 +19,7 @@ let SitemapExportDataView = class extends c.BaseComponent {
     }
 
     async downloadFile(filetype) {
-        console.log("downloadFile");
+       // console.log("downloadFile");
         const {sitemap: sitemap} = this.props.appState;
         this.props.appState.startLoader();
         const i = await l.backgroundPageClient.getSitemapData(sitemap._id);

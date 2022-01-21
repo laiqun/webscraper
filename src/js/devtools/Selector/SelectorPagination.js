@@ -8,7 +8,7 @@ import * as p from "./ClickMoreElementExtractorStrategy.js"//p = i(411),
 import * as h from "./ClickOnceExtractorStrategy.js"//h = i(412),
 import * as f from "./LinkFromClickRedirectStrategy.js"//f = i(413),
 import * as m from "./LinkFromInterceptableJavaScriptClickExtractor.js"//const      m = i(414);
-        console.log("SelectorPagination module");
+       // console.log("SelectorPagination module");
 class SelectorPagination extends o.Selector {
     constructor(e) {
         super();
@@ -52,7 +52,7 @@ class SelectorPagination extends o.Selector {
     }
 
     async _getData(parentElement, dataDeDuplicator) {
-        console.log("pagination _getData");
+        //console.log("pagination _getData");
         let error_temp, a;
         const dataElements = await this.getDataElements(parentElement);
         const strategy = this.strategies();

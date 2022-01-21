@@ -427,7 +427,7 @@ class Stats {
     }
 
     async getStatId() {
-        console.log("getStatId");
+        //console.log("getStatId");
         if (!this.isEnabled)
             return "";
         else {

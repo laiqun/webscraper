@@ -1,7 +1,7 @@
 import "../img/icon48.png"
 chrome.devtools.panels.create('Web crawler', '../img/icon48.png', 'devtools_web_crawler_panel.html', function(panel)
 {
-	console.log('create customer panel success!'); // 注意这个log一般看不到
+	;//console.log('create customer panel success!'); // 注意这个log一般看不到
 });
 
 // 创建自定义侧边栏

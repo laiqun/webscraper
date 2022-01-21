@@ -44,7 +44,7 @@ class SelectorElementScroll extends o.Selector {
     }
 
     async _getData(e) {
-        console.log("SelectorElementScroll");
+       // console.log("SelectorElementScroll");
         await this.waitDelay();
         let result = [];
         await this.scrollToTop(e);

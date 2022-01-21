@@ -72,7 +72,7 @@ class TabEventListener extends r.BaseWebNavigationEventListener {
     }
 
     tabOnUpdated(tabId, changeInfo, tab) {
-        console.log("tabOnUpdated");
+        //console.log("tabOnUpdated");
         if (tabId === this.sharedState.tab.tabId) {
             if (changeInfo.status === o.ChromeTabStatus.complete)
                 this.onTabLoadComplete();

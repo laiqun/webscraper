@@ -1,7 +1,7 @@
 //
 import * as o from "./Selector.js"//o = i(10),
 import * as s from "./UniqueElementList.js"//const  s = i(85);
-console.log("element click");
+//console.log("element click");
 class SelectorElementClick extends o.Selector {
     constructor(e) {
         super();

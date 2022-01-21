@@ -3,9 +3,9 @@ import * as r from "./MemoryKeyValueStorage.js"//, r = i(594);
 import * as n from "./IndexedDBKeyValueStorage.js"//const n = i(592)
 let keyValueStorage = new class {
     constructor() {
-        console.log("oooooo");
-        console.log(e.version);
-        console.log("xxxxxx");
+       // console.log("oooooo");
+       // console.log(e.version);
+       // console.log("xxxxxx");
         e.version ? this.driver = new r.MemoryKeyValueStorage : this.driver = new n.IndexedDBKeyValueStorage;
     }
 

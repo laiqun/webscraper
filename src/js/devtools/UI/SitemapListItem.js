@@ -9,7 +9,7 @@ var n = this && this.__decorate || function (e, t, i, n) {
 
 let SitemapListItem = class extends react.Component {
 	render() {
-		console.log("sitemaplist ");
+		//console.log("sitemaplist ");
 		const {sitemap: e} = this.props;
 		if (this.props.appState.sitemapSyncEnabled)
 			return this.getSitemapRowWithSyncEnabled(e);

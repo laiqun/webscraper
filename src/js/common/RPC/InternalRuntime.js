@@ -23,9 +23,9 @@ class InternalRuntime {
 
     }
     connect({ name: name_x }) {
-        console.log("Internal Runtime call 1"+name_x);
+        //console.log("Internal Runtime call 1"+name_x);
         const { client: client_x, runtime: runtime_x } = portFactory.portFactory(name_x);
-        console.log("Internal Runtime call 2"+runtime_x);
+        //console.log("Internal Runtime call 2"+runtime_x);
         this.onConnect.call(runtime_x);
         return  client_x;
     }

@@ -5,27 +5,24 @@ class optionsClass {
     constructor() {
         this.config = serviceFactory(Targets.config);
         this.state = {
-            formValues: {
-                enableDailyStats: false,
-                storageType: "local"
-            }
         };
-        this.componentDidMount();
-        this.render();
+        this.getStoredValue();
     }
 
-    async componentDidMount() {
+    async getStoredValue() {
         this.setState({
             formValues: {
-                enableDailyStats: await this.config.get("enableDailyStats"),
-                storageType: "local"
+                enableDailyStats: await this.config.get("enableDailyStats")||false,
+                storageType: "local",
+                loggingLevels:await this.config.get("loggingLevels")||4
             }
         });
+        this.render();
     }
 
     setState(map) {
         for (let key in map)
-            this.state.formValues[key] = map[key];
+            this.state[key] = map[key];
     }
 
     render() {
@@ -34,20 +31,53 @@ class optionsClass {
         let control_parent = document.createElement("div");
         let header = document.createElement("h1");
         header.innerText = "Web crawler setting";
-        let input = document.createElement("input");
-        input.type = "checkbox";
-        input.value = "EnableDailyStats";
-        let span = document.createElement("span");
-        span.innerText = "Allow usage metric gathering";
-        control_parent.appendChild(input);
-        control_parent.appendChild(span);
+        //create input
+        let dailyStatsinput = document.createElement("input");
+        dailyStatsinput.type = "checkbox";
+        dailyStatsinput.value = "EnableDailyStats";
+        //create input span
+        let dailyStatsspan = document.createElement("span");
+        dailyStatsspan.innerText = "Allow usage metric gathering";
+
+
+        //create logging level span
+        let loggingLevelspan = document.createElement("span");
+        loggingLevelspan.innerText = "Set logging level: ";
+        let loggingLevelSelect = document.createElement("select");
+
+        let logLevelArray = ["Error","Warning","Notice","Profile","Info","Debug"];
+        for(let key in logLevelArray)
+        {
+            let option = document.createElement("option");
+            option.innerText = logLevelArray[key];
+            option.value = key;
+            loggingLevelSelect.appendChild(option);
+        }
+
+        control_parent.appendChild(dailyStatsinput);
+        control_parent.appendChild(dailyStatsspan);
+        control_parent.appendChild(document.createElement("br"));
+        control_parent.appendChild(loggingLevelspan);
+        control_parent.appendChild(loggingLevelSelect);
+
         let container = document.createElement("div");
         container.appendChild(header);
-        let p = this.privacyPolicy();
-        container.appendChild(p);
+        container.appendChild(this.privacyPolicy());
         container.appendChild(control_parent);
-        input.onchange = this.updateFormValue("enableDailyStats");
-        input.checked = this.state.formValues.enableDailyStats;
+
+        //set event handler
+        dailyStatsinput.onchange = this.updateFormValue("enableDailyStats");
+        loggingLevelSelect.onchange = this.updateFormValue("loggingLevels");
+
+        //set default value from storage
+        dailyStatsinput.checked = this.state.formValues.enableDailyStats;
+        for(let child of loggingLevelSelect.children)
+        {
+            if(child.value == this.state.formValues.loggingLevels)
+            {
+                child.selected ="selected";
+            }
+        }
         app.appendChild(container);
     }
 

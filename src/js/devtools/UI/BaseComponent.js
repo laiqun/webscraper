@@ -2,7 +2,7 @@ import * as r from "react"//r = i(0),
 import * as n from "../../common/lib/jquery.js"//n = i(65),
 class BaseComponent extends r.Component {
 	handleInputChange(e) {
-		console.log("handle input change");
+		//console.log("handle input change");
 		const target = e.target;
 		const value = "checkbox" === target.type ? target.checked : target.value;
 		const name = target.name;
@@ -49,7 +49,7 @@ class BaseComponent extends r.Component {
 
 	initFormValidator() {
 		const e = this.getFormValidatorOptions();
-		console.log("initFormValidator");
+		//console.log("initFormValidator");
 		const t = this.getFormElement();
 		n(t).bootstrapValidator(e);
 	}

@@ -9,7 +9,8 @@ let Config = class {
             storageType: storageTypes.local,
             sitemapDb: "scraper-sitemaps",
             dataDb: "",
-            enableDailyStats: true
+            enableDailyStats: true,
+            loggingLevels: 4
         };
         this.mapItemsToFields = this.mapItemsToFields.bind(this);
         this.onUpdateCallbacks = [];
@@ -44,6 +45,7 @@ let Config = class {
     }
 
     async set(key, value) {
+        o.info(key.toString()+":"+value.toString());
         if(undefined === this.fields )
             await this.loadConfiguration();
         return  new Promise(resolve => {

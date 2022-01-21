@@ -1,6 +1,6 @@
-import * as n from "./BaseWebNavigationEventListener.js"//n = i(67),
+import {BaseWebNavigationEventListener} from "./BaseWebNavigationEventListener.js"//n = i(67),
 import * as r from "../../devtools/Selector/Url.js"//    const r = i(19);
-class AjaxEventListener extends n.BaseWebNavigationEventListener {
+class AjaxEventListener extends BaseWebNavigationEventListener {
     constructor(e) {
         super(e);
         this.singleAjaxTimeout = 10000;

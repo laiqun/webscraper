@@ -58,7 +58,7 @@ DevToolsContentScriptClient = new class {
     }
 
     async canCommunicateWithContentScript() {
-        console.log("canCommunicateWithContentScript");
+        //console.log("canCommunicateWithContentScript");
         const e = await this.getInspectedWindowProtocol();
         return !["chrome-search:", "about:", "chrome:"].includes(e);
     }

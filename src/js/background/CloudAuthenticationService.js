@@ -41,7 +41,7 @@ class CloudAuthenticationService {
                     throw new Error("Unknown auth message type");
             }
         } catch (exception) {
-            log.error(exception.message);
+            log.error(exception.message,{stack:exception.stack});
             return  void callback({
                 success: false,
                 error: exception.message

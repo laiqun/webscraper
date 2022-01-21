@@ -24,7 +24,7 @@ class Dispatcher {
             this.handlePortMessage(request, sender);
     }
     handleNewPort(port) {
-        console.log("handleNewPort");
+        //console.log("handleNewPort");
         const {name: port_name} = port;
         port.onMessage.addListener(this.handlePortMessage);
         port.onDisconnect.addListener(this.removePort(port_name));
@@ -58,22 +58,22 @@ class Dispatcher {
     }
 
     removePort(e) {
-        console.log("removePort");
+        //console.log("removePort");
         return () => {
             delete this.ports[e];
         };
     }
 
     async handlePortMessage(request, sender_port) {
-        console.log("handle port message");
-        console.log(request);
+        //console.log("handle port message");
+        //console.log(request);
         //request demo:
         // action: "apply"
         // callId: 0
         // payload: {functionName: 'changeInFocus', functionArguments: Array(1)}
         // sender: {local: '1635507329571'}
         // target: {local: 'uiOverlay'}
-        console.log(sender_port);
+        //console.log(sender_port);
         const {action: action_local, target: {local: local_x, external: external_x}} = request;
         if (undefined !== local_x) {//如果local 有数据
             if (action_local in r.Actions) {

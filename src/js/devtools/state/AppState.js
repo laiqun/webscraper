@@ -61,7 +61,7 @@ class AppState {
         this.errorTimeouts = {};
         this.overrideLastHash = false;
         this.routingStore = new mobx_react_router.RouterStore;
-        console.log("App state");
+        //console.log("App state");
         if (useHashHistory) {
             //https://segmentfault.com/a/1190000018674629#comment-area createHashHistory是单页面的访问，会在url加个#号作为定位，这个对于要打包到后台作为页面时是很方便的。
             this.history = mobx_react_router.syncHistoryWithStore(useHashHistory, this.routingStore);
@@ -189,7 +189,7 @@ class AppState {
     }
 
     async locationChanged() {
-        console.log("location changed");
+        //console.log("location changed");
 
         function decodeURI(key, search_str) {//demo : key = "sitemapId", search_str = "?sitemapId=aaaaaaaaaaaa
             key = key.replace(/[\[\]]/g, "\\$&");//"sitemapId"
@@ -302,7 +302,7 @@ class AppState {
     }
 
     async dataPreview(selector_id) {
-        console.log("dataPreview");
+        //console.log("dataPreview");
         const parent_selector_id = this.selectorBreadcrumb;//面包碎屑
         await RequestPermissions.RequestPermissions.requestAdditionalPermissions();
         const selector_context = {
@@ -337,8 +337,8 @@ class AppState {
     }
 
     async updateSitemap() {
-        console.log(JSON.stringify(this.sitemap));
-        console.log("oooooooooooo");
+        //console.log(JSON.stringify(this.sitemap));
+        //console.log("oooooooooooo");
         this.sitemap.setHashHistory(this.overrideLastHash);
         this.overrideLastHash = this.sitemap.deduplicateLastHashes();
         await backgroundPageClient.backgroundPageClient.updateSitemap(this.sitemap);

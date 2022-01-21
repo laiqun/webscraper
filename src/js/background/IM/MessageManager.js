@@ -11,7 +11,7 @@ class MessageManager {
     }
 
     init() {
-        console.log("message Manager");
+        //console.log("message Manager");
         chrome.runtime.onConnect.addListener(this.handleNewConection);
         chrome.tabs.onRemoved.addListener(this.removeTabGroup);
         this.internalRuntime.onConnect.addListener(this.handleBackgroundConnection);//添加callbacks
@@ -24,9 +24,9 @@ class MessageManager {
     }
 
     handleNewConection(port) {
-        console.log("handleNewConection");
-        console.log(port);
-        console.log(port.name);
+       // console.log("handleNewConection");
+       // console.log(port);
+       // console.log(port.name);
         const tab_id = port.sender.tab.id.toString();
         if(undefined === this.tabGroups[tab_id] )
             this.tabGroups[tab_id] = new n.Dispatcher(tab_id, this.backgroundPorts);

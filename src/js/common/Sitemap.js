@@ -211,7 +211,7 @@ class Sitemap {
     }
 
     setHashHistory(overrideLastHash = false) {
-        console.log("setHashHistory");
+       // console.log("setHashHistory");
         const sitemapHash = this.getSitemapHash();
         if (this.hashHistory) {
             /*['9622df078b6b2fdd668d3f1dd3cf7afeb152ce617a23fab89cba80d55fabe4f0', '3682e7019145b95e9a37f38dfc704000b113296bf953b87ccef7e073019fef9d', '476beafeb0786f0c1415581d597c45b890dc5445f4533613c0bae5f15692d05f', '20b9d157838f2e302e951843d705ebafa6892a617af1ee220e14a4ed89297ff2', 'ede1be90bfe812968181ed8d3815f0c5543635f34dea6cb3975b9387dd761934', 'eb0ffcc206e48a3884b92ccc7cd492fbeb0aae9f9fdfedd1102600d1111881f5', '4d8418d45984e9f757fd703c970387971b8dcd5c94e7be7de830806a9ab18f0a', 'dc4e9925c7fd0bc6d4adcfcf21922a89b1c06e05f60235bc25dc2ca5dbc3540b']*/
