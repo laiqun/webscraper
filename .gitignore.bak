@@ -3,4 +3,6 @@ build
 secrets.*.js
 src/.idea
 .DS_Store
+*.pdf
+*.doc
 .idea
