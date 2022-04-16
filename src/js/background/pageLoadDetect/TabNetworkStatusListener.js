@@ -1,16 +1,16 @@
-import {default as u} from "../../common/Msg.js"//u = i(17),
-import {default as r} from "../../log/log.js";//r = i(5),
-import * as p from "../../devtools/Selector/Url.js"//p = i(19),
-import * as a from "./WebRequestEventListener.js"//a = i(596),
-import * as o from "./WebNavigationEventListener.js"//o = i(597),
-import * as s from "./TabEventListener.js"//s = i(598),
-import * as c from "./PageLoadDelayEventListener.js"//c = i(600),
-import * as l from "./GlobalTimeoutEventListener.js"//l = i(601),
-import * as h from "./FailOnErrorPagesEventListener.js"//h = i(603),
-import * as f from "./AjaxEventListener.js"//f = i(604),
-import * as m from "./MinDurationEventListener.js"//m = i(605),
-import * as g from "./LockEventListener.js"//g = i(606);
-import * as d from "./WaitForRootElementEventListener.js"//const d = i(602);
+import {default as Msg} from "../../common/Msg.js"//u = i(17),
+import {default as Log} from "../../log/log.js";//r = i(5),
+import {Url} from "../../devtools/Selector/Url.js"//p = i(19),
+import {WebRequestEventListener} from "./WebRequestEventListener.js"//a = i(596),
+import {WebNavigationEventListener} from "./WebNavigationEventListener.js"//o = i(597),
+import {TabEventListener} from "./TabEventListener.js"//s = i(598),
+import {PageLoadDelayEventListener} from "./PageLoadDelayEventListener.js"//c = i(600),
+import {GlobalTimeoutEventListener} from "./GlobalTimeoutEventListener.js"//l = i(601),
+import {FailOnErrorPagesEventListener} from "./FailOnErrorPagesEventListener.js"//h = i(603),
+import {AjaxEventListener} from "./AjaxEventListener.js"//f = i(604),
+import {MinDurationEventListener} from "./MinDurationEventListener.js"//m = i(605),
+import {LockEventListener} from "./LockEventListener.js"//g = i(606);
+import {WaitForRootElementEventListener} from "./WaitForRootElementEventListener.js"//const d = i(602);
 class TabNetworkStatusListener {
     constructor(setting) {
         this.sharedState = {
@@ -49,17 +49,17 @@ class TabNetworkStatusListener {
             onStateChanged: this.onStateChanged,
             onPageLoadDelayShouldBeReset: this.initPageLoadDelayCompletedTimeout
         };
-        this.eventListeners.lockEventListener = new g.LockEventListener(listenerSetting);
-        this.eventListeners.minDurationEventListener = new m.MinDurationEventListener(listenerSetting);
-        this.eventListeners.webRequestEventListener = new a.WebRequestEventListener(listenerSetting);
-        this.eventListeners.tabEventListener = new s.TabEventListener(listenerSetting);
-        this.eventListeners.pageLoadDelayEventListener = new c.PageLoadDelayEventListener(listenerSetting);
-        this.eventListeners.globalTimeoutEventListener = new l.GlobalTimeoutEventListener(listenerSetting);
-        this.eventListeners.ajaxEventListener = new f.AjaxEventListener(listenerSetting);
-        this.eventListeners.webNavigationEventListener = new o.WebNavigationEventListener(Object.assign(Object.assign({}, listenerSetting), {
+        this.eventListeners.lockEventListener = new LockEventListener(listenerSetting);
+        this.eventListeners.minDurationEventListener = new MinDurationEventListener(listenerSetting);
+        this.eventListeners.webRequestEventListener = new WebRequestEventListener(listenerSetting);
+        this.eventListeners.tabEventListener = new TabEventListener(listenerSetting);
+        this.eventListeners.pageLoadDelayEventListener = new PageLoadDelayEventListener(listenerSetting);
+        this.eventListeners.globalTimeoutEventListener = new GlobalTimeoutEventListener(listenerSetting);
+        this.eventListeners.ajaxEventListener = new AjaxEventListener(listenerSetting);
+        this.eventListeners.webNavigationEventListener = new WebNavigationEventListener(Object.assign(Object.assign({}, listenerSetting), {
             webNavigationEnabled: setting.webNavigationEnabled
         }));
-        this.eventListeners.failOnErrorPagesEventListener = new h.FailOnErrorPagesEventListener(Object.assign(Object.assign({}, listenerSetting), {
+        this.eventListeners.failOnErrorPagesEventListener = new FailOnErrorPagesEventListener(Object.assign(Object.assign({}, listenerSetting), {
             webRequestEventListener: this.eventListeners.webRequestEventListener,
             webNavigationEventListener: this.eventListeners.webNavigationEventListener,
             waitForListeners: [this.eventListeners.webRequestEventListener,
@@ -67,7 +67,7 @@ class TabNetworkStatusListener {
                 this.eventListeners.pageLoadDelayEventListener,
                 this.eventListeners.webNavigationEventListener]
         }));
-        this.eventListeners.waitForRootElementEventListener = new d.WaitForRootElementEventListener(Object.assign(Object.assign({}, listenerSetting), {
+        this.eventListeners.waitForRootElementEventListener = new WaitForRootElementEventListener(Object.assign(Object.assign({}, listenerSetting), {
             waitForListeners: [this.eventListeners.webRequestEventListener,
                 this.eventListeners.tabEventListener,
                 this.eventListeners.pageLoadDelayEventListener,
@@ -98,7 +98,7 @@ class TabNetworkStatusListener {
         e.lock && this.eventListeners.lockEventListener.lock();
         await new Promise((resolve, reject) => {
             this.callbacks.success = () => {
-                r.info("tab status network OK", {
+                Log.info("tab status network OK", {
                     url: this.sharedState.url
                 });
                 this.clearCallbacksAndTimeouts();
@@ -106,9 +106,9 @@ class TabNetworkStatusListener {
                 resolve();
             };
             this.callbacks.error = arg => {
-                r.notice("tab status network ERROR", {
+                Log.notice("tab status network ERROR", {
                     url: this.sharedState.url,
-                    error: u.getMessage(arg)
+                    error: Msg.getMessage(arg)
                 });
                 this.clearCallbacksAndTimeouts();
                 this.sharedState.waitForStatusActive = false;
@@ -156,7 +156,7 @@ class TabNetworkStatusListener {
 
     unlock() {
         if(!this.eventListeners.lockEventListener.isLocked())
-            r.notice("lock event listener wasn't locked");
+            Log.notice("lock event listener wasn't locked");
         this.eventListeners.lockEventListener.unlock();
     }
 
@@ -164,8 +164,8 @@ class TabNetworkStatusListener {
         if(this.webNavigationEnabled )
         {
             if(!this.eventListeners.webNavigationEventListener.state.wnOnCompleted )
-                if(!p.Url.isExtensionUrl(this.sharedState.url) )
-                    r.notice("Page loaded without web navigation completed", {
+                if(!Url.isExtensionUrl(this.sharedState.url) )
+                    Log.notice("Page loaded without web navigation completed", {
                         url: this.sharedState.url,
                         state: JSON.stringify(this.state)
                     });
@@ -175,7 +175,7 @@ class TabNetworkStatusListener {
     onStateChanged() {
         //console.log("TabNetworkStatusListener onStateChanged");
         if(this.logEventListenerChanges)
-            r.info("page load status", {
+            Log.info("page load status", {
                 pageLoadDelayCompleted: this.eventListeners.pageLoadDelayEventListener.isPageLoadComplete,
                 tabEventListenerCompleted: this.eventListeners.tabEventListener.isPageLoadComplete,
                 webNavigationCompleted: this.eventListeners.webNavigationEventListener.isPageLoadComplete,
@@ -244,13 +244,13 @@ class TabNetworkStatusListener {
         } else if (this.isPageCompletedWithSuccess()) {
             if (!this.sharedState.isHashTagChange) {
                 if(!this.eventListeners.webRequestEventListener.state.wrOnCompleted )
-                    r.notice("Page loaded without web request completed", {
+                    Log.notice("Page loaded without web request completed", {
                         url: this.sharedState.url,
                         state: JSON.stringify(this.state)
                     });
                 if(!this.eventListeners.webRequestEventListener.state.headersContentType )
-                    if(!p.Url.isExtensionUrl(this.sharedState.url) )
-                        r.notice("Page loaded without content type", {
+                    if(!Url.isExtensionUrl(this.sharedState.url) )
+                        Log.notice("Page loaded without content type", {
                             url: this.sharedState.url,
                             state: JSON.stringify(this.state),
                             hideInEsLogs: true

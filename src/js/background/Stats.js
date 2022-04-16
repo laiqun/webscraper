@@ -1,6 +1,6 @@
 import {default as log} from "../log/log.js";//a = i(5),
-import * as r from "../common/lib/jquery.js"//r = i(65),
-import * as o from "../common/Sitemap.js"//o = i(119),
+import * as JQuery from "../common/lib/jquery.js"//r = i(65),
+import {Sitemap} from "../common/Sitemap.js"//o = i(119),
 let Interval_Handle;
 
 class Stats {
@@ -221,7 +221,7 @@ class Stats {
         if (!this.isEnabled)
             return Promise.resolve({});
         const store = this.store;
-        const sitemaps = (await store.getAllSitemaps()).map(e => new o.Sitemap(e));
+        const sitemaps = (await store.getAllSitemaps()).map(e => new Sitemap(e));
         const couchDbUsed = await this.config.get("storageType").then(e => "local" !== e);
         const version = this.getExtensionVersion();
         const result = {
@@ -506,7 +506,7 @@ class Stats {
             return;
         const stats = await this.getStats();
         return new Promise((resolve, reject) => {
-            r.ajax({
+            JQuery.ajax({
                 type: "POST",
                 url: "https://stats.webscraper.io/post-stats",
                 data: JSON.stringify({

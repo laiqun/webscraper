@@ -1,17 +1,17 @@
-import * as u from "../common/Obj.js"//, u = i(57)
-import * as l from "./DataSizeLimitError.js"//, l = i(499)
-import * as a from "../devtools/SelectorOpt/SelectorList.js"//a = i(215),
-import * as o from "../common/Sitemap.js"//o = i(119),
-import * as s from "./IM/WebPageElement.js"// s = i(93),
+import {Obj} from "../common/Obj.js"//, u = i(57)
+import {DataSizeLimitError} from "./DataSizeLimitError.js"//, l = i(499)
+import {SelectorList} from "../devtools/SelectorOpt/SelectorList.js"//a = i(215),
+import {Sitemap} from "../common/Sitemap.js"//o = i(119),
+import {WebPageElement} from "./IM/WebPageElement.js"// s = i(93),
 import {DataDeduplicator} from "./DataDeduplicator.js"//const   c = i(543);
 class DataExtractor2 {
     constructor(e) {
         this.rawDataSize = 0;
         this.sizeLimit = 26214400;
-        if (e.sitemap instanceof o.Sitemap)
+        if (e.sitemap instanceof Sitemap)
             this.sitemap = e.sitemap;
         else {
-            this.sitemap = new o.Sitemap(e.sitemap);
+            this.sitemap = new Sitemap(e.sitemap);
         }
         this.parentSelectorId = e.parentSelectorId;
         this.parentElement = e.parentElement;
@@ -72,7 +72,7 @@ class DataExtractor2 {
                 const childSelectorDataItemCloned = childSelectorDataItem;
                 if(directChildSelector.shouldDeduplicateChildSelectorData() )
                     newDataDeduplicator.startNewDataBatch();
-                if (childSelectorDataItemCloned instanceof s.WebPageElement) {
+                if (childSelectorDataItemCloned instanceof WebPageElement) {
                     if (directChildSelector.id === this.parentSelectorId)
                         continue;
                     if (dataDedeuplicator && !(await dataDedeuplicator.isUniqueElement(childSelectorDataItemCloned)))
@@ -119,7 +119,7 @@ class DataExtractor2 {
         const sitemap = this.sitemap;
         const n = sitemap.getSingleSelectorDataPreviewSelectors(parentSelectorIds, selectorId);
         let parentSelectorId;
-        sitemap.selectors = new a.SelectorList(n);
+        sitemap.selectors = new SelectorList(n);
         for (let index = parentSelectorIds.length - 1; index >= 0; index--) {
             const oneParent = parentSelectorIds[index];
             if ("_root" === oneParent) {
@@ -136,19 +136,19 @@ class DataExtractor2 {
     }
 
     checkRawDataSize(oneRow) {
-        const size = u.Obj.getSize(oneRow);
+        const size = Obj.getSize(oneRow);
         this.rawDataSize += size;
         if (this.rawDataSize > this.sizeLimit)
-            throw new l.DataSizeLimitError("Extracted data size limit exceeded", this.rawDataSize / 1024 / 1024);
+            throw new DataSizeLimitError("Extracted data size limit exceeded", this.rawDataSize / 1024 / 1024);
     }
 
     checkJoinedDataSize(e, list) {
-        const baseSize = u.Obj.getSize(e);
+        const baseSize = Obj.getSize(e);
         let total = 0;
         for (const listElement of list)
-            total += baseSize + u.Obj.getSize(listElement);
+            total += baseSize + Obj.getSize(listElement);
         if (total > this.sizeLimit)
-            throw new l.DataSizeLimitError("Extracted data size limit exceeded", total / 1024 / 1024);
+            throw new DataSizeLimitError("Extracted data size limit exceeded", total / 1024 / 1024);
     }
 }
 

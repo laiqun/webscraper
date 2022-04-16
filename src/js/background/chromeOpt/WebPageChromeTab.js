@@ -1,6 +1,6 @@
-import * as o from "../../devtools/Selector/WebPageDriverType.js"//, o = i(34)
+import {WebPageDriverType} from "../../devtools/Selector/WebPageDriverType.js"//, o = i(34)
 import {WebPageDriverBase} from "../../devtools/Selector/WebPageDriverBase.js"//r = i(619),
-import * as a from "../IM/WebPageChromeTabElement.js"//const  a = i(620);
+import {WebPageChromeTabElement} from "../IM/WebPageChromeTabElement.js"//const  a = i(620);
 class WebPageChromeTab extends WebPageDriverBase {
     constructor(e) {
         super();
@@ -15,7 +15,7 @@ class WebPageChromeTab extends WebPageDriverBase {
     }
 
     async getElementsWithDriver(e) {
-        return (await this.chromeClient.getElements(e)).map(e => new a.WebPageChromeTabElement(e, this));
+        return (await this.chromeClient.getElements(e)).map(e => new WebPageChromeTabElement(e, this));
     }
 
     async close() {
@@ -24,7 +24,7 @@ class WebPageChromeTab extends WebPageDriverBase {
 
     async getRootElement() {
         const rootElement = await this.chromeClient.getRootElement();
-        return new a.WebPageChromeTabElement(rootElement, this);
+        return new WebPageChromeTabElement(rootElement, this);
     }
 
     async setProxyConfiguration(e) {
@@ -32,7 +32,7 @@ class WebPageChromeTab extends WebPageDriverBase {
     }
 
     getDriverType() {
-        return o.WebPageDriverType.chrometab;
+        return WebPageDriverType.chrometab;
     }
 
     setUserAgent(e) {

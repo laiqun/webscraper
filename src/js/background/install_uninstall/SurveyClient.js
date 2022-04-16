@@ -1,6 +1,6 @@
-import {default as s} from "../../log/log.js";//s = i(5),
-import * as a from "../../common/Async.js"//a = i(22),
-import * as o from "../database/keyValueStorage.js"// o = i(591)
+import {default as Log} from "../../log/log.js";//s = i(5),
+import {Async} from "../../common/Async.js"//a = i(22),
+import {keyValueStorage} from "../database/keyValueStorage.js"// o = i(591)
 import * as r from "axios/index"//const r = i(502) ;
 
 class SurveyClient {
@@ -13,11 +13,11 @@ class SurveyClient {
     }
 
     async getLastTimeUpdated() {
-        return await o.keyValueStorage.get("time-surveys-updated", 0);
+        return await keyValueStorage.get("time-surveys-updated", 0);
     }
 
     async getSurveys() {
-        const e = await o.keyValueStorage.get("surveys", "[]");
+        const e = await keyValueStorage.get("surveys", "[]");
         try {
             return JSON.parse(e);
         } catch (e) {
@@ -26,7 +26,7 @@ class SurveyClient {
     }
 
     async getCompletedSurveys() {
-        const e = await o.keyValueStorage.get("completed-surveys", "[]");
+        const e = await keyValueStorage.get("completed-surveys", "[]");
         try {
             return JSON.parse(e);
         } catch (e) {
@@ -35,7 +35,7 @@ class SurveyClient {
     }
 
     async getLastTimeSurveyCompleted() {
-        return await o.keyValueStorage.get("last-time-survey-completed", 0);
+        return await keyValueStorage.get("last-time-survey-completed", 0);
     }
 
     async fetchSurveysFromRemote() {
@@ -49,11 +49,11 @@ class SurveyClient {
         if (!(86400000 + (await this.getLastTimeUpdated()) > Date.now())) {
             try {
                 const e = await this.fetchSurveysFromRemote();
-                await o.keyValueStorage.set("surveys", JSON.stringify(e));
+                await keyValueStorage.set("surveys", JSON.stringify(e));
             } catch (e) {
-                await o.keyValueStorage.set("surveys", JSON.stringify([]));
+                await keyValueStorage.set("surveys", JSON.stringify([]));
             }
-            await o.keyValueStorage.set("time-surveys-updated", Date.now());
+            await keyValueStorage.set("time-surveys-updated", Date.now());
         }
     }
 
@@ -69,7 +69,7 @@ class SurveyClient {
                 if (!(survey.minDataScraped > this.userRecordCount || survey.minSitemaps > this.userSitemapCount || completed_surveys.includes(survey.id)))
                     return survey;
         } catch (exception) {
-            s.error("An error occurred while fetching surveys", {
+            Log.error("An error occurred while fetching surveys", {
                 error: exception.toString(),
                 stack:exception.stack
             });
@@ -94,16 +94,16 @@ class SurveyClient {
                 await this.submitSurveyToRemote(e);
                 const completed_survery = await this.getCompletedSurveys();
                 completed_survery.push(e.surveyId);
-                await o.keyValueStorage.set("completed-surveys", JSON.stringify(completed_survery));
-                await o.keyValueStorage.set("last-time-survey-completed", Date.now());
+                await keyValueStorage.set("completed-surveys", JSON.stringify(completed_survery));
+                await keyValueStorage.set("last-time-survey-completed", Date.now());
                 break;
             } catch (exception) {
-                s.error("an error occurred while submitting survey", {
+                Log.error("an error occurred while submitting survey", {
                     error: exception.toString(),
                     stack:exception.stack
                 });
                 t++;
-                await a.Async.sleep(10000);
+                await Async.sleep(10000);
             }
     }
 }

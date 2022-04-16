@@ -1,7 +1,7 @@
 import * as pouchDB from "pouchdb-browser"//r = i(565),
-import {default as o} from "../../log/log.js";//o = i(5),
-import * as a from "../../common/Sitemap.js"//a = i(119),
-import * as s from "./StoreScrapeResultWriter.js"//const   s = i(572);
+import {default as Log} from "../../log/log.js";//o = i(5),
+import {Sitemap} from "../../common/Sitemap.js"//a = i(119),
+import {StoreScrapeResultWriter} from "./StoreScrapeResultWriter.js"//const   s = i(572);
 let PouchDB;
 PouchDB = undefined !== pouchDB.default ? pouchDB.default : pouchDB;
 
@@ -39,7 +39,7 @@ class PouchDbStorage {
             await dataDb.destroy();
         }
         const sitemapDataDb = this.getSitemapDataDb(databaseName);
-        return new s.StoreScrapeResultWriter(sitemapDataDb);
+        return new StoreScrapeResultWriter(sitemapDataDb);
     }
     async deleteSitemapDataDb(sitemap_id,destroyOldDB)
     {
@@ -52,7 +52,7 @@ class PouchDbStorage {
     }
     async createSitemap(sitemap) {
         const doc = JSON.parse(JSON.stringify(sitemap));
-        sitemap._id || o.info("cannot save sitemap without an id", {
+        sitemap._id || Log.info("cannot save sitemap without an id", {
             sitemap: JSON.stringify(sitemap)
         });
         const result = await this.sitemapDb.put(doc);
@@ -88,7 +88,7 @@ class PouchDbStorage {
         const sitemaps = [];
         for (const rowsKey in allDocs.rows) {
             const doc = allDocs.rows[rowsKey].doc;
-            const sitemap = new a.Sitemap(doc);
+            const sitemap = new Sitemap(doc);
             sitemaps.push(sitemap);
         }
         return sitemaps;
@@ -101,7 +101,7 @@ class PouchDbStorage {
         const allSitemapMetadata = [];
         for (const rowsKey in allDocs.rows) {
             const doc = allDocs.rows[rowsKey].doc;
-            const sitemap = new a.Sitemap(doc);
+            const sitemap = new Sitemap(doc);
             const sitemapMetaData = {
                 domain: sitemap.getFirstStartUrlDomain(),
                 hashHistory: sitemap.hashHistory,

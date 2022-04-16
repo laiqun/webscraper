@@ -1,7 +1,7 @@
-import {default as o} from "../../common/Msg.js"//o = i(17),
-import {default as a} from "../../log/log.js";//a = i(5),
-import * as r from "./Proxy.js"//const r = i(611);
-class ImageBlocker extends r.Proxy {
+import {default as Msg} from "../../common/Msg.js"//o = i(17),
+import {default as Log} from "../../log/log.js";//a = i(5),
+import {Proxy} from "./Proxy.js"//const r = i(611);
+class ImageBlocker extends Proxy {
     async initImageBlocker() {
         if (this.blockImages) {
             await this.blockAllImagesByDefault();
@@ -29,8 +29,8 @@ class ImageBlocker extends r.Proxy {
             }, () => {
                 const lastError = chrome.runtime.lastError;
                 if (null != lastError) {
-                    const errorMsg = o.getMessage(lastError);
-                    a.error("couldn't toggle images", {
+                    const errorMsg = Msg.getMessage(lastError);
+                    Log.error("couldn't toggle images", {
                         error: errorMsg,
                         pattern: pattern,
                         setting: isBlock

@@ -1,7 +1,7 @@
-import {default as o} from "../../common/Msg.js"//o = i(17),
-import {default as r} from "../../log/log.js";//r = i(5),
-import * as a from "./ChromeClientBase.js"//const  a = i(615);
-class ContentScriptMessenger extends a.ChromeClientBase {
+import {default as Msg} from "../../common/Msg.js"//o = i(17),
+import {default as Log} from "../../log/log.js";//r = i(5),
+import {ChromeClientBase} from "./ChromeClientBase.js"//const  a = i(615);
+class ContentScriptMessenger extends ChromeClientBase {
     sendMessage(method, args, disable_error_log, tabid) {
         undefined === args && (args = []);
         const request = {
@@ -17,7 +17,7 @@ class ContentScriptMessenger extends a.ChromeClientBase {
                     if ("[object Object]" === error_str)
                         error_str = JSON.stringify(lastError);
                     if (!disable_error_log)
-                        r.error("Failed to send message to chrome tab", {
+                        Log.error("Failed to send message to chrome tab", {
                             error: error_str,
                             method: method,
                             request: JSON.stringify(request)
@@ -27,8 +27,8 @@ class ContentScriptMessenger extends a.ChromeClientBase {
                 if (res.success)
                     resolve(res.response);
                 else {
-                    if (!o.startsWithAnyOf(res.error, ["ACCESSING_UNDEFINED_ELEMENT", "SCRIPT_SELECTOR_ERROR", "ELEMENT_SELECTION_ERROR", "PAGE_STATUS_CODE_ERROR"]))
-                        r.error("Content Script client error", {
+                    if (!Msg.startsWithAnyOf(res.error, ["ACCESSING_UNDEFINED_ELEMENT", "SCRIPT_SELECTOR_ERROR", "ELEMENT_SELECTION_ERROR", "PAGE_STATUS_CODE_ERROR"]))
+                        Log.error("Content Script client error", {
                             error: res.error,
                             request: JSON.stringify(request)
                         });
@@ -115,7 +115,7 @@ class ContentScriptMessenger extends a.ChromeClientBase {
     }
 
     ping() {
-        return r.info("ping pong"), "pong";
+        return Log.info("ping pong"), "pong";
     }
 
     getRootElement() {
@@ -145,7 +145,7 @@ class ContentScriptMessenger extends a.ChromeClientBase {
         } catch (e) {
             if (e.toString().includes("Could not establish connection. Receiving end does not exist."))
                 return false;
-            r.error("unexpected error message when connecting to content script", {
+            Log.error("unexpected error message when connecting to content script", {
                 error: e.toString(),
                 stack:e.stack
             });

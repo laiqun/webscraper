@@ -1,5 +1,5 @@
 import {BaseWebNavigationEventListener} from "./BaseWebNavigationEventListener.js"//n = i(67),
-import * as r from "../../devtools/Selector/Url.js"//    const r = i(19);
+import {Url} from "../../devtools/Selector/Url.js"//    const r = i(19);
 class AjaxEventListener extends BaseWebNavigationEventListener {
     constructor(e) {
         super(e);
@@ -136,7 +136,7 @@ class AjaxEventListener extends BaseWebNavigationEventListener {
     }
 
     isRequestMonitored(e) {
-        if(r.Url.getTopLevelDomain(e.url) !== r.Url.getTopLevelDomain(this.sharedState.url))
+        if(Url.getTopLevelDomain(e.url) !== Url.getTopLevelDomain(this.sharedState.url))
             return false;
         return  e.tabId === this.sharedState.tab.tabId || -1 === e.tabId;
     }

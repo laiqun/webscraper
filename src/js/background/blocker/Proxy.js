@@ -1,6 +1,6 @@
-import * as a from "../chromeOpt/WindowManager.js"//const  a = i(612);
-import {default as r} from "../../log/log.js";//r = i(5),
-class Proxy extends a.WindowManager {
+import {WindowManager} from "../chromeOpt/WindowManager.js"//const  a = i(612);
+import {default as Log} from "../../log/log.js";//r = i(5),
+class Proxy extends WindowManager {
     constructor() {
         super(...arguments);
         this.proxyAuthCallbacks = [];
@@ -40,7 +40,7 @@ class Proxy extends a.WindowManager {
 
     async configureProxy(e) {
         await new Promise((resolve, reject) => {
-            r.info("setting proxy settings");
+            Log.info("setting proxy settings");
             chrome.proxy.settings.set({
                 value: e,
                 scope: "regular"
@@ -49,7 +49,7 @@ class Proxy extends a.WindowManager {
                 if (lastError)
                     reject(lastError);
                 else {
-                    r.info("proxy set up");
+                    Log.info("proxy set up");
                     resolve();
                 }
             });
@@ -124,7 +124,7 @@ class Proxy extends a.WindowManager {
                 }
             };
         } else {
-            r.notice("Received auth request when already authenticated. Wrong login or IP blacklisted", {
+            Log.notice("Received auth request when already authenticated. Wrong login or IP blacklisted", {
                 details: JSON.stringify(e)
             });
             return {cancel: true};

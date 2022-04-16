@@ -1,4 +1,5 @@
 import {Job} from "../Job.js"//const r = i(500);
+import {default as Log} from "../../log/log.js";//o = i(5),
 class jobDbStorage {
     constructor(e) {
         this.urlsAddedToQueue = {};
@@ -12,9 +13,11 @@ class jobDbStorage {
     }
 
     async updateJob(job) {
+        Log.debug("before updateJob",{"jobQueue":this.jobQueue});
         await this.dataWriter.writeDocs(job.data);
         for (const oneNewJob of job.newJobs)
             this.addJob(oneNewJob);
+        Log.debug("after updateJob",{"jobQueue":this.jobQueue});
     }
 
     async getJob() {
@@ -28,6 +31,7 @@ class jobDbStorage {
     }
 
     loadStartUrls(sitemap) {
+        Log.debug("before loadStartUrls",{"jobQueue":this.jobQueue});
         const startUrls = sitemap.getStartUrls();
         for (const startUrl of startUrls)
             if (this.canBeAdded(startUrl)) {
@@ -42,6 +46,7 @@ class jobDbStorage {
                 this.addJob(job);
                 this.jobQueue.push(job);
             }
+        Log.debug("after loadStartUrls",{"jobQueue":this.jobQueue});
     }
 
     addJob(job) {

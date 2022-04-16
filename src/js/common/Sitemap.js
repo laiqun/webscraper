@@ -1,10 +1,10 @@
-import * as n from "./CSV.js" //n = i(415),
-import * as a from "../devtools/SelectorOpt/selectorFactory.js" //a = i(94),
-import * as l from "../devtools/Selector/Url.js" //  , l = i(19)
-import * as r from "../devtools/SelectorOpt/SelectorList.js" //r = i(215),
-import * as o from "./Obj.js"//o = i(57),
+import {CSV} from "./CSV.js" //n = i(415),
+import {selectorFactory} from "../devtools/SelectorOpt/selectorFactory.js" //a = i(94),
+import {Url} from "../devtools/Selector/Url.js" //  , l = i(19)
+import {SelectorList} from "../devtools/SelectorOpt/SelectorList.js" //r = i(215),
+import {Obj} from "./Obj.js"//o = i(57),
 import crypto from "crypto-browserify" //const     s = i(140);
-import * as u from "./Xlsx.js"
+import {Xlsx} from "./Xlsx.js"
 class Sitemap {
     constructor(doc) {
         this.initData(doc);
@@ -14,7 +14,7 @@ class Sitemap {
         this._id = doc._id;
         this.startUrl = this.fixStartUrls(doc.startUrl);
         this.auth = doc.auth;
-        const selectorList = new r.SelectorList(doc.selectors);
+        const selectorList = new SelectorList(doc.selectors);
         this.selectors = selectorList;
         this.websiteStateSetup = doc.websiteStateSetup;
         if (doc.hashHistory && doc.hashHistory.length > 0)
@@ -78,7 +78,7 @@ class Sitemap {
     }
 
     updateSelector(originalSelector, t) {
-        const after_selector = a.selectorFactory(t);
+        const after_selector = selectorFactory(t);
         if (!this.hasSelector(originalSelector.id)) {
             this.selectors.push(after_selector);
             return undefined;
@@ -150,12 +150,12 @@ class Sitemap {
 
     getDataExportCsvBlob(e) {
         const t = this.getDataColumns();
-        return n.CSV.getCsvBlob(e, t);
+        return CSV.getCsvBlob(e, t);
     }
 
     async getDataExportXlsxBlob(e) {
         const t = this.getDataColumns();
-        return await u.Xlsx.getXlsxBlob(e, t);
+        return await Xlsx.getXlsxBlob(e, t);
     }
 
     getSelectorById(e) {
@@ -206,7 +206,7 @@ class Sitemap {
     }
 
     getSitemapHash() {
-        const e = o.Obj.recursiveKeySort(JSON.parse(JSON.stringify(this))).toString();//这里深拷贝一下，不影响原来的值
+        const e = Obj.recursiveKeySort(JSON.parse(JSON.stringify(this))).toString();//这里深拷贝一下，不影响原来的值
         return crypto.createHash("sha256").update(e).digest("hex");
     }
 
@@ -232,7 +232,7 @@ class Sitemap {
     }
 
     getFirstStartUrlDomain() {
-        return l.Url.getDomain(Array.isArray(this.startUrl) ? this.startUrl[0] : this.startUrl);
+        return Url.getDomain(Array.isArray(this.startUrl) ? this.startUrl[0] : this.startUrl);
     }
 
     removeSingleSelector(selector_id) {
@@ -265,9 +265,9 @@ class Sitemap {
 
     deleteDefaultExperimentalAttributes(e) {
         for (const [t, i] of Object.entries(e.selectors)) {
-            const n = a.selectorFactory(i), r = n.getExperimentalFeatures();
+            const n = selectorFactory(i), r = n.getExperimentalFeatures();
             if (r.length > 0) {
-                const i = a.selectorFactory({
+                const i = selectorFactory({
                     type: n.type
                 });
                 for (const a of r) n[a] === i[a] && delete e.selectors[t][a];

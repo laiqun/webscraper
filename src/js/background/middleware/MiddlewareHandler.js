@@ -1,5 +1,5 @@
 import * as URLParse from "url-parse"//const r = i(48),
-import * as a from "./JobRuntimeMetadata.js"//a = i(556);
+import {JobRuntimeMetadata} from "./JobRuntimeMetadata.js"//a = i(556);
 class MiddlewareHandler {
     constructor(meddlers) {
         this.currentDomain = "";
@@ -7,7 +7,7 @@ class MiddlewareHandler {
     }
 
     async handle(jobs) {
-        const jobRuntimeMetadata = new a.JobRuntimeMetadata;
+        const jobRuntimeMetadata = new JobRuntimeMetadata;
         const func = async middlewareIndex => {
             const middleware = this.middlewares[middlewareIndex];
             const hostname = URLParse(jobs.url).hostname;

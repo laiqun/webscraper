@@ -1,4 +1,4 @@
-import {default as logFunc} from "../log/log.js";
+import {default as Log} from "../log/log.js";
 import {TimeoutError} from "./TimeoutError.js";
 
 class Async {
@@ -8,22 +8,20 @@ class Async {
 
     static async sleepDifference(start_time, duration) {
         const now = Date.now();
-        const remanent_time = duration - (now - start_time);
-        if (remanent_time > 0)
-        {
-            logFunc.info("will be sleeping for additional " + remanent_time);
-            await Async.sleep(remanent_time)
-        }
-        else
-            logFunc.info("will not be sleeping for additional time");
+        const remain_time = duration - (now - start_time);
+        if (remain_time > 0) {
+            Log.info("will be sleeping for additional " + remain_time);
+            await Async.sleep(remain_time)
+        } else
+            Log.info("will not be sleeping for additional time");
     }
 
     static async timeoutPromise(promise_item, duration, index) {
         let timeout_handle;
         const promise_array = [new Promise((resolve, reject) => {
             timeout_handle = setTimeout(() => {
-                    reject(new TimeoutError("timeout: " + index));
-                }, duration);
+                reject(new TimeoutError("timeout: " + index));
+            }, duration);
         }), promise_item];
         try {
             return await Promise.race(promise_array).then(args => (clearTimeout(timeout_handle), args));
@@ -37,7 +35,7 @@ class Async {
         let timeout_handle;
         const promiseList = [new Promise((resolve, reject) => {
             timeout_handle = setTimeout(() => {
-                logFunc.log(log_level, "request timed out. continuing", {
+                Log.log(log_level, "request timed out. continuing", {
                     error: error_item
                 });
                 resolve();

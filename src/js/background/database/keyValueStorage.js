@@ -1,12 +1,12 @@
-import * as e from "process/browser"
-import * as r from "./MemoryKeyValueStorage.js"//, r = i(594);
-import * as n from "./IndexedDBKeyValueStorage.js"//const n = i(592)
+import * as processBrowser from "process/browser"
+import {MemoryKeyValueStorage} from "./MemoryKeyValueStorage.js"//, r = i(594);
+import {IndexedDBKeyValueStorage} from "./IndexedDBKeyValueStorage.js"//const n = i(592)
 let keyValueStorage = new class {
     constructor() {
        // console.log("oooooo");
        // console.log(e.version);
        // console.log("xxxxxx");
-        e.version ? this.driver = new r.MemoryKeyValueStorage : this.driver = new n.IndexedDBKeyValueStorage;
+        processBrowser.version ? this.driver = new MemoryKeyValueStorage : this.driver = new IndexedDBKeyValueStorage;
     }
 
     get(e, t) {

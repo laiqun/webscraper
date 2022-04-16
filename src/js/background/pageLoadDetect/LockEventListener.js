@@ -1,6 +1,6 @@
-import * as n from "./BaseWebNavigationEventListener.js"//n = i(67),
+import {BaseWebNavigationEventListener} from "./BaseWebNavigationEventListener.js"//n = i(67),
 
-class LockEventListener extends n.BaseWebNavigationEventListener {
+class LockEventListener extends BaseWebNavigationEventListener {
     deInitListeners() {
     }
 

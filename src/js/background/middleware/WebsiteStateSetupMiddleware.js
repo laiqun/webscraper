@@ -1,5 +1,5 @@
 import {BaseMiddleware} from "./BaseMiddleware.js"//r = i(33)
-import {default as log} from "../../log/log.js";//a = i(5),
+import {default as Log} from "../../log/log.js";//a = i(5),
 import {Async} from "../../common/Async.js"//const r = i(22);
 class WebsiteStateSetupMiddleware extends BaseMiddleware {
     constructor(webPage, sitemap) {
@@ -15,7 +15,7 @@ class WebsiteStateSetupMiddleware extends BaseMiddleware {
     }
 
     async setupState() {
-        log.info("Setting up website state");
+        Log.info("Setting up website state");
         const sitemap = this.sitemap;
         const webPage = this.webPage;
         const websiteStateSetup = sitemap.websiteStateSetup;

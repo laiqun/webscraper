@@ -1,5 +1,5 @@
 import {default as Msg} from "../../common/Msg.js"//a = i(17),
-import {default as log} from "../../log/log.js";//o = i(5),
+import {default as Log} from "../../log/log.js";//o = i(5),
 import {BaseMiddleware} from "./BaseMiddleware.js"//const r = i(33);
 class DetectRedirectAfterPageLoadMiddleware extends BaseMiddleware {
     constructor(webPage) {
@@ -19,7 +19,7 @@ class DetectRedirectAfterPageLoadMiddleware extends BaseMiddleware {
                         await this.webPage.waitForPageLoadComplete();
                         jobRuntimeInfo = await this.webPage.getPageLoadState();
                         if (t.statusCode >= 400) {
-                            log.notice("FIXME - page was redirected during data extraction and loaded with error status code. Status code will be ignored and empty page returned. Status code parser override is ignored", {
+                            Log.notice("FIXME - page was redirected during data extraction and loaded with error status code. Status code will be ignored and empty page returned. Status code parser override is ignored", {
                                 statusCode: t.statusCode
                             });
                             return []

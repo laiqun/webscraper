@@ -6,3 +6,4 @@
 set NODE_ENV=development
 
 
+https://developer.chrome.com/docs/extensions/reference/webRequest/

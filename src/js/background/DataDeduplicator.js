@@ -1,5 +1,5 @@
 import {Obj}from "../common/Obj.js"//, a = i(57)
-import {default as log} from "../log/log.js";//c = i(5),
+import {default as Log} from "../log/log.js";//c = i(5),
 import {UniqueElementList} from "../devtools/selector/UniqueElementList.js"
 
 class DataDeduplicator {
@@ -43,7 +43,7 @@ class DataDeduplicator {
 
     getFirstPageDeduplicationHash() {
         if(undefined === this.firstPageDeduplicationHash )
-            log.warning("missing first page deduplication hash");
+            Log.warning("missing first page deduplication hash");
         return this.firstPageDeduplicationHash;
     }
 

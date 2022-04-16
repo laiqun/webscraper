@@ -20,7 +20,12 @@ class EndpointBase {
         this.pendingMessages = {};
         this.port = this.initPort();
         this.port.onMessage.addListener(this.receive);
+        this.port.onDisconnect.addListener (this.reconnect);
         this.messageIdIncrement = 0;
+    }
+    reconnect()
+    {
+        this.port = this.initPort();
     }
     //apply Controler 中的receive使用,它扩展了EndpointBase中的receive 方法
     postResponse(target, payload) {

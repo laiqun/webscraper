@@ -1,5 +1,5 @@
-import * as n from "./BaseWebNavigationEventListener.js"//const n = i(67);
-class PageLoadDelayEventListener extends n.BaseWebNavigationEventListener {
+import {BaseWebNavigationEventListener} from "./BaseWebNavigationEventListener.js"//const n = i(67);
+class PageLoadDelayEventListener extends BaseWebNavigationEventListener {
     deInitListeners() {
     }
 

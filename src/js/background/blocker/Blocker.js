@@ -1,7 +1,7 @@
-import * as n from "./UrlBlocker2.js"//    const n = i(617);
+import {UrlBlocker2} from "./UrlBlocker2.js"//    const n = i(617);
 class Blocker {
     constructor() {
-        this.urlBlocker = new n.UrlBlocker2;
+        this.urlBlocker = new UrlBlocker2;
         this.handleWebRequest = this.handleWebRequest.bind(this);
     }
 

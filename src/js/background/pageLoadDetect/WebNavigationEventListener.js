@@ -1,7 +1,7 @@
-import * as a from "../../devtools/Selector/Url.js"//a = i(19),
-import {default as n} from "../../log/log.js";//n = i(5),
-import * as r from "./BaseWebNavigationEventListener.js"//const r = i(67);
-class WebNavigationEventListener extends r.BaseWebNavigationEventListener {
+import {Url} from "../../devtools/Selector/Url.js"//a = i(19),
+import {default as Log} from "../../log/log.js";//n = i(5),
+import {BaseWebNavigationEventListener} from "./BaseWebNavigationEventListener.js"//const r = i(67);
+class WebNavigationEventListener extends BaseWebNavigationEventListener {
     constructor(e) {
         super(e);
         this.listeners = {
@@ -18,7 +18,7 @@ class WebNavigationEventListener extends r.BaseWebNavigationEventListener {
     }
 
     get isPageLoadComplete() {
-        return !this.webNavigationEnabled || (!!this.sharedState.isHashTagChange || (!!a.Url.isExtensionUrl(this.sharedState.url) || this.state.wnOnCompleted));
+        return !this.webNavigationEnabled || (!!this.sharedState.isHashTagChange || (!!Url.isExtensionUrl(this.sharedState.url) || this.state.wnOnCompleted));
     }
 
     get pageLoadError() {
@@ -102,7 +102,7 @@ class WebNavigationEventListener extends r.BaseWebNavigationEventListener {
         {
             if(true === this.state.wnOnBeforeNavigate)
             {
-                n.info("JavaScript redirect detected", {
+                Log.info("JavaScript redirect detected", {
                     sourceUrl: this.sharedState.url,
                     toUrl: e.url,
                     wnOnCompleted: this.state.wnOnCompleted

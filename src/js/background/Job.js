@@ -1,25 +1,24 @@
 class Job {
     constructor(e) {
-        if(undefined !== e.parentJob )
+        if (undefined !== e.parentJob)
             this.url = this.combineUrls(e.parentJob.url, e.url);
-        else
-        {
+        else {
             this.url = e.url;
         }
-        if(undefined !== e._id)
+        if (undefined !== e._id)
             this._id = e._id;
-        if(undefined !== e._rev )
+        if (undefined !== e._rev)
             this._rev = e._rev;
         this.parentSelector = e.parentSelector;
         this.baseData = e.baseData || {};
         this.executed = e.executed || false;
-        if(e.failed_retries)
+        if (e.failed_retries)
             this.failed_retries = e.failed_retries;
-        if(e.empty_retries )
+        if (e.empty_retries)
             this.empty_retries = e.empty_retries;
-        if(e.timeAvailableAt)
+        if (e.timeAvailableAt)
             this.timeAvailableAt = e.timeAvailableAt;
-        if(e.deduplicateFirstPageData )
+        if (e.deduplicateFirstPageData)
             this.deduplicateFirstPageData = e.deduplicateFirstPageData;
     }
 
@@ -30,8 +29,8 @@ class Job {
     recordCanHaveChildJobs(e, t) {
         if (undefined === e._follow)
             return false;
-        const i = e._followSelectorId;
-        return 0 !== t.getDirectChildSelectors(i).length;
+        const followSelectorId = e._followSelectorId;
+        return 0 !== t.getDirectChildSelectors(followSelectorId).length;
     }
 
     getResults() {

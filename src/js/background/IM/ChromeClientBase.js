@@ -1,4 +1,4 @@
-import {default as r} from "../../log/log.js";//r = i(5),
+import {default as Log} from "../../log/log.js";//r = i(5),
 class ChromeClientBase {
     constructor(e) {
         this.tab = {
@@ -15,7 +15,7 @@ class ChromeClientBase {
                 const lastError = chrome.runtime.lastError;
                 if (null != lastError)
                 {
-                    r.error("Failed to get tab info", {
+                    Log.error("Failed to get tab info", {
                         error: lastError.toString()
                     });
                     return reject("Failed to get tab info" + lastError.toString());

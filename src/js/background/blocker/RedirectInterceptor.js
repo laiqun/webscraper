@@ -1,7 +1,7 @@
-import * as a from "../chromeOpt/ChromeTabs.js"//a = i(196),
-import * as o from "../pageLoadDetect/TabNetworkStatusListener.js"//o = i(511),
-import * as s from "../../common/Async.js"//s = i(22),
-import * as r from "../../contentjs/Action/ClickActionTypes.js"//r = i(83),
+import {ChromeTabs} from "../chromeOpt/ChromeTabs.js"//a = i(196),
+import {TabNetworkStatusListener} from "../pageLoadDetect/TabNetworkStatusListener.js"//o = i(511),
+import {Async} from "../../common/Async.js"//s = i(22),
+import {ClickActionTypes} from "../../contentjs/Action/ClickActionTypes.js"//r = i(83),
 class RedirectInterceptor{
     constructor(e) {
         this.started = false;
@@ -62,8 +62,8 @@ class RedirectInterceptor{
     }
 
     async createTabDuplicate() {
-        const e = await a.ChromeTabs.duplicate(this.tab.tabId);
-        const t = new o.TabNetworkStatusListener({
+        const e = await ChromeTabs.duplicate(this.tab.tabId);
+        const t = new TabNetworkStatusListener({
             webNavigationEnabled: "undefined" == typeof chrome || undefined !== chrome.webNavigation
         });
         t.setAlmostLoaded({
@@ -87,13 +87,13 @@ class RedirectInterceptor{
     async clickInDuplicateTab(e) {
         const t = await this.chromeClient.getCSSSelector(e);
         const i = this.chromeClient.sendMessage.bind(this, "getElement", [t, 0], false, this.duplicateTabId);
-        const n = await s.Async.waitForCallback(i, "Element reference in duplicate tab not found");
-        await this.chromeClient.sendMessage("click", [n, r.ClickActionTypes.realLikeEvents], false, this.duplicateTabId);
+        const n = await Async.waitForCallback(i, "Element reference in duplicate tab not found");
+        await this.chromeClient.sendMessage("click", [n, ClickActionTypes.realLikeEvents], false, this.duplicateTabId);
     }
 
     async closeDuplicateTab() {
         if(this.duplicateTabId )
-            await a.ChromeTabs.remove(this.duplicateTabId);
+            await ChromeTabs.remove(this.duplicateTabId);
     }
 }
 

@@ -1,5 +1,5 @@
-import * as n from "./BaseWebNavigationEventListener.js"//n = i(67),
-class MinDurationEventListener extends n.BaseWebNavigationEventListener {
+import {BaseWebNavigationEventListener} from "./BaseWebNavigationEventListener.js"//n = i(67),
+class MinDurationEventListener extends BaseWebNavigationEventListener {
     deInitListeners() {
     }
 

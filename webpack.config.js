@@ -19,6 +19,7 @@ if (fileSystem.existsSync(secretsPath)) {
 }
 
 var options = {
+  devtool: '#eval-source-map',
   mode: process.env.NODE_ENV || "development",
   entry: {
     popup: path.join(__dirname, "src", "js", "popup.js"),

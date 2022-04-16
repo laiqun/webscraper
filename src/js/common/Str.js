@@ -1,5 +1,5 @@
 //75
-import * as n from "buffer/index"
+import {Buffer} from "buffer/index"
 
 class Str {
     static slugify(e) {
@@ -12,7 +12,7 @@ class Str {
     }
 
     static getSize(t) {
-        return "undefined" != typeof Blob ? new Blob([t]).size : n.Buffer.byteLength(t, "utf-8");
+        return "undefined" != typeof Blob ? new Blob([t]).size : Buffer.byteLength(t, "utf-8");
     }
     //splitCamelCase("pageLoadDelay")
     //"page Load Delay"

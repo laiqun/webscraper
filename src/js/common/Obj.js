@@ -18,9 +18,9 @@ console.log(aaa) // { kkk: 'hello c', kkm: 'world c' }
 import {kkk} from 'aaa'
 console.log(kkk) // 报错：SyntaxError: The requested module 'aaa' does not provide an export named 'kkk'
  */
-import * as n from "./Str.js" //n = i(75),
+import {Str} from "./Str.js" //n = i(75),
 //import * as r from "crypto-browserify" //const  r = i(140);
-import createHash from "crypto-browserify"
+import {createHash} from "crypto-browserify"
 
 class Obj {
     static clone(e) {
@@ -72,7 +72,7 @@ class Obj {
 
     static getSize(e) {
         const t = JSON.stringify(e);
-        return n.Str.getSize(t);
+        return Str.getSize(t);
     }
 
     static getHash(e) {

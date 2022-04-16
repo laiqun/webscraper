@@ -1,5 +1,5 @@
-import * as o from "../../contentjs/HighlightOverly/Targets.js"//,  o = i(73);
-import * as r from "../../common/Actions.js"//r = i(27),
+import {Targets} from "../../contentjs/HighlightOverly/Targets.js"//,  o = i(73);
+import {Actions} from "../../common/Actions.js"//r = i(27),
 import * as a from "../Errors.js"//const a = i(625);
 class Dispatcher {
     constructor(tab_id, backgroundPorts) {
@@ -35,7 +35,7 @@ class Dispatcher {
     }
     dispatchError(sender_port, error_type, msg = "") {
         sender_port.postMessage({
-            action: r.Actions.error,
+            action: Actions.error,
             payload: {
                 type: error_type,
                 message: msg
@@ -76,7 +76,7 @@ class Dispatcher {
         //console.log(sender_port);
         const {action: action_local, target: {local: local_x, external: external_x}} = request;
         if (undefined !== local_x) {//如果local 有数据
-            if (action_local in r.Actions) {
+            if (action_local in Actions) {
                 try {
                     let target_port;
                     if( local_x in this.backgroundPorts ){
@@ -106,10 +106,10 @@ class Dispatcher {
         // sender: {local: '1635507329571'}
         // target: {local: 'uiOverlay'}
         sender_port.postMessage({
-            action: r.Actions.response,
+            action: Actions.response,
             target: request.sender,
             sender: {
-                local: o.Targets.backgroundScript
+                local: Targets.backgroundScript
             },
             callId: request.callId,
             payload: {

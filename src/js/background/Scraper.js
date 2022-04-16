@@ -1,8 +1,8 @@
 import * as processBrowser from "process/browser"
-import {default as a} from "../log/log.js";//a = i(5),
-import * as r from "../common/Async.js"//r = i(22),
-import {default as o} from "../common/Msg.js"//o = i(17),
-import * as s from "./UnrecoverablError.js"//const   s = i(501);
+import {default as Log} from "../log/log.js";//a = i(5),
+import {Async} from "../common/Async.js"//r = i(22),
+import {default as Msg} from "../common/Msg.js"//o = i(17),
+import {UnrecoverablError} from "./UnrecoverablError.js"//const   s = i(501);
 
 class Scraper {
     constructor(e) {
@@ -11,7 +11,7 @@ class Scraper {
             "chrome not reachable",
             "session deleted because of page crash",
             "REMOTE_CHROME_CLIENT_RECEIVED_REQUEST_WHILE_WAITING_FOR_PREVIOUS",
-            s.UnrecoverablError.prefix];
+            UnrecoverablError.prefix];
         this.silentMiddlewareExecutionErrors = ["Too many failed or empty jobs"];
         this.storageSyncedBecauseOfFailedJobCount = 0;
         this.sitemap = e.sitemap;
@@ -29,29 +29,28 @@ class Scraper {
             const dateNow = Date.now();
             try {
                 await this.executeJob(chromeTabMiddleware, job);
-            } catch (e) {
-                this.logUnexpectedMiddlewareExecutionErrors(e);
-                return  void (await this.finishScraping());
+            } catch (exception) {
+                this.logUnexpectedMiddlewareExecutionErrors(exception);
+                return void (await this.finishScraping());
             }
             await this.sleepRequestInterval(dateNow);
         }
     }
 
     async executeJob(chromeTabMiddleware, job) {
-        a.info("Job execution started", {
+        Log.info("Job execution started", {
             url: job.url,
             parentSelector: job.parentSelector
         });
         await chromeTabMiddleware.handle(job);
-        if(job.hasFailed() )
+        if (job.hasFailed())
             await this.syncStorageBecauseOfFailedJob(job);
         await this.handleChromeCrashErrors(job);
     }
 
     async syncStorageBecauseOfFailedJob(job) {
-        if(!(this.storageSyncedBecauseOfFailedJobCount >= this.stopSyncingStorageAfterFailedCount))
-        {
-            a.info("Syncing storage because a job failed", {
+        if (!(this.storageSyncedBecauseOfFailedJobCount >= this.stopSyncingStorageAfterFailedCount)) {
+            Log.info("Syncing storage because a job failed", {
                 url: job.url
             });
             await this.storage.syncExecutedJobs();
@@ -60,43 +59,44 @@ class Scraper {
     }
 
     async handleChromeCrashErrors(job) {
-        if (!0 === job.hasFailed() && job.error_message && o.includesAnyOf(job.error_message, this.chromeCrashErrors)) {
+        if (true === job.hasFailed() && job.error_message && Msg.includesAnyOf(job.error_message, this.chromeCrashErrors)) {
             try {
                 await this.browser.close();
-            } catch (e) {
-                a.notice("an error occurred while closing browser during on-error tear down", {
-                    error: e.toString()
+            } catch (exception) {
+                Log.notice("an error occurred while closing browser during on-error tear down", {
+                    error: exception.toString()
                 });
             }
-            a.warning("exiting scraper process because chrome driver failed");
-            if(!(processBrowser.browser === true))
+            Log.warning("exiting scraper process because chrome driver failed");
+            if (!(processBrowser.browser === true))//If in nodejs
             {
-                processBrowser.exit();//If in nodejs
+                processBrowser.exit();
             }
 
         }
     }
 
     async finishScraping() {
-        await this.storage.syncExecutedJobs(), a.info("Scraper execution is finished"),
-            await this.browser.close();
+        await this.storage.syncExecutedJobs();
+        Log.info("Scraper execution is finished");
+        await this.browser.close();
     }
 
-    async sleepRequestInterval(e) {
-        const t = Date.now(), i = e + this.requestInterval;
-        if (t < i) {
-            const e = i - t;
-            a.debug("sleeping for request interval");
-            await r.Async.sleep(e);
+    async sleepRequestInterval(startDate) {
+        const currentDate = Date.now();
+        const endDate = startDate + this.requestInterval;
+        if (currentDate < endDate) {
+            const duration = endDate - currentDate;
+            Log.debug("sleeping for request interval");
+            await Async.sleep(duration);
         }
     }
 
     logUnexpectedMiddlewareExecutionErrors(e) {
-        if(!o.includesAnyOf(e, this.silentMiddlewareExecutionErrors) )
-        {
-            a.error("job handler received an error", {
+        if (!Msg.includesAnyOf(e, this.silentMiddlewareExecutionErrors)) {
+            Log.error("job handler received an error", {
                 error: e.toString(),
-                stack:e.stack
+                stack: e.stack
             });
         }
 

@@ -1,4 +1,4 @@
-import {default as o} from "../log/log.js";//o = i(5),
+import {default as Log} from "../log/log.js";//o = i(5),
 import {Targets} from "../contentjs/HighlightOverly/Targets.js"//,  l = i(73);
 import {storageTypes} from "./database/storageTypes.js"
 import {applyController} from "../common/RPC/applyController";
@@ -21,7 +21,7 @@ let Config = class {
             chrome.storage.sync.get(Object.keys(this.defaults), args => {
                 if (undefined === args) {
                     const lastError = chrome.runtime.lastError;
-                    lastError && o.notice(lastError.toString());
+                    lastError && Log.notice(lastError.toString());
                     args = {};
                 }
                 this.mapItemsToFields(args);
@@ -37,7 +37,7 @@ let Config = class {
     async get(e) {
         if (undefined === this.fields) {
             await this.loadConfiguration().catch(arg => {
-                o.error(arg);
+                Log.error(arg);
                 this.fields = this.defaults;
             });
         }
@@ -45,7 +45,7 @@ let Config = class {
     }
 
     async set(key, value) {
-        o.info(key.toString()+":"+value.toString());
+        Log.info(key.toString()+":"+value.toString());
         if(undefined === this.fields )
             await this.loadConfiguration();
         return  new Promise(resolve => {
@@ -54,7 +54,7 @@ let Config = class {
             }, () => {
                 const lastError = chrome.runtime.lastError;
                 if(lastError)
-                    o.error("Couldn't set config value", {
+                    Log.error("Couldn't set config value", {
                         error: lastError.toString()
                     });
                 this.fields[key] = value;

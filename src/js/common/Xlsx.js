@@ -1,8 +1,8 @@
-import * as jszip from "jszip"
-import * as a from "./Xml.js"
+import * as JSzip from "jszip"
+import {Xml} from "./Xml.js"
 class Xlsx {
     static async getXlsxBlob(e, t) {
-        const zip = new jszip;
+        const zip = new JSzip;
         const n = zip.folder("docProps");
         n.file("app.xml", this.getAppData());
         n.file("core.xml", this.getCoreData());
@@ -76,7 +76,7 @@ class Xlsx {
             const l = Object.keys(s).length;
             n = `<row r="${t + 2}" spans="1:${l}">`;
             r.forEach((e, i) => {
-                const r = s[e] ? `<t>${a.Xml.filterXmlEscapeCharacters(s[e])}</t>` : "<t></t>";
+                const r = s[e] ? `<t>${Xml.filterXmlEscapeCharacters(s[e])}</t>` : "<t></t>";
                 n += `<c r="${o[i]}${t + 2}" s="1" t="inlineStr"><is>${r}</is></c>`;
             });
             i = i + n + "</row>";

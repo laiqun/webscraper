@@ -1,8 +1,8 @@
-import {default as n} from "../../log/log.js";//n = i(5),
-import * as r from "./BaseWebNavigationEventListener.js"//const r = i(67);
-import * as a from "./TabEventListenerTabStatus.js"//a = i(599),
-import * as o from "./ChromeTabStatus.js"//const   o = i(512);
-class TabEventListener extends r.BaseWebNavigationEventListener {
+import {default as Log} from "../../log/log.js";//n = i(5),
+import {BaseWebNavigationEventListener} from "./BaseWebNavigationEventListener.js"//const r = i(67);
+import {TabEventListenerTabStatus} from "./TabEventListenerTabStatus.js"//a = i(599),
+import {ChromeTabStatus} from "./ChromeTabStatus.js"//const   o = i(512);
+class TabEventListener extends BaseWebNavigationEventListener {
     constructor(e) {
         super(e);
         this.listeners = {
@@ -52,7 +52,7 @@ class TabEventListener extends r.BaseWebNavigationEventListener {
         this.state = {
             tabOnHalfCompleted: true,
             tabOnCompleted: true,
-            tabStatus: a.TabEventListenerTabStatus.complete,
+            tabStatus: TabEventListenerTabStatus.complete,
             tabOnRemoved: false,
             tabOnUnloaded: false
         };
@@ -62,7 +62,7 @@ class TabEventListener extends r.BaseWebNavigationEventListener {
         this.state = {
             tabOnHalfCompleted: false,
             tabOnCompleted: false,
-            tabStatus: a.TabEventListenerTabStatus.preLoading,
+            tabStatus: TabEventListenerTabStatus.preLoading,
             tabOnRemoved: false,
             tabOnUnloaded: false
         };
@@ -74,23 +74,23 @@ class TabEventListener extends r.BaseWebNavigationEventListener {
     tabOnUpdated(tabId, changeInfo, tab) {
         //console.log("tabOnUpdated");
         if (tabId === this.sharedState.tab.tabId) {
-            if (changeInfo.status === o.ChromeTabStatus.complete)
+            if (changeInfo.status === ChromeTabStatus.complete)
                 this.onTabLoadComplete();
-            else if (this.state.tabOnCompleted && this.state.tabStatus === a.TabEventListenerTabStatus.complete && changeInfo.status === o.ChromeTabStatus.loading && changeInfo.url !== this.sharedState.url)
+            else if (this.state.tabOnCompleted && this.state.tabStatus === TabEventListenerTabStatus.complete && changeInfo.status === ChromeTabStatus.loading && changeInfo.url !== this.sharedState.url)
                 this.onWindowHistoryPushStateUrlChange(changeInfo);
-            else if (changeInfo.status === o.ChromeTabStatus.loading)
+            else if (changeInfo.status === ChromeTabStatus.loading)
                 this.onTabStatusLoading(changeInfo);
-            else if (void 0 === changeInfo.status && tab.status === o.ChromeTabStatus.loading && void 0 !== changeInfo.title)
+            else if (void 0 === changeInfo.status && tab.status === ChromeTabStatus.loading && void 0 !== changeInfo.title)
                 this.onLoadingTabTitleSet();
-            else if (changeInfo.status === o.ChromeTabStatus.unloaded) {
-                n.notice("tab unloaded", {
+            else if (changeInfo.status === ChromeTabStatus.unloaded) {
+                Log.notice("tab unloaded", {
                     data: JSON.stringify(changeInfo),
                     event: "tabOnUpdated",
                     url: changeInfo.url
                 });
                 this.onTabUnloaded(changeInfo);
             } else if (this.couldIgnoreTabUpdateEvent(changeInfo) == false)
-                n.notice("unknown tab load half status event", {
+                Log.notice("unknown tab load half status event", {
                     data: JSON.stringify(changeInfo),
                     event: "tabOnUpdated",
                     url: changeInfo.url
@@ -101,20 +101,20 @@ class TabEventListener extends r.BaseWebNavigationEventListener {
     couldIgnoreTabUpdateEvent(e) {
         if(  undefined !== e.favIconUrl )
             return true;
-        if( undefined !== e.isArticle || undefined !== e.title && this.state.tabStatus === a.TabEventListenerTabStatus.complete)
+        if( undefined !== e.isArticle || undefined !== e.title && this.state.tabStatus === TabEventListenerTabStatus.complete)
             return true;
         return false;
     }
 
     onTabStatusLoading(e) {
-        if(this.state.tabStatus === a.TabEventListenerTabStatus.preLoading )
+        if(this.state.tabStatus === TabEventListenerTabStatus.preLoading )
             this.setState({
-                tabStatus: a.TabEventListenerTabStatus.loading
+                tabStatus: TabEventListenerTabStatus.loading
             }, {
                 tabOnCompleted: !1
             });
         else
-            n.info("Tab loading state is being set after it has already gone through loading state", {
+            Log.info("Tab loading state is being set after it has already gone through loading state", {
                 data: JSON.stringify(e),
                 event: "tabOnUpdated",
                 sourceUrl: this.sharedState.url,
@@ -133,7 +133,7 @@ class TabEventListener extends r.BaseWebNavigationEventListener {
     }
 
     onWindowHistoryPushStateUrlChange(e) {
-        n.notice("window.history.pushState detected", {
+        Log.notice("window.history.pushState detected", {
             data: JSON.stringify(e),
             event: "tabOnUpdated",
             sourceUrl: this.sharedState.url,
@@ -144,19 +144,19 @@ class TabEventListener extends r.BaseWebNavigationEventListener {
         {
             this.sharedState.url = e.url;
             this.setState({
-                tabStatus: a.TabEventListenerTabStatus.loading,
+                tabStatus: TabEventListenerTabStatus.loading,
                 tabOnCompleted: false
             }, {});
         }
     }
 
     onLoadingTabTitleSet() {
-        if (!this.state.tabOnHalfCompleted || this.state.tabStatus !== a.TabEventListenerTabStatus.halfComplete) {
+        if (!this.state.tabOnHalfCompleted || this.state.tabStatus !== TabEventListenerTabStatus.halfComplete) {
             const settingStatus = {};
             if(!this.state.tabOnHalfCompleted )
                 settingStatus.tabOnHalfCompleted = true;
-            if(this.state.tabStatus !== a.TabEventListenerTabStatus.halfComplete)
-                settingStatus.tabStatus = a.TabEventListenerTabStatus.halfComplete;
+            if(this.state.tabStatus !== TabEventListenerTabStatus.halfComplete)
+                settingStatus.tabStatus = TabEventListenerTabStatus.halfComplete;
             this.setState(settingStatus, {
                 tabOnCompleted: false
             });
@@ -168,7 +168,7 @@ class TabEventListener extends r.BaseWebNavigationEventListener {
         this.clearTimeout("tabOnHalfLoadedConvertToLoadedTimeout");
         this.setState({
             tabOnCompleted: true,
-            tabStatus: a.TabEventListenerTabStatus.complete
+            tabStatus: TabEventListenerTabStatus.complete
         }, {});
     }
 
@@ -185,17 +185,17 @@ class TabEventListener extends r.BaseWebNavigationEventListener {
     initTabOnHalfLoadedConvertToLoadedTimeout() {
         this.clearTimeout("tabOnHalfLoadedConvertToLoadedTimeout");
         this.timeouts.tabOnHalfLoadedConvertToLoadedTimeout = setTimeout(() => {
-            n.info("tab status half-complete timeout timed out. Setting status to complete");
-            if(this.state.tabStatus === a.TabEventListenerTabStatus.halfComplete)
+            Log.info("tab status half-complete timeout timed out. Setting status to complete");
+            if(this.state.tabStatus === TabEventListenerTabStatus.halfComplete)
             {
                 this.clearTimeout("tabOnHalfLoadedConvertToLoadedTimeout");
                 this.setState({
                         tabOnCompleted: true,
-                        tabStatus: a.TabEventListenerTabStatus.complete
+                        tabStatus: TabEventListenerTabStatus.complete
                 }, {});
             }
             else
-                n.warning("unexpected tab status. Should be half complete", {
+                Log.warning("unexpected tab status. Should be half complete", {
                     url: this.sharedState.url,
                     status: this.state.tabStatus
                 });

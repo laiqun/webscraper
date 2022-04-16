@@ -1,5 +1,5 @@
 import {BaseMiddleware} from "./BaseMiddleware.js"//a = i(33),
-import {default as log} from "../../log/log.js";//r = i(5),
+import {default as Log} from "../../log/log.js";//r = i(5),
     class JobExecutionProfileMiddleware extends BaseMiddleware {
         constructor(webPage, sitemap) {
             super();
@@ -21,13 +21,13 @@ import {default as log} from "../../log/log.js";//r = i(5),
                     logType: "JOB_STAT"
                 };
                 if(job.hasFailed() )
-                    log.notice("Job failed", Object.assign(Object.assign({}, jobInfo), {
+                    Log.notice("Job failed", Object.assign(Object.assign({}, jobInfo), {
                         error: job.error_message
                     }));
                 else if(job.isEmpty() && !job.isKnownEmpty() )
-                    log.notice("Job is empty", jobInfo);
+                    Log.notice("Job is empty", jobInfo);
                 else
-                    log.info("Job OK", jobInfo);
+                    Log.info("Job OK", jobInfo);
                 return result;
         }
     }

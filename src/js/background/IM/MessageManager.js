@@ -1,5 +1,5 @@
-import * as r from "../../common/RPC/InternalRuntime.js"//, r = i(84)
-import * as n from "./Dispatcher.js"//const n = i(624);
+import {InternalRuntime} from "../../common/RPC/InternalRuntime.js"//, r = i(84)
+import {Dispatcher} from "./Dispatcher.js"//const n = i(624);
 class MessageManager {
     constructor() {
         this.handleNewConection = this.handleNewConection.bind(this);
@@ -7,7 +7,7 @@ class MessageManager {
         this.removeTabGroup = this.removeTabGroup.bind(this);
         this.tabGroups = {};
         this.backgroundPorts = {};
-        this.internalRuntime = new r.InternalRuntime;
+        this.internalRuntime = new InternalRuntime;
     }
 
     init() {
@@ -29,7 +29,7 @@ class MessageManager {
        // console.log(port.name);
         const tab_id = port.sender.tab.id.toString();
         if(undefined === this.tabGroups[tab_id] )
-            this.tabGroups[tab_id] = new n.Dispatcher(tab_id, this.backgroundPorts);
+            this.tabGroups[tab_id] = new Dispatcher(tab_id, this.backgroundPorts);
         this.tabGroups[tab_id].handleNewPort(port);//Dispatcher 中的方法，会保存到其内部的ports 数组中，包括inComing和outGoing
     }
 

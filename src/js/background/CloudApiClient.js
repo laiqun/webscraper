@@ -1,4 +1,4 @@
-import * as axios from "axios"//const r = i(502) ;
+import * as Axios from "axios"//const r = i(502) ;
 class CloudApiClient {
     constructor(e) {
         this.authService = e.authService;
@@ -40,7 +40,7 @@ class CloudApiClient {
             data: t
         };
         try {
-            const axiosResponse = await axios.default(request);
+            const axiosResponse = await Axios.default(request);
             if(axiosResponse.data && axiosResponse.data.data)
                 return axiosResponse.data.data;
             else

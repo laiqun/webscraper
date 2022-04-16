@@ -10,7 +10,9 @@ class BackgroundPort {
     constructor(name) {
         this.name = name;
         this.onMessage = new BackgroundEvent.BackgroundEvent;
+        this.onDisconnect = new BackgroundEvent.BackgroundEvent;
     }
+
     postMessage(e) {
         this.orchestratorOnMessage(e);
     }

@@ -1,5 +1,5 @@
-import {default as n} from "../../log/log.js";//n = i(5),
-import * as r from "../../common/Obj.js"// r = i(57);
+import {default as Log} from "../../log/log.js";//n = i(5),
+import {Obj} from "../../common/Obj.js"// r = i(57);
 class BaseWebNavigationEventListener {
     constructor(e) {
         this.sharedState = e.sharedState;
@@ -23,8 +23,8 @@ class BaseWebNavigationEventListener {
     }
 
     assertState(e, t) {
-        if (!r.Obj.empty(r.Obj.diffWouldUpdate(this.state, t))) {
-            n.notice(`Unexpected state values. should be: ${JSON.stringify(t)} was: ${JSON.stringify(this.state)}`, {
+        if (!Obj.empty(Obj.diffWouldUpdate(this.state, t))) {
+            Log.notice(`Unexpected state values. should be: ${JSON.stringify(t)} was: ${JSON.stringify(this.state)}`, {
                 event: e
             });
         }
@@ -32,9 +32,9 @@ class BaseWebNavigationEventListener {
 
     setState(needSetStatus, assertStatus) {
         if (!this.sharedState.waitForStatusActive)
-            n.notice("Received set state event after tab load complete " + JSON.stringify(needSetStatus));
-        if (!r.Obj.empty(r.Obj.diffWouldNotUpdate(this.state, needSetStatus)))
-            n.notice(`unset state: ${JSON.stringify(r.Obj.diffWouldNotUpdate(this.state, needSetStatus))} current: ${JSON.stringify(this.state)}`, {});
+            Log.notice("Received set state event after tab load complete " + JSON.stringify(needSetStatus));
+        if (!Obj.empty(Obj.diffWouldNotUpdate(this.state, needSetStatus)))
+            Log.notice(`unset state: ${JSON.stringify(Obj.diffWouldNotUpdate(this.state, needSetStatus))} current: ${JSON.stringify(this.state)}`, {});
         this.assertState("setState", assertStatus);
         this.overrideState(needSetStatus);
         this.sharedState.waitForStatusActive && this.onStateChanged();

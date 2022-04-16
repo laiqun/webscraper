@@ -1,7 +1,7 @@
 class DataSizeLimitError extends Error {
-    constructor(e, t) {
+    constructor(e, size) {
         super(e);
-        this.size = t;
+        this.size = size;
     }
 }
 

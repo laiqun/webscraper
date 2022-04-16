@@ -1,9 +1,9 @@
-import * as a from "../../devtools/Selector/WebPageDriverType.js"//, a = i(34)
-import * as r from "./WebPageElement.js"//r = i(93),
-class WebPageChromeTabElement extends r.WebPageElement {
+import {WebPageDriverType} from "../../devtools/Selector/WebPageDriverType.js"//, a = i(34)
+import {WebPageElement} from "./WebPageElement.js"//r = i(93),
+class WebPageChromeTabElement extends WebPageElement {
     constructor(e, t) {
         super(e);
-        this.driver = a.WebPageDriverType.chrometab;
+        this.driver = WebPageDriverType.chrometab;
         this.contentScriptClient = t.chromeClient;
         this._webPage = t;
     }

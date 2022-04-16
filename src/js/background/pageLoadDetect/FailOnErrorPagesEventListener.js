@@ -1,6 +1,6 @@
-import * as n from "./BaseWebNavigationEventListener.js"
-import * as r from "./ContentTypeParser.js"//    const  r = i(416);
-class FailOnErrorPagesEventListener extends n.BaseWebNavigationEventListener {
+import {BaseWebNavigationEventListener} from "./BaseWebNavigationEventListener.js"
+import {ContentTypeParser} from "./ContentTypeParser.js"//    const  r = i(416);
+class FailOnErrorPagesEventListener extends BaseWebNavigationEventListener {
     constructor(e) {
         super(e);
         this.webNavigationEventListener = e.webNavigationEventListener;
@@ -22,7 +22,7 @@ class FailOnErrorPagesEventListener extends n.BaseWebNavigationEventListener {
         if (this.haveOtherListenersCompleted())
             if("net::ERR_HTTP_RESPONSE_CODE_FAILURE" === this.webNavigationEventListener.state.wnError)
             return  "PAGE_STATUS_CODE_ERROR " + this.webRequestEventListener.state.headersStatusCode;
-        else if(r.ContentTypeParser.isContentTypeUnknown(this.webRequestEventListener.state.headersContentType) )
+        else if(ContentTypeParser.isContentTypeUnknown(this.webRequestEventListener.state.headersContentType) )
             return "PAGE_UNKNOWN_CONTENT_TYPE_ERROR";
         else
             return undefined;

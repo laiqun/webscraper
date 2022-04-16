@@ -1,6 +1,6 @@
-import * as n from "./BaseWebNavigationEventListener.js"//const n = i(67);
-import {default as r} from "../../log/log.js";//n = i(5),
-class WebRequestEventListener extends n.BaseWebNavigationEventListener {
+import {BaseWebNavigationEventListener} from "./BaseWebNavigationEventListener.js"//const n = i(67);
+import {default as Log} from "../../log/log.js";//n = i(5),
+class WebRequestEventListener extends BaseWebNavigationEventListener {
     constructor(e) {
         super(e);
         this.onBeforeRequestTimeout = 1000;
@@ -118,7 +118,7 @@ class WebRequestEventListener extends n.BaseWebNavigationEventListener {
             this.clearTimeout("wrOnBeforeRequestTimeout");
             this.timeouts.wrOnBeforeRequestTimeout = setTimeout(() => {
                 this.clearTimeout("wrOnBeforeRequestTimeout");
-                r.notice("missed on before request event. maybe a service worker is loading this or page load is retried after web navigation error", {
+                Log.notice("missed on before request event. maybe a service worker is loading this or page load is retried after web navigation error", {
                     url: this.sharedState.url,
                     event: "wrOnBeforeRequestTimeout"
                 });
@@ -147,7 +147,7 @@ class WebRequestEventListener extends n.BaseWebNavigationEventListener {
         {
             if(true === this.state.wrOnBeforeRequest)
             {
-                r.info("JavaScript redirect detected", {
+                Log.info("JavaScript redirect detected", {
                     sourceUrl: this.sharedState.url,
                     toUrl: e.url,
                     wrOnCompleted: this.state.wrOnCompleted
@@ -172,7 +172,7 @@ class WebRequestEventListener extends n.BaseWebNavigationEventListener {
     wrOnBeforeRedirect(e) {
         if (!this.isRequestMonitored(e))
             return;
-        r.info("onBeforeRedirect received", {
+        Log.info("onBeforeRedirect received", {
             sourceUrl: this.sharedState.url,
             toUrl: e.url
         });
@@ -180,7 +180,7 @@ class WebRequestEventListener extends n.BaseWebNavigationEventListener {
             wrOnBeforeRequest: true
         };
         if(!this.state.wrOnHeadersReceived && this.state.wrOnProxyAuthHeadersReceived)
-            r.notice("missed wrOnHeadersReceived event but received wrOnBeforeRedirect. This is due to a proxy auth + miss headers bug in chrome", {
+            Log.notice("missed wrOnHeadersReceived event but received wrOnBeforeRedirect. This is due to a proxy auth + miss headers bug in chrome", {
                 url: e.url,
                 event: "wrOnBeforeRedirect",
                 hideInEsLogs: true
@@ -209,7 +209,7 @@ class WebRequestEventListener extends n.BaseWebNavigationEventListener {
         const resHeader = this.extractContentTypeFromResponseHeaders(e.responseHeaders);
         if(!resHeader )
             if(![301, 302, 303, 307, 308, 503].includes(e.statusCode) )
-                r.notice("missing Content Type even though headers received. " + JSON.stringify(e.responseHeaders), {
+                Log.notice("missing Content Type even though headers received. " + JSON.stringify(e.responseHeaders), {
                     event: "wrOnHeadersReceived",
                     url: e.url,
                     hideInEsLogs: true
@@ -238,7 +238,7 @@ class WebRequestEventListener extends n.BaseWebNavigationEventListener {
         if (!this.isRequestMonitored(e))
             return;
         if (this.state.wrOnProxyAuthHeadersReceived && !this.state.wrOnHeadersReceived) {
-            r.notice("missed wrOnHeadersReceived event but received wrOnResponseStarted. This is due to a proxy auth + miss headers bug in chrome", {
+            Log.notice("missed wrOnHeadersReceived event but received wrOnResponseStarted. This is due to a proxy auth + miss headers bug in chrome", {
                 url: e.url,
                 event: "wrOnResponseStarted",
                 hideInEsLogs: true
@@ -278,7 +278,7 @@ class WebRequestEventListener extends n.BaseWebNavigationEventListener {
     wrOnErrorOccurred(e) {
         if(this.isRequestMonitored(e) )
         {
-            r.notice("web request error occurred", {
+            Log.notice("web request error occurred", {
                 url: e.url,
                 event: "wrOnErrorOccurred",
                 error: e.error

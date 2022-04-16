@@ -1,5 +1,5 @@
-import {default as a} from "../../common/Msg.js"//a = i(17),
-import {default as r} from "../../log/log.js";//r = i(5),
+import {default as Msg} from "../../common/Msg.js"//a = i(17),
+import {default as Log} from "../../log/log.js";//r = i(5),
 class WebRTCBlocker {
     constructor(e) {
         this.blockingEnabled = e;
@@ -9,10 +9,10 @@ class WebRTCBlocker {
         if (this.blockingEnabled)
             try {
                 await this.blockWebRtcIpLeak();
-            } catch (e) {
-                r.error("Couldn't init WebRTCBlocker", {
-                    error: a.getMessage(e),
-                    stack:e.stack
+            } catch (exception) {
+                Log.error("Couldn't init WebRTCBlocker", {
+                    error: Msg.getMessage(exception),
+                    stack:exception.stack
             });
         }
     }

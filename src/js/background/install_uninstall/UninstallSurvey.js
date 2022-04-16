@@ -1,4 +1,4 @@
-import {default as n} from "../../log/log.js";//c = i(5),//const n = i(5);
+import {default as Log} from "../../log/log.js";//c = i(5),//const n = i(5);
 class UninstallSurvey {
     constructor(e) {
         this.userSitemapCount = e.userSitemapCount;
@@ -13,7 +13,7 @@ class UninstallSurvey {
         chrome.runtime.setUninstallURL(t, () => {
             const lastError = chrome.runtime.lastError;
             if (lastError)
-                n.error("Couldn't set uninstall url", {
+                Log.error("Couldn't set uninstall url", {
                     error: lastError.toString()
                 });
         });

@@ -1,9 +1,9 @@
-import {default as n} from "../../log/log.js";//n = i(5),
+import {default as Log} from "../../log/log.js";//n = i(5),
 class ContentTypeParser {
     static isContentTypeUnknown(e) {
         if (!!e) {
             if (!(e = e.toLocaleLowerCase()).match(/^(text\/[^\n]*?|[^\n]*?(html|xml|json)[^\n]*?|application\/[^\n]*?(java|ecma|type)script[^\n]*?)$/)) {
-                n.Log.notice("unknown content type loaded", {
+                Log.notice("unknown content type loaded", {
                     contentType: e
                 });
                 return true;

@@ -1,14 +1,14 @@
-import * as r from "../common/Str.js"//r = i(75),
-import * as a from "../devtools/Selector/Url.js"//a = i(19),
-import {default as o} from "../log/log.js";//o = i(5),
+import {Str} from "../common/Str.js"//r = i(75),
+import {Url} from "../devtools/Selector/Url.js"//a = i(19),
+import {default as Log} from "../log/log.js";//o = i(5),
 class RobotsTxt {
     async getRobotsTextContent(e) {
         const page_url = await e.getPageUrl();
-        const url = a.Url.combine(page_url, "/robots.txt");
+        const url = Url.combine(page_url, "/robots.txt");
         try {
             return await e.downloadUrl(url);
         } catch (exception) {
-            o.notice("failed to download robots.txt", {
+            Log.notice("failed to download robots.txt", {
                 error: exception.toString(),
                 url: url
             });
@@ -22,7 +22,7 @@ class RobotsTxt {
         const result = [];
         let a = regx.exec(t);
         for (; a;) {
-            const e = r.Str.removeCDATA(a[1]);
+            const e = Str.removeCDATA(a[1]);
             result.push(e);
             a = regx.exec(t);
         }

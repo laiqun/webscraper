@@ -1,6 +1,6 @@
 import {BaseMiddleware} from "./BaseMiddleware.js"//a = i(33),
 import {default as Msg} from "../../common/Msg.js"//o = i(17),
-import {default as log} from "../../log/log.js";//r = i(5),
+import {default as Log} from "../../log/log.js";//r = i(5),
 class ErrorHandlerMiddleware extends BaseMiddleware {
     constructor(webPage, sitemap) {
         super();
@@ -51,7 +51,7 @@ class ErrorHandlerMiddleware extends BaseMiddleware {
                 if(!Msg.startsWithAnyOf(t, this.reduceSeverityForStartsWith) )
                     if(!Msg.includesAnyOf(t, this.reduceSeverityForIncludes) )
                     {
-                        log.error("Job execution failed with unknown error", jobInfo);
+                        Log.error("Job execution failed with unknown error", jobInfo);
                     }
                 job.markAsFailed(message);
             }

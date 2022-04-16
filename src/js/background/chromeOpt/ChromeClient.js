@@ -1,14 +1,14 @@
-import {default as a} from "../../log/log.js";//a = i(5),
-import * as r from "../../common/Async.js"//r = i(22),
-import * as c from "../../devtools/Selector/Url.js"//c = i(19),
-import * as h from "../UnrecoverablError.js"//, h = i(501)
-import * as d from "../blocker/Blocker.js"//, d = i(616)
-import * as l from "./ChromeTabs.js"//l = i(196),
-import * as o from "../pageLoadDetect/TabNetworkStatusListener.js"//o = i(511),
-import * as s from "../blocker/WebRTCBlocker.js"//s = i(607),
-import * as u from "../blocker/InterceptsRedirects.js"//const   u = i(608);
+import {default as Log} from "../../log/log.js";//a = i(5),
+import {Async} from "../../common/Async.js"//r = i(22),
+import {Url} from "../../devtools/Selector/Url.js"//c = i(19),
+import {UnrecoverablError} from "../UnrecoverablError.js"//, h = i(501)
+import {Blocker} from "../blocker/Blocker.js"//, d = i(616)
+import {ChromeTabs} from "./ChromeTabs.js"//l = i(196),
+import {TabNetworkStatusListener} from "../pageLoadDetect/TabNetworkStatusListener.js"//o = i(511),
+import {WebRTCBlocker} from "../blocker/WebRTCBlocker.js"//s = i(607),
+import {InterceptsRedirects} from "../blocker/InterceptsRedirects.js"//const   u = i(608);
 //ChromeClient不直接使用，而是作为 WebPageChromeTab的参数，由它来调用
-class ChromeClient extends u.InterceptsRedirects {
+class ChromeClient extends InterceptsRedirects {
     constructor(clientSetting) {
         super(clientSetting);
         this.pageLoadDelay = clientSetting.pageLoadDelay;
@@ -16,10 +16,10 @@ class ChromeClient extends u.InterceptsRedirects {
         this.blockImages = clientSetting.blockImages;
         this.blockImagesWhitelistDomains = clientSetting.blockImagesWhitelistDomains;
         this.blockWebRTC = clientSetting.blockWebRTC;
-        this.webRTCBlocker = new s.WebRTCBlocker(clientSetting.blockWebRTC);
-        this.blocker = new d.Blocker;
+        this.webRTCBlocker = new WebRTCBlocker(clientSetting.blockWebRTC);
+        this.blocker = new Blocker;
         this.reloadPageBeforeHashTagChange = clientSetting.reloadPageBeforeHashTagChange;
-        this.tabNetworkStatusListener = new o.TabNetworkStatusListener({
+        this.tabNetworkStatusListener = new TabNetworkStatusListener({
             webNavigationEnabled: "undefined" == typeof chrome || undefined !== chrome.webNavigation
         });
     }
@@ -56,7 +56,7 @@ class ChromeClient extends u.InterceptsRedirects {
             chrome.tabs.get(this.tab.tabId, tabInfo => {
                 const lastError = chrome.runtime.lastError;
                 if (null != lastError) {
-                    a.error("Failed to get tab info", {
+                    Log.error("Failed to get tab info", {
                         error: lastError.toString()
                     });
                     return void reject("Failed to get tab info" + lastError.toString());
@@ -65,12 +65,12 @@ class ChromeClient extends u.InterceptsRedirects {
                 resolve(curURL);
             });
         });
-        return c.Url.isHashTagChange(curURL, oldURL);
+        return Url.isHashTagChange(curURL, oldURL);
     }
 
     async openPage(url) {
         this.url = url;
-        a.info("opening page", {
+        Log.info("opening page", {
             url: url
         });
         const windowExists = await this.windowExists();
@@ -118,8 +118,8 @@ class ChromeClient extends u.InterceptsRedirects {
         })(async () => {
             if (windowExists)
                 if (createNewTab) {
-                    a.info("creating new blank page tab");
-                    const t = await l.ChromeTabs.create({
+                    Log.info("creating new blank page tab");
+                    const t = await ChromeTabs.create({
                         windowId: this.tab.windowId,
                         url: url,
                         active: false
@@ -132,10 +132,10 @@ class ChromeClient extends u.InterceptsRedirects {
         })()]);
         if(createNewTab)
         {
-            a.info("Removing old tab");
-            await l.ChromeTabs.remove(oldTabId);
+            Log.info("Removing old tab");
+            await ChromeTabs.remove(oldTabId);
         }
-        a.info("blank page loaded");
+        Log.info("blank page loaded");
     }
 
     getPupeteerPage() {
@@ -151,7 +151,7 @@ class ChromeClient extends u.InterceptsRedirects {
     }
 
     async setNetworkListenerPageAlmostLoaded() {
-        const tabInfo = await l.ChromeTabs.get(this.tab.tabId);
+        const tabInfo = await ChromeTabs.get(this.tab.tabId);
         this.tabNetworkStatusListener.setAlmostLoaded({
             isHashTagChange: false,
             pageLoadDelay: 100,
@@ -170,9 +170,9 @@ class ChromeClient extends u.InterceptsRedirects {
 
     async initExternalPageLoad(url) {
         if (undefined !== this.externalPageLoadPromise)
-            throw new h.UnrecoverablError("Starting external page load while previous hasn't completed");
+            throw new UnrecoverablError("Starting external page load while previous hasn't completed");
         this.url = url;
-        a.info("opening page", {
+        Log.info("opening page", {
             url: url
         });
         if (!(await this.windowExists()))
@@ -206,22 +206,22 @@ class ChromeClient extends u.InterceptsRedirects {
     }
 
     async loadPageInTab(url) {
-        a.debug("Loading url in tab", {
+        Log.debug("Loading url in tab", {
             url: url
         });
-        const promise_item = l.ChromeTabs.update(this.tab.tabId, {
+        const promise_item = ChromeTabs.update(this.tab.tabId, {
             url: url
         });
-        await r.Async.timeoutPromise(promise_item, 60000, "tabUpdatePromise");
-        const waitedURL = await l.ChromeTabs.waitForUrl(this.tab.tabId, url, 1000, false);
+        await Async.timeoutPromise(promise_item, 60000, "tabUpdatePromise");
+        const waitedURL = await ChromeTabs.waitForUrl(this.tab.tabId, url, 1000, false);
         if(waitedURL.url !== url && waitedURL.url.startsWith("chrome-extension") )
-            a.notice("chrome tab didn't start loading. Still empty page", {
+            Log.notice("chrome tab didn't start loading. Still empty page", {
                 url: url,
                 tabUrl: waitedURL.url,
                 status: waitedURL.status
             }) ;
         else
-            a.debug("chrome tab check", {
+            Log.debug("chrome tab check", {
                 url: url,
                 tabUrl: waitedURL.url,
                 status: waitedURL.status

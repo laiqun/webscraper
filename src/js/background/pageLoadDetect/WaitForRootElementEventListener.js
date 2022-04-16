@@ -1,11 +1,11 @@
-import * as r from "./BaseWebNavigationEventListener.js"//r = i(67),
-import {default as u} from "../../common/Msg.js"//u = i(17),
-import {default as o} from "../../log/log.js";//o = i(5),
-import * as a from "../../common/Async.js"//a = i(22),
-import * as s from "../../devtools/Selector/Url.js"//s = i(19),
-import * as c from "../chromeOpt/ChromeTabs.js"//c = i(196),
-import * as l from "./ChromeTabStatus.js"//const     l = i(512);
-class WaitForRootElementEventListener extends r.BaseWebNavigationEventListener {
+import {BaseWebNavigationEventListener} from "./BaseWebNavigationEventListener.js"//r = i(67),
+import {default as Msg} from "../../common/Msg.js"//u = i(17),
+import {default as Log} from "../../log/log.js";//o = i(5),
+import {Async} from "../../common/Async.js"//a = i(22),
+import {Url} from "../../devtools/Selector/Url.js"//s = i(19),
+import {ChromeTabs} from "../chromeOpt/ChromeTabs.js"//c = i(196),
+import {ChromeTabStatus} from "./ChromeTabStatus.js"//const     l = i(512);
+class WaitForRootElementEventListener extends BaseWebNavigationEventListener {
     constructor(e) {
         super(e);
         this.waitId = 0;
@@ -14,7 +14,7 @@ class WaitForRootElementEventListener extends r.BaseWebNavigationEventListener {
     }
 
     onGlobalStateChanged() {
-        if (s.Url.isExtensionUrl(this.sharedState.url))
+        if (Url.isExtensionUrl(this.sharedState.url))
             return;
         if (this.state.rootElementFound)
             return;
@@ -44,7 +44,7 @@ class WaitForRootElementEventListener extends r.BaseWebNavigationEventListener {
     }
 
     get isPageLoadComplete() {
-        return !!s.Url.isExtensionUrl(this.sharedState.url) || this.state.rootElementFound;
+        return !!Url.isExtensionUrl(this.sharedState.url) || this.state.rootElementFound;
     }
 
     resetState() {
@@ -69,8 +69,8 @@ class WaitForRootElementEventListener extends r.BaseWebNavigationEventListener {
         const waitId = this.waitId;
         do {
             try {
-                if ((await c.ChromeTabs.get(this.sharedState.tab.tabId)).status === l.ChromeTabStatus.unloaded) {
-                    o.notice("WaitForRootElementEventListener detected that tab has crashed. Stop waiting");
+                if ((await ChromeTabs.get(this.sharedState.tab.tabId)).status === ChromeTabStatus.unloaded) {
+                    Log.notice("WaitForRootElementEventListener detected that tab has crashed. Stop waiting");
                     this.setState({
                         tabStatusUnloaded: true
                     }, {
@@ -79,13 +79,13 @@ class WaitForRootElementEventListener extends r.BaseWebNavigationEventListener {
                     return (this.waitActive = false);
                 }
             } catch (exception) {
-                o.notice("chrome tab fetch error", {
-                    error: u.getMessage(exception)
+                Log.notice("chrome tab fetch error", {
+                    error: Msg.getMessage(exception)
                 });
             }
-            const raceResult = await a.Async.timeoutPromiseWithoutTimeoutError(this.checkContentScriptReachable(), 10000, "checkContentScriptReachable");
+            const raceResult = await Async.timeoutPromiseWithoutTimeoutError(this.checkContentScriptReachable(), 10000, "checkContentScriptReachable");
             if (!this.waitActive || waitId !== this.waitId)
-                return void o.notice("wait for root element", {
+                return void Log.notice("wait for root element", {
                     waitActive: this.waitActive,
                     currentWaitId: this.waitId,
                     expectedWaitId: waitId
@@ -96,7 +96,7 @@ class WaitForRootElementEventListener extends r.BaseWebNavigationEventListener {
                 }, {});
                 return void (this.waitActive = false);
             }
-            await a.Async.sleep(50);
+            await Async.sleep(50);
         } while (now + this.waitForRootTimeout > Date.now());
         this.setState({
             rootElementLookupTimedOut: true

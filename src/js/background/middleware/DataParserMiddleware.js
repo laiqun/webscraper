@@ -1,9 +1,9 @@
 let order = 0;
 import {Job} from "../Job.js"//const r = i(500);
 import {BaseMiddleware} from "./BaseMiddleware.js"//a = i(33),
-import {default as log} from "../../log/log.js";//o = i(5),
-import * as s from "../../devtools/Selector/Url.js"//s = i(19),
-import * as l from "../../common/Obj.js"//, l = i(57)
+import {default as Log} from "../../log/log.js";//o = i(5),
+import {Url} from "../../devtools/Selector/Url.js"//s = i(19),
+import {Obj} from "../../common/Obj.js"//, l = i(57)
 import {DataSizeLimitError} from "../DataSizeLimitError.js"//,  c = i(499)
 class DataParserMiddleware extends BaseMiddleware {
     constructor(e) {
@@ -15,10 +15,10 @@ class DataParserMiddleware extends BaseMiddleware {
     }
 
     recordCanHaveChildJobs(e, t) {
-        if (void 0 === e._follow)
-            return !1;
-        const i = e._followSelectorId;
-        return 0 !== t.getDirectChildSelectors(i).length;
+        if (undefined === e._follow)
+            return false;
+        const followSelectorId = e._followSelectorId;
+        return 0 !== t.getDirectChildSelectors(followSelectorId).length;
     }
 
     async handle(job, jobRuntimeInfo, callback) {
@@ -31,12 +31,12 @@ class DataParserMiddleware extends BaseMiddleware {
         job.newJobs = newJobs;
         if (0 === job.newJobs.length && 0 === job.data.length) {
             job.markAsEmpty();
-            log.notice("Empty page", {
+            Log.notice("Empty page", {
                 url: job.url
             });
         }
         if (this.jobDataSizeLimitReached)
-            log.notice("Job data size limit exceeded", {
+            Log.notice("Job data size limit exceeded", {
                 error: "DATA_SIZE_LIMIT_EXCEEDED",
                 url: job.url,
                 size: this.dataSize / 1024 / 1024
@@ -65,39 +65,39 @@ class DataParserMiddleware extends BaseMiddleware {
         return result;
     }
 
-    extractNewJobs(nextCallbackData, jobBaseData, job) {
-        const n = this.sitemap;
+    extractNewJobs(nextCallbackData, jobBaseData, parentJob) {
+        const sitemap = this.sitemap;
         const result = [];
-        for (const c of nextCallbackData) {
+        for (const nextCallbackDatum of nextCallbackData) {
             for (const e in jobBaseData)
-                if(undefined === c[e])
-                    c[e] = jobBaseData[e];
-            if (this.recordCanHaveChildJobs(c, n)) {
-                const e = c._follow;
-                const t = c._followSelectorId;
-                const n = c._deduplicateFirstPageData;
-                delete c._follow;
-                delete c._followSelectorId;
-                delete c._deduplicateFirstPageData;
-                if (!e)
+                if(undefined === nextCallbackDatum[e])
+                    nextCallbackDatum[e] = jobBaseData[e];
+            if (this.recordCanHaveChildJobs(nextCallbackDatum, sitemap)) {
+                const follow = nextCallbackDatum._follow;
+                const followSelectorId = nextCallbackDatum._followSelectorId;
+                const deduplicateFirstPageData = nextCallbackDatum._deduplicateFirstPageData;
+                delete nextCallbackDatum._follow;
+                delete nextCallbackDatum._followSelectorId;
+                delete nextCallbackDatum._deduplicateFirstPageData;
+                if (!follow)
                     continue;
-                if (!s.Url.isValidUrlOrUrlPart(e))
+                if (!Url.isValidUrlOrUrlPart(follow))
                     continue;
                 const job = new Job({
-                    url: e,
-                    parentSelector: t,
-                    parentJob: job,
-                    baseData: c,
-                    deduplicateFirstPageData: n
+                    url: follow,
+                    parentSelector: followSelectorId,
+                    parentJob: parentJob,
+                    baseData: nextCallbackDatum,
+                    deduplicateFirstPageData: deduplicateFirstPageData
                 });
                 const protocol = new URL(job.url).protocol;
                 if("http:" === protocol || "https:" === protocol )
                 {
-                    this.checkDataSize(c, job.url);
+                    this.checkDataSize(nextCallbackDatum, parentJob.url);
                     result.push(job);
                 }
                 else
-                    log.notice("invalid New Job URL protocol", {
+                    Log.notice("invalid New Job URL protocol", {
                         url: job.url,
                         hideInEsLogs: !0
                     });
@@ -107,13 +107,13 @@ class DataParserMiddleware extends BaseMiddleware {
     }
 
     checkDataSize(e, t) {
-        const i = l.Obj.getSize(e);
-        if (i > this.recordSizeLimit)
-            throw new DataSizeLimitError("Record data size limit reached", i / 1024 / 1024);
-        this.dataSize += i;
+        const size = Obj.getSize(e);
+        if (size > this.recordSizeLimit)
+            throw new DataSizeLimitError("Record data size limit reached", size / 1024 / 1024);
+        this.dataSize += size;
         if(this.dataSize > this.jobDataSizeLimit && !this.jobDataSizeLimitReached )
         {
-            log.notice("Job data size limit reached", {
+            Log.notice("Job data size limit reached", {
                 error: "DATA_SIZE_LIMIT_REACHED",
                 url: t,
                 size: this.dataSize / 1024 / 1024

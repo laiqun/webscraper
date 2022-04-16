@@ -1,4 +1,4 @@
- //https://github.com/defunctzombie/node-process  npm install process
+//https://github.com/defunctzombie/node-process  npm install process
 import * as processBrowser from "process/browser"
 import * as hrtTime from "browser-process-hrtime"   //https://github.com/kumavis/browser-process-hrtime npm install browser-process-hrtime
 //https://www.cnblogs.com/tzyy/p/nodejs.html#_h2_1
@@ -14,27 +14,31 @@ class logHandler {
         this.prefixText = msgSetting.prefixText || "";
         this.setLoggingLevel();
     }
+
     getLogger(msgSetting) {
         msgSetting.prefixText = this.prefixText + (msgSetting.prefixText || "");
         msgSetting.profilingEnabled = msgSetting.profilingEnabled || this.profilingEnabled;//profiling  资料收集，剖析研究
         return new logHandler(msgSetting);
     }
+
     setScrapingJobId(e) {
         this.scrapingJobId = e;
     }
+
     setTaskTrackerName(e) {
         this.taskTrackerName = e;
     }
+
     setUserId(e) {
         this.userId = e;
     }
+
     setProxyServiceType(e) {
         this.proxyServiceType = e;
     }
-    formatDate(timestamp)
-    {
-        if(timestamp.toString().length<13)
-        {
+
+    formatDate(timestamp) {
+        if (timestamp.toString().length < 13) {
             timestamp = timestamp * 1000;
         }
         let localDateTime = new Date(timestamp);
@@ -44,25 +48,24 @@ class logHandler {
         let hour = localDateTime.getHours();
         let minute = localDateTime.getMinutes();
         let second = localDateTime.getSeconds();
-        return year+"-"+month+"-"+date+" " + hour+":"+minute+":"+second;
+        return year + "-" + month + "-" + date + " " + hour + ":" + minute + ":" + second;
     }
-    prettyLog(outputMsg)
-    {
-        for(let key in outputMsg)
-        {
-            if(key === 'timestamp')
-            {
+
+    prettyLog(outputMsg) {
+        for (let key in outputMsg) {
+            if (key === 'timestamp') {
                 outputMsg[key] = this.formatDate(outputMsg[key]);
                 continue;
             }
-            if(isJSON(outputMsg[key]))
+            if (isJSON(outputMsg[key]))
                 outputMsg[key] = JSON.parse(outputMsg[key]);
 
         }
     }
+
     log(level, rawmsg, outputMsg, timestamp) {
         timestamp || (timestamp = Math.round(Date.now() / 1000));
-        if(outputMsg.url == null || outputMsg.url==undefined)
+        if (outputMsg.url == null || outputMsg.url == undefined)
             outputMsg.url = this.url;
 
         const parsedURL = URLParse(outputMsg.url);
@@ -74,21 +77,29 @@ class logHandler {
         outputMsg.taskTrackerName = this.taskTrackerName;
         outputMsg.userId = this.userId;
         outputMsg.proxyServiceType = this.proxyServiceType;
-        if ("ERROR" === level || "WARNING" === level)
+        if(this.loggingLevel === loggingLevels.loggingLevels.Debug )
         {
-            this.prettyLog(outputMsg);
-            console.error(JSON.stringify(outputMsg,null,2));
+            outputMsg["callStack"] = new Error().stack.substr(5).trim().split("\n").map((x)=>x.trim());
+            if(outputMsg["callStack"].length >= 2)
+            {
+                outputMsg["callStack"].shift();
+                outputMsg["callStack"].shift();
+                if(outputMsg["callStack"].length === 0)
+                    delete outputMsg["callStack"];
+            }
         }
-        else
-        {
+        if ("ERROR" === level || "WARNING" === level) {
             this.prettyLog(outputMsg);
-            console.log(JSON.stringify(outputMsg,null,2));
+            console.error(JSON.stringify(outputMsg, null, 2));
+        }  else {
+            this.prettyLog(outputMsg);
+            console.log(JSON.stringify(outputMsg, null, 2));
         }
     }
 
     error(rawMsg, context = {}) {
         if (this.canLog(loggingLevels.loggingLevels.Error)) {
-            if (context.stack == null || context.stack==undefined)
+            if (context.stack == null || context.stack == undefined)
                 context.stack = (new Error).stack; //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
             this.log("ERROR", rawMsg, context);
         }
@@ -101,7 +112,10 @@ class logHandler {
 
     debug(rawMsg, context = {}) {
         if (this.canLog(loggingLevels.loggingLevels.Debug))
+        {
             this.log("DEBUG", rawMsg, context);
+        }
+
     }
 
     warning(rawMsg, context = {}) {
@@ -111,50 +125,50 @@ class logHandler {
             this.log("WARNING", rawMsg, context);
         }
     }
-    setUrl(e) {
-        this.url = e;
+
+    setUrl(url) {
+        this.url = url;
     }
+
     copyMessage(e) {
         this.log(e.level_name, e.message, e, e.timestamp);
     }
+
     notice(rawMsg, context = {}) {
         if (this.canLog(loggingLevels.loggingLevels.Notice))
             this.log("NOTICE", rawMsg, context);
     }
 
-    profile(e) {
-        const oldtimestamp = hrtTime();
-        return this.closeProfile.bind(this, rawMsg, oldtimestamp);
+    profile(rawMsg) {
+        const oldTimeStamp = hrtTime();
+        return this.closeProfile.bind(this, rawMsg, oldTimeStamp);
     }
 
-    closeProfile(rawMsg, oldtimestamp) {
+    closeProfile(rawMsg, oldTimeStamp) {
         if (!this.canLog(loggingLevels.loggingLevels.Profile))
             return;
-        const hrtTime1 = hrtTime(oldtimestamp);
+        const hrtTime1 = hrtTime(oldTimeStamp);
         let timestamp = Math.round((1e9 * hrtTime1[0] + hrtTime1[1]) / 1e6);
         this.log("PROFILE", timestamp + " " + rawMsg, {});
     }
 
-    canLog(canlogLevel) {
-        return this.loggingLevel >= canlogLevel;
+    canLog(currentLogLevel) {
+        return this.loggingLevel >= currentLogLevel;
     }
 
     async setLoggingLevel() {
-        if(processBrowser.browser)
-        {
-            await new Promise((resolve,reject) => {
+        if (processBrowser.browser) {
+            await new Promise((resolve, reject) => {
                 chrome.storage.sync.get(["loggingLevels"], args => {
                     if (undefined === args) {
                         this.loggingLevel = this.defaultLoggingLevel;
-                    }
-                    else
+                    } else
                         this.loggingLevel = parseInt(args["loggingLevels"]);
                     resolve();
                 });
             });
         }
-        else  //in Node.js
-        {
+        else {//in Node.js
             switch (processBrowser.env.LOGGING_LEVEL) {
                 case "error":
                     this.loggingLevel = loggingLevels.loggingLevels.Error;
